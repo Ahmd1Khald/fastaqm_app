@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../Core/constatnts/app_strings.dart';
+import '../../../../../Core/constatnts/colors.dart';
 
 class SlidingText extends StatelessWidget {
   const SlidingText({
@@ -20,7 +21,7 @@ class SlidingText extends StatelessWidget {
             child: const Text(
               AppStrings.slidingSplashTest,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 36, color: Color(0xffA85000)),
+              style: TextStyle(fontSize: 36, color: MyColors.babyBrown),
             ),
           );
         });

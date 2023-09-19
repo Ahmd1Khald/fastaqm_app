@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class AppFunctions {
   static String convertEnglishNumberToArabic(String input) {
     const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -8,5 +10,10 @@ class AppFunctions {
     }
 
     return input;
+  }
+
+  static void pushAndRemove({required context, required Widget screen}) {
+    Navigator.pushAndRemoveUntil(context,
+        MaterialPageRoute(builder: (context) => screen), (route) => false);
   }
 }

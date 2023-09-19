@@ -1,8 +1,7 @@
 import 'package:fastaqm_app/Core/constatnts/app_strings.dart';
 import 'package:fastaqm_app/Core/theme/app_theme.dart';
+import 'package:fastaqm_app/Features/splash/presentation/views/splash_body.dart';
 import 'package:flutter/material.dart';
-
-import 'Features/splash/presentation/views/splash_body.dart';
 
 void main() {
   runApp(const MyApp());
