@@ -8,23 +8,23 @@ class AppTheme {
     return ThemeData.light().copyWith(
       scaffoldBackgroundColor: Colors.white,
       colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-          backgroundColor:
-              MaterialStateColor.resolveWith((states) => MyColors.myPurble),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-        ),
-      ),
+      // elevatedButtonTheme: ElevatedButtonThemeData(
+      //   style: ButtonStyle(
+      //     backgroundColor:
+      //         MaterialStateColor.resolveWith((states) => MyColors.myPurble),
+      //     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+      //       RoundedRectangleBorder(
+      //         borderRadius: BorderRadius.circular(20),
+      //       ),
+      //     ),
+      //   ),
+      // ),
       textTheme: TextTheme(
         headlineLarge: GoogleFonts.notoNastaliqUrdu(
           textStyle: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w400,
-            color: MyColors.myPurble,
+            color: MyColors.darkBrown,
           ),
         ),
         bodyMedium: GoogleFonts.cairo(
@@ -37,6 +37,7 @@ class AppTheme {
       ),
       useMaterial3: true,
       appBarTheme: AppBarTheme(
+        backgroundColor: MyColors.lightBrown,
         iconTheme: const IconThemeData(color: MyColors.primaryColor, size: 32),
         titleTextStyle: GoogleFonts.cairo(
           color: MyColors.primaryColor,
