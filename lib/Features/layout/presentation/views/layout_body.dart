@@ -30,7 +30,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
     return Scaffold(
       bottomNavigationBar: buildCurvedNavigationBar(navBarIconSize),
       appBar: AppBar(
-        title: AppName(),
+        title: const AppName(),
       ),
       body: screens[_page],
     );

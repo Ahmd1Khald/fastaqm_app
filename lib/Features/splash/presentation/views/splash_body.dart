@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../Core/constatnts/app_functions.dart';
 import '../../../../Core/constatnts/assets_manager.dart';
+import '../../../../Core/constatnts/variables.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -41,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen>
         children: [
           Image.asset(
             AssetsManager.appLogo,
-            height: MediaQuery.of(context).size.width * 0.5,
+            height: AppVariables.appSize(context).width * 0.5,
           ),
           // const SizedBox(
           //   height: 4,

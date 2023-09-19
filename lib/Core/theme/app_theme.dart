@@ -37,7 +37,8 @@ class AppTheme {
       ),
       useMaterial3: true,
       appBarTheme: AppBarTheme(
-        backgroundColor: MyColors.lightBrown,
+        elevation: 0,
+        backgroundColor: MyColors.whiteColor,
         iconTheme: const IconThemeData(color: MyColors.primaryColor, size: 32),
         titleTextStyle: GoogleFonts.cairo(
           color: MyColors.primaryColor,
