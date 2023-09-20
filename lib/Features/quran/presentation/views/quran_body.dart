@@ -61,55 +61,57 @@ class QuranScreen extends StatelessWidget {
   Padding buildContainer(BuildContext context, QuranCubit cubit, int index) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-      child: InkWell(
-          onTap: () {
-            AppFunctions.pushTo(context: context, screen: const SuraWidget());
-          },
-          child: MaterialButton(
-            color: MyColors.lightBrown,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
-            ),
-            splashColor: MyColors.darkBrown,
-            onPressed: () {
-              print(quran.getPlaceOfRevelation(index + 1));
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                if (quran.getPlaceOfRevelation(index + 1) == "Madinah") ...[
-                  Image.asset(
-                    AssetsManager.masjedIcon,
-                    width: 25,
-                  ),
-                ] else ...[
-                  Image.asset(
-                    AssetsManager.makaaIcon,
-                    width: 25,
-                  ),
-                ],
-                const Spacer(),
-                Text(
-                  quran.getSurahNameArabic(index + 1),
-                  style: GoogleFonts.notoNastaliqUrdu(
-                    textStyle: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w400,
-                      color: MyColors.darkBrown,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Image.asset(
-                  AssetsManager.q1Icon,
+      child: MaterialButton(
+        color: MyColors.lightBrown,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
+        splashColor: MyColors.darkBrown,
+        onPressed: () {
+          cubit.surapages = quran.getSurahPages(index + 1);
+          AppFunctions.pushTo(
+              context: context,
+              screen: SuraWidget(
+                suraPages: cubit.surapages,
+              ));
+          print(quran.getSurahPages(index + 1));
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            if (quran.getPlaceOfRevelation(index + 1) == "Madinah") ...[
+              Image.asset(
+                AssetsManager.masjedIcon,
+                width: 25,
+              ),
+            ] else ...[
+              Image.asset(
+                AssetsManager.makaaIcon,
+                width: 25,
+              ),
+            ],
+            const Spacer(),
+            Text(
+              quran.getSurahNameArabic(index + 1),
+              style: GoogleFonts.notoNastaliqUrdu(
+                textStyle: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w400,
                   color: MyColors.darkBrown,
-                  width: AppVariables.appSize(context).width * 0.12,
                 ),
-              ],
+              ),
             ),
-          )),
+            const SizedBox(
+              width: 5,
+            ),
+            Image.asset(
+              AssetsManager.q1Icon,
+              color: MyColors.darkBrown,
+              width: AppVariables.appSize(context).width * 0.12,
+            ),
+          ],
+        ),
+      ),
     );
   }
   // Widget makiaOrMadania(){
