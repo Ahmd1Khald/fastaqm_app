@@ -84,24 +84,37 @@ class HomeScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.all(15),
-          child: InkWell(
-            onTap: func,
-            child: Container(
+            padding: const EdgeInsets.all(8),
+            child: MaterialButton(
               height: AppVariables.appSize(context).width * 0.2,
-              width: AppVariables.appSize(context).width * 0.2,
-              decoration: BoxDecoration(
-                  color: MyColors.darkBrown,
-                  borderRadius: BorderRadius.circular(20)),
+              minWidth: AppVariables.appSize(context).width * 0.2,
+              onPressed: func,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              splashColor: MyColors.lightBrown,
+              color: MyColors.darkBrown,
               child: Center(
                 child: Image.asset(
                   image,
                   width: AppVariables.appSize(context).width * 0.15,
                 ),
               ),
-            ),
-          ),
-        ),
+            )),
+        // Container(
+        //   height: AppVariables.appSize(context).width * 0.2,
+        //   width: AppVariables.appSize(context).width * 0.2,
+        //   decoration: BoxDecoration(
+        //     color: MyColors.darkBrown,
+        //     borderRadius: BorderRadius.circular(20),
+        //   ),
+        //   child: Center(
+        //     child: Image.asset(
+        //       image,
+        //       width: AppVariables.appSize(context).width * 0.15,
+        //     ),
+        //   ),
+        // ),
         Text(
           text,
           textDirection: TextDirection.rtl,

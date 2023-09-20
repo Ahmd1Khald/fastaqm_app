@@ -7,7 +7,7 @@ class AppTheme {
   static lightTheme() {
     return ThemeData.light().copyWith(
       scaffoldBackgroundColor: Colors.white,
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      colorScheme: ColorScheme.fromSeed(seedColor: MyColors.lightBrown),
       // elevatedButtonTheme: ElevatedButtonThemeData(
       //   style: ButtonStyle(
       //     backgroundColor:
@@ -29,7 +29,7 @@ class AppTheme {
         ),
         bodyMedium: GoogleFonts.cairo(
           textStyle: const TextStyle(
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: FontWeight.w500,
             color: Color.fromRGBO(73, 71, 71, 1),
           ),
