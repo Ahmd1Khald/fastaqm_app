@@ -1,7 +1,10 @@
+import 'package:fastaqm_app/Core/constatnts/app_functions.dart';
 import 'package:fastaqm_app/Core/constatnts/assets_manager.dart';
 import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:flutter/material.dart';
+
+import '../../../quran/presentation/views/quran_body.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -33,7 +36,10 @@ class HomeScreen extends StatelessWidget {
                 context: context,
                 image: AssetsManager.quranIcon,
                 text: "قرآن",
-                func: () {},
+                func: () {
+                  AppFunctions.pushTo(
+                      context: context, screen: const QuranScreen());
+                },
               ),
             ],
           ),

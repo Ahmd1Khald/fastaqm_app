@@ -16,4 +16,8 @@ class AppFunctions {
     Navigator.pushAndRemoveUntil(context,
         MaterialPageRoute(builder: (context) => screen), (route) => false);
   }
+
+  static void pushTo({required context, required Widget screen}) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
+  }
 }
