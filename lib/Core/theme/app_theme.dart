@@ -30,8 +30,8 @@ class AppTheme {
         bodyMedium: GoogleFonts.cairo(
           textStyle: const TextStyle(
             fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: Color.fromRGBO(73, 71, 71, 1),
+            fontWeight: FontWeight.w600,
+            color: MyColors.babyBrown, //Color.fromRGBO(73, 71, 71, 1),
           ),
         ),
       ),

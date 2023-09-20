@@ -1,11 +1,11 @@
 import 'package:fastaqm_app/Core/theme/app_theme.dart';
-import 'package:fastaqm_app/Features/quran/presentation/controller/quran_cubit.dart';
 import 'package:fastaqm_app/Features/splash/presentation/views/splash_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'Core/constatnts/app_strings.dart';
+import 'Features/quran/presentation/controller/quran_cubit.dart';
 
 void main() {
   runApp(const MyApp());

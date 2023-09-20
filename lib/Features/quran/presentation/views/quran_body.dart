@@ -13,6 +13,7 @@ class QuranScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("quraaaaaaaaaaaaaaaaaaaaaan");
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -39,7 +40,10 @@ class QuranScreen extends StatelessWidget {
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => buildContainer(context, index),
+              itemBuilder: (context, index) => BuildSuraContainer(
+                context: context,
+                index: index,
+              ),
               itemCount: 114,
             ),
           ],
@@ -47,8 +51,17 @@ class QuranScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  Padding buildContainer(BuildContext context, int index) {
+class BuildSuraContainer extends StatelessWidget {
+  const BuildSuraContainer(
+      {Key? key, required this.context, required this.index})
+      : super(key: key);
+
+  final BuildContext context;
+  final int index;
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       child: MaterialButton(
@@ -104,8 +117,4 @@ class QuranScreen extends StatelessWidget {
       ),
     );
   }
-  // Widget makiaOrMadania(){
-  //
-  //
-  // }
 }

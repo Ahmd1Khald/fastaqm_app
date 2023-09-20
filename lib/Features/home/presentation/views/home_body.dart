@@ -1,4 +1,3 @@
-import 'package:fastaqm_app/Core/constatnts/app_functions.dart';
 import 'package:fastaqm_app/Core/constatnts/assets_manager.dart';
 import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
@@ -37,8 +36,13 @@ class HomeScreen extends StatelessWidget {
                 image: AssetsManager.quranIcon,
                 text: "قرآن",
                 func: () {
-                  AppFunctions.pushTo(
-                      context: context, screen: const QuranScreen());
+                  // AppFunctions.pushTo(
+                  //     context: context, screen: const QuranScreen());
+
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const QuranScreen()));
                 },
               ),
             ],
