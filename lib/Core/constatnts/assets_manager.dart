@@ -12,4 +12,5 @@ class AssetsManager {
   static const quranIcon = '$baseImagesPath/quran_icon.png';
   static const quranImage = '$baseImagesPath/quran_image.png';
   static const q1Icon = '$baseImagesPath/q1_icon.png';
+  static const makaaIcon = '$baseImagesPath/makaa.png';
 }

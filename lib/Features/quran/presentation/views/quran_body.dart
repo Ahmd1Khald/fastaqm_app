@@ -1,10 +1,13 @@
+import 'package:fastaqm_app/Core/constatnts/app_functions.dart';
 import 'package:fastaqm_app/Core/constatnts/assets_manager.dart';
 import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:fastaqm_app/Features/quran/presentation/views/widgets/quran_image_widget.dart';
+import 'package:fastaqm_app/Features/quran/presentation/views/widgets/sura_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quran/quran.dart' as quran;
 
 import '../controller/quran_cubit.dart';
 
@@ -43,7 +46,8 @@ class QuranScreen extends StatelessWidget {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) => buildContainer(context),
+                  itemBuilder: (context, index) =>
+                      buildContainer(context, cubit, index),
                   itemCount: 114,
                 ),
               ],
@@ -54,45 +58,62 @@ class QuranScreen extends StatelessWidget {
     );
   }
 
-  Padding buildContainer(BuildContext context) {
-    Color color = MyColors.lightBrown;
-    Color color2 = MyColors.darkBrown;
+  Padding buildContainer(BuildContext context, QuranCubit cubit, int index) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       child: InkWell(
-        onTap: () {},
-        child: Container(
-          height: AppVariables.appSize(context).width * 0.15,
-          width: AppVariables.appSize(context).width * 0.7,
-          decoration: BoxDecoration(
+          onTap: () {
+            AppFunctions.pushTo(context: context, screen: const SuraWidget());
+          },
+          child: MaterialButton(
             color: MyColors.lightBrown,
-            borderRadius: BorderRadius.circular(30),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                "الفاتحة",
-                style: GoogleFonts.notoNastaliqUrdu(
-                  textStyle: const TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w400,
-                    color: MyColors.darkBrown,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            splashColor: MyColors.darkBrown,
+            onPressed: () {
+              print(quran.getPlaceOfRevelation(index + 1));
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                if (quran.getPlaceOfRevelation(index + 1) == "Madinah") ...[
+                  Image.asset(
+                    AssetsManager.masjedIcon,
+                    width: 25,
+                  ),
+                ] else ...[
+                  Image.asset(
+                    AssetsManager.makaaIcon,
+                    width: 25,
+                  ),
+                ],
+                const Spacer(),
+                Text(
+                  quran.getSurahNameArabic(index + 1),
+                  style: GoogleFonts.notoNastaliqUrdu(
+                    textStyle: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w400,
+                      color: MyColors.darkBrown,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Image.asset(
-                AssetsManager.q1Icon,
-                color: MyColors.darkBrown,
-                width: AppVariables.appSize(context).width * 0.12,
-              ),
-            ],
-          ),
-        ),
-      ),
+                const SizedBox(
+                  width: 5,
+                ),
+                Image.asset(
+                  AssetsManager.q1Icon,
+                  color: MyColors.darkBrown,
+                  width: AppVariables.appSize(context).width * 0.12,
+                ),
+              ],
+            ),
+          )),
     );
   }
+  // Widget makiaOrMadania(){
+  //
+  //
+  // }
 }
