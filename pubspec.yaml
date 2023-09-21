@@ -28,6 +28,11 @@ dependencies:
   dio: ^5.3.2
   #service locator
   get_it: ^7.6.4
+  #cache
+  shared_preferences: ^2.2.1
+  #location
+  geolocator: ^10.0.1
+  geocoding: ^2.1.0
 
 
 dev_dependencies:

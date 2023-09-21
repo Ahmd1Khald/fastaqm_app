@@ -2,12 +2,17 @@ import 'package:fastaqm_app/Core/theme/app_theme.dart';
 import 'package:fastaqm_app/Features/splash/presentation/views/splash_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'Core/constatnts/app_strings.dart';
-import 'Features/quran/presentation/controller/quran_cubit.dart';
+import 'Core/helpers/cachehelper.dart';
+import 'Core/helpers/dio_helper.dart';
+import 'Core/services/ServiceLocator.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheHelper.init();
+  DioHelper.init();
+  setUpServiceLocator();
   runApp(const MyApp());
 }
 
@@ -21,16 +26,11 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => QuranCubit()),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: AppStrings.appName,
-        theme: AppTheme.lightTheme(),
-        home: const SplashScreen(),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: AppStrings.appName,
+      theme: AppTheme.lightTheme(),
+      home: const SplashScreen(),
     );
   }
 }

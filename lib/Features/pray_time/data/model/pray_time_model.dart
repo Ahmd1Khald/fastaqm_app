@@ -13,7 +13,7 @@ class PrayerTimings extends Equatable {
   final String firstthird;
   final String lastthird;
 
-  PrayerTimings({
+  const PrayerTimings({
     required this.fajr,
     required this.sunrise,
     required this.dhuhr,

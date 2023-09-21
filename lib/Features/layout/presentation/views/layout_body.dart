@@ -9,16 +9,18 @@ import '../../../saves/presentation/views/saves_body.dart';
 import '../../../settings/presentation/views/settings_body.dart';
 
 class LayoutScreen extends StatefulWidget {
-  const LayoutScreen({Key? key}) : super(key: key);
+  const LayoutScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<LayoutScreen> createState() => _LayoutScreenState();
 }
 
 class _LayoutScreenState extends State<LayoutScreen> {
-  List<Widget> screens = const [
-    SavesScreen(),
-    SettingsScreen(),
+  List<Widget> screens = [
+    const SavesScreen(),
+    const SettingsScreen(),
     HomeScreen(),
   ];
   int _page = 2;

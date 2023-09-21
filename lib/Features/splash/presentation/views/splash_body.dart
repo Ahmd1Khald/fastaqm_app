@@ -1,6 +1,11 @@
+import 'package:fastaqm_app/Core/constatnts/app_strings.dart';
+import 'package:fastaqm_app/Core/helpers/cachehelper.dart';
 import 'package:fastaqm_app/Features/layout/presentation/views/layout_body.dart';
 import 'package:fastaqm_app/Features/splash/presentation/views/widgets/sliding_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../../../../Core/constatnts/app_functions.dart';
 import '../../../../Core/constatnts/assets_manager.dart';
@@ -17,13 +22,65 @@ class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<Offset> slidingAnimation;
+  late Position? position;
+
+  Future<Position> getUserLocation() async {
+    try {
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          throw PlatformException(
+            code: 'PERMISSION_DENIED',
+            message: 'Location permission denied',
+          );
+        }
+      }
+      if (permission == LocationPermission.deniedForever) {
+        throw PlatformException(
+          code: 'PERMISSION_DENIED_FOREVER',
+          message: 'Location permission denied forever',
+        );
+      }
+      final Position position = await Geolocator.getCurrentPosition();
+      print(position);
+      return position;
+    } catch (e) {
+      throw PlatformException(
+        code: 'ERROR_GETTING_LOCATION',
+        message: 'Error getting user location: $e',
+      );
+    }
+  }
+
+  Future<String?> getCountryName(double latitude, double longitude) async {
+    try {
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(latitude, longitude);
+
+      if (placemarks.isNotEmpty) {
+        return placemarks[0].country;
+      } else {
+        return null; // No placemark found
+      }
+    } catch (e) {
+      print("Error getting country name: $e");
+      return null; // Error occurred
+    }
+  }
 
   @override
   void initState() {
-    super.initState();
     initSlidingAnimation();
-
-    navigateToHome();
+    getUserLocation().then((value) async {
+      await getCountryName(value.latitude, value.longitude).then((value) {
+        CacheHelper.saveData(
+            key: AppStrings.countryNameKey, value: value ?? "Egypt");
+        print(CacheHelper.getDate(key: AppStrings.countryNameKey));
+        navigateToHome();
+      });
+    });
+    super.initState();
   }
 
   @override
@@ -67,15 +124,9 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void navigateToHome() {
-    Future.delayed(
-      const Duration(seconds: 4),
-      () {
-        AppFunctions.pushAndRemove(
-          context: context,
-          screen: const LayoutScreen(),
-        );
-        //GoRouter.of(context).push(AppRouter.kHomeView);
-      },
+    AppFunctions.pushAndRemove(
+      context: context,
+      screen: const LayoutScreen(),
     );
   }
 }
