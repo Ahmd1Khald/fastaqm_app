@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quran/quran.dart' as quran;
 
+import '../../../../Core/widgets/custom_app_bar.dart';
+
 class QuranScreen extends StatelessWidget {
   const QuranScreen({Key? key}) : super(key: key);
 
@@ -15,20 +17,7 @@ class QuranScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     print("quraaaaaaaaaaaaaaaaaaaaaan");
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_forward,
-                size: 32,
-                color: MyColors.darkBrown,
-              ))
-        ],
-      ),
+      appBar: customAppBar(context),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

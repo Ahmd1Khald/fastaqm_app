@@ -3,7 +3,7 @@ import 'package:fastaqm_app/Core/constatnts/assets_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../Core/constatnts/colors.dart';
-import '../../../../Core/widgets/custom_app_bar.dart';
+import '../../../../Core/widgets/App_name.dart';
 import '../../../home/presentation/views/home_body.dart';
 import '../../../saves/presentation/views/saves_body.dart';
 import '../../../settings/presentation/views/settings_body.dart';
