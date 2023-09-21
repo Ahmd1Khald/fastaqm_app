@@ -5,6 +5,7 @@ import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:fastaqm_app/Features/pray_time/presentation/views/pray_time_body.dart';
 import 'package:flutter/material.dart';
 
+import '../../../bakiat/presentation/views/bakiat_body.dart';
 import '../../../quran/presentation/views/quran_body.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -77,7 +78,12 @@ class HomeScreen extends StatelessWidget {
                 context: context,
                 image: AssetsManager.bakiatIcon,
                 text: "الباقيات الصالحات",
-                func: () {},
+                func: () {
+                  AppFunctions.pushTo(
+                    context: context,
+                    screen: const BakiatScreen(),
+                  );
+                },
               ),
             ],
           ),

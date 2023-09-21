@@ -15,4 +15,6 @@ class AssetsManager {
   static const makaaIcon = '$baseImagesPath/makaa.png';
   static const backgraoundImage = '$baseImagesPath/backgraound.png';
   static const prayIcon = '$baseImagesPath/pray_icon.png';
+  static const bakiatImage = '$baseImagesPath/bakiat_image.png';
+  static const ayaBakiatImage = '$baseImagesPath/aya_bakiat.png';
 }
