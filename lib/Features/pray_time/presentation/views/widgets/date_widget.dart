@@ -20,15 +20,29 @@ class DateWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 60.0),
-      child: Text(
-        '$dayName $dayNum $monthName عام $dateNum',
-        style: GoogleFonts.cairo(
-          textStyle: const TextStyle(
-            fontSize: 23,
-            fontWeight: FontWeight.w600,
-            color: MyColors.babyBrown,
+      child: Column(
+        children: [
+          Text(
+            '$dayName $dayNum $monthName',
+            style: GoogleFonts.cairo(
+              textStyle: const TextStyle(
+                fontSize: 23,
+                fontWeight: FontWeight.w600,
+                color: MyColors.babyBrown,
+              ),
+            ),
           ),
-        ),
+          Text(
+            ' عام $dateNum',
+            style: GoogleFonts.cairo(
+              textStyle: const TextStyle(
+                fontSize: 23,
+                fontWeight: FontWeight.w600,
+                color: MyColors.babyBrown,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

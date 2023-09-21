@@ -10,15 +10,15 @@ class TimeWidget extends StatelessWidget {
     required this.prayName,
     required this.timeNow,
     required this.prayTime,
-    required this.prayHour,
   }) : super(key: key);
 
   final String prayName;
   final String prayTime;
   final double timeNow;
-  final double prayHour;
   @override
   Widget build(BuildContext context) {
+    String ss = prayTime;
+    int prayHour = int.parse(ss.split(":").first);
     print("prayName  $prayName");
     print("prayTime  $prayTime");
     print("timeNow  $timeNow");

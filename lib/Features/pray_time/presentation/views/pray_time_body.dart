@@ -59,64 +59,61 @@ class PrayTimeScreen extends StatelessWidget {
                   alignment: AlignmentDirectional.topCenter,
                   children: [
                     const BackGroundWidget(),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const DateWidget(
-                          dayName: 'الجمعة',
-                          dayNum: '12',
-                          monthName: 'ذي الحجة',
-                          dateNum: '1445',
-                        ),
-                        TimeWidget(
-                          prayName: 'الفجر',
-                          timeNow: timeNow,
-                          prayTime: "04:23",
-                          prayHour: 4,
-                        ),
-                        TimeWidget(
-                          prayName: 'الشروق',
-                          timeNow: timeNow,
-                          prayTime: "06:32",
-                          prayHour: 6,
-                        ),
-                        TimeWidget(
-                          prayName: 'الظهر',
-                          timeNow: timeNow,
-                          prayTime: "12:49",
-                          prayHour: 12,
-                        ),
-                        TimeWidget(
-                          prayName: 'العصر',
-                          timeNow: timeNow,
-                          prayTime: "16:15",
-                          prayHour: 16,
-                        ),
-                        TimeWidget(
-                          prayName: 'المغرب',
-                          timeNow: timeNow,
-                          prayTime: "19:06",
-                          prayHour: 19,
-                        ),
-                        TimeWidget(
-                          prayName: 'العشاء',
-                          timeNow: timeNow,
-                          prayTime: "20:36",
-                          prayHour: 20,
-                        ),
-                        Image.asset(
-                          AssetsManager.prayIcon,
-                          fit: BoxFit.cover,
-                          width: AppVariables.appSize(context).width * 0.7,
-                        ),
-                      ],
+                    SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          DateWidget(
+                            dayName: state.data.data['date']['hijri']['weekday']
+                                ['ar'],
+                            dayNum: state.data.data['date']['hijri']['day'],
+                            monthName: state.data.data['date']['hijri']['month']
+                                ['ar'],
+                            dateNum: state.data.data['date']['hijri']['year'],
+                          ),
+                          TimeWidget(
+                            prayName: 'الفجر',
+                            timeNow: timeNow,
+                            prayTime: state.data.data['timings']['Fajr'],
+                          ),
+                          TimeWidget(
+                            prayName: 'الشروق',
+                            timeNow: timeNow,
+                            prayTime: state.data.data['timings']['Sunrise'],
+                          ),
+                          TimeWidget(
+                            prayName: 'الظهر',
+                            timeNow: timeNow,
+                            prayTime: state.data.data['timings']['Dhuhr'],
+                          ),
+                          TimeWidget(
+                            prayName: 'العصر',
+                            timeNow: timeNow,
+                            prayTime: state.data.data['timings']['Asr'],
+                          ),
+                          TimeWidget(
+                            prayName: 'المغرب',
+                            timeNow: timeNow,
+                            prayTime: state.data.data['timings']['Maghrib'],
+                          ),
+                          TimeWidget(
+                            prayName: 'العشاء',
+                            timeNow: timeNow,
+                            prayTime: state.data.data['timings']['Isha'],
+                          ),
+                          Image.asset(
+                            AssetsManager.prayIcon,
+                            fit: BoxFit.cover,
+                            width: AppVariables.appSize(context).width * 0.7,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
             );
           } else if (state is PrayTimeErrorFetchData) {
-            print("++++++++++++++++++++++++++++++++++");
             return Scaffold(
               body: SafeArea(
                 child: Stack(

@@ -24,7 +24,7 @@ class PrayRemoteDataSource extends BasePrayTimeDataSource {
     if (response.statusCode == 200) {
       final jsonData = response.data;
       final PrayerDataModel apiData = PrayerDataModel.fromJson(jsonData);
-      print(apiData.data);
+      //print(apiData.data);
       return apiData;
     } else {
       print('error +++++++++++++++++++');

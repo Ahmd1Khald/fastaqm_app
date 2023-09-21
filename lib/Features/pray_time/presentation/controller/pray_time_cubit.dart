@@ -31,6 +31,8 @@ class PrayTimeCubit extends Cubit<PrayTimeState> {
       emit(PrayTimeErrorFetchData());
     }, (data) {
       prayTimeData = data;
+      print("----------------------");
+      //print(prayTimeData?.data['timings']);
       emit(PrayTimeSuccessFetchData(data));
     });
   }
