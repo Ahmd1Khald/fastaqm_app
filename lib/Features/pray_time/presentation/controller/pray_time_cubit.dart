@@ -12,17 +12,23 @@ class PrayTimeCubit extends Cubit<PrayTimeState> {
   PrayerDataModel? prayTimeData;
   final PrayTimeUseCase prayTimeUseCase;
 
-  Future<void> fetchTopicsList({
+  Future<void> fetchPrayData({
     required String country,
     required String date,
   }) async {
     emit(PrayTimeLoadingFetchData());
-    var result = await prayTimeUseCase.execute(
+    var result = await prayTimeUseCase
+        .execute(
       country: country,
       date: date,
-    );
+    )
+        .catchError((error) {
+      emit(PrayTimeErrorFetchData());
+      print("emited success");
+      print(error.toString());
+    });
     result.fold((failure) {
-      emit(PrayTimeErrorFetchData(failure.message));
+      emit(PrayTimeErrorFetchData());
     }, (data) {
       prayTimeData = data;
       emit(PrayTimeSuccessFetchData(data));

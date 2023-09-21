@@ -29,6 +29,7 @@ class _SplashScreenState extends State<SplashScreen>
       LocationPermission permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
+        CacheHelper.saveData(key: AppStrings.countryNameKey, value: "egypt");
         if (permission == LocationPermission.denied) {
           throw PlatformException(
             code: 'PERMISSION_DENIED',
@@ -75,10 +76,13 @@ class _SplashScreenState extends State<SplashScreen>
     getUserLocation().then((value) async {
       await getCountryName(value.latitude, value.longitude).then((value) {
         CacheHelper.saveData(
-            key: AppStrings.countryNameKey, value: value ?? "Egypt");
+            key: AppStrings.countryNameKey, value: value ?? "egypt");
         print(CacheHelper.getDate(key: AppStrings.countryNameKey));
         navigateToHome();
       });
+    }).catchError((error) {
+      //initSlidingAnimation();
+      navigateToHome();
     });
     super.initState();
   }
@@ -124,9 +128,11 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void navigateToHome() {
-    AppFunctions.pushAndRemove(
-      context: context,
-      screen: const LayoutScreen(),
-    );
+    Future.delayed(const Duration(seconds: 2)).then((value) {
+      AppFunctions.pushAndRemove(
+        context: context,
+        screen: const LayoutScreen(),
+      );
+    });
   }
 }

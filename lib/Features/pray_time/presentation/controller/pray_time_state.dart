@@ -14,6 +14,6 @@ class PrayTimeSuccessFetchData extends PrayTimeState {
 }
 
 class PrayTimeErrorFetchData extends PrayTimeState {
-  final String error;
-  PrayTimeErrorFetchData(this.error);
+  // final String error;
+  // PrayTimeErrorFetchData(this.error);
 }
