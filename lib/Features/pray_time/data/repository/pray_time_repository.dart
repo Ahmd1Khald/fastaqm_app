@@ -4,7 +4,7 @@ import '../../../../Core/error/exceptions.dart';
 import '../../../../Core/error/failure.dart';
 import '../../domain/repository/base_pray_repository.dart';
 import '../data_sources/pray_remote_data_source.dart';
-import '../model/pray_time_model.dart';
+import '../model/PrayerData.dart';
 
 class PrayRepository extends BasePrayRepository {
   final BasePrayTimeDataSource basePrayTimeDataSource;
@@ -14,7 +14,7 @@ class PrayRepository extends BasePrayRepository {
   });
 
   @override
-  Future<Either<Failure, PrayerTimings>> fetchPrayTime({
+  Future<Either<Failure, PrayerDataModel>> fetchPrayTime({
     required String country,
     required String date,
   }) async {

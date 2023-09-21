@@ -1,6 +1,6 @@
-import 'package:fastaqm_app/Features/pray_time/data/model/pray_time_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../data/model/PrayerData.dart';
 import '../../domain/usecase/pray_time_usecase.dart';
 
 part 'pray_time_state.dart';
@@ -9,7 +9,7 @@ class PrayTimeCubit extends Cubit<PrayTimeState> {
   PrayTimeCubit(this.prayTimeUseCase) : super(PrayTimeInitial());
   static PrayTimeCubit get(context) => BlocProvider.of(context);
 
-  PrayerTimings? prayTimeData;
+  PrayerDataModel? prayTimeData;
   final PrayTimeUseCase prayTimeUseCase;
 
   Future<void> fetchTopicsList({

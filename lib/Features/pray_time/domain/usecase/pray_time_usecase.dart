@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../Core/error/failure.dart';
 import '../../../../Core/services/use_cases.dart';
-import '../../data/model/pray_time_model.dart';
+import '../../data/model/PrayerData.dart';
 import '../repository/base_pray_repository.dart';
 
 class PrayTimeUseCase extends NoParam {
@@ -10,7 +10,7 @@ class PrayTimeUseCase extends NoParam {
 
   PrayTimeUseCase(this.basePrayRepository);
 
-  Future<Either<Failure, PrayerTimings>> execute({
+  Future<Either<Failure, PrayerDataModel>> execute({
     required String country,
     required String date,
   }) async {

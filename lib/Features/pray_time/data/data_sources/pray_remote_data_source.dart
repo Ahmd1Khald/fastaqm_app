@@ -1,10 +1,10 @@
 import '../../../../Core/constatnts/const_api.dart';
 import '../../../../Core/error/exceptions.dart';
 import '../../../../Core/helpers/dio_helper.dart';
-import '../model/pray_time_model.dart';
+import '../model/PrayerData.dart';
 
 abstract class BasePrayTimeDataSource {
-  Future<PrayerTimings> getPrayTime({
+  Future<PrayerDataModel> getPrayTime({
     required String country,
     required String date,
   });
@@ -12,7 +12,7 @@ abstract class BasePrayTimeDataSource {
 
 class PrayRemoteDataSource extends BasePrayTimeDataSource {
   @override
-  Future<PrayerTimings> getPrayTime({
+  Future<PrayerDataModel> getPrayTime({
     required String country,
     required String date,
   }) async {
@@ -22,9 +22,10 @@ class PrayRemoteDataSource extends BasePrayTimeDataSource {
       country: country,
     );
     if (response.statusCode == 200) {
-      //var apiData = await response.data;
-      print(response.data);
-      return response.data;
+      final jsonData = response.data;
+      final PrayerDataModel apiData = PrayerDataModel.fromJson(jsonData);
+      print(apiData.data);
+      return apiData;
     } else {
       print('error +++++++++++++++++++');
       throw const ServerException(errorMessage: 'Error while get Pray Time');
