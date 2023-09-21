@@ -12,6 +12,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../Core/services/ServiceLocator.dart';
+import '../../../../Core/widgets/custom_floating_button.dart';
 import '../../data/repository/pray_time_repository.dart';
 import '../../domain/usecase/pray_time_usecase.dart';
 import '../controller/pray_time_cubit.dart';
@@ -23,16 +24,7 @@ class PrayTimeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Create a DateTime object representing the date you want to format
-    DateTime date = DateTime.now(); // Replace with your specific date
-
-    // Define the date format
-    //final DateFormat formatter = DateFormat('dd-MM-yyyy');
-
-    // Format the date
-    //final String formattedDate;
-
-    //print('Formatted Date: $formattedDate');
+    DateTime date = DateTime.now();
     print(date);
     final double timeNow = DateTime.now().hour.toDouble();
     return BlocProvider(
@@ -54,6 +46,7 @@ class PrayTimeScreen extends StatelessWidget {
         builder: (context, state) {
           if (state is PrayTimeSuccessFetchData) {
             return Scaffold(
+              floatingActionButton: customFloatingActionButton(context),
               body: SafeArea(
                 child: Stack(
                   alignment: AlignmentDirectional.topCenter,
