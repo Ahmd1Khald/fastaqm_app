@@ -41,6 +41,8 @@ class SuraWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(1.0),
           child: PageView(
+            scrollDirection: Axis.horizontal,
+            reverse: true,
             children: retPage(context),
           ),
         ),

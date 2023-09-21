@@ -1,6 +1,8 @@
+import 'package:fastaqm_app/Core/constatnts/app_functions.dart';
 import 'package:fastaqm_app/Core/constatnts/assets_manager.dart';
 import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
+import 'package:fastaqm_app/Features/pray_time/presentation/views/pray_time.dart';
 import 'package:flutter/material.dart';
 
 import '../../../quran/presentation/views/quran_body.dart';
@@ -23,7 +25,12 @@ class HomeScreen extends StatelessWidget {
                 context: context,
                 image: AssetsManager.masjedIcon,
                 text: "مواقيت الصلاة",
-                func: () {},
+                func: () {
+                  AppFunctions.pushTo(
+                    context: context,
+                    screen: const PrayTimeScreen(),
+                  );
+                },
               ),
               customItem(
                 context: context,
