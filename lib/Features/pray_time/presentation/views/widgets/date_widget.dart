@@ -4,13 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../Core/constatnts/colors.dart';
 
 class DateWidget extends StatelessWidget {
-  const DateWidget(
-      {Key? key,
-      required this.dayName,
-      required this.dayNum,
-      required this.monthName,
-      required this.dateNum})
-      : super(key: key);
+  const DateWidget({
+    Key? key,
+    required this.dayName,
+    required this.dayNum,
+    required this.monthName,
+    required this.dateNum,
+  }) : super(key: key);
 
   final String dayName;
   final String dayNum;
