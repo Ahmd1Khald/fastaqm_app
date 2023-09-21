@@ -29,18 +29,21 @@ class TimeWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          prayTime,
-          style: GoogleFonts.notoNastaliqUrdu(
-            textStyle: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w400,
-              color: MyColors.darkBrown,
+        SizedBox(
+          width: AppVariables.appSize(context).width * 0.18,
+          child: Text(
+            prayTime,
+            style: GoogleFonts.notoNastaliqUrdu(
+              textStyle: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w400,
+                color: MyColors.darkBrown,
+              ),
             ),
           ),
         ),
         SizedBox(
-          width: AppVariables.appSize(context).width * 0.6,
+          width: AppVariables.appSize(context).width * 0.55,
           child: Slider(
             autofocus: true,
             value: time,
@@ -49,13 +52,16 @@ class TimeWidget extends StatelessWidget {
             onChanged: (value) {},
           ),
         ),
-        Text(
-          prayName,
-          style: GoogleFonts.notoNastaliqUrdu(
-            textStyle: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w400,
-              color: MyColors.darkBrown,
+        SizedBox(
+          width: AppVariables.appSize(context).width * 0.19,
+          child: Text(
+            prayName,
+            style: GoogleFonts.notoNastaliqUrdu(
+              textStyle: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w400,
+                color: MyColors.darkBrown,
+              ),
             ),
           ),
         ),

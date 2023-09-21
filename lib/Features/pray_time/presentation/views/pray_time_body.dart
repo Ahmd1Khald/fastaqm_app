@@ -54,7 +54,7 @@ class PrayTimeScreen extends StatelessWidget {
                     const BackGroundWidget(),
                     SingleChildScrollView(
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           DateWidget(
                             dayName: state.data.data['date']['hijri']['weekday']
