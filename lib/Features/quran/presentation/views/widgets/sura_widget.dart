@@ -10,7 +10,7 @@ class SuraWidget extends StatelessWidget {
     bool lock = false;
     final List<Widget> pages = [];
     for (int i = 0; i < suraPages.length; i++) {
-      if (suraPages[0] == 2 && !lock || suraPages.length == 1) {
+      if (suraPages[0] == 2 && !lock || suraPages[0] == 1) {
         pages.add(Container(
           color: MyColors.lightBrown,
           height: 50,
