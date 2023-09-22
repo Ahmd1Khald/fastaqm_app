@@ -2,6 +2,7 @@ import 'package:fastaqm_app/Core/constatnts/app_functions.dart';
 import 'package:fastaqm_app/Core/constatnts/assets_manager.dart';
 import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
+import 'package:fastaqm_app/Features/home/presentation/views/widgets/qiblah_screen.dart';
 import 'package:fastaqm_app/Features/pray_time/presentation/views/pray_time_body.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +20,9 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        //mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const Expanded(child: QiblahScreen()),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
