@@ -30,7 +30,7 @@ class TimeWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          width: AppVariables.appSize(context).width * 0.18,
+          width: AppVariables.appSize(context).width * 0.19,
           child: Text(
             prayTime,
             style: GoogleFonts.notoNastaliqUrdu(
@@ -53,12 +53,12 @@ class TimeWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: AppVariables.appSize(context).width * 0.19,
+          width: AppVariables.appSize(context).width * 0.18,
           child: Text(
             prayName,
             style: GoogleFonts.notoNastaliqUrdu(
               textStyle: const TextStyle(
-                fontSize: 24,
+                fontSize: 22,
                 fontWeight: FontWeight.w400,
                 color: MyColors.darkBrown,
               ),
