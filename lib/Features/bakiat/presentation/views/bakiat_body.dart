@@ -10,15 +10,15 @@ class BakiatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(context),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            CustomBackground(),
-            CustomBakiat(text: "سبحان الله"),
-            CustomBakiat(text: "الحمد لله"),
-            CustomBakiat(text: "لا إله إلا الله"),
-            CustomBakiat(text: "الله أكبر"),
-            CustomBakiat(text: "أستغفر الله"),
+            const CustomBackground(),
+            CustomBakiat(text: "سبحان الله", index: 1),
+            CustomBakiat(text: "الحمد لله", index: 2),
+            CustomBakiat(text: "لا إله إلا الله", index: 3),
+            CustomBakiat(text: "الله أكبر", index: 4),
+            CustomBakiat(text: "أستغفر الله", index: 5),
           ],
         ),
       ),
