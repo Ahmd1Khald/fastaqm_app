@@ -8,7 +8,6 @@ import 'package:fastaqm_app/Features/home/presentation/views/widgets/qiblah_scre
 import 'package:fastaqm_app/Features/pray_time/presentation/views/pray_time_body.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../Core/widgets/customErrorContainer.dart';
 import '../../../azkar/presentation/views/azkar_body.dart';
 import '../../../bakiat/presentation/views/bakiat_body.dart';
 import '../../../quran/presentation/views/quran_body.dart';
@@ -23,14 +22,14 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        //mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (CacheHelper.getDate(key: AppStrings.locationKey) == true)
             const Expanded(child: QiblahScreen()),
-          if (CacheHelper.getDate(key: AppStrings.locationKey) == false)
-            const CustomErrorContainer(
-              title: "قم بتفعيل الموقع\nلاظهار القبلة",
-            ),
+          // if (CacheHelper.getDate(key: AppStrings.locationKey) == false)
+          //   const CustomErrorContainer(
+          //     title: "قم بتفعيل الموقع\nلاظهار القبلة",
+          //   ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

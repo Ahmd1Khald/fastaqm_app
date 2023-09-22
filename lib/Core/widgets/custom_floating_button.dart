@@ -7,7 +7,7 @@ FloatingActionButton customFloatingActionButton(BuildContext context) {
     onPressed: () {
       Navigator.pop(context);
     },
-    backgroundColor: MyColors.lightBrown,
+    backgroundColor: MyColors.creamColor,
     child: const Icon(
       Icons.arrow_forward,
       size: 32,

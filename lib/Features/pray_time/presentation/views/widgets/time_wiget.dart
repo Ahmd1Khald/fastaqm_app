@@ -45,6 +45,9 @@ class TimeWidget extends StatelessWidget {
         SizedBox(
           width: AppVariables.appSize(context).width * 0.55,
           child: Slider(
+            //secondaryActiveColor: MyColors.creamColor,
+            activeColor: MyColors.darkBrown,
+            //inactiveColor: MyColors.lightBrown,
             autofocus: true,
             value: time,
             min: 0,
