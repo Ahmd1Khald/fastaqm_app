@@ -23,7 +23,7 @@ class TimeWidget extends StatelessWidget {
     print("prayTime  $prayTime");
     print("timeNow  $timeNow");
     print(prayHour - timeNow);
-    double time = prayHour - timeNow;
+    double time = timeNow - prayHour;
     time < 0 ? time += 24 : time;
     print("time  $time");
     return Row(
