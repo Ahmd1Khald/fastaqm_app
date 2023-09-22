@@ -63,7 +63,7 @@ class _QiblahScreenState extends State<QiblahScreen>
                       height: 10,
                     ),
                     SizedBox(
-                        height: AppVariables.appSize(context).height * 0.25,
+                        height: AppVariables.appSize(context).height * 0.22,
                         child: AnimatedBuilder(
                           animation: animation!,
                           builder: (context, child) => Transform.rotate(

@@ -31,6 +31,7 @@ class _SplashScreenState extends State<SplashScreen>
         permission = await Geolocator.requestPermission();
         CacheHelper.saveData(key: AppStrings.countryNameKey, value: "egypt");
         if (permission == LocationPermission.denied) {
+          CacheHelper.saveData(key: AppStrings.locationKey, value: false);
           throw PlatformException(
             code: 'PERMISSION_DENIED',
             message: 'Location permission denied',
@@ -38,6 +39,7 @@ class _SplashScreenState extends State<SplashScreen>
         }
       }
       if (permission == LocationPermission.deniedForever) {
+        CacheHelper.saveData(key: AppStrings.locationKey, value: false);
         throw PlatformException(
           code: 'PERMISSION_DENIED_FOREVER',
           message: 'Location permission denied forever',
@@ -45,8 +47,10 @@ class _SplashScreenState extends State<SplashScreen>
       }
       final Position position = await Geolocator.getCurrentPosition();
       print(position);
+      CacheHelper.saveData(key: AppStrings.locationKey, value: true);
       return position;
     } catch (e) {
+      CacheHelper.saveData(key: AppStrings.locationKey, value: false);
       throw PlatformException(
         code: 'ERROR_GETTING_LOCATION',
         message: 'Error getting user location: $e',

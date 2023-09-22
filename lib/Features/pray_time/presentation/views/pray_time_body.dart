@@ -9,9 +9,9 @@ import 'package:fastaqm_app/Features/pray_time/presentation/views/widgets/time_w
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../Core/services/ServiceLocator.dart';
+import '../../../../Core/widgets/customErrorContainer.dart';
 import '../../../../Core/widgets/custom_floating_button.dart';
 import '../../data/repository/pray_time_repository.dart';
 import '../../domain/usecase/pray_time_usecase.dart';
@@ -115,40 +115,9 @@ class PrayTimeScreen extends StatelessWidget {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          height: AppVariables.appSize(context).height * 0.3,
-                          width: AppVariables.appSize(context).width * 0.8,
-                          decoration: BoxDecoration(
-                            color: MyColors.creamColor,
-                            borderRadius: BorderRadius.circular(30),
-                            border: Border.all(color: MyColors.darkBrown),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.error_outline,
-                                color: Colors.red,
-                                size: 60,
-                              ),
-                              const SizedBox(
-                                height: 16.0,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Center(
-                                  child: Text(
-                                    "تحقق من اتصالك بالانترنيت واعد المحاولة لاحقا",
-                                    style: GoogleFonts.cairo(
-                                      color: MyColors.darkBrown,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 22,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                        const CustomErrorContainer(
+                          title:
+                              "تحقق من اتصالك بالانترنيت واعد المحاولة لاحقا",
                         ),
                         Image.asset(
                           AssetsManager.prayIcon,
