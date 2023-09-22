@@ -18,4 +18,7 @@ class AssetsManager {
   static const bakiatImage = '$baseImagesPath/bakiat_image.png';
   static const ayaBakiatImage = '$baseImagesPath/aya_bakiat.png';
   static const qiblaImage = '$baseImagesPath/qibla.png';
+  static const sunIcon = '$baseImagesPath/sun_icon.png';
+  static const moonIcon = '$baseImagesPath/moon_icon.png';
+  static const sleepIcon = '$baseImagesPath/sleep_icon.png';
 }

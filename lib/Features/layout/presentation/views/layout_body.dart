@@ -1,12 +1,12 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:fastaqm_app/Core/constatnts/assets_manager.dart';
+import 'package:fastaqm_app/Features/qibla/presentation/views/qibla_body.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../Core/constatnts/colors.dart';
 import '../../../../Core/widgets/App_name.dart';
 import '../../../home/presentation/views/home_body.dart';
 import '../../../saves/presentation/views/saves_body.dart';
-import '../../../settings/presentation/views/settings_body.dart';
 
 class LayoutScreen extends StatefulWidget {
   const LayoutScreen({
@@ -20,8 +20,8 @@ class LayoutScreen extends StatefulWidget {
 class _LayoutScreenState extends State<LayoutScreen> {
   List<Widget> screens = [
     const SavesScreen(),
-    const SettingsScreen(),
-    HomeScreen(),
+    const QiblaScreen(),
+    const HomeScreen(),
   ];
   int _page = 2;
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
@@ -50,10 +50,10 @@ class _LayoutScreenState extends State<LayoutScreen> {
           width: navBarIconSize,
           color: MyColors.whiteColor,
         ),
-        Icon(
-          Icons.settings,
-          size: navBarIconSize,
-          color: MyColors.whiteColor,
+        Image.asset(
+          AssetsManager.makaaIcon,
+          width: navBarIconSize,
+          //color: MyColors.whiteColor,
         ),
         Image.asset(
           AssetsManager.homeIcon,
