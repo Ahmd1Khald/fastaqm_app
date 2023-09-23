@@ -48,6 +48,7 @@ class TimeWidget extends StatelessWidget {
             //secondaryActiveColor: MyColors.creamColor,
             activeColor: MyColors.darkBrown,
             //inactiveColor: MyColors.lightBrown,
+            allowedInteraction: SliderInteraction.slideOnly,
             autofocus: true,
             value: time,
             min: 0,

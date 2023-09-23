@@ -6,23 +6,23 @@ import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
 
-class QiblahScreen extends StatefulWidget {
-  const QiblahScreen({super.key});
+class QiblahWidget extends StatefulWidget {
+  const QiblahWidget({super.key});
 
   @override
-  State<QiblahScreen> createState() => _QiblahScreenState();
+  State<QiblahWidget> createState() => _QiblahWidgetState();
 }
 
 Animation<double>? animation;
 AnimationController? _animationController;
 double begin = 0.0;
 
-class _QiblahScreenState extends State<QiblahScreen>
+class _QiblahWidgetState extends State<QiblahWidget>
     with SingleTickerProviderStateMixin {
   @override
   void initState() {
     _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 500));
+        vsync: this, duration: const Duration(milliseconds: 100));
     animation = Tween(begin: 0.0, end: 0.0).animate(_animationController!);
     super.initState();
   }

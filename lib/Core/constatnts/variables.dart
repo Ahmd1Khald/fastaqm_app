@@ -5,4 +5,6 @@ class AppVariables {
     Size size = MediaQuery.of(context).size;
     return size;
   }
+
+  static int azkarSelected = -1;
 }

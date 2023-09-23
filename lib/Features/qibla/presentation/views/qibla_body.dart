@@ -1,5 +1,5 @@
 import 'package:fastaqm_app/Core/widgets/customErrorContainer.dart';
-import 'package:fastaqm_app/Features/qibla/presentation/views/widgets/qiblah_screen.dart';
+import 'package:fastaqm_app/Features/qibla/presentation/views/widgets/qiblah_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../Core/constatnts/app_strings.dart';
@@ -11,7 +11,7 @@ class QiblaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (CacheHelper.getDate(key: AppStrings.locationKey) == true) {
-      return const QiblahScreen();
+      return const QiblahWidget();
     }
     return const Scaffold(
       body: CustomErrorContainer(title: 'قم بتفعيل الموقع'),

@@ -21,4 +21,5 @@ class AssetsManager {
   static const sunIcon = '$baseImagesPath/sun_icon.png';
   static const moonIcon = '$baseImagesPath/moon_icon.png';
   static const sleepIcon = '$baseImagesPath/sleep_icon.png';
+  static const qiblaBottumIcon = '$baseImagesPath/qibla_nav_bar.png';
 }

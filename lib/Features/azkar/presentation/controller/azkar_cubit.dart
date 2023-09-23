@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../Core/constatnts/variables.dart';
+
 part 'azkar_state.dart';
 
 class AzkarCubit extends Cubit<AzkarState> {
@@ -23,5 +25,10 @@ class AzkarCubit extends Cubit<AzkarState> {
     } catch (error) {
       print('Error loading or parsing JSON: $error');
     }
+  }
+
+  void changeSelectedAzkarIcon(index) {
+    AppVariables.azkarSelected = index;
+    emit(AzkarCkangeSelectedIcon());
   }
 }

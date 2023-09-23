@@ -51,7 +51,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
           color: MyColors.whiteColor,
         ),
         Image.asset(
-          AssetsManager.makaaIcon,
+          AssetsManager.qiblaBottumIcon,
           width: navBarIconSize,
           //color: MyColors.whiteColor,
         ),

@@ -116,8 +116,7 @@ class PrayTimeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const CustomErrorContainer(
-                          title:
-                              "تحقق من اتصالك بالانترنيت واعد المحاولة لاحقا",
+                          title: "تحقق من اتصالك بالإنترنت وأعد المحاولة لاحقا",
                         ),
                         Image.asset(
                           AssetsManager.prayIcon,
