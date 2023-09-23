@@ -1,46 +1,17 @@
-import 'package:fastaqm_app/Core/constatnts/colors.dart';
-import 'package:fastaqm_app/Core/widgets/custom_app_bar.dart';
-import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/azkar_masaa.dart';
-import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/azkar_sabah.dart';
-import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/azkar_sleep.dart';
+import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/count_ziker_widget.dart';
+import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/next_zeker_button.dart';
+import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/slider_widget.dart';
+import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/ziker_containt_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../Core/constatnts/variables.dart';
+import '../../../../Core/widgets/custom_app_bar.dart';
+import '../../../../Core/widgets/custom_loading.dart';
 import '../controller/azkar_cubit.dart';
 
 class AzkarScreen extends StatelessWidget {
   const AzkarScreen({Key? key}) : super(key: key);
-
-  List<Widget> azkar(index) {
-    List<Widget> azkars = [
-      AzkarSabah(
-        containerColor: AppVariables.azkarSelected == index
-            ? MyColors.darkBrown
-            : MyColors.lightBrown,
-        iconColor: AppVariables.azkarSelected == index
-            ? MyColors.lightBrown
-            : MyColors.darkBrown,
-      ),
-      AzkarMasaa(
-        containerColor: AppVariables.azkarSelected == index
-            ? MyColors.darkBrown
-            : MyColors.lightBrown,
-        iconColor: AppVariables.azkarSelected == index
-            ? MyColors.lightBrown
-            : MyColors.darkBrown,
-      ),
-      AzkarSleep(
-        containerColor: AppVariables.azkarSelected == index
-            ? MyColors.darkBrown
-            : MyColors.lightBrown,
-        iconColor: AppVariables.azkarSelected == index
-            ? MyColors.lightBrown
-            : MyColors.darkBrown,
-      ),
-    ];
-    return azkars;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,41 +20,99 @@ class AzkarScreen extends StatelessWidget {
       child: BlocConsumer<AzkarCubit, AzkarState>(
         listener: (context, state) {},
         builder: (context, state) {
+          print(AppVariables.azkarSelected);
           AzkarCubit cubit = AzkarCubit.get(context);
+          if (state is AzkarLoadingFetchData) {
+            return Scaffold(
+              appBar: customAppBar(context),
+              body: const Center(
+                child: CustomLoadingPage(),
+              ),
+            );
+          }
+          if (state is AzkarSuccessFetchData || cubit.azkarAlsabah.isNotEmpty) {
+            return Scaffold(
+              appBar: customAppBar(context),
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: SizedBox(
+                        height: AppVariables.appSize(context).width * 0.2,
+                        child: ListView.separated(
+                          itemBuilder: (context, index) => InkWell(
+                            borderRadius: BorderRadius.circular(40),
+                            onTap: () {
+                              cubit.changeSelectedAzkarIcon(index);
+                            },
+                            child: cubit.changeSelectedZiker(index)[index],
+                          ),
+                          scrollDirection: Axis.horizontal,
+                          separatorBuilder: (context, index) => const SizedBox(
+                            width: 10,
+                          ),
+                          itemCount: cubit.changeSelectedZiker(-1).length,
+                        ),
+                      ),
+                    ),
+                    SliderWidget(
+                      allCount: AppVariables.azkarSelected == 0
+                          ? cubit.azkarAlsabah.length
+                          : AppVariables.azkarSelected == 1
+                              ? cubit.azkarAlmasaa.length
+                              : AppVariables.azkarSelected == 2
+                                  ? cubit.azkarAlnom.length
+                                  : 1,
+                      current: AppVariables.azkarSelected == 0
+                          ? cubit.sabahIndex
+                          : AppVariables.azkarSelected == 1
+                              ? cubit.masaaIndex
+                              : AppVariables.azkarSelected == 2
+                                  ? cubit.nomIndex
+                                  : 0,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ZikerContantWidget(
+                      text: AppVariables.azkarSelected == 0
+                          ? cubit.azkarAlsabah[cubit.sabahIndex]['zekr']
+                          : AppVariables.azkarSelected == 1
+                              ? cubit.azkarAlmasaa[cubit.masaaIndex]['zekr']
+                              : AppVariables.azkarSelected == 2
+                                  ? cubit.azkarAlnom[cubit.nomIndex]['zekr']
+                                  : '',
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CountZikerWidget(
+                      num: AppVariables.azkarSelected == 0
+                          ? cubit.azkarAlsabah[cubit.sabahIndex]['count']
+                          : AppVariables.azkarSelected == 1
+                              ? cubit.azkarAlmasaa[cubit.masaaIndex]['count']
+                              : AppVariables.azkarSelected == 2
+                                  ? cubit.azkarAlnom[cubit.nomIndex]['count']
+                                  : '',
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    NextZikerWidget(
+                      fnc: () {
+                        cubit.incIndex(tt: AppVariables.azkarSelected);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
           return Scaffold(
             appBar: customAppBar(context),
-            body: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: SizedBox(
-                    height: AppVariables.appSize(context).width * 0.2,
-                    child: ListView.separated(
-                      itemBuilder: (context, index) => InkWell(
-                        onTap: () {
-                          cubit.changeSelectedAzkarIcon(index);
-                        },
-                        child: azkar(index)[index],
-                      ),
-                      scrollDirection: Axis.horizontal,
-                      separatorBuilder: (context, index) => const SizedBox(
-                        width: 10,
-                      ),
-                      itemCount: azkar(-1).length,
-                    ),
-                  ),
-                ),
-                Slider(
-                  value: 10,
-                  min: 5,
-                  max: 20,
-                  divisions: 6,
-                  allowedInteraction: SliderInteraction.slideOnly,
-                  activeColor: MyColors.darkBrown,
-                  inactiveColor: MyColors.lightBrown,
-                  onChanged: (value) {},
-                ),
-              ],
+            body: const Center(
+              child: CustomLoadingPage(),
             ),
           );
         },

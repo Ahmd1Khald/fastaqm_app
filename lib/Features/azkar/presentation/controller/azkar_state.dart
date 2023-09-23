@@ -5,4 +5,10 @@ abstract class AzkarState {}
 
 class AzkarInitial extends AzkarState {}
 
-class AzkarCkangeSelectedIcon extends AzkarState {}
+class AzkarLoadingFetchData extends AzkarState {}
+
+class AzkarSuccessFetchData extends AzkarState {}
+
+class AzkarChangeSelectedIcon extends AzkarState {}
+
+class AzkarIncreaseIndex extends AzkarState {}

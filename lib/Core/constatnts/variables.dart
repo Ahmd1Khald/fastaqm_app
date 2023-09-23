@@ -6,5 +6,5 @@ class AppVariables {
     return size;
   }
 
-  static int azkarSelected = -1;
+  static int azkarSelected = 0;
 }

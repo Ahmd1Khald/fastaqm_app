@@ -1,6 +1,5 @@
 import 'package:fastaqm_app/Core/constatnts/app_strings.dart';
 import 'package:fastaqm_app/Core/constatnts/assets_manager.dart';
-import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:fastaqm_app/Core/helpers/cachehelper.dart';
 import 'package:fastaqm_app/Features/pray_time/presentation/views/widgets/backgraound_widget.dart';
@@ -8,11 +7,11 @@ import 'package:fastaqm_app/Features/pray_time/presentation/views/widgets/date_w
 import 'package:fastaqm_app/Features/pray_time/presentation/views/widgets/time_wiget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../../../Core/services/ServiceLocator.dart';
 import '../../../../Core/widgets/customErrorContainer.dart';
 import '../../../../Core/widgets/custom_floating_button.dart';
+import '../../../../Core/widgets/custom_loading.dart';
 import '../../data/repository/pray_time_repository.dart';
 import '../../domain/usecase/pray_time_usecase.dart';
 import '../controller/pray_time_cubit.dart';
@@ -136,17 +135,7 @@ class PrayTimeScreen extends StatelessWidget {
                   alignment: AlignmentDirectional.topCenter,
                   children: [
                     const BackGroundWidget(),
-                    SpinKitFadingCircle(
-                      itemBuilder: (BuildContext context, int index) {
-                        return DecoratedBox(
-                          decoration: BoxDecoration(
-                            color: index.isEven
-                                ? MyColors.babyBrown
-                                : MyColors.lightBrown,
-                          ),
-                        );
-                      },
-                    ),
+                    const CustomLoadingPage(),
                     const SizedBox(
                       height: 100,
                     ),

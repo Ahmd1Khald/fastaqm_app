@@ -22,7 +22,7 @@ class _QiblahWidgetState extends State<QiblahWidget>
   @override
   void initState() {
     _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 100));
+        vsync: this, duration: const Duration(milliseconds: 400));
     animation = Tween(begin: 0.0, end: 0.0).animate(_animationController!);
     super.initState();
   }
