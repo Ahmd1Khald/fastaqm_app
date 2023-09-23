@@ -100,47 +100,50 @@ class AzkarScreen extends StatelessWidget {
                     const SizedBox(
                       height: 45,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Visibility(
-                          visible: AppVariables.azkarSelected == 0 &&
-                                  cubit.sabahIndex > 0
-                              ? true
-                              : AppVariables.azkarSelected == 1 &&
-                                      cubit.masaaIndex > 0
-                                  ? true
-                                  : AppVariables.azkarSelected == 2 &&
-                                          cubit.nomIndex > 0
-                                      ? true
-                                      : false,
-                          child: BackZikerWidget(
-                            fnc: () {
-                              cubit.decIndex(tt: AppVariables.azkarSelected);
-                            },
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 55),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Visibility(
+                            visible: AppVariables.azkarSelected == 0 &&
+                                    cubit.sabahIndex > 0
+                                ? true
+                                : AppVariables.azkarSelected == 1 &&
+                                        cubit.masaaIndex > 0
+                                    ? true
+                                    : AppVariables.azkarSelected == 2 &&
+                                            cubit.nomIndex > 0
+                                        ? true
+                                        : false,
+                            child: BackZikerWidget(
+                              fnc: () {
+                                cubit.decIndex(tt: AppVariables.azkarSelected);
+                              },
+                            ),
                           ),
-                        ),
-                        Visibility(
-                          visible: AppVariables.azkarSelected == 0 &&
-                                  cubit.sabahIndex !=
-                                      cubit.azkarAlsabah.length - 1
-                              ? true
-                              : AppVariables.azkarSelected == 1 &&
-                                      cubit.masaaIndex !=
-                                          cubit.azkarAlmasaa.length - 1
-                                  ? true
-                                  : AppVariables.azkarSelected == 2 &&
-                                          cubit.nomIndex !=
-                                              cubit.azkarAlnom.length - 1
-                                      ? true
-                                      : false,
-                          child: NextZikerWidget(
-                            fnc: () {
-                              cubit.incIndex(tt: AppVariables.azkarSelected);
-                            },
+                          Visibility(
+                            visible: AppVariables.azkarSelected == 0 &&
+                                    cubit.sabahIndex !=
+                                        cubit.azkarAlsabah.length - 1
+                                ? true
+                                : AppVariables.azkarSelected == 1 &&
+                                        cubit.masaaIndex !=
+                                            cubit.azkarAlmasaa.length - 1
+                                    ? true
+                                    : AppVariables.azkarSelected == 2 &&
+                                            cubit.nomIndex !=
+                                                cubit.azkarAlnom.length - 1
+                                        ? true
+                                        : false,
+                            child: NextZikerWidget(
+                              fnc: () {
+                                cubit.incIndex(tt: AppVariables.azkarSelected);
+                              },
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),

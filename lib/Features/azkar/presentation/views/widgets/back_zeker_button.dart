@@ -11,6 +11,7 @@ class BackZikerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: fnc,
+      elevation: 5,
       height: AppVariables.appSize(context).width * 0.1,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
       color: MyColors.darkBrown,

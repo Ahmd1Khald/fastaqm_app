@@ -37,7 +37,7 @@ class SliderWidget extends StatelessWidget {
                         : AppVariables.azkarSelected == 2
                             ? cubit.azkarAlnom.length.toDouble() - 1
                             : 0,
-                divisions: allCount,
+                divisions: allCount - 1,
                 allowedInteraction: SliderInteraction.slideOnly,
                 activeColor: MyColors.darkBrown,
                 inactiveColor: MyColors.lightBrown,

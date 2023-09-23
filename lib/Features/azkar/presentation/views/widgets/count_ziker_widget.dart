@@ -65,6 +65,7 @@ class CountZikerWidget extends StatelessWidget {
                   }
                 },
                 height: AppVariables.appSize(context).width * 0.14,
+                elevation: 5,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
