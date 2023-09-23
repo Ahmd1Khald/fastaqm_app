@@ -59,16 +59,28 @@ class AzkarCubit extends Cubit<AzkarState> {
     if (tt == 0 && azkarAlsabah.length - 1 - sabahIndex > 0) {
       print(azkarAlsabah.length - 1 - sabahIndex);
       sabahIndex++;
-      emit(AzkarIncreaseIndex());
     } else if (tt == 1 && azkarAlmasaa.length - 1 - masaaIndex > 0) {
       print(azkarAlmasaa.length - 1 - masaaIndex);
       masaaIndex++;
-      emit(AzkarIncreaseIndex());
     } else if (tt == 2 && azkarAlnom.length - 1 - nomIndex > 0) {
       print(azkarAlnom.length - 1 - nomIndex);
       nomIndex++;
-      emit(AzkarIncreaseIndex());
     }
+    resetCounters();
+    emit(AzkarIncreaseIndex());
+  }
+
+  void decIndex({required int tt}) {
+    print(tt);
+    if (tt == 0 && sabahIndex > 0) {
+      sabahIndex--;
+    } else if (tt == 1 && masaaIndex > 0) {
+      masaaIndex--;
+    } else if (tt == 2 && nomIndex > 0) {
+      print(azkarAlnom.length - 1 - nomIndex);
+      nomIndex--;
+    }
+    emit(AzkarDecreaseIndex());
   }
 
   List<Widget> changeSelectedZiker(index) {
@@ -99,5 +111,35 @@ class AzkarCubit extends Cubit<AzkarState> {
       ),
     ];
     return azkars;
+  }
+
+  void updateSliderValue(double value) {
+    if (AppVariables.azkarSelected == 0) {
+      sabahIndex = value.toInt();
+    }
+    if (AppVariables.azkarSelected == 1) {
+      masaaIndex = value.toInt();
+    }
+    if (AppVariables.azkarSelected == 2) {
+      nomIndex = value.toInt();
+    }
+    emit(AzkarUpdateSliderValue());
+  }
+
+  double counterValue = 0;
+  double counterIndicator = 0;
+
+  void incCounter(String num) {
+    print(double.parse(num == "" ? '1' : num));
+    counterIndicator += 1 / double.parse(num == "" ? '1' : num);
+    print("indecator = $counterIndicator");
+    counterValue++;
+    emit(AzkarIncreaseCounter());
+  }
+
+  void resetCounters() {
+    counterValue = 0;
+    counterIndicator = 0;
+    emit(AzkarResetCounter());
   }
 }

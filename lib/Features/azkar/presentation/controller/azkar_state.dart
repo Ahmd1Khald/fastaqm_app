@@ -12,3 +12,11 @@ class AzkarSuccessFetchData extends AzkarState {}
 class AzkarChangeSelectedIcon extends AzkarState {}
 
 class AzkarIncreaseIndex extends AzkarState {}
+
+class AzkarIncreaseCounter extends AzkarState {}
+
+class AzkarResetCounter extends AzkarState {}
+
+class AzkarDecreaseIndex extends AzkarState {}
+
+class AzkarUpdateSliderValue extends AzkarState {}

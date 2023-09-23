@@ -1,3 +1,4 @@
+import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/back_zeker_button.dart';
 import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/count_ziker_widget.dart';
 import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/next_zeker_button.dart';
 import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/slider_widget.dart';
@@ -97,12 +98,49 @@ class AzkarScreen extends StatelessWidget {
                                   : '',
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 45,
                     ),
-                    NextZikerWidget(
-                      fnc: () {
-                        cubit.incIndex(tt: AppVariables.azkarSelected);
-                      },
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Visibility(
+                          visible: AppVariables.azkarSelected == 0 &&
+                                  cubit.sabahIndex > 0
+                              ? true
+                              : AppVariables.azkarSelected == 1 &&
+                                      cubit.masaaIndex > 0
+                                  ? true
+                                  : AppVariables.azkarSelected == 2 &&
+                                          cubit.nomIndex > 0
+                                      ? true
+                                      : false,
+                          child: BackZikerWidget(
+                            fnc: () {
+                              cubit.decIndex(tt: AppVariables.azkarSelected);
+                            },
+                          ),
+                        ),
+                        Visibility(
+                          visible: AppVariables.azkarSelected == 0 &&
+                                  cubit.sabahIndex !=
+                                      cubit.azkarAlsabah.length - 1
+                              ? true
+                              : AppVariables.azkarSelected == 1 &&
+                                      cubit.masaaIndex !=
+                                          cubit.azkarAlmasaa.length - 1
+                                  ? true
+                                  : AppVariables.azkarSelected == 2 &&
+                                          cubit.nomIndex !=
+                                              cubit.azkarAlnom.length - 1
+                                      ? true
+                                      : false,
+                          child: NextZikerWidget(
+                            fnc: () {
+                              cubit.incIndex(tt: AppVariables.azkarSelected);
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -118,6 +156,5 @@ class AzkarScreen extends StatelessWidget {
         },
       ),
     );
-    ;
   }
 }
