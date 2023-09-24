@@ -41,7 +41,7 @@ class _CustomBakiatState extends State<CustomBakiat> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 30, right: 15, left: 15),
+      padding: const EdgeInsets.only(top: 20, right: 15, left: 15),
       child: SizedBox(
         width: AppVariables.appSize(context).width * 0.89,
         child: Row(

@@ -30,6 +30,9 @@ class _BakiatScreenState extends State<BakiatScreen> {
             CustomBakiat(text: "لا إله إلا الله", index: 3),
             CustomBakiat(text: "الله أكبر", index: 4),
             CustomBakiat(text: "أستغفر الله", index: 5),
+            SizedBox(
+              height: AppVariables.appSize(context).width * 0.07,
+            ),
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 12.0, horizontal: 10),
