@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../../../azkar/presentation/views/azkar_body.dart';
 import '../../../bakiat/presentation/views/bakiat_body.dart';
+import '../../../duaa/presentation/views/duaa_body.dart';
 import '../../../quran/presentation/views/quran_body.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -73,7 +74,12 @@ class HomeScreen extends StatelessWidget {
                 context: context,
                 image: AssetsManager.duaaLogo,
                 text: "أدعية وظيفية",
-                func: () {},
+                func: () {
+                  AppFunctions.pushTo(
+                    context: context,
+                    screen: const DuaaScreen(),
+                  );
+                },
               ),
               customItem(
                 context: context,

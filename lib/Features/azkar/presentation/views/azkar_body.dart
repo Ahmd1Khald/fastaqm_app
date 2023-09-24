@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../Core/constatnts/variables.dart';
+import '../../../../Core/widgets/customErrorContainer.dart';
 import '../../../../Core/widgets/custom_app_bar.dart';
 import '../../../../Core/widgets/custom_loading.dart';
 import '../controller/azkar_cubit.dart';
@@ -153,7 +154,8 @@ class AzkarScreen extends StatelessWidget {
           return Scaffold(
             appBar: customAppBar(context),
             body: const Center(
-              child: CustomLoadingPage(),
+              child:
+                  CustomErrorContainer(title: 'حدث خطأ ما حاول مرة اخرى لاحقا'),
             ),
           );
         },

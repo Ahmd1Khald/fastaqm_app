@@ -35,7 +35,7 @@ class AzkarCubit extends Cubit<AzkarState> {
           azkarAlsabah.add(value);
         } else if (value['category'] == "أذكار المساء") {
           azkarAlmasaa.add(value);
-        } else if (value['category'] == "أذكار الاستيقاظ من النوم") {
+        } else if (value['category'] == "أذكار النوم") {
           azkarAlnom.add(value);
         }
       }
