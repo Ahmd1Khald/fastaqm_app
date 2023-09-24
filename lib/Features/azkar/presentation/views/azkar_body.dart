@@ -65,14 +65,18 @@ class AzkarScreen extends StatelessWidget {
                               ? cubit.azkarAlmasaa.length
                               : AppVariables.azkarSelected == 2
                                   ? cubit.azkarAlnom.length
-                                  : 1,
+                                  : AppVariables.azkarSelected == 3
+                                      ? cubit.azkarAlsalaa.length
+                                      : 1,
                       current: AppVariables.azkarSelected == 0
                           ? cubit.sabahIndex
                           : AppVariables.azkarSelected == 1
                               ? cubit.masaaIndex
                               : AppVariables.azkarSelected == 2
                                   ? cubit.nomIndex
-                                  : 0,
+                                  : AppVariables.azkarSelected == 3
+                                      ? cubit.salaaIndex
+                                      : 0,
                     ),
                     const SizedBox(
                       height: 20,
@@ -84,7 +88,10 @@ class AzkarScreen extends StatelessWidget {
                               ? cubit.azkarAlmasaa[cubit.masaaIndex]['zekr']
                               : AppVariables.azkarSelected == 2
                                   ? cubit.azkarAlnom[cubit.nomIndex]['zekr']
-                                  : '',
+                                  : AppVariables.azkarSelected == 3
+                                      ? cubit.azkarAlsalaa[cubit.salaaIndex]
+                                          ['zekr']
+                                      : '',
                     ),
                     const SizedBox(
                       height: 20,
@@ -96,7 +103,10 @@ class AzkarScreen extends StatelessWidget {
                               ? cubit.azkarAlmasaa[cubit.masaaIndex]['count']
                               : AppVariables.azkarSelected == 2
                                   ? cubit.azkarAlnom[cubit.nomIndex]['count']
-                                  : '',
+                                  : AppVariables.azkarSelected == 3
+                                      ? cubit.azkarAlsalaa[cubit.salaaIndex]
+                                          ['count']
+                                      : '',
                     ),
                     const SizedBox(
                       height: 45,
@@ -116,7 +126,10 @@ class AzkarScreen extends StatelessWidget {
                                     : AppVariables.azkarSelected == 2 &&
                                             cubit.nomIndex > 0
                                         ? true
-                                        : false,
+                                        : AppVariables.azkarSelected == 3 &&
+                                                cubit.salaaIndex > 0
+                                            ? true
+                                            : false,
                             child: BackZikerWidget(
                               fnc: () {
                                 cubit.decIndex(tt: AppVariables.azkarSelected);
@@ -136,7 +149,12 @@ class AzkarScreen extends StatelessWidget {
                                             cubit.nomIndex !=
                                                 cubit.azkarAlnom.length - 1
                                         ? true
-                                        : false,
+                                        : AppVariables.azkarSelected == 3 &&
+                                                cubit.salaaIndex !=
+                                                    cubit.azkarAlsalaa.length -
+                                                        1
+                                            ? true
+                                            : false,
                             child: NextZikerWidget(
                               fnc: () {
                                 cubit.incIndex(tt: AppVariables.azkarSelected);

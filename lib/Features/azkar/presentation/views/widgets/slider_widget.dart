@@ -28,7 +28,9 @@ class SliderWidget extends StatelessWidget {
                         ? cubit.masaaIndex.toDouble()
                         : AppVariables.azkarSelected == 2
                             ? cubit.nomIndex.toDouble()
-                            : 0,
+                            : AppVariables.azkarSelected == 3
+                                ? cubit.salaaIndex.toDouble()
+                                : 0,
                 min: 0,
                 max: AppVariables.azkarSelected == 0
                     ? cubit.azkarAlsabah.length.toDouble() - 1
@@ -36,7 +38,9 @@ class SliderWidget extends StatelessWidget {
                         ? cubit.azkarAlmasaa.length.toDouble() - 1
                         : AppVariables.azkarSelected == 2
                             ? cubit.azkarAlnom.length.toDouble() - 1
-                            : 0,
+                            : AppVariables.azkarSelected == 3
+                                ? cubit.azkarAlsalaa.length.toDouble() - 1
+                                : 0,
                 divisions: allCount - 1,
                 allowedInteraction: SliderInteraction.slideOnly,
                 activeColor: MyColors.darkBrown,

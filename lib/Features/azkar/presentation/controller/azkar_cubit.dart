@@ -8,6 +8,7 @@ import '../../../../Core/constatnts/colors.dart';
 import '../../../../Core/constatnts/variables.dart';
 import '../views/widgets/azkar_masaa.dart';
 import '../views/widgets/azkar_sabah.dart';
+import '../views/widgets/azkar_salaa.dart';
 import '../views/widgets/azkar_sleep.dart';
 
 part 'azkar_state.dart';
@@ -24,6 +25,7 @@ class AzkarCubit extends Cubit<AzkarState> {
   List<Map<String, dynamic>> azkarAlsabah = [];
   List<Map<String, dynamic>> azkarAlmasaa = [];
   List<Map<String, dynamic>> azkarAlnom = [];
+  List<Map<String, dynamic>> azkarAlsalaa = [];
   Future<void> fetchAzkarData() async {
     try {
       emit(AzkarLoadingFetchData());
@@ -37,10 +39,12 @@ class AzkarCubit extends Cubit<AzkarState> {
           azkarAlmasaa.add(value);
         } else if (value['category'] == "أذكار النوم") {
           azkarAlnom.add(value);
+        } else if (value['category'] == "الأذكار بعد السلام من الصلاة") {
+          azkarAlsalaa.add(value);
         }
       }
       emit(AzkarSuccessFetchData());
-      //print(jsonData[0]['zekr']);
+      print(azkarAlsalaa);
     } catch (error) {
       print('Error loading or parsing JSON: $error');
     }
@@ -54,6 +58,7 @@ class AzkarCubit extends Cubit<AzkarState> {
   int sabahIndex = 0;
   int masaaIndex = 0;
   int nomIndex = 0;
+  int salaaIndex = 0;
   void incIndex({required int tt}) {
     print(tt);
     if (tt == 0 && azkarAlsabah.length - 1 - sabahIndex > 0) {
@@ -65,6 +70,9 @@ class AzkarCubit extends Cubit<AzkarState> {
     } else if (tt == 2 && azkarAlnom.length - 1 - nomIndex > 0) {
       print(azkarAlnom.length - 1 - nomIndex);
       nomIndex++;
+    } else if (tt == 3 && azkarAlsalaa.length - 1 - salaaIndex > 0) {
+      print(azkarAlsalaa.length - 1 - salaaIndex);
+      salaaIndex++;
     }
     resetCounters();
     emit(AzkarIncreaseIndex());
@@ -77,8 +85,9 @@ class AzkarCubit extends Cubit<AzkarState> {
     } else if (tt == 1 && masaaIndex > 0) {
       masaaIndex--;
     } else if (tt == 2 && nomIndex > 0) {
-      print(azkarAlnom.length - 1 - nomIndex);
       nomIndex--;
+    } else if (tt == 3 && salaaIndex > 0) {
+      salaaIndex--;
     }
     emit(AzkarDecreaseIndex());
   }
@@ -109,6 +118,14 @@ class AzkarCubit extends Cubit<AzkarState> {
             ? MyColors.lightBrown
             : MyColors.darkBrown,
       ),
+      AzkarSalaa(
+        containerColor: AppVariables.azkarSelected == index
+            ? MyColors.darkBrown
+            : MyColors.lightBrown,
+        iconColor: AppVariables.azkarSelected == index
+            ? MyColors.lightBrown
+            : MyColors.darkBrown,
+      ),
     ];
     return azkars;
   }
@@ -122,6 +139,9 @@ class AzkarCubit extends Cubit<AzkarState> {
     }
     if (AppVariables.azkarSelected == 2) {
       nomIndex = value.toInt();
+    }
+    if (AppVariables.azkarSelected == 3) {
+      salaaIndex = value.toInt();
     }
     emit(AzkarUpdateSliderValue());
   }

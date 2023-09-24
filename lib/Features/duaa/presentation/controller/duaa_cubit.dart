@@ -16,8 +16,8 @@ class DuaaCubit extends Cubit<DuaaState> {
     return jsonString;
   }
 
-  // List<Map<String, dynamic>> azkarAlsabah = [];
-  // List<Map<String, dynamic>> azkarAlmasaa = [];
+  List<Map<String, dynamic>> duaaNewClothes = [];
+  List<Map<String, dynamic>> duaaEnterMosque = [];
   // List<Map<String, dynamic>> azkarAlnom = [];
   Future<void> fetchDuaaData() async {
     try {
@@ -26,11 +26,30 @@ class DuaaCubit extends Cubit<DuaaState> {
       final jsonData = json.decode(jsonString);
       //int i =0;
       for (var value in jsonData) {
-        // if (value['category'] == "أذكار الصباح") {
-        //   azkarAlsabah.add(value);
-        // } else if (value['category'] == "أذكار المساء") {
-        //   azkarAlmasaa.add(value);
-        // } else if (value['category'] == "أذكار النوم") {
+        if (value['category'] == "دعاء لبس الثوب الجديد") {
+          duaaNewClothes.add(value);
+        } else if (value['category'] == "دعاء دخول المسجد") {
+          duaaEnterMosque.add(value);
+        }
+        // else if (value['category'] == "أذكار النوم") {
+        //   azkarAlnom.add(value);
+        // }
+        // else if (value['category'] == "أذكار النوم") {
+        //   azkarAlnom.add(value);
+        // }
+        // else if (value['category'] == "أذكار النوم") {
+        //   azkarAlnom.add(value);
+        // }
+        // else if (value['category'] == "أذكار النوم") {
+        //   azkarAlnom.add(value);
+        // }
+        // else if (value['category'] == "أذكار النوم") {
+        //   azkarAlnom.add(value);
+        // }
+        // else if (value['category'] == "أذكار النوم") {
+        //   azkarAlnom.add(value);
+        // }
+        // else if (value['category'] == "أذكار النوم") {
         //   azkarAlnom.add(value);
         // }
       }
