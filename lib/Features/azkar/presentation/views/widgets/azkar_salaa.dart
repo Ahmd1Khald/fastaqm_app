@@ -23,7 +23,7 @@ class AzkarSalaa extends StatelessWidget {
         ),
         child: Center(
           child: Image.asset(
-            AssetsManager.prayIcon,
+            AssetsManager.salaaIcon,
             color: iconColor,
             width: AppVariables.appSize(context).width * 0.14,
           ),
