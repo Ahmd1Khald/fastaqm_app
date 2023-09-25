@@ -1,5 +1,7 @@
+import 'package:fastaqm_app/Core/constatnts/app_functions.dart';
 import 'package:fastaqm_app/Core/widgets/customErrorContainer.dart';
 import 'package:fastaqm_app/Features/duaa/presentation/views/widgets/custom_aya_widget.dart';
+import 'package:fastaqm_app/Features/duaa/presentation/views/widgets/duaa_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -89,7 +91,13 @@ class BuildDuaaContainer extends StatelessWidget {
             backgroundColor: MyColors.darkBrown,
             radius: 39,
             child: MaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                AppFunctions.pushTo(
+                    context: context,
+                    screen: DuaaWidget(
+                      list: list,
+                    ));
+              },
               elevation: 5,
               //height: AppVariables.appSize(context).width * 0.1,
               shape: RoundedRectangleBorder(
@@ -127,12 +135,23 @@ class BuildDuaaContainer extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30)),
                 child: Center(
                   child: Text(
-                    list[0]["category"],
+                    list[0]["category"] == "الدعاء عند إفطار الصائم - الصوم"
+                        ? "الدعاء عند إفطار الصائم"
+                        : list[0]["category"] ==
+                                "الرُّقية الشرعية من القرآن الكريم"
+                            ? "الرُّقية الشرعية"
+                            : list[0]["category"] ==
+                                    "دعاء دخول القرية أو البلدة"
+                                ? "دعاء دخول البلدة"
+                                : list[0]["category"] ==
+                                        "دعاء دخول الخلاء - الحمام"
+                                    ? "دعاء دخول الخلاء"
+                                    : list[0]["category"],
                     textAlign: TextAlign.center,
                     style: GoogleFonts.noticiaText(
                       color: Colors.black,
                       fontWeight: FontWeight.w400,
-                      fontSize: 22,
+                      fontSize: 24,
                     ),
                   ),
                 ),
