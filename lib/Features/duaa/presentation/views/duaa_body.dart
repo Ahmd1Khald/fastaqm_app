@@ -44,11 +44,12 @@ class DuaaScreen extends StatelessWidget {
                   ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => BuildSuraContainer(
+                    itemBuilder: (context, index) => BuildDuaaContainer(
                       context: context,
                       index: index,
+                      list: cubit.duaaLists[index],
                     ),
-                    itemCount: 30,
+                    itemCount: cubit.duaaLists.length,
                   ),
                 ],
               )),
@@ -67,13 +68,17 @@ class DuaaScreen extends StatelessWidget {
   }
 }
 
-class BuildSuraContainer extends StatelessWidget {
-  const BuildSuraContainer(
-      {Key? key, required this.context, required this.index})
+class BuildDuaaContainer extends StatelessWidget {
+  const BuildDuaaContainer(
+      {Key? key,
+      required this.context,
+      required this.index,
+      required this.list})
       : super(key: key);
 
   final BuildContext context;
   final int index;
+  final List<Map<String, dynamic>> list;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -108,21 +113,21 @@ class BuildSuraContainer extends StatelessWidget {
             alignment: AlignmentDirectional.center,
             children: [
               Container(
-                width: AppVariables.appSize(context).width * 0.56,
-                height: AppVariables.appSize(context).width * 0.18,
+                width: AppVariables.appSize(context).width * 0.57,
+                height: AppVariables.appSize(context).width * 0.19,
                 decoration: BoxDecoration(
                     color: MyColors.darkBrown,
                     borderRadius: BorderRadius.circular(30)),
               ),
               Container(
-                width: AppVariables.appSize(context).width * 0.55,
-                height: AppVariables.appSize(context).width * 0.17,
+                width: AppVariables.appSize(context).width * 0.552,
+                height: AppVariables.appSize(context).width * 0.172,
                 decoration: BoxDecoration(
                     color: MyColors.lightBrown,
                     borderRadius: BorderRadius.circular(30)),
                 child: Center(
                   child: Text(
-                    "دعاء الخروج من المنزل",
+                    list[0]["category"],
                     textAlign: TextAlign.center,
                     style: GoogleFonts.noticiaText(
                       color: Colors.black,
