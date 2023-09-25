@@ -35,6 +35,9 @@ dependencies:
   #location
   geolocator: ^9.0.2
   geocoding: ^2.1.0
+  #share
+  #share_plus: ^7.1.0
+
 
 
 dev_dependencies:

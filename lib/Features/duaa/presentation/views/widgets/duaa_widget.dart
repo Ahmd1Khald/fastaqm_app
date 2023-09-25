@@ -54,7 +54,9 @@ class _DuaaWidgetState extends State<DuaaWidget> {
             CustomDuaaContant(
               text: widget.list[AppVariables.duaaSelected]["zekr"],
             ),
-            const IconsButton(),
+            IconsButton(
+              text: widget.list[AppVariables.duaaSelected]["zekr"],
+            ),
             if (AppVariables.duaaSelected == 0) ...[
               CircleAvatar(
                 backgroundColor: MyColors.darkBrown,

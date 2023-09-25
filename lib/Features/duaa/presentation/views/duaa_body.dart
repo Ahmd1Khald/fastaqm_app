@@ -115,20 +115,20 @@ class BuildDuaaContainer extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: AppVariables.appSize(context).width * 0.1,
+            width: AppVariables.appSize(context).width * 0.06,
           ),
           Stack(
             alignment: AlignmentDirectional.center,
             children: [
               Container(
-                width: AppVariables.appSize(context).width * 0.57,
+                width: AppVariables.appSize(context).width * 0.6,
                 height: AppVariables.appSize(context).width * 0.19,
                 decoration: BoxDecoration(
                     color: MyColors.darkBrown,
                     borderRadius: BorderRadius.circular(30)),
               ),
               Container(
-                width: AppVariables.appSize(context).width * 0.552,
+                width: AppVariables.appSize(context).width * 0.555,
                 height: AppVariables.appSize(context).width * 0.172,
                 decoration: BoxDecoration(
                     color: MyColors.lightBrown,
@@ -136,7 +136,7 @@ class BuildDuaaContainer extends StatelessWidget {
                 child: Center(
                   child: Text(
                     list[0]["category"] == "الدعاء عند إفطار الصائم - الصوم"
-                        ? "الدعاء عند إفطار الصائم"
+                        ? "الدعاء عند الإفطار"
                         : list[0]["category"] ==
                                 "الرُّقية الشرعية من القرآن الكريم"
                             ? "الرُّقية الشرعية"
@@ -146,7 +146,10 @@ class BuildDuaaContainer extends StatelessWidget {
                                 : list[0]["category"] ==
                                         "دعاء دخول الخلاء - الحمام"
                                     ? "دعاء دخول الخلاء"
-                                    : list[0]["category"],
+                                    : list[0]["category"] ==
+                                            "دعاء لبس الثوب الجديد"
+                                        ? "دعاء لبس ثوب جديد"
+                                        : list[0]["category"],
                     textAlign: TextAlign.center,
                     style: GoogleFonts.noticiaText(
                       color: Colors.black,

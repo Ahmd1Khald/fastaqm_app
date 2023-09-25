@@ -3,14 +3,19 @@ import 'package:flutter/material.dart';
 import '../../../../../Core/constatnts/colors.dart';
 
 class IconsButton extends StatefulWidget {
-  const IconsButton({Key? key}) : super(key: key);
+  const IconsButton({Key? key, required this.text}) : super(key: key);
 
   @override
   State<IconsButton> createState() => _IconsButtonState();
+  final String text;
 }
 
 class _IconsButtonState extends State<IconsButton> {
   bool selected = false;
+  void shareDuaa({required String text}) {
+    //Share.share(text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,7 +30,9 @@ class _IconsButtonState extends State<IconsButton> {
             backgroundColor: MyColors.lightBrown,
             radius: 35,
             child: MaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                shareDuaa(text: widget.text);
+              },
               splashColor: MyColors.darkBrown,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50)),
