@@ -31,7 +31,7 @@ class _DuaaWidgetState extends State<DuaaWidget> {
   }
 
   void backDuaa() {
-    if (AppVariables.duaaSelected <= 0) {
+    if (AppVariables.duaaSelected > 0) {
       AppVariables.duaaSelected--;
       setState(() {});
     }
@@ -41,49 +41,130 @@ class _DuaaWidgetState extends State<DuaaWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(context),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CustomDuaaTitle(
-            text: widget.list[0]["category"],
-          ),
-          SizedBox(
-            height: AppVariables.appSize(context).width * 0.1,
-          ),
-          CustomDuaaContant(
-            text: widget.list[AppVariables.duaaSelected]["zekr"],
-          ),
-          SizedBox(
-            height: AppVariables.appSize(context).width * 0.04,
-          ),
-          const IconsButton(),
-          SizedBox(
-            height: AppVariables.appSize(context).width * 0.04,
-          ),
-          CircleAvatar(
-            backgroundColor: MyColors.darkBrown,
-            radius: 39,
-            child: MaterialButton(
-              onPressed: () {
-                nextDuaa(len: widget.list.length - 1);
-              },
-              elevation: 5,
-              //height: AppVariables.appSize(context).width * 0.1,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(45),
-              ),
-              color: MyColors.darkBrown,
-              splashColor: MyColors.lightBrown,
-              child: const Center(
-                child: Icon(
-                  Icons.keyboard_arrow_right,
-                  size: 50,
-                  color: MyColors.whiteColor,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CustomDuaaTitle(
+              text: widget.list[0]["category"],
+            ),
+            SizedBox(
+              height: AppVariables.appSize(context).width * 0.1,
+            ),
+            CustomDuaaContant(
+              text: widget.list[AppVariables.duaaSelected]["zekr"],
+            ),
+            const IconsButton(),
+            if (AppVariables.duaaSelected == 0) ...[
+              CircleAvatar(
+                backgroundColor: MyColors.darkBrown,
+                radius: 39,
+                child: MaterialButton(
+                  onPressed: () {
+                    nextDuaa(len: widget.list.length - 1);
+                  },
+                  elevation: 5,
+                  //height: AppVariables.appSize(context).width * 0.1,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(45),
+                  ),
+                  color: MyColors.darkBrown,
+                  splashColor: MyColors.lightBrown,
+                  child: const Center(
+                    child: Icon(
+                      Icons.keyboard_arrow_right,
+                      size: 50,
+                      color: MyColors.whiteColor,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-        ],
+            ] else if (AppVariables.duaaSelected == widget.list.length - 1) ...[
+              CircleAvatar(
+                backgroundColor: MyColors.darkBrown,
+                radius: 39,
+                child: MaterialButton(
+                  onPressed: () {
+                    backDuaa();
+                  },
+                  elevation: 5,
+                  //height: AppVariables.appSize(context).width * 0.1,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(45),
+                  ),
+                  color: MyColors.darkBrown,
+                  splashColor: MyColors.lightBrown,
+                  child: const Center(
+                    child: Icon(
+                      Icons.keyboard_arrow_left,
+                      size: 50,
+                      color: MyColors.whiteColor,
+                    ),
+                  ),
+                ),
+              ),
+            ] else ...[
+              Padding(
+                padding: EdgeInsets.only(
+                  top: AppVariables.appSize(context).width * 0.1,
+                  left: 80,
+                  right: 80,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: MyColors.darkBrown,
+                      radius: 39,
+                      child: MaterialButton(
+                        onPressed: () {
+                          backDuaa();
+                        },
+                        elevation: 5,
+                        //height: AppVariables.appSize(context).width * 0.1,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(45),
+                        ),
+                        color: MyColors.darkBrown,
+                        splashColor: MyColors.lightBrown,
+                        child: const Center(
+                          child: Icon(
+                            Icons.keyboard_arrow_left,
+                            size: 50,
+                            color: MyColors.whiteColor,
+                          ),
+                        ),
+                      ),
+                    ),
+                    CircleAvatar(
+                      backgroundColor: MyColors.darkBrown,
+                      radius: 39,
+                      child: MaterialButton(
+                        onPressed: () {
+                          nextDuaa(len: widget.list.length - 1);
+                        },
+                        elevation: 5,
+                        //height: AppVariables.appSize(context).width * 0.1,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(45),
+                        ),
+                        color: MyColors.darkBrown,
+                        splashColor: MyColors.lightBrown,
+                        child: const Center(
+                          child: Icon(
+                            Icons.keyboard_arrow_right,
+                            size: 50,
+                            color: MyColors.whiteColor,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ]
+          ],
+        ),
       ),
     );
   }
