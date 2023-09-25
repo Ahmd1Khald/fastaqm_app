@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 import '../../../../../Core/constatnts/colors.dart';
 
@@ -12,8 +13,8 @@ class IconsButton extends StatefulWidget {
 
 class _IconsButtonState extends State<IconsButton> {
   bool selected = false;
-  void shareDuaa({required String text}) {
-    //Share.share(text);
+  void shareDuaa(String textToShare, {String subject = ''}) {
+    Share.share(textToShare, subject: subject);
   }
 
   @override
@@ -31,7 +32,7 @@ class _IconsButtonState extends State<IconsButton> {
             radius: 35,
             child: MaterialButton(
               onPressed: () {
-                shareDuaa(text: widget.text);
+                shareDuaa(subject: "لا تنسونا من صالح الدعاء", widget.text);
               },
               splashColor: MyColors.darkBrown,
               shape: RoundedRectangleBorder(
