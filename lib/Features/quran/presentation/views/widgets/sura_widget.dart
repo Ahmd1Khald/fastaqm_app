@@ -1,4 +1,3 @@
-import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:flutter/material.dart';
 
@@ -7,36 +6,22 @@ class SuraWidget extends StatelessWidget {
   final List<int> suraPages;
 
   List<Widget> retPage(context) {
-    bool lock = false;
     final List<Widget> pages = [];
-    for (int i = 0; i < suraPages.length; i++) {
-      if (suraPages[0] == 2 && !lock || suraPages[0] == 1) {
-        pages.add(Container(
-          color: MyColors.lightBrown,
-          height: 50,
-          child: Image.asset(
-            "assets/quran_images/${suraPages[i]}.jpg",
-            //color: Colors.black,
-            //height: AppVariables.appSize(context).height,
-            fit: BoxFit.fill,
-          ),
-        ));
-        lock = true;
-      } else {
-        pages.add(Image.asset(
-          "assets/quran_images/${suraPages[i]}.png",
-          height: AppVariables.appSize(context).height,
-          fit: BoxFit.fill,
-        ));
-      }
+    for (int i = suraPages[0]; i <= 604; i++) {
+      pages.add(Image.asset(
+        "assets/quran_images/$i.png",
+        height: AppVariables.appSize(context).height,
+        fit: BoxFit.fill,
+      ));
     }
-
     return pages;
   }
 
   @override
   Widget build(BuildContext context) {
+    print(suraPages);
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(1.0),

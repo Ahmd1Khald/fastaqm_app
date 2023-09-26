@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:fastaqm_app/Core/constatnts/assets_manager.dart';
 import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
+import 'package:fastaqm_app/Core/widgets/custom_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
 
@@ -22,7 +23,7 @@ class _QiblahWidgetState extends State<QiblahWidget>
   @override
   void initState() {
     _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 400));
+        vsync: this, duration: const Duration(milliseconds: 600));
     animation = Tween(begin: 0.0, end: 0.0).animate(_animationController!);
     super.initState();
   }
@@ -35,11 +36,7 @@ class _QiblahWidgetState extends State<QiblahWidget>
           stream: FlutterQiblah.qiblahStream,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Container(
-                  alignment: Alignment.center,
-                  child: const CircularProgressIndicator(
-                    color: Colors.white,
-                  ));
+              return const CustomLoadingPage();
             }
 
             final qiblahDirection = snapshot.data;
