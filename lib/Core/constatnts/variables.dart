@@ -8,4 +8,5 @@ class AppVariables {
 
   static int azkarSelected = 0;
   static int duaaSelected = 0;
+  static int ahadithSelected = 0;
 }

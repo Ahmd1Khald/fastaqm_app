@@ -41,25 +41,25 @@ class _LayoutScreenState extends State<LayoutScreen> {
   CurvedNavigationBar buildCurvedNavigationBar(double navBarIconSize) {
     return CurvedNavigationBar(
       index: _page,
-      backgroundColor: MyColors.whiteColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       color: MyColors.darkBrown,
       key: _bottomNavigationKey,
       items: <Widget>[
         Image.asset(
           AssetsManager.saveIcon,
           width: navBarIconSize,
-          color: MyColors.whiteColor,
+          color: Theme.of(context).scaffoldBackgroundColor,
         ),
         Image.asset(
           AssetsManager.qiblaBottumIcon,
           width: navBarIconSize,
-          //color: MyColors.whiteColor,
+          //color: Theme.of(context).scaffoldBackgroundColor,
         ),
         Image.asset(
           AssetsManager.homeIcon,
           width: navBarIconSize + 13,
           fit: BoxFit.cover,
-          color: MyColors.whiteColor,
+          color: Theme.of(context).scaffoldBackgroundColor,
         ),
       ],
       onTap: (index) {

@@ -5,6 +5,7 @@ import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:fastaqm_app/Features/pray_time/presentation/views/pray_time_body.dart';
 import 'package:flutter/material.dart';
 
+import '../../../ahadith/presentation/views/ahadith_body.dart';
 import '../../../azkar/presentation/views/azkar_body.dart';
 import '../../../bakiat/presentation/views/bakiat_body.dart';
 import '../../../duaa/presentation/views/duaa_body.dart';
@@ -46,20 +47,27 @@ class HomeScreen extends StatelessWidget {
                 context: context,
                 image: AssetsManager.hadithLogo,
                 text: "أحاديث",
-                func: () {},
+                func: () {
+                  AppFunctions.pushTo(
+                    context: context,
+                    screen: const AhadithScreen(),
+                  );
+                },
               ),
               customItem(
                 context: context,
                 image: AssetsManager.quranIcon,
                 text: "قرآن",
                 func: () {
-                  // AppFunctions.pushTo(
-                  //     context: context, screen: const QuranScreen());
-
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const QuranScreen()));
+                  AppFunctions.pushTo(
+                    context: context,
+                    screen: const QuranScreen(),
+                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => const QuranScreen()),
+                  // );
                 },
               ),
             ],

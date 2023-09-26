@@ -46,7 +46,7 @@ class CountZikerWidget extends StatelessWidget {
                     strokeWidth: 8,
                     value: cubit.counterIndicator,
                     color: MyColors.darkBrown,
-                    backgroundColor: MyColors.whiteColor,
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   ),
                 ),
               ],

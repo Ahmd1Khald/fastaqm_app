@@ -12,7 +12,7 @@ class CustomDuaaContant extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: AppVariables.appSize(context).width * 0.8,
-      height: AppVariables.appSize(context).width * 0.75,
+      height: AppVariables.appSize(context).width * 0.9,
       decoration: BoxDecoration(
         color: MyColors.lightBrown,
         borderRadius: BorderRadius.circular(30),
