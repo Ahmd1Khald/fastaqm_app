@@ -1,3 +1,4 @@
+import 'package:fastaqm_app/Features/ahadith/data/model/hadith_model.dart';
 import 'package:flutter/material.dart';
 
 class AppVariables {
@@ -9,4 +10,7 @@ class AppVariables {
   static int azkarSelected = 0;
   static int duaaSelected = 0;
   static int ahadithSelected = 0;
+
+  //saves
+  static List<HadithModel> hadishSaveLists = [];
 }

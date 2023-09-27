@@ -51,8 +51,11 @@ class AhadithScreen extends StatelessWidget {
                         ["hadith"],
                   ),
                   HadithIconsButton(
-                    text: cubit.ahadithList[AppVariables.ahadithSelected]
+                    cubit: cubit,
+                    hadith: cubit.ahadithList[AppVariables.ahadithSelected]
                         ["hadith"],
+                    number: cubit.ahadithList[AppVariables.ahadithSelected]
+                        ["number"],
                     description: cubit.ahadithList[AppVariables.ahadithSelected]
                         ["description"],
                   ),

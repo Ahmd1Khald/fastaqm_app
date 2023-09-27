@@ -12,3 +12,7 @@ class AhadithSuccessFetchData extends AhadithState {}
 class AhadithChangeNext extends AhadithState {}
 
 class AhadithChangeBack extends AhadithState {}
+
+class AhadithChangeSelectedIcon extends AhadithState {}
+
+class AhadithSaveToList extends AhadithState {}
