@@ -13,4 +13,5 @@ class AppVariables {
 
   //saves
   static List<HadithModel> hadishSaveLists = [];
+  static int hadishSaveIndex = 0;
 }

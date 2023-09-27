@@ -1,3 +1,5 @@
+import 'package:fastaqm_app/Core/constatnts/app_functions.dart';
+import 'package:fastaqm_app/Features/saves/presentation/views/widgets/ahadith_saves.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -18,7 +20,9 @@ class SavesScreen extends StatelessWidget {
         ),
         CustomBuildItem(
           text: "أحاديث",
-          fnc: () {},
+          fnc: () {
+            AppFunctions.pushTo(context: context, screen: const AhadithSaves());
+          },
         ),
         CustomBuildItem(
           text: "أذكار",
