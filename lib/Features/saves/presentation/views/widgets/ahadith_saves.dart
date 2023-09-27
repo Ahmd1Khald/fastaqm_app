@@ -170,8 +170,9 @@ class AhadithSaves extends StatelessWidget {
               ),
             );
           }
-          return const Scaffold(
-            body: CustomErrorContainer(
+          return Scaffold(
+            appBar: customAppBar(context),
+            body: const CustomErrorContainer(
               title: "لا يوجد أحاديث مضافه",
             ),
           );

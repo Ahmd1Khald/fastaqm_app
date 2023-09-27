@@ -41,13 +41,15 @@ class SavesCubit extends Cubit<SavesState> {
   }
 
   void removedFromList({required int number}) {
-    print(number);
+    print(AppVariables.hadishSaveIndex);
     if ((AppVariables.hadishSaveLists
         .where((element) => element.number == number)).isNotEmpty) {
       AppVariables.hadishSaveLists
           .removeWhere((element) => element.number == number);
       print("removed");
     }
+    backHadith();
+    print(AppVariables.hadishSaveIndex);
     print(AppVariables.hadishSaveLists.length);
     emit(SavesRemoveFromList());
   }
