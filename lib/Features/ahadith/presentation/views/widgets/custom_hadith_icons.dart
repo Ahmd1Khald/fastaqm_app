@@ -2,8 +2,8 @@ import 'package:fastaqm_app/Features/ahadith/data/model/hadith_model.dart';
 import 'package:fastaqm_app/Features/ahadith/presentation/controller/ahadith_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:share/share.dart';
 
+import '../../../../../Core/constatnts/app_functions.dart';
 import '../../../../../Core/constatnts/colors.dart';
 import '../../../../../Core/constatnts/variables.dart';
 
@@ -20,10 +20,6 @@ class HadithIconsButton extends StatelessWidget {
   final int number;
   final AhadithCubit cubit;
 
-  void shareDuaa(String textToShare, {String subject = ''}) {
-    Share.share(textToShare, subject: subject);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,7 +35,7 @@ class HadithIconsButton extends StatelessWidget {
             radius: 35,
             child: MaterialButton(
               onPressed: () {
-                shareDuaa(subject: "لا تنسونا من صالح الدعاء", hadith);
+                AppFunctions.shareDuaa(hadith);
               },
               splashColor: MyColors.darkBrown,
               shape: RoundedRectangleBorder(

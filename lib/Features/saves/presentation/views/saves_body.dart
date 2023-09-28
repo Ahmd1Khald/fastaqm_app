@@ -25,7 +25,7 @@ class SavesScreen extends StatelessWidget {
           },
         ),
         CustomBuildItem(
-          text: "أذكار",
+          text: "أدعية",
           fnc: () {},
         ),
       ],

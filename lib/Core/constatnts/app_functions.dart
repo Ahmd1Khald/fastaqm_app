@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 class AppFunctions {
   static String convertEnglishNumberToArabic(String input) {
@@ -19,5 +20,9 @@ class AppFunctions {
 
   static void pushTo({required context, required Widget screen}) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
+  }
+
+  static void shareDuaa(String textToShare, {String subject = ''}) {
+    Share.share(textToShare, subject: subject);
   }
 }

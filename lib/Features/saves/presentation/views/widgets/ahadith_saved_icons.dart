@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share/share.dart';
 
+import '../../../../../Core/constatnts/app_functions.dart';
 import '../../../../../Core/constatnts/colors.dart';
 import '../../../../../Core/constatnts/variables.dart';
 
@@ -38,7 +39,7 @@ class HadithSavesIconsButton extends StatelessWidget {
             radius: 35,
             child: MaterialButton(
               onPressed: () {
-                shareDuaa(subject: "لا تنسونا من صالح الدعاء", hadith);
+                AppFunctions.shareDuaa(hadith);
               },
               splashColor: MyColors.darkBrown,
               shape: RoundedRectangleBorder(
