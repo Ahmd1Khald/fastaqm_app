@@ -3,6 +3,7 @@ class AppStrings {
   static const String countryNameKey = "countryName";
   static const String locationKey = "locationKey";
   static const String ahadithSavesKey = "AhadithSavesList";
+  static const String duaaSavesKey = "DuaaSavesList";
   static const String bakiat1Key = "bakiat1";
   static const String bakiat2Key = "bakiat2";
   static const String bakiat3Key = "bakiat3";

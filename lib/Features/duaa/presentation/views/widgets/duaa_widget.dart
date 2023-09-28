@@ -1,4 +1,5 @@
 import 'package:fastaqm_app/Core/widgets/custom_app_bar.dart';
+import 'package:fastaqm_app/Features/duaa/presentation/controller/duaa_cubit.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../Core/constatnts/colors.dart';
@@ -8,9 +9,11 @@ import 'custom_duaa_title.dart';
 import 'duaa_containt.dart';
 
 class DuaaWidget extends StatefulWidget {
-  const DuaaWidget({Key? key, required this.list}) : super(key: key);
+  const DuaaWidget({Key? key, required this.list, required this.cubit})
+      : super(key: key);
 
   final List<Map<String, dynamic>> list;
+  final DuaaCubit cubit;
 
   @override
   State<DuaaWidget> createState() => _DuaaWidgetState();
@@ -55,7 +58,8 @@ class _DuaaWidgetState extends State<DuaaWidget> {
               text: widget.list[AppVariables.duaaSelected]["zekr"],
             ),
             IconsButton(
-              text: widget.list[AppVariables.duaaSelected]["zekr"],
+              duaa: widget.list[AppVariables.duaaSelected]["zekr"],
+              category: widget.list[AppVariables.duaaSelected]["category"],
             ),
             if (AppVariables.duaaSelected == 0) ...[
               CircleAvatar(

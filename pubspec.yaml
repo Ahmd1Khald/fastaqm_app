@@ -37,6 +37,8 @@ dependencies:
   geocoding: ^2.1.0
   #share
   share: ^2.0.4
+  #uuid
+  uuid: ^3.0.7
 
 
 

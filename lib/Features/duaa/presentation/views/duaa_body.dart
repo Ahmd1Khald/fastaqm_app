@@ -47,6 +47,7 @@ class DuaaScreen extends StatelessWidget {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) => BuildDuaaContainer(
+                      cubit: cubit,
                       context: context,
                       index: index,
                       list: cubit.duaaLists[index],
@@ -75,11 +76,13 @@ class BuildDuaaContainer extends StatelessWidget {
       {Key? key,
       required this.context,
       required this.index,
-      required this.list})
+      required this.list,
+      required this.cubit})
       : super(key: key);
 
   final BuildContext context;
   final int index;
+  final DuaaCubit cubit;
   final List<Map<String, dynamic>> list;
   @override
   Widget build(BuildContext context) {
@@ -96,6 +99,7 @@ class BuildDuaaContainer extends StatelessWidget {
                     context: context,
                     screen: DuaaWidget(
                       list: list,
+                      cubit: cubit,
                     ));
               },
               elevation: 5,

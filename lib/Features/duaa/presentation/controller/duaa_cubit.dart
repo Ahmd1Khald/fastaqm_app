@@ -4,6 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../Core/constatnts/app_strings.dart';
+import '../../../../Core/helpers/cachehelper.dart';
+import '../../data/model/duaa_model.dart';
+
 part 'duaa_state.dart';
 
 class DuaaCubit extends Cubit<DuaaState> {
@@ -106,10 +110,63 @@ class DuaaCubit extends Cubit<DuaaState> {
         duaaAlabtlaa,
       ];
       emit(DuaaSuccessFetchData());
-      print(duaaAlazan[0]);
       //print(jsonData[0]['zekr']);
     } catch (error) {
       print('Error loading or parsing JSON: $error');
+    }
+  }
+
+  bool selected1 = false;
+
+  void changeSelectedIcon({required int tt}) {
+    if (tt == 1) {
+      selected1 = !selected1;
+      emit(DuaaChangeSelectedIcon());
+    } else if (tt == 0) {
+      selected1 = false;
+      emit(DuaaChangeSelectedIcon());
+    }
+  }
+
+  List<String>? listOfFavKeys =
+      CacheHelper.getFavDate(key: AppStrings.duaaSavesKey) ?? [];
+  List<String> semiFavKeysList = [];
+
+  void saveToList({required DuaaModel model}) {
+    //ssInSavedList(id: model.zekr);
+    for (String value in listOfFavKeys!) {
+      semiFavKeysList.add(value);
+    }
+    print(semiFavKeysList);
+    if (semiFavKeysList.contains(model.zekr)) {
+      semiFavKeysList.removeWhere((element) => element == model.zekr);
+      CacheHelper.saveListOfStrings(
+        key: AppStrings.duaaSavesKey,
+        value: semiFavKeysList,
+      );
+      print(semiFavKeysList);
+      print("removed");
+    } else {
+      semiFavKeysList.add(model.zekr);
+      CacheHelper.saveListOfStrings(
+        key: AppStrings.duaaSavesKey,
+        value: semiFavKeysList,
+      );
+      print(semiFavKeysList);
+      print("added");
+    }
+    emit(DuaaSaveToList());
+  }
+
+  bool ssInSavedList({required String id}) {
+    listOfFavKeys = CacheHelper.getFavDate(key: AppStrings.duaaSavesKey) ?? [];
+    print("listOfFavKeys");
+    print(listOfFavKeys);
+    if ((listOfFavKeys!.where((element) => element.length == id.length))
+        .isNotEmpty) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

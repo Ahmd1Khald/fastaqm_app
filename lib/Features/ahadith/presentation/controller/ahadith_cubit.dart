@@ -82,6 +82,7 @@ class AhadithCubit extends Cubit<AhadithState> {
         key: AppStrings.ahadithSavesKey,
         value: semiFavKeysList,
       );
+      print(semiFavKeysList);
       print("removed");
     } else {
       semiFavKeysList.add(model.number.toString());

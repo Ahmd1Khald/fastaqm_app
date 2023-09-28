@@ -1,25 +1,73 @@
-import 'package:fastaqm_app/Core/constatnts/app_functions.dart';
+import 'package:fastaqm_app/Features/duaa/data/model/duaa_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../Core/constatnts/app_functions.dart';
+import '../../../../../Core/constatnts/app_strings.dart';
 import '../../../../../Core/constatnts/colors.dart';
+import '../../../../../Core/helpers/cachehelper.dart';
 
 class IconsButton extends StatefulWidget {
-  const IconsButton({Key? key, required this.text}) : super(key: key);
+  const IconsButton({
+    Key? key,
+    required this.duaa,
+    required this.category,
+  }) : super(key: key);
+  final String duaa;
+  final String category;
 
   @override
   State<IconsButton> createState() => _IconsButtonState();
-  final String text;
 }
 
 class _IconsButtonState extends State<IconsButton> {
-  bool selected = false;
+  List<String>? listOfFavKeys =
+      CacheHelper.getFavDate(key: AppStrings.duaaSavesKey) ?? [];
+  bool ssInSavedList({required String id}) {
+    listOfFavKeys = CacheHelper.getFavDate(key: AppStrings.duaaSavesKey) ?? [];
+    print("listOfFavKeys");
+    print(listOfFavKeys);
+    if ((listOfFavKeys!.where((element) => element.length == id.length))
+        .isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  List<String> semiFavKeysList = [];
+
+  void saveToList({required DuaaModel model}) {
+    //ssInSavedList(id: model.zekr);
+    for (String value in listOfFavKeys!) {
+      semiFavKeysList.add(value);
+    }
+    print(semiFavKeysList);
+    if (semiFavKeysList.contains(model.zekr)) {
+      semiFavKeysList.removeWhere((element) => element == model.zekr);
+      CacheHelper.saveListOfStrings(
+        key: AppStrings.duaaSavesKey,
+        value: semiFavKeysList,
+      );
+      print(semiFavKeysList);
+      print("removed");
+    } else {
+      semiFavKeysList.add(model.zekr);
+      CacheHelper.saveListOfStrings(
+        key: AppStrings.duaaSavesKey,
+        value: semiFavKeysList,
+      );
+      print(semiFavKeysList);
+      print("added");
+    }
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 20,
-        horizontal: 90,
+        horizontal: 95,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -29,8 +77,7 @@ class _IconsButtonState extends State<IconsButton> {
             radius: 35,
             child: MaterialButton(
               onPressed: () {
-                AppFunctions.shareDuaa(
-                    subject: "لا تنسونا من صالح الدعاء", widget.text);
+                AppFunctions.shareDuaa(widget.duaa);
               },
               splashColor: MyColors.darkBrown,
               shape: RoundedRectangleBorder(
@@ -45,14 +92,17 @@ class _IconsButtonState extends State<IconsButton> {
             ),
           ),
           CircleAvatar(
-            backgroundColor:
-                selected ? MyColors.darkBrown : MyColors.lightBrown,
+            backgroundColor: ssInSavedList(id: widget.duaa)
+                ? MyColors.darkBrown
+                : MyColors.lightBrown,
             radius: 35,
             child: MaterialButton(
               onPressed: () {
-                setState(() {
-                  selected = !selected;
-                });
+                saveToList(
+                    model: DuaaModel(
+                  category: widget.category,
+                  zekr: widget.duaa,
+                ));
               },
               splashColor: MyColors.darkBrown,
               shape: RoundedRectangleBorder(
@@ -60,7 +110,11 @@ class _IconsButtonState extends State<IconsButton> {
               child: Center(
                 child: Icon(
                   Icons.favorite,
-                  color: selected ? MyColors.lightBrown : MyColors.darkBrown,
+                  color: ssInSavedList(
+                    id: widget.duaa,
+                  )
+                      ? MyColors.lightBrown
+                      : MyColors.darkBrown,
                   size: 40,
                 ),
               ),
