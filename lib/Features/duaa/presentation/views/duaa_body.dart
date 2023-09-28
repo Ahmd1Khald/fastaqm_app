@@ -1,5 +1,4 @@
 import 'package:fastaqm_app/Core/constatnts/app_functions.dart';
-import 'package:fastaqm_app/Core/widgets/customErrorContainer.dart';
 import 'package:fastaqm_app/Features/duaa/presentation/views/widgets/custom_aya_widget.dart';
 import 'package:fastaqm_app/Features/duaa/presentation/views/widgets/duaa_widget.dart';
 import 'package:flutter/material.dart';
@@ -32,38 +31,29 @@ class DuaaScreen extends StatelessWidget {
               ),
             );
           }
-          if (state is DuaaSuccessFetchData) {
-            return Scaffold(
-              appBar: customAppBar(context),
-              body: SingleChildScrollView(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const CustomAyaWidget(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => BuildDuaaContainer(
-                      cubit: cubit,
-                      context: context,
-                      index: index,
-                      list: cubit.duaaLists[index],
-                    ),
-                    itemCount: cubit.duaaLists.length,
-                  ),
-                ],
-              )),
-            );
-          }
           return Scaffold(
             appBar: customAppBar(context),
-            body: const Center(
-              child:
-                  CustomErrorContainer(title: 'حدث خطأ ما حاول مرة اخرى لاحقا'),
-            ),
+            body: SingleChildScrollView(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const CustomAyaWidget(),
+                const SizedBox(
+                  height: 20,
+                ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) => BuildDuaaContainer(
+                    cubit: cubit,
+                    context: context,
+                    index: index,
+                    list: cubit.duaaLists[index],
+                  ),
+                  itemCount: cubit.duaaLists.length,
+                ),
+              ],
+            )),
           );
         },
       ),
