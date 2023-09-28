@@ -4,7 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../Core/constatnts/app_strings.dart';
 import '../../../../Core/constatnts/variables.dart';
+import '../../../../Core/helpers/cachehelper.dart';
 import '../../data/model/hadith_model.dart';
 
 part 'ahadith_state.dart';
@@ -64,24 +66,39 @@ class AhadithCubit extends Cubit<AhadithState> {
     }
   }
 
+  List<String>? listOfFavKeys =
+      CacheHelper.getFavDate(key: AppStrings.ahadithSavesKey);
+  List<String> semiFavKeysList = [];
+
   void saveToList({required HadithModel model}) {
-    print(model.number);
-    if ((AppVariables.hadishSaveLists
-        .where((element) => element.number == model.number)).isNotEmpty) {
-      AppVariables.hadishSaveLists
-          .removeWhere((element) => element.number == model.number);
+    for (String value in listOfFavKeys!) {
+      semiFavKeysList.add(value);
+    }
+    print(semiFavKeysList);
+    if (semiFavKeysList.contains(model.number.toString())) {
+      semiFavKeysList
+          .removeWhere((element) => element == model.number.toString());
+      CacheHelper.saveListOfStrings(
+        key: AppStrings.ahadithSavesKey,
+        value: semiFavKeysList,
+      );
       print("removed");
     } else {
-      AppVariables.hadishSaveLists.add(model);
+      semiFavKeysList.add(model.number.toString());
+      CacheHelper.saveListOfStrings(
+        key: AppStrings.ahadithSavesKey,
+        value: semiFavKeysList,
+      );
+      print(semiFavKeysList);
       print("added");
     }
-    print(AppVariables.hadishSaveLists.length);
     emit(AhadithSaveToList());
   }
 
   bool ssInSavedList({required int number}) {
-    if ((AppVariables.hadishSaveLists
-        .where((element) => element.number == number)).isNotEmpty) {
+    listOfFavKeys = CacheHelper.getFavDate(key: AppStrings.ahadithSavesKey);
+    if ((listOfFavKeys!.where((element) => element == number.toString()))
+        .isNotEmpty) {
       return true;
     } else {
       return false;

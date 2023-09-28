@@ -1,5 +1,6 @@
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:fastaqm_app/Core/widgets/customErrorContainer.dart';
+import 'package:fastaqm_app/Core/widgets/custom_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,12 +18,18 @@ class AhadithSaves extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SavesCubit()..setUp(),
+      create: (context) => SavesCubit()..fetchFavAhadithData(),
       child: BlocConsumer<SavesCubit, SavesState>(
         listener: (context, state) {},
         builder: (context, state) {
           SavesCubit cubit = SavesCubit.get(context);
-          if (AppVariables.hadishSaveLists.isNotEmpty) {
+          if (state is SavesLoadingFetchData) {
+            return Scaffold(
+              appBar: customAppBar(context),
+              body: const Center(child: CustomLoadingPage()),
+            );
+          }
+          if (cubit.ahadithFavList.isNotEmpty) {
             return Scaffold(
               appBar: customAppBar(context),
               body: SingleChildScrollView(
@@ -33,25 +40,25 @@ class AhadithSaves extends StatelessWidget {
                       text: 'صحيح البخاري',
                     ),
                     Text(
-                      '${AppVariables.hadishSaveIndex + 1}/${AppVariables.hadishSaveLists.length}',
+                      '${AppVariables.hadishSaveIndex + 1}/${cubit.ahadithFavList.length}',
                       style: GoogleFonts.notoNastaliqUrdu(
                         color: Colors.black,
                         fontSize: 24,
                       ),
                     ),
                     CustomDuaaContant(
-                      text: AppVariables
-                          .hadishSaveLists[AppVariables.hadishSaveIndex].hadith,
+                      text: cubit.ahadithFavList[AppVariables.hadishSaveIndex]
+                          ["hadith"],
                     ),
                     HadithSavesIconsButton(
                       cubit: cubit,
-                      hadith: AppVariables
-                          .hadishSaveLists[AppVariables.hadishSaveIndex].hadith,
-                      number: AppVariables
-                          .hadishSaveLists[AppVariables.hadishSaveIndex].number,
-                      description: AppVariables
-                          .hadishSaveLists[AppVariables.hadishSaveIndex]
-                          .description,
+                      hadith: cubit.ahadithFavList[AppVariables.hadishSaveIndex]
+                          ["hadith"],
+                      number: cubit.ahadithFavList[AppVariables.hadishSaveIndex]
+                          ["number"],
+                      description:
+                          cubit.ahadithFavList[AppVariables.hadishSaveIndex]
+                              ["description"],
                     ),
                     if (AppVariables.hadishSaveIndex == 0) ...[
                       CircleAvatar(
@@ -60,7 +67,7 @@ class AhadithSaves extends StatelessWidget {
                         child: MaterialButton(
                           onPressed: () {
                             cubit.nextHadith(
-                                len: AppVariables.hadishSaveLists.length - 1);
+                                len: cubit.ahadithFavList.length - 1);
                           },
                           elevation: 5,
                           //height: AppVariables.appSize(context).width * 0.1,
@@ -79,7 +86,7 @@ class AhadithSaves extends StatelessWidget {
                         ),
                       ),
                     ] else if (AppVariables.hadishSaveIndex ==
-                        AppVariables.hadishSaveLists.length - 1) ...[
+                        cubit.ahadithFavList.length - 1) ...[
                       CircleAvatar(
                         backgroundColor: MyColors.darkBrown,
                         radius: 39,
@@ -142,8 +149,7 @@ class AhadithSaves extends StatelessWidget {
                               child: MaterialButton(
                                 onPressed: () {
                                   cubit.nextHadith(
-                                      len: AppVariables.hadishSaveLists.length -
-                                          1);
+                                      len: cubit.ahadithFavList.length - 1);
                                 },
                                 elevation: 5,
                                 //height: AppVariables.appSize(context).width * 0.1,

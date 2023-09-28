@@ -7,6 +7,10 @@ class SavesInitial extends SavesState {}
 
 class SavesChangeNext extends SavesState {}
 
+class SavesLoadingFetchData extends SavesState {}
+
+class SavesSuccessFetchData extends SavesState {}
+
 class SavesChangeBack extends SavesState {}
 
 class SavesRemoveFromList extends SavesState {}
