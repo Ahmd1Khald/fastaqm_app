@@ -97,7 +97,8 @@ class AhadithCubit extends Cubit<AhadithState> {
   }
 
   bool ssInSavedList({required int number}) {
-    listOfFavKeys = CacheHelper.getFavDate(key: AppStrings.ahadithSavesKey);
+    listOfFavKeys =
+        CacheHelper.getFavDate(key: AppStrings.ahadithSavesKey) ?? [];
     if ((listOfFavKeys!.where((element) => element == number.toString()))
         .isNotEmpty) {
       return true;

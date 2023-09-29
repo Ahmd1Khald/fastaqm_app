@@ -51,6 +51,23 @@ class BuildSuraContainer extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
+    print("+++++++++++++++++");
+    print(quran.getSurahAndVersesFromJuz(25));
+    var tt = quran.getSurahAndVersesFromJuz(25);
+    print("رقم السور الموجودة في الجزء");
+    print(tt.keys.toList());
+    int surahNumber = tt.keys.toList()[0];
+    int verseNumber = tt.values.toList()[0][1];
+    int firstPageInJusa = quran.getPageNumber(surahNumber, verseNumber);
+    print("firstPageInJusa");
+    print(firstPageInJusa);
+    surahNumber = tt.keys.toList()[tt.keys.toList().length - 1];
+    verseNumber = tt.values.toList()[tt.values.toList().length - 1][1];
+    int lastPageInJusa = quran.getPageNumber(surahNumber, verseNumber);
+    print("lastPageInJusa");
+    print(lastPageInJusa);
+
+    for (int i = 0; i < quran.getSurahAndVersesFromJuz(30).length; i++) {}
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       child: MaterialButton(
@@ -82,6 +99,19 @@ class BuildSuraContainer extends StatelessWidget {
                 width: 25,
               ),
             ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Text(
+                "${quran.getSurahPages(index + 1).length}",
+                style: GoogleFonts.noticiaText(
+                  textStyle: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                    color: MyColors.darkBrown,
+                  ),
+                ),
+              ),
+            ),
             const Spacer(),
             Text(
               quran.getSurahNameArabic(index + 1),
