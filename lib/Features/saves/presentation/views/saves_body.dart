@@ -16,17 +16,13 @@ class SavesScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CustomBuildItem(
-          text: "قرأن",
-          fnc: () {},
-        ),
-        CustomBuildItem(
-          text: "أحاديث",
+          text: "الأحاديث  المفضلة",
           fnc: () {
             AppFunctions.pushTo(context: context, screen: const AhadithSaves());
           },
         ),
         CustomBuildItem(
-          text: "أدعية",
+          text: "الأدعية  المفضلة",
           fnc: () {
             AppFunctions.pushTo(context: context, screen: const DuaaSaves());
           },

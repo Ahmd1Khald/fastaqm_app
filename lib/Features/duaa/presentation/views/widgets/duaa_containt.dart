@@ -28,7 +28,7 @@ class CustomDuaaContant extends StatelessWidget {
             textDirection: TextDirection.rtl,
             textAlign: TextAlign.center,
             style: GoogleFonts.noticiaText(
-              fontSize: 28,
+              fontSize: 25,
               fontWeight: FontWeight.w400,
               color: Colors.black,
             ),

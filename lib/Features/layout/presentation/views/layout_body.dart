@@ -28,7 +28,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const double navBarIconSize = 43;
+    const double navBarIconSize = 40;
     return Scaffold(
       bottomNavigationBar: buildCurvedNavigationBar(navBarIconSize),
       appBar: AppBar(
@@ -44,6 +44,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       color: MyColors.darkBrown,
       key: _bottomNavigationKey,
+      //height: AppVariables.appSize(context).width * 0.15,
       items: <Widget>[
         Image.asset(
           AssetsManager.saveIcon,

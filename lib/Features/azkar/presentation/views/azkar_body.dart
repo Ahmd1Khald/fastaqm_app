@@ -5,7 +5,9 @@ import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/slider_wid
 import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/ziker_containt_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../Core/constatnts/colors.dart';
 import '../../../../Core/constatnts/variables.dart';
 import '../../../../Core/widgets/customErrorContainer.dart';
 import '../../../../Core/widgets/custom_app_bar.dart';
@@ -26,6 +28,7 @@ class AzkarScreen extends StatelessWidget {
           AzkarCubit cubit = AzkarCubit.get(context);
           if (state is AzkarLoadingFetchData) {
             return Scaffold(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               appBar: customAppBar(context),
               body: const Center(
                 child: CustomLoadingPage(),
@@ -34,7 +37,28 @@ class AzkarScreen extends StatelessWidget {
           }
           if (state is AzkarSuccessFetchData || cubit.azkarAlsabah.isNotEmpty) {
             return Scaffold(
-              appBar: customAppBar(context),
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              appBar: AppBar(
+                automaticallyImplyLeading: false,
+                actions: [
+                  Text(
+                    cubit.zekrNameSelected,
+                    style: GoogleFonts.noticiaText(
+                      color: MyColors.darkBrown,
+                      fontSize: 22,
+                    ),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_forward,
+                        size: 32,
+                        color: MyColors.darkBrown,
+                      ))
+                ],
+              ),
               body: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -170,6 +194,7 @@ class AzkarScreen extends StatelessWidget {
             );
           }
           return Scaffold(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             appBar: customAppBar(context),
             body: const Center(
               child:

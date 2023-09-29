@@ -50,8 +50,18 @@ class AzkarCubit extends Cubit<AzkarState> {
     }
   }
 
+  String zekrNameSelected = "أذكار الصباح";
   void changeSelectedAzkarIcon(index) {
     AppVariables.azkarSelected = index;
+    if (index == 0) {
+      zekrNameSelected = "أذكار الصباح";
+    } else if (index == 1) {
+      zekrNameSelected = "أذكار المساء";
+    } else if (index == 2) {
+      zekrNameSelected = "أذكار النوم";
+    } else if (index == 3) {
+      zekrNameSelected = "أذكار الصلاة";
+    }
     emit(AzkarChangeSelectedIcon());
   }
 

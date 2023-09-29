@@ -12,7 +12,7 @@ class ZikerContantWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: AppVariables.appSize(context).width * 0.8,
-      height: AppVariables.appSize(context).width * 0.75,
+      height: AppVariables.appSize(context).width * 0.8,
       decoration: BoxDecoration(
         color: MyColors.lightBrown,
         borderRadius: BorderRadius.circular(30),
@@ -28,7 +28,7 @@ class ZikerContantWidget extends StatelessWidget {
             textDirection: TextDirection.rtl,
             textAlign: TextAlign.center,
             style: GoogleFonts.noticiaText(
-              fontSize: 23,
+              fontSize: 25,
               fontWeight: FontWeight.w400,
               color: Colors.black,
             ),

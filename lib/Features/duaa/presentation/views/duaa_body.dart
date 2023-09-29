@@ -25,6 +25,7 @@ class DuaaScreen extends StatelessWidget {
           DuaaCubit cubit = DuaaCubit.get(context);
           if (state is DuaaLoadingFetchData) {
             return Scaffold(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               appBar: customAppBar(context),
               body: const Center(
                 child: CustomLoadingPage(),

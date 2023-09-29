@@ -24,6 +24,7 @@ class AhadithScreen extends StatelessWidget {
           AhadithCubit cubit = AhadithCubit.get(context);
           if (state is AhadithLoadingFetchData) {
             return Scaffold(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               appBar: customAppBar(context),
               body: const Center(
                 child: CustomLoadingPage(),

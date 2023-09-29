@@ -4,6 +4,7 @@ import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:fastaqm_app/Features/pray_time/presentation/views/pray_time_body.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../ahadith/presentation/views/ahadith_body.dart';
 import '../../../azkar/presentation/views/azkar_body.dart';
@@ -39,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                 func: () {
                   AppFunctions.pushTo(
                     context: context,
-                    screen: PrayTimeScreen(),
+                    screen: const PrayTimeScreen(),
                   );
                 },
               ),
@@ -163,6 +164,9 @@ class HomeScreen extends StatelessWidget {
           text,
           textDirection: TextDirection.rtl,
           textAlign: TextAlign.center,
+          style: GoogleFonts.noticiaText(
+            fontSize: 16,
+          ),
         ),
       ],
     );

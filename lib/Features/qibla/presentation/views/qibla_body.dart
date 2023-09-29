@@ -19,13 +19,14 @@ class QiblaScreen extends StatefulWidget {
 }
 
 class _QiblaScreenState extends State<QiblaScreen> {
+  var location;
   Future<Position> getUserLocation() async {
     try {
       LocationPermission permission = await Geolocator.checkPermission();
+      CacheHelper.saveData(key: AppStrings.locationKey, value: false);
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.denied) {
-          CacheHelper.saveData(key: AppStrings.locationKey, value: false);
           throw PlatformException(
             code: 'PERMISSION_DENIED',
             message: 'Location permission denied',
@@ -35,7 +36,6 @@ class _QiblaScreenState extends State<QiblaScreen> {
       if (permission == LocationPermission.deniedForever) {
         permission = await Geolocator.requestPermission();
         print(permission.toString());
-        CacheHelper.saveData(key: AppStrings.locationKey, value: false);
         throw PlatformException(
           code: 'PERMISSION_DENIED_FOREVER',
           message: 'Location permission denied forever',
@@ -43,7 +43,7 @@ class _QiblaScreenState extends State<QiblaScreen> {
       }
       final Position position = await Geolocator.getCurrentPosition();
       print(position);
-
+      location = position;
       return position;
     } catch (e) {
       CacheHelper.saveData(key: AppStrings.locationKey, value: false);
@@ -57,44 +57,43 @@ class _QiblaScreenState extends State<QiblaScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (CacheHelper.getDate(key: AppStrings.locationKey) == true) {
+    if (CacheHelper.getDate(key: AppStrings.locationKey) == true &&
+        location != null) {
       return const QiblahWidget();
     }
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const CustomErrorContainer(title: 'قم بتفعيل الموقع'),
-          const SizedBox(
-            height: 45,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const CustomErrorContainer(title: 'قم بتفعيل الموقع'),
+        const SizedBox(
+          height: 45,
+        ),
+        MaterialButton(
+          color: MyColors.darkBrown,
+          onPressed: () async {
+            const CustomLoadingPage();
+            await getUserLocation().then((value) {
+              CacheHelper.saveData(key: AppStrings.locationKey, value: true);
+              setState(() {});
+            });
+          },
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
           ),
-          MaterialButton(
-            color: MyColors.darkBrown,
-            onPressed: () async {
-              const CustomLoadingPage();
-              await getUserLocation().then((value) {
-                CacheHelper.saveData(key: AppStrings.locationKey, value: true);
-                setState(() {});
-              });
-            },
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            splashColor: MyColors.lightBrown,
-            elevation: 5,
-            height: AppVariables.appSize(context).width * 0.15,
-            child: Text(
-              "تفعيل الموقع",
-              style: GoogleFonts.noticiaText(
-                color: Theme.of(context).scaffoldBackgroundColor,
-                fontSize: 22,
-                fontWeight: FontWeight.w500,
-              ),
+          splashColor: MyColors.lightBrown,
+          elevation: 5,
+          height: AppVariables.appSize(context).width * 0.15,
+          child: Text(
+            "تفعيل الموقع",
+            style: GoogleFonts.noticiaText(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              fontSize: 22,
+              fontWeight: FontWeight.w500,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

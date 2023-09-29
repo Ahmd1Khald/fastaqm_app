@@ -13,6 +13,7 @@ class QuranScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
           backgroundColor: MyColors.lightBrown,
           automaticallyImplyLeading: false,
@@ -32,7 +33,7 @@ class QuranScreen extends StatelessWidget {
             tabs: [
               Tab(
                 child: Text(
-                  "الأجزاء",
+                  "السور",
                   style: GoogleFonts.noticiaText(
                     color: MyColors.darkBrown,
                     fontSize: 24,
@@ -41,7 +42,7 @@ class QuranScreen extends StatelessWidget {
               ),
               Tab(
                 child: Text(
-                  "السور",
+                  "الأجزاء",
                   style: GoogleFonts.noticiaText(
                     color: MyColors.darkBrown,
                     fontSize: 24,
@@ -53,8 +54,8 @@ class QuranScreen extends StatelessWidget {
         ),
         body: const TabBarView(
           children: [
-            AjzaaBody(),
             SuwuerBody(),
+            AjzaaBody(),
           ],
         ),
       ),

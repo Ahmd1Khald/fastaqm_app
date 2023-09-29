@@ -163,7 +163,7 @@ class AjzaaBody extends StatelessWidget {
                 itemBuilder: (context, index) {
                   int suraNum = index + 1;
                   return SizedBox(
-                    height: AppVariables.appSize(context).width * 0.17,
+                    height: AppVariables.appSize(context).width * 0.2,
                     child: Center(
                       child: ListTile(
                         title: Row(
@@ -193,21 +193,10 @@ class AjzaaBody extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                Text(
-                                  '.${index + 1}',
-                                  style: GoogleFonts.noticiaText(
-                                    fontSize: 22,
-                                    color: MyColors.darkBrown,
-                                  ),
-                                ),
                               ],
                             ),
                           ],
                         ),
-                        //leading: Text('45 صفحة'),
                         splashColor: MyColors.darkBrown,
                         onTap: () {
                           AppFunctions.pushTo(
@@ -223,7 +212,7 @@ class AjzaaBody extends StatelessWidget {
                 separatorBuilder: (context, index) => Container(
                   width: AppVariables.appSize(context).width,
                   height: 1,
-                  color: MyColors.darkBrown,
+                  color: MyColors.darkBrown.withOpacity(0.1),
                 ),
                 itemCount: 30,
               ),

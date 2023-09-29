@@ -38,7 +38,7 @@ class SuwuerBody extends StatelessWidget {
                   return Container(
                     width: AppVariables.appSize(context).width,
                     height: 1,
-                    color: MyColors.darkBrown,
+                    color: MyColors.darkBrown.withOpacity(0.1),
                   );
                 },
               ),
@@ -60,7 +60,7 @@ class BuildSuraContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      height: AppVariables.appSize(context).width * 0.18,
+      height: AppVariables.appSize(context).width * 0.2,
       //color: Theme.of(context).scaffoldBackgroundColor,
       splashColor: MyColors.darkBrown,
       onPressed: () {
@@ -100,17 +100,17 @@ class BuildSuraContainer extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            width: 10,
+            width: 12,
           ),
           if (quran.getPlaceOfRevelation(index + 1) == "Madinah") ...[
             Image.asset(
               AssetsManager.masjedIcon,
-              width: 25,
+              width: 28,
             ),
           ] else ...[
             Image.asset(
               AssetsManager.makaaIcon,
-              width: 25,
+              width: 28,
             ),
           ],
         ],
