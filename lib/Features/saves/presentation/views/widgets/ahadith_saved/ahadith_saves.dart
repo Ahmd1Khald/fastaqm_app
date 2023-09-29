@@ -185,7 +185,7 @@ class AhadithSaves extends StatelessWidget {
           return Scaffold(
             appBar: customAppBar(context),
             body: const CustomErrorContainer(
-              title: "لا يوجد أحاديث مضافه",
+              title: "لا يوجد أحاديث مضافة",
             ),
           );
         },

@@ -81,7 +81,7 @@ class CountZikerWidget extends StatelessWidget {
                             : num == "3"
                                 ? "ثلاث مرات"
                                 : num == "4"
-                                    ? "اربع مرات"
+                                    ? "أربع مرات"
                                     : num == "7"
                                         ? "سبع مرات"
                                         : num == "10"

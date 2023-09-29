@@ -39,6 +39,8 @@ dependencies:
   share: ^2.0.4
   #uuid
   uuid: ^3.0.7
+  #rename
+  rename: ^3.0.0
 
 
 

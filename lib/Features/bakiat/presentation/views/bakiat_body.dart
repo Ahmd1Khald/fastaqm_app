@@ -41,7 +41,7 @@ class _BakiatScreenState extends State<BakiatScreen> {
               child: Column(
                 children: [
                   Text(
-                    "أسحب لحذف الأعداد",
+                    "اسحب لحذف الأعداد",
                     textDirection: TextDirection.rtl,
                     textAlign: TextAlign.right,
                     style: GoogleFonts.noticiaText(

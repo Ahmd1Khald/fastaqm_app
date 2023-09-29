@@ -1,3 +1,4 @@
+import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class SuraWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     print(suraPages);
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: MyColors.whiteColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(1.0),

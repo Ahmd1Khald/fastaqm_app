@@ -179,7 +179,7 @@ class DuaaSaves extends StatelessWidget {
           return Scaffold(
             appBar: customAppBar(context),
             body: const CustomErrorContainer(
-              title: "لا يوجد أدعية مضافه",
+              title: "لا يوجد أدعية مضافة",
             ),
           );
         },

@@ -19,7 +19,7 @@ class QiblaScreen extends StatefulWidget {
 }
 
 class _QiblaScreenState extends State<QiblaScreen> {
-  var location;
+  //var location;
   Future<Position> getUserLocation() async {
     try {
       LocationPermission permission = await Geolocator.checkPermission();
@@ -43,7 +43,7 @@ class _QiblaScreenState extends State<QiblaScreen> {
       }
       final Position position = await Geolocator.getCurrentPosition();
       print(position);
-      location = position;
+      //location = position;
       return position;
     } catch (e) {
       CacheHelper.saveData(key: AppStrings.locationKey, value: false);
@@ -57,15 +57,17 @@ class _QiblaScreenState extends State<QiblaScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (CacheHelper.getDate(key: AppStrings.locationKey) == true &&
-        location != null) {
+    if (CacheHelper.getDate(key: AppStrings.locationKey) ==
+            true /*&&
+        location != null*/
+        ) {
       return const QiblahWidget();
     }
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const CustomErrorContainer(title: 'قم بتفعيل الموقع'),
+        const CustomErrorContainer(title: 'قم بتفعيل القبلة'),
         const SizedBox(
           height: 45,
         ),
