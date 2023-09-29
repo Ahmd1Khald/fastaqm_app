@@ -1,6 +1,7 @@
+import 'package:fastaqm_app/Core/constatnts/app_functions.dart';
+import 'package:fastaqm_app/Features/quran/presentation/views/widgets/sura_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quran/quran.dart' as quran;
 
 import '../../../../../Core/constatnts/assets_manager.dart';
 import '../../../../../Core/constatnts/colors.dart';
@@ -76,23 +77,75 @@ class AjzaaBody extends StatelessWidget {
     return ss;
   }
 
+  int getJuzaPageCount({required int num}) {
+    int count = 0;
+    if (num == 1) {
+      count = 1;
+    } else if (num == 2) {
+      count = 22;
+    } else if (num == 3) {
+      count = 42;
+    } else if (num == 4) {
+      count = 62;
+    } else if (num == 5) {
+      count = 82;
+    } else if (num == 6) {
+      count = 102;
+    } else if (num == 7) {
+      count = 121;
+    } else if (num == 8) {
+      count = 142;
+    } else if (num == 9) {
+      count = count = 162;
+    } else if (num == 10) {
+      count = 182;
+    } else if (num == 11) {
+      count = 201;
+    } else if (num == 12) {
+      count = 222;
+    } else if (num == 13) {
+      count = 242;
+    } else if (num == 14) {
+      count = 262;
+    } else if (num == 15) {
+      count = 282;
+    } else if (num == 16) {
+      count = 302;
+    } else if (num == 17) {
+      count = 322;
+    } else if (num == 18) {
+      count = 342;
+    } else if (num == 19) {
+      count = 362;
+    } else if (num == 20) {
+      count = 382;
+    } else if (num == 21) {
+      count = 402;
+    } else if (num == 22) {
+      count = 422;
+    } else if (num == 23) {
+      count = 442;
+    } else if (num == 24) {
+      count = 462;
+    } else if (num == 25) {
+      count = 482;
+    } else if (num == 26) {
+      count = 502;
+    } else if (num == 27) {
+      count = 522;
+    } else if (num == 28) {
+      count = 542;
+    } else if (num == 29) {
+      count = 562;
+    } else if (num == 30) {
+      count = 582;
+    }
+
+    return count;
+  }
+
   @override
   Widget build(BuildContext context) {
-    print("+++++++++++++++++");
-    print(quran.getSurahAndVersesFromJuz(25));
-    var tt = quran.getSurahAndVersesFromJuz(25);
-    print("رقم السور الموجودة في الجزء");
-    print(tt.keys.toList());
-    int surahNumber = tt.keys.toList()[0];
-    int verseNumber = tt.values.toList()[0][1];
-    int firstPageInJusa = quran.getPageNumber(surahNumber, verseNumber);
-    print("firstPageInJusa");
-    print(firstPageInJusa);
-    surahNumber = tt.keys.toList()[tt.keys.toList().length - 1];
-    verseNumber = tt.values.toList()[tt.values.toList().length - 1][1];
-    int lastPageInJusa = quran.getPageNumber(surahNumber, verseNumber);
-    print("lastPageInJusa");
-    print(lastPageInJusa);
     return Stack(
       children: [
         Container(
@@ -118,7 +171,7 @@ class AjzaaBody extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text(
-                              '45 صفحة',
+                              '${getJuzaPageCount(num: suraNum)} صفحة',
                               style: GoogleFonts.noticiaText(
                                 textStyle: const TextStyle(
                                   fontSize: 18,
@@ -156,7 +209,13 @@ class AjzaaBody extends StatelessWidget {
                         ),
                         //leading: Text('45 صفحة'),
                         splashColor: MyColors.darkBrown,
-                        onTap: () {},
+                        onTap: () {
+                          AppFunctions.pushTo(
+                              context: context,
+                              screen: SuraWidget(
+                                suraPages: [getJuzaPageCount(num: suraNum)],
+                              ));
+                        },
                       ),
                     ),
                   );
