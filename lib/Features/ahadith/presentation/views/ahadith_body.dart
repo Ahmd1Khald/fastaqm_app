@@ -41,7 +41,7 @@ class AhadithScreen extends StatelessWidget {
                     text: 'صحيح البخاري',
                   ),
                   Text(
-                    '${AppVariables.ahadithSelected + 1}/300',
+                    '${AppVariables.ahadithSelected + 1}/${cubit.ahadithList.length}',
                     style: GoogleFonts.notoNastaliqUrdu(
                       color: Colors.black,
                       fontSize: 24,
