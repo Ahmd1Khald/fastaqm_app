@@ -1,7 +1,8 @@
 const baseImagesPath = "assets/images";
 
 class AssetsManager {
-  static const appLogo = '$baseImagesPath/app_logo.png';
+  static const appLogo = '$baseImagesPath/app_logo2.png';
+  //static const appLogo2 = '$baseImagesPath/app_logo2.png';
   static const saveIcon = '$baseImagesPath/save_icon.png';
   static const homeIcon = '$baseImagesPath/home.png';
   static const hadithLogo = '$baseImagesPath/ahadith_icon.png';
