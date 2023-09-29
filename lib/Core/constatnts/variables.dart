@@ -10,5 +10,7 @@ class AppVariables {
   static int duaaSelected = 0;
   static int ahadithSelected = 0;
 
+  //saved
   static int hadishSaveIndex = 0;
+  static int duaaSaveIndex = 0;
 }

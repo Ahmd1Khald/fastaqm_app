@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share/share.dart';
 
-import '../../../../../Core/constatnts/app_functions.dart';
-import '../../../../../Core/constatnts/colors.dart';
-import '../../../../../Core/constatnts/variables.dart';
+import '../../../../../../Core/constatnts/app_functions.dart';
+import '../../../../../../Core/constatnts/colors.dart';
+import '../../../../../../Core/constatnts/variables.dart';
 
 class HadithSavesIconsButton extends StatelessWidget {
   const HadithSavesIconsButton({
@@ -130,13 +130,13 @@ class HadithSavesIconsButton extends StatelessWidget {
             ),
           ),
           CircleAvatar(
-            backgroundColor: cubit.ssInSavedList(number: number)
+            backgroundColor: cubit.ssInHadithSavedList(number: number)
                 ? MyColors.darkBrown
                 : MyColors.lightBrown,
             radius: 35,
             child: MaterialButton(
               onPressed: () {
-                cubit.removedFromList(number: number);
+                cubit.removedHadithFromList(number: number);
               },
               splashColor: MyColors.darkBrown,
               shape: RoundedRectangleBorder(
@@ -144,7 +144,7 @@ class HadithSavesIconsButton extends StatelessWidget {
               child: Center(
                 child: Icon(
                   Icons.favorite,
-                  color: cubit.ssInSavedList(number: number)
+                  color: cubit.ssInHadithSavedList(number: number)
                       ? MyColors.lightBrown
                       : MyColors.darkBrown,
                   size: 40,

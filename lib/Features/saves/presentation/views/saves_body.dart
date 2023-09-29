@@ -1,5 +1,6 @@
 import 'package:fastaqm_app/Core/constatnts/app_functions.dart';
-import 'package:fastaqm_app/Features/saves/presentation/views/widgets/ahadith_saves.dart';
+import 'package:fastaqm_app/Features/saves/presentation/views/widgets/ahadith_saved/ahadith_saves.dart';
+import 'package:fastaqm_app/Features/saves/presentation/views/widgets/duaa_saved/duaa_saves.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -26,7 +27,9 @@ class SavesScreen extends StatelessWidget {
         ),
         CustomBuildItem(
           text: "أدعية",
-          fnc: () {},
+          fnc: () {
+            AppFunctions.pushTo(context: context, screen: const DuaaSaves());
+          },
         ),
       ],
     );
