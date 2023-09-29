@@ -1,14 +1,12 @@
 import 'package:fastaqm_app/Core/constatnts/app_functions.dart';
 import 'package:fastaqm_app/Core/constatnts/assets_manager.dart';
 import 'package:fastaqm_app/Core/constatnts/colors.dart';
-import 'package:fastaqm_app/Core/constatnts/variables.dart';
+import 'package:fastaqm_app/Features/quran/presentation/views/widgets/drawer_body.dart';
 import 'package:fastaqm_app/Features/quran/presentation/views/widgets/quran_image_widget.dart';
 import 'package:fastaqm_app/Features/quran/presentation/views/widgets/sura_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quran/quran.dart' as quran;
-
-import '../../../../Core/widgets/custom_app_bar.dart';
 
 class QuranScreen extends StatelessWidget {
   const QuranScreen({Key? key}) : super(key: key);
@@ -17,7 +15,21 @@ class QuranScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     print("quraaaaaaaaaaaaaaaaaaaaaan");
     return Scaffold(
-      appBar: customAppBar(context),
+      appBar: AppBar(
+        //automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_forward,
+                size: 32,
+                color: MyColors.darkBrown,
+              )),
+        ],
+      ),
+      drawer: const DrawerBody(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,23 +63,6 @@ class BuildSuraContainer extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
-    print("+++++++++++++++++");
-    print(quran.getSurahAndVersesFromJuz(25));
-    var tt = quran.getSurahAndVersesFromJuz(25);
-    print("رقم السور الموجودة في الجزء");
-    print(tt.keys.toList());
-    int surahNumber = tt.keys.toList()[0];
-    int verseNumber = tt.values.toList()[0][1];
-    int firstPageInJusa = quran.getPageNumber(surahNumber, verseNumber);
-    print("firstPageInJusa");
-    print(firstPageInJusa);
-    surahNumber = tt.keys.toList()[tt.keys.toList().length - 1];
-    verseNumber = tt.values.toList()[tt.values.toList().length - 1][1];
-    int lastPageInJusa = quran.getPageNumber(surahNumber, verseNumber);
-    print("lastPageInJusa");
-    print(lastPageInJusa);
-
-    for (int i = 0; i < quran.getSurahAndVersesFromJuz(30).length; i++) {}
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       child: MaterialButton(
@@ -88,21 +83,10 @@ class BuildSuraContainer extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            if (quran.getPlaceOfRevelation(index + 1) == "Madinah") ...[
-              Image.asset(
-                AssetsManager.masjedIcon,
-                width: 25,
-              ),
-            ] else ...[
-              Image.asset(
-                AssetsManager.makaaIcon,
-                width: 25,
-              ),
-            ],
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: Text(
-                "${quran.getSurahPages(index + 1).length}",
+                "صفحة  ${quran.getSurahPages(index + 1).length}",
                 style: GoogleFonts.noticiaText(
                   textStyle: const TextStyle(
                     fontSize: 18,
@@ -114,7 +98,7 @@ class BuildSuraContainer extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              quran.getSurahNameArabic(index + 1),
+              "سورة  ${quran.getSurahNameArabic(index + 1)}",
               style: GoogleFonts.notoNastaliqUrdu(
                 textStyle: const TextStyle(
                   fontSize: 22,
@@ -124,13 +108,19 @@ class BuildSuraContainer extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              width: 5,
+              width: 10,
             ),
-            Image.asset(
-              AssetsManager.q1Icon,
-              color: MyColors.darkBrown,
-              width: AppVariables.appSize(context).width * 0.12,
-            ),
+            if (quran.getPlaceOfRevelation(index + 1) == "Madinah") ...[
+              Image.asset(
+                AssetsManager.masjedIcon,
+                width: 25,
+              ),
+            ] else ...[
+              Image.asset(
+                AssetsManager.makaaIcon,
+                width: 25,
+              ),
+            ],
           ],
         ),
       ),

@@ -39,7 +39,7 @@ class AppTheme {
       appBarTheme: AppBarTheme(
         elevation: 0,
         backgroundColor: MyColors.appBackGroundColor,
-        iconTheme: const IconThemeData(color: MyColors.primaryColor, size: 32),
+        iconTheme: const IconThemeData(color: MyColors.darkBrown, size: 32),
         titleTextStyle: GoogleFonts.cairo(
           color: MyColors.primaryColor,
           fontWeight: FontWeight.w700,
