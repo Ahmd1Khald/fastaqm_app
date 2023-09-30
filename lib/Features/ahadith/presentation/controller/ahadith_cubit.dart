@@ -17,7 +17,8 @@ class AhadithCubit extends Cubit<AhadithState> {
   static AhadithCubit get(context) => BlocProvider.of(context);
 
   Future<String> loadJsonData() async {
-    final jsonString = await rootBundle.loadString('assets/ahadith.json');
+    final jsonString =
+        await rootBundle.loadString('assets/ahadithNawawia.json');
     return jsonString;
   }
 

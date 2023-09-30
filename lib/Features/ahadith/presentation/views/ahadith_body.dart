@@ -37,8 +37,9 @@ class AhadithScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CustomDuaaTitle(
-                    text: 'صحيح البخاري',
+                  CustomDuaaTitle(
+                    text: cubit.ahadithList[AppVariables.ahadithSelected]
+                        ["title"],
                   ),
                   Text(
                     '${AppVariables.ahadithSelected + 1}/${cubit.ahadithList.length}',
