@@ -16,7 +16,7 @@ class SavesCubit extends Cubit<SavesState> {
 
   Future<String> loadJsonData({required bool isHadith}) async {
     final jsonString = isHadith
-        ? await rootBundle.loadString('assets/ahadith.json')
+        ? await rootBundle.loadString('assets/ahadithNawawia.json')
         : await rootBundle.loadString('assets/azkar.json');
     return jsonString;
   }
