@@ -99,6 +99,7 @@ class AzkarCubit extends Cubit<AzkarState> {
     } else if (tt == 3 && salaaIndex > 0) {
       salaaIndex--;
     }
+    resetCounters();
     emit(AzkarDecreaseIndex());
   }
 
