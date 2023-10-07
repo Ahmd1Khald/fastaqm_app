@@ -1,14 +1,15 @@
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:fastaqm_app/Core/widgets/customErrorContainer.dart';
+import 'package:fastaqm_app/Core/widgets/custom_containt.dart';
 import 'package:fastaqm_app/Core/widgets/custom_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../Core/constatnts/colors.dart';
 import '../../../../../../Core/widgets/custom_app_bar.dart';
 import '../../../../../duaa/presentation/views/widgets/custom_duaa_title.dart';
-import '../../../../../duaa/presentation/views/widgets/duaa_containt.dart';
 import '../../../controller/saves_cubit.dart';
 import 'ahadith_saved_icons.dart';
 
@@ -36,17 +37,18 @@ class AhadithSaves extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const CustomDuaaTitle(
-                      text: 'صحيح البخاري',
+                    CustomDuaaTitle(
+                      text: cubit.ahadithFavList[AppVariables.hadishSaveIndex]
+                          ["title"],
                     ),
                     Text(
                       '${AppVariables.hadishSaveIndex + 1}/${cubit.ahadithFavList.length}',
                       style: GoogleFonts.notoNastaliqUrdu(
                         color: Colors.black,
-                        fontSize: 24,
+                        fontSize: 24.sp,
                       ),
                     ),
-                    CustomDuaaContant(
+                    CustomContantContainer(
                       text: cubit.ahadithFavList[AppVariables.hadishSaveIndex]
                           ["hadith"],
                     ),
@@ -63,7 +65,7 @@ class AhadithSaves extends StatelessWidget {
                     if (AppVariables.hadishSaveIndex == 0) ...[
                       CircleAvatar(
                         backgroundColor: MyColors.darkBrown,
-                        radius: 39,
+                        radius: 38.sp,
                         child: MaterialButton(
                           onPressed: () {
                             cubit.nextHadith(
@@ -77,10 +79,10 @@ class AhadithSaves extends StatelessWidget {
                           ),
                           color: MyColors.darkBrown,
                           splashColor: MyColors.lightBrown,
-                          child: const Center(
+                          child: Center(
                             child: Icon(
                               Icons.keyboard_arrow_right,
-                              size: 50,
+                              size: 38.sp,
                               color: MyColors.whiteColor,
                             ),
                           ),
@@ -90,7 +92,7 @@ class AhadithSaves extends StatelessWidget {
                         cubit.ahadithFavList.length - 1) ...[
                       CircleAvatar(
                         backgroundColor: MyColors.darkBrown,
-                        radius: 39,
+                        radius: 38.sp,
                         child: MaterialButton(
                           onPressed: () {
                             cubit.backHadith(
@@ -104,28 +106,24 @@ class AhadithSaves extends StatelessWidget {
                           ),
                           color: MyColors.darkBrown,
                           splashColor: MyColors.lightBrown,
-                          child: const Center(
+                          child: Center(
                             child: Icon(
                               Icons.keyboard_arrow_left,
-                              size: 50,
+                              size: 38.sp,
                               color: MyColors.whiteColor,
                             ),
                           ),
                         ),
                       ),
                     ] else ...[
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: AppVariables.appSize(context).width * 0.1,
-                          left: 80,
-                          right: 80,
-                        ),
+                      SizedBox(
+                        width: AppVariables.appSize(context).width * 0.65,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CircleAvatar(
                               backgroundColor: MyColors.darkBrown,
-                              radius: 39,
+                              radius: 38.sp,
                               child: MaterialButton(
                                 onPressed: () {
                                   cubit.backHadith(
@@ -139,10 +137,10 @@ class AhadithSaves extends StatelessWidget {
                                 ),
                                 color: MyColors.darkBrown,
                                 splashColor: MyColors.lightBrown,
-                                child: const Center(
+                                child: Center(
                                   child: Icon(
                                     Icons.keyboard_arrow_left,
-                                    size: 50,
+                                    size: 38.sp,
                                     color: MyColors.whiteColor,
                                   ),
                                 ),
@@ -150,7 +148,7 @@ class AhadithSaves extends StatelessWidget {
                             ),
                             CircleAvatar(
                               backgroundColor: MyColors.darkBrown,
-                              radius: 39,
+                              radius: 38.sp,
                               child: MaterialButton(
                                 onPressed: () {
                                   cubit.nextHadith(
@@ -164,10 +162,10 @@ class AhadithSaves extends StatelessWidget {
                                 ),
                                 color: MyColors.darkBrown,
                                 splashColor: MyColors.lightBrown,
-                                child: const Center(
+                                child: Center(
                                   child: Icon(
                                     Icons.keyboard_arrow_right,
-                                    size: 50,
+                                    size: 38.sp,
                                     color: MyColors.whiteColor,
                                   ),
                                 ),

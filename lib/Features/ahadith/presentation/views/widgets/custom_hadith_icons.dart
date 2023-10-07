@@ -1,6 +1,7 @@
 import 'package:fastaqm_app/Features/ahadith/data/model/hadith_model.dart';
 import 'package:fastaqm_app/Features/ahadith/presentation/controller/ahadith_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../Core/constatnts/app_functions.dart';
@@ -25,14 +26,14 @@ class HadithIconsButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 20,
-        horizontal: 55,
+        horizontal: 40,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CircleAvatar(
             backgroundColor: MyColors.lightBrown,
-            radius: 35,
+            radius: 35.sp,
             child: MaterialButton(
               onPressed: () {
                 AppFunctions.shareDuaa(hadith);
@@ -40,11 +41,11 @@ class HadithIconsButton extends StatelessWidget {
               splashColor: MyColors.darkBrown,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50)),
-              child: const Center(
+              child: Center(
                 child: Icon(
                   Icons.share,
                   color: MyColors.darkBrown,
-                  size: 40,
+                  size: 35.sp,
                 ),
               ),
             ),
@@ -52,7 +53,7 @@ class HadithIconsButton extends StatelessWidget {
           CircleAvatar(
             backgroundColor:
                 cubit.selected1 ? MyColors.darkBrown : MyColors.lightBrown,
-            radius: 35,
+            radius: 35.sp,
             child: MaterialButton(
               onPressed: () async {
                 cubit.changeSelectedIcon(tt: 1);
@@ -74,7 +75,7 @@ class HadithIconsButton extends StatelessWidget {
                                 textDirection: TextDirection.rtl,
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.noticiaText(
-                                  fontSize: 24,
+                                  fontSize: 24.sp,
                                   fontWeight: FontWeight.w400,
                                   color: Colors.black,
                                 ),
@@ -120,7 +121,7 @@ class HadithIconsButton extends StatelessWidget {
                   color: cubit.selected1
                       ? MyColors.lightBrown
                       : MyColors.darkBrown,
-                  size: 40,
+                  size: 35.sp,
                 ),
               ),
             ),
@@ -129,7 +130,7 @@ class HadithIconsButton extends StatelessWidget {
             backgroundColor: cubit.ssInSavedList(number: number)
                 ? MyColors.darkBrown
                 : MyColors.lightBrown,
-            radius: 35,
+            radius: 35.sp,
             child: MaterialButton(
               onPressed: () {
                 //cubit.changeSelectedIcon(tt: 2);
@@ -149,7 +150,7 @@ class HadithIconsButton extends StatelessWidget {
                   color: cubit.ssInSavedList(number: number)
                       ? MyColors.lightBrown
                       : MyColors.darkBrown,
-                  size: 40,
+                  size: 35.sp,
                 ),
               ),
             ),

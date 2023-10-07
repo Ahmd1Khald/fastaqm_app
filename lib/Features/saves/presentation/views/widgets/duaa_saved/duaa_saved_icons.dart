@@ -1,5 +1,6 @@
 import 'package:fastaqm_app/Features/saves/presentation/controller/saves_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../Core/constatnts/app_functions.dart';
 import '../../../../../../Core/constatnts/colors.dart';
@@ -27,7 +28,7 @@ class DuaaSavesIconsButton extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundColor: MyColors.lightBrown,
-            radius: 35,
+            radius: 35.sp,
             child: MaterialButton(
               onPressed: () {
                 AppFunctions.shareDuaa(duaa);
@@ -35,11 +36,11 @@ class DuaaSavesIconsButton extends StatelessWidget {
               splashColor: MyColors.darkBrown,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50)),
-              child: const Center(
+              child: Center(
                 child: Icon(
                   Icons.share,
                   color: MyColors.darkBrown,
-                  size: 40,
+                  size: 35.sp,
                 ),
               ),
             ),
@@ -48,7 +49,7 @@ class DuaaSavesIconsButton extends StatelessWidget {
             backgroundColor: cubit.ssInDuaaSavedList(duaa: duaa)
                 ? MyColors.darkBrown
                 : MyColors.lightBrown,
-            radius: 35,
+            radius: 35.sp,
             child: MaterialButton(
               onPressed: () {
                 cubit.removedDuaaFromList(duaa: duaa);
@@ -62,7 +63,7 @@ class DuaaSavesIconsButton extends StatelessWidget {
                   color: cubit.ssInDuaaSavedList(duaa: duaa)
                       ? MyColors.lightBrown
                       : MyColors.darkBrown,
-                  size: 40,
+                  size: 35.sp,
                 ),
               ),
             ),

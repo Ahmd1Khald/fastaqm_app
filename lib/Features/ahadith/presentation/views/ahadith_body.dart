@@ -1,14 +1,15 @@
 import 'package:fastaqm_app/Core/widgets/custom_app_bar.dart';
+import 'package:fastaqm_app/Core/widgets/custom_containt.dart';
 import 'package:fastaqm_app/Features/ahadith/presentation/views/widgets/custom_hadith_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../Core/constatnts/colors.dart';
 import '../../../../Core/constatnts/variables.dart';
 import '../../../../Core/widgets/custom_loading.dart';
 import '../../../duaa/presentation/views/widgets/custom_duaa_title.dart';
-import '../../../duaa/presentation/views/widgets/duaa_containt.dart';
 import '../controller/ahadith_cubit.dart';
 
 class AhadithScreen extends StatelessWidget {
@@ -45,10 +46,10 @@ class AhadithScreen extends StatelessWidget {
                     '${AppVariables.ahadithSelected + 1}/${cubit.ahadithList.length}',
                     style: GoogleFonts.notoNastaliqUrdu(
                       color: Colors.black,
-                      fontSize: 24,
+                      fontSize: 24.sp,
                     ),
                   ),
-                  CustomDuaaContant(
+                  CustomContantContainer(
                     text: cubit.ahadithList[AppVariables.ahadithSelected]
                         ["hadith"],
                   ),
@@ -64,7 +65,7 @@ class AhadithScreen extends StatelessWidget {
                   if (AppVariables.ahadithSelected == 0) ...[
                     CircleAvatar(
                       backgroundColor: MyColors.darkBrown,
-                      radius: 39,
+                      radius: 38.sp,
                       child: MaterialButton(
                         onPressed: () {
                           cubit.nextHadith(len: cubit.ahadithList.length);
@@ -76,10 +77,10 @@ class AhadithScreen extends StatelessWidget {
                         ),
                         color: MyColors.darkBrown,
                         splashColor: MyColors.lightBrown,
-                        child: const Center(
+                        child: Center(
                           child: Icon(
                             Icons.keyboard_arrow_right,
-                            size: 50,
+                            size: 38.sp,
                             color: MyColors.whiteColor,
                           ),
                         ),
@@ -89,7 +90,7 @@ class AhadithScreen extends StatelessWidget {
                       cubit.ahadithList.length - 1) ...[
                     CircleAvatar(
                       backgroundColor: MyColors.darkBrown,
-                      radius: 39,
+                      radius: 38.sp,
                       child: MaterialButton(
                         onPressed: () {
                           cubit.backHadith();
@@ -101,22 +102,18 @@ class AhadithScreen extends StatelessWidget {
                         ),
                         color: MyColors.darkBrown,
                         splashColor: MyColors.lightBrown,
-                        child: const Center(
+                        child: Center(
                           child: Icon(
                             Icons.keyboard_arrow_left,
-                            size: 50,
+                            size: 38.sp,
                             color: MyColors.whiteColor,
                           ),
                         ),
                       ),
                     ),
                   ] else ...[
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: AppVariables.appSize(context).width * 0.1,
-                        left: 80,
-                        right: 80,
-                      ),
+                    SizedBox(
+                      width: AppVariables.appSize(context).width * 0.65,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
