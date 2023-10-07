@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../Core/constatnts/assets_manager.dart';
@@ -21,13 +22,13 @@ class CustomAyaWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: AppVariables.appSize(context).width * 0.8,
+          width: AppVariables.appSize(context).width * 0.99,
           child: Text(
             textAlign: TextAlign.center,
             "وَقَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ",
             textDirection: TextDirection.rtl,
             style: GoogleFonts.noticiaText(
-              fontSize: 24,
+              fontSize: 23.sp,
               color: Colors.black,
             ),
           ),

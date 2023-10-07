@@ -1,6 +1,4 @@
-import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/back_zeker_button.dart';
 import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/count_ziker_widget.dart';
-import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/next_zeker_button.dart';
 import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/slider_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,8 +9,10 @@ import '../../../../Core/constatnts/colors.dart';
 import '../../../../Core/constatnts/variables.dart';
 import '../../../../Core/widgets/customErrorContainer.dart';
 import '../../../../Core/widgets/custom_app_bar.dart';
+import '../../../../Core/widgets/custom_back_button.dart';
 import '../../../../Core/widgets/custom_containt.dart';
 import '../../../../Core/widgets/custom_loading.dart';
+import '../../../../Core/widgets/custom_next_button.dart';
 import '../controller/azkar_cubit.dart';
 
 class AzkarScreen extends StatelessWidget {
@@ -155,7 +155,7 @@ class AzkarScreen extends StatelessWidget {
                                                 cubit.salaaIndex > 0
                                             ? true
                                             : false,
-                            child: BackZikerWidget(
+                            child: CustomBackButton(
                               fnc: () {
                                 cubit.decIndex(tt: AppVariables.azkarSelected);
                               },
@@ -180,7 +180,7 @@ class AzkarScreen extends StatelessWidget {
                                                         1
                                             ? true
                                             : false,
-                            child: NextZikerWidget(
+                            child: CustomNextButton(
                               fnc: () {
                                 cubit.incIndex(tt: AppVariables.azkarSelected);
                               },

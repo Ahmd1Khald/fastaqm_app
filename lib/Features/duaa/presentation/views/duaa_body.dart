@@ -3,6 +3,7 @@ import 'package:fastaqm_app/Features/duaa/presentation/views/widgets/custom_aya_
 import 'package:fastaqm_app/Features/duaa/presentation/views/widgets/duaa_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../Core/constatnts/colors.dart';
@@ -39,8 +40,8 @@ class DuaaScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const CustomAyaWidget(),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 ListView.builder(
                   shrinkWrap: true,
@@ -78,12 +79,12 @@ class BuildDuaaContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: Row(
         children: [
           CircleAvatar(
             backgroundColor: MyColors.darkBrown,
-            radius: 39,
+            radius: 40.sp,
             child: MaterialButton(
               onPressed: () {
                 AppFunctions.pushTo(
@@ -100,17 +101,17 @@ class BuildDuaaContainer extends StatelessWidget {
               ),
               color: MyColors.darkBrown,
               splashColor: MyColors.lightBrown,
-              child: const Center(
+              child: Center(
                 child: Icon(
                   Icons.keyboard_arrow_left,
-                  size: 50,
+                  size: 50.sp,
                   color: MyColors.whiteColor,
                 ),
               ),
             ),
           ),
           SizedBox(
-            width: AppVariables.appSize(context).width * 0.06,
+            width: AppVariables.appSize(context).width * 0.05,
           ),
           Stack(
             alignment: AlignmentDirectional.center,
@@ -148,8 +149,8 @@ class BuildDuaaContainer extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: GoogleFonts.noticiaText(
                       color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 24,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 22.sp,
                     ),
                   ),
                 ),

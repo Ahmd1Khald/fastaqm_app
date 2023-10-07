@@ -1,5 +1,7 @@
+import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:fastaqm_app/Features/duaa/data/model/duaa_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../Core/constatnts/app_functions.dart';
 import '../../../../../Core/constatnts/app_strings.dart';
@@ -64,17 +66,14 @@ class _IconsButtonState extends State<IconsButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 20,
-        horizontal: 95,
-      ),
+    return SizedBox(
+      width: AppVariables.appSize(context).width * 0.55,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CircleAvatar(
             backgroundColor: MyColors.lightBrown,
-            radius: 35,
+            radius: 35.sp,
             child: MaterialButton(
               onPressed: () {
                 AppFunctions.shareDuaa(widget.duaa);
@@ -82,11 +81,11 @@ class _IconsButtonState extends State<IconsButton> {
               splashColor: MyColors.darkBrown,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50)),
-              child: const Center(
+              child: Center(
                 child: Icon(
                   Icons.share,
                   color: MyColors.darkBrown,
-                  size: 40,
+                  size: 35.sp,
                 ),
               ),
             ),
@@ -95,7 +94,7 @@ class _IconsButtonState extends State<IconsButton> {
             backgroundColor: ssInSavedList(id: widget.duaa)
                 ? MyColors.darkBrown
                 : MyColors.lightBrown,
-            radius: 35,
+            radius: 35.sp,
             child: MaterialButton(
               onPressed: () {
                 saveToList(
@@ -115,7 +114,7 @@ class _IconsButtonState extends State<IconsButton> {
                   )
                       ? MyColors.lightBrown
                       : MyColors.darkBrown,
-                  size: 40,
+                  size: 35.sp,
                 ),
               ),
             ),

@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../Core/constatnts/colors.dart';
 import '../../../../../Core/constatnts/variables.dart';
 
-class BackZikerWidget extends StatelessWidget {
-  const BackZikerWidget({Key? key, required this.fnc}) : super(key: key);
+class CustomBackButton extends StatelessWidget {
+  const CustomBackButton({Key? key, required this.fnc}) : super(key: key);
 
   final VoidCallback fnc;
   @override

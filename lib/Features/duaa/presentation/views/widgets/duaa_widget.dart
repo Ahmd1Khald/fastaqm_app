@@ -1,12 +1,14 @@
 import 'package:fastaqm_app/Core/widgets/custom_app_bar.dart';
+import 'package:fastaqm_app/Core/widgets/custom_containt.dart';
 import 'package:fastaqm_app/Features/duaa/presentation/controller/duaa_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../Core/constatnts/colors.dart';
 import '../../../../../Core/constatnts/variables.dart';
+import '../../../../../Core/widgets/custom_back_button.dart';
+import '../../../../../Core/widgets/custom_next_button.dart';
 import 'Love_button.dart';
 import 'custom_duaa_title.dart';
-import 'duaa_containt.dart';
 
 class DuaaWidget extends StatefulWidget {
   const DuaaWidget({Key? key, required this.list, required this.cubit})
@@ -52,119 +54,61 @@ class _DuaaWidgetState extends State<DuaaWidget> {
               text: widget.list[0]["category"],
             ),
             SizedBox(
-              height: AppVariables.appSize(context).width * 0.1,
+              height: 20.h,
             ),
-            CustomDuaaContant(
+            CustomContantContainer(
               text: widget.list[AppVariables.duaaSelected]["zekr"],
+            ),
+            SizedBox(
+              height: 15.h,
             ),
             IconsButton(
               duaa: widget.list[AppVariables.duaaSelected]["zekr"],
               category: widget.list[AppVariables.duaaSelected]["category"],
             ),
-            if (AppVariables.duaaSelected == 0) ...[
-              CircleAvatar(
-                backgroundColor: MyColors.darkBrown,
-                radius: 39,
-                child: MaterialButton(
-                  onPressed: () {
-                    nextDuaa(len: widget.list.length - 1);
-                  },
-                  elevation: 5,
-                  //height: AppVariables.appSize(context).width * 0.1,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(45),
-                  ),
-                  color: MyColors.darkBrown,
-                  splashColor: MyColors.lightBrown,
-                  child: const Center(
-                    child: Icon(
-                      Icons.keyboard_arrow_right,
-                      size: 50,
-                      color: MyColors.whiteColor,
-                    ),
-                  ),
-                ),
-              ),
-            ] else if (AppVariables.duaaSelected == widget.list.length - 1) ...[
-              CircleAvatar(
-                backgroundColor: MyColors.darkBrown,
-                radius: 39,
-                child: MaterialButton(
-                  onPressed: () {
-                    backDuaa();
-                  },
-                  elevation: 5,
-                  //height: AppVariables.appSize(context).width * 0.1,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(45),
-                  ),
-                  color: MyColors.darkBrown,
-                  splashColor: MyColors.lightBrown,
-                  child: const Center(
-                    child: Icon(
-                      Icons.keyboard_arrow_left,
-                      size: 50,
-                      color: MyColors.whiteColor,
-                    ),
-                  ),
-                ),
-              ),
-            ] else ...[
-              Padding(
-                padding: EdgeInsets.only(
-                  top: AppVariables.appSize(context).width * 0.1,
-                  left: 80,
-                  right: 80,
-                ),
+            SizedBox(
+              height: 25.h,
+            ),
+            if (widget.list.length > 1) ...[
+              SizedBox(
+                width: AppVariables.appSize(context).width * 0.7,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CircleAvatar(
-                      backgroundColor: MyColors.darkBrown,
-                      radius: 39,
-                      child: MaterialButton(
-                        onPressed: () {
-                          backDuaa();
-                        },
-                        elevation: 5,
-                        //height: AppVariables.appSize(context).width * 0.1,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(45),
-                        ),
-                        color: MyColors.darkBrown,
-                        splashColor: MyColors.lightBrown,
-                        child: const Center(
-                          child: Icon(
-                            Icons.keyboard_arrow_left,
-                            size: 50,
-                            color: MyColors.whiteColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                    CircleAvatar(
-                      backgroundColor: MyColors.darkBrown,
-                      radius: 39,
-                      child: MaterialButton(
-                        onPressed: () {
+                    if (AppVariables.duaaSelected == 0) ...[
+                      const Spacer(),
+                      CustomNextButton(
+                        fnc: () {
                           nextDuaa(len: widget.list.length - 1);
                         },
-                        elevation: 5,
-                        //height: AppVariables.appSize(context).width * 0.1,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(45),
-                        ),
-                        color: MyColors.darkBrown,
-                        splashColor: MyColors.lightBrown,
-                        child: const Center(
-                          child: Icon(
-                            Icons.keyboard_arrow_right,
-                            size: 50,
-                            color: MyColors.whiteColor,
-                          ),
+                      ),
+                    ] else if (AppVariables.duaaSelected ==
+                        widget.list.length - 1) ...[
+                      CustomBackButton(
+                        fnc: () {
+                          backDuaa();
+                        },
+                      ),
+                    ] else ...[
+                      SizedBox(
+                        width: AppVariables.appSize(context).width * 0.7,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomBackButton(
+                              fnc: () {
+                                backDuaa();
+                              },
+                            ),
+                            CustomNextButton(
+                              fnc: () {
+                                nextDuaa(len: widget.list.length - 1);
+                              },
+                            ),
+                          ],
                         ),
                       ),
-                    ),
+                    ]
                   ],
                 ),
               ),

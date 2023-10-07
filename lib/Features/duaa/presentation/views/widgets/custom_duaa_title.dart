@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../Core/constatnts/colors.dart';
@@ -23,7 +24,7 @@ class CustomDuaaTitle extends StatelessWidget {
           textAlign: TextAlign.center,
           style: GoogleFonts.notoNastaliqUrdu(
             color: MyColors.whiteColor,
-            fontSize: 23,
+            fontSize: 22.sp,
           ),
         ),
       ),

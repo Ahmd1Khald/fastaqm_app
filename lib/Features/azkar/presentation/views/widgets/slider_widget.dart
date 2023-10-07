@@ -19,9 +19,10 @@ class SliderWidget extends StatelessWidget {
       builder: (context, state) {
         AzkarCubit cubit = AzkarCubit.get(context);
         return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              width: AppVariables.appSize(context).width * 0.75,
+              width: AppVariables.appSize(context).width * 0.7,
               child: Slider(
                 value: AppVariables.azkarSelected == 0
                     ? cubit.sabahIndex.toDouble()
@@ -52,7 +53,7 @@ class SliderWidget extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: AppVariables.appSize(context).width * 0.15,
+              width: AppVariables.appSize(context).width * 0.21,
               child: Text(
                 '$current/${allCount - 1}',
                 style: TextStyle(
