@@ -1,4 +1,6 @@
+import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../Core/constatnts/app_strings.dart';
 import '../../../../../Core/constatnts/colors.dart';
@@ -18,10 +20,13 @@ class SlidingText extends StatelessWidget {
         builder: (context, _) {
           return SlideTransition(
             position: slidingAnimation,
-            child: const Text(
-              AppStrings.slidingSplashTest,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 36, color: MyColors.babyBrown),
+            child: SizedBox(
+              width: AppVariables.appSize(context).width * 0.99,
+              child: Text(
+                AppStrings.slidingSplashTest,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 32.sp, color: MyColors.babyBrown),
+              ),
             ),
           );
         });

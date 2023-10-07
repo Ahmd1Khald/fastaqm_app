@@ -41,6 +41,8 @@ dependencies:
   uuid: ^3.0.7
   #rename
   rename: ^3.0.0
+  # responsive
+  flutter_screenutil: ^5.9.0
 
 
 

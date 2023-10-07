@@ -3,6 +3,7 @@ import 'package:fastaqm_app/Core/theme/app_theme.dart';
 import 'package:fastaqm_app/Features/splash/presentation/views/splash_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'Core/constatnts/app_strings.dart';
 import 'Core/helpers/cachehelper.dart';
@@ -29,11 +30,18 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: AppStrings.appName,
-      theme: AppTheme.lightTheme(),
-      home: const SplashScreen(),
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: AppStrings.appName,
+          theme: AppTheme.lightTheme(),
+          home: const SplashScreen(),
+        );
+      },
     );
   }
 }
