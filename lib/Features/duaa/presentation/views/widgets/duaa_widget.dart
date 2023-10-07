@@ -61,7 +61,7 @@ class _DuaaWidgetState extends State<DuaaWidget> {
               text: widget.list[AppVariables.duaaSelected]["zekr"],
             ),
             SizedBox(
-              height: 15.h,
+              height: 20.h,
             ),
             IconsButton(
               duaa: widget.list[AppVariables.duaaSelected]["zekr"],
@@ -125,6 +125,27 @@ class _DuaaWidgetState extends State<DuaaWidget> {
                         ),
                       ),
                     ]
+                  ],
+                ),
+              ),
+            ] else ...[
+              SizedBox(
+                width: AppVariables.appSize(context).width * 0.7,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomBackButton(
+                      fnc: () {
+                        //backDuaa();
+                      },
+                      color: Colors.grey,
+                    ),
+                    CustomNextButton(
+                      fnc: () {
+                        //nextDuaa(len: widget.list.length - 1);
+                      },
+                      color: Colors.grey,
+                    ),
                   ],
                 ),
               ),

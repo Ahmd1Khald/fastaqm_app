@@ -62,6 +62,7 @@ class AzkarScreen extends StatelessWidget {
               ),
               body: SingleChildScrollView(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(20.0),
