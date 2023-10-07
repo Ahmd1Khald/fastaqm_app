@@ -159,6 +159,7 @@ class AzkarScreen extends StatelessWidget {
                               fnc: () {
                                 cubit.decIndex(tt: AppVariables.azkarSelected);
                               },
+                              color: MyColors.darkBrown,
                             ),
                           ),
                           Visibility(
@@ -184,6 +185,7 @@ class AzkarScreen extends StatelessWidget {
                               fnc: () {
                                 cubit.incIndex(tt: AppVariables.azkarSelected);
                               },
+                              color: MyColors.darkBrown,
                             ),
                           ),
                         ],

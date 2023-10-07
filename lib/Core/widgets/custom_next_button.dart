@@ -5,9 +5,11 @@ import '../../../../../Core/constatnts/colors.dart';
 import '../../../../../Core/constatnts/variables.dart';
 
 class CustomNextButton extends StatelessWidget {
-  const CustomNextButton({Key? key, required this.fnc}) : super(key: key);
+  const CustomNextButton({Key? key, required this.fnc, required this.color})
+      : super(key: key);
 
   final VoidCallback fnc;
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
@@ -15,7 +17,7 @@ class CustomNextButton extends StatelessWidget {
       elevation: 5,
       height: AppVariables.appSize(context).width * 0.08,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-      color: MyColors.darkBrown,
+      color: color,
       splashColor: MyColors.lightBrown,
       child: Center(
         child: Icon(

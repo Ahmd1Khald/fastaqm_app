@@ -4,6 +4,7 @@ import 'package:fastaqm_app/Features/duaa/presentation/controller/duaa_cubit.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../Core/constatnts/colors.dart';
 import '../../../../../Core/constatnts/variables.dart';
 import '../../../../../Core/widgets/custom_back_button.dart';
 import '../../../../../Core/widgets/custom_next_button.dart';
@@ -76,11 +77,17 @@ class _DuaaWidgetState extends State<DuaaWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     if (AppVariables.duaaSelected == 0) ...[
-                      const Spacer(),
+                      CustomBackButton(
+                        fnc: () {
+                          //backDuaa();
+                        },
+                        color: Colors.grey,
+                      ),
                       CustomNextButton(
                         fnc: () {
                           nextDuaa(len: widget.list.length - 1);
                         },
+                        color: MyColors.darkBrown,
                       ),
                     ] else if (AppVariables.duaaSelected ==
                         widget.list.length - 1) ...[
@@ -88,6 +95,13 @@ class _DuaaWidgetState extends State<DuaaWidget> {
                         fnc: () {
                           backDuaa();
                         },
+                        color: MyColors.darkBrown,
+                      ),
+                      CustomNextButton(
+                        fnc: () {
+                          nextDuaa(len: widget.list.length - 1);
+                        },
+                        color: Colors.grey,
                       ),
                     ] else ...[
                       SizedBox(
@@ -99,11 +113,13 @@ class _DuaaWidgetState extends State<DuaaWidget> {
                               fnc: () {
                                 backDuaa();
                               },
+                              color: MyColors.darkBrown,
                             ),
                             CustomNextButton(
                               fnc: () {
                                 nextDuaa(len: widget.list.length - 1);
                               },
+                              color: MyColors.darkBrown,
                             ),
                           ],
                         ),
