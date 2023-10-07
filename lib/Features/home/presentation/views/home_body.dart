@@ -4,6 +4,7 @@ import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:fastaqm_app/Features/pray_time/presentation/views/pray_time_body.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../ahadith/presentation/views/ahadith_body.dart';
@@ -31,7 +32,7 @@ class HomeScreen extends StatelessWidget {
           //     title: "قم بتفعيل الموقع\nلاظهار القبلة",
           //   ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               customItem(
                 context: context,
@@ -77,7 +78,7 @@ class HomeScreen extends StatelessWidget {
             height: 30,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               customItem(
                 context: context,
@@ -146,26 +147,12 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             )),
-        // Container(
-        //   height: AppVariables.appSize(context).width * 0.2,
-        //   width: AppVariables.appSize(context).width * 0.2,
-        //   decoration: BoxDecoration(
-        //     color: MyColors.darkBrown,
-        //     borderRadius: BorderRadius.circular(20),
-        //   ),
-        //   child: Center(
-        //     child: Image.asset(
-        //       image,
-        //       width: AppVariables.appSize(context).width * 0.15,
-        //     ),
-        //   ),
-        // ),
         Text(
           text,
           textDirection: TextDirection.rtl,
           textAlign: TextAlign.center,
           style: GoogleFonts.noticiaText(
-            fontSize: 16,
+            fontSize: 15.5.sp,
           ),
         ),
       ],
