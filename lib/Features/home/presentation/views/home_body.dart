@@ -74,8 +74,8 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(
-            height: 30,
+          SizedBox(
+            height: 30.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -129,24 +129,25 @@ class HomeScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Padding(
-            padding: const EdgeInsets.all(8),
-            child: MaterialButton(
-              height: AppVariables.appSize(context).width * 0.2,
-              minWidth: AppVariables.appSize(context).width * 0.2,
-              onPressed: func,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              splashColor: MyColors.lightBrown,
-              color: MyColors.darkBrown,
-              child: Center(
-                child: Image.asset(
-                  image,
-                  width: AppVariables.appSize(context).width * 0.15,
-                ),
-              ),
-            )),
+        MaterialButton(
+          height: AppVariables.appSize(context).width * 0.2,
+          minWidth: AppVariables.appSize(context).width * 0.2,
+          onPressed: func,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          splashColor: MyColors.lightBrown,
+          color: MyColors.darkBrown,
+          child: Center(
+            child: Image.asset(
+              image,
+              width: AppVariables.appSize(context).width * 0.15,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 5.h,
+        ),
         Text(
           text,
           textDirection: TextDirection.rtl,

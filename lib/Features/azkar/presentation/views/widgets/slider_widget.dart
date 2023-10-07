@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../Core/constatnts/colors.dart';
 import '../../../../../Core/constatnts/variables.dart';
@@ -51,11 +52,11 @@ class SliderWidget extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: AppVariables.appSize(context).width * 0.2,
+              width: AppVariables.appSize(context).width * 0.15,
               child: Text(
                 '$current/${allCount - 1}',
-                style: const TextStyle(
-                  fontSize: 24,
+                style: TextStyle(
+                  fontSize: 22.sp,
                 ),
               ),
             ),

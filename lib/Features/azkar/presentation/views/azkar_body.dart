@@ -188,7 +188,7 @@ class AzkarScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),
