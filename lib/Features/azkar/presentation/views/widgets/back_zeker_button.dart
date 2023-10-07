@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../Core/constatnts/colors.dart';
 import '../../../../../Core/constatnts/variables.dart';
@@ -12,14 +13,14 @@ class BackZikerWidget extends StatelessWidget {
     return MaterialButton(
       onPressed: fnc,
       elevation: 5,
-      height: AppVariables.appSize(context).width * 0.1,
+      height: AppVariables.appSize(context).width * 0.08,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
       color: MyColors.darkBrown,
       splashColor: MyColors.lightBrown,
-      child: const Center(
+      child: Center(
         child: Icon(
           Icons.keyboard_arrow_left,
-          size: 60,
+          size: 55.sp,
           color: MyColors.whiteColor,
         ),
       ),

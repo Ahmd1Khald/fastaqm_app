@@ -2,15 +2,16 @@ import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/back_zeker
 import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/count_ziker_widget.dart';
 import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/next_zeker_button.dart';
 import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/slider_widget.dart';
-import 'package:fastaqm_app/Features/azkar/presentation/views/widgets/ziker_containt_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../Core/constatnts/colors.dart';
 import '../../../../Core/constatnts/variables.dart';
 import '../../../../Core/widgets/customErrorContainer.dart';
 import '../../../../Core/widgets/custom_app_bar.dart';
+import '../../../../Core/widgets/custom_containt.dart';
 import '../../../../Core/widgets/custom_loading.dart';
 import '../controller/azkar_cubit.dart';
 
@@ -102,10 +103,10 @@ class AzkarScreen extends StatelessWidget {
                                       ? cubit.salaaIndex
                                       : 0,
                     ),
-                    const SizedBox(
-                      height: 20,
+                    SizedBox(
+                      height: 15.h,
                     ),
-                    ZikerContantWidget(
+                    CustomContantContainer(
                       text: AppVariables.azkarSelected == 0
                           ? cubit.azkarAlsabah[cubit.sabahIndex]['zekr']
                           : AppVariables.azkarSelected == 1
@@ -117,8 +118,8 @@ class AzkarScreen extends StatelessWidget {
                                           ['zekr']
                                       : '',
                     ),
-                    const SizedBox(
-                      height: 20,
+                    SizedBox(
+                      height: 15.h,
                     ),
                     CountZikerWidget(
                       num: AppVariables.azkarSelected == 0
@@ -132,8 +133,8 @@ class AzkarScreen extends StatelessWidget {
                                           ['count']
                                       : '',
                     ),
-                    const SizedBox(
-                      height: 45,
+                    SizedBox(
+                      height: 20.h,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 55),

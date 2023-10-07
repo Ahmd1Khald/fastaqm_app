@@ -7,6 +7,7 @@ import 'package:fastaqm_app/Core/widgets/custom_app_bar.dart';
 import 'package:fastaqm_app/Features/bakiat/presentation/views/widgets/custom_background.dart';
 import 'package:fastaqm_app/Features/bakiat/presentation/views/widgets/custom_bakiat.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BakiatScreen extends StatefulWidget {
@@ -33,7 +34,7 @@ class _BakiatScreenState extends State<BakiatScreen> {
             CustomBakiat(text: "الله أكبر", index: 4),
             CustomBakiat(text: "أستغفر الله", index: 5),
             SizedBox(
-              height: AppVariables.appSize(context).width * 0.07,
+              height: AppVariables.appSize(context).width * 0.05,
             ),
             Padding(
               padding:
@@ -46,7 +47,7 @@ class _BakiatScreenState extends State<BakiatScreen> {
                     textAlign: TextAlign.right,
                     style: GoogleFonts.noticiaText(
                       color: MyColors.darkBrown,
-                      fontSize: 20,
+                      fontSize: 20.sp,
                     ),
                   ),
                   Container(

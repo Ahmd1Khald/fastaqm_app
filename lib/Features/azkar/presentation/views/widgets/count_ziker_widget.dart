@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../Core/constatnts/colors.dart';
@@ -28,14 +29,13 @@ class CountZikerWidget extends StatelessWidget {
                     color: MyColors.lightBrown,
                     shape: BoxShape.circle,
                   ),
-                  child: Center(
-                    child: Text(
-                      "${cubit.counterValue.toInt()}",
-                      style: const TextStyle(
-                        fontSize: 34,
-                        fontWeight: FontWeight.w700,
-                        color: MyColors.darkBrown,
-                      ),
+                  child: Text(
+                    "${cubit.counterValue.toInt()}",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 33.sp,
+                      fontWeight: FontWeight.w700,
+                      color: MyColors.darkBrown,
                     ),
                   ),
                 ),
@@ -71,28 +71,26 @@ class CountZikerWidget extends StatelessWidget {
                 ),
                 color: MyColors.darkBrown,
                 splashColor: MyColors.lightBrown,
-                child: Center(
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    num == ""
-                        ? "مرة واحدة"
-                        : num == "2"
-                            ? "مرتان"
-                            : num == "3"
-                                ? "ثلاث مرات"
-                                : num == "4"
-                                    ? "أربع مرات"
-                                    : num == "7"
-                                        ? "سبع مرات"
-                                        : num == "10"
-                                            ? "عشر مرات"
-                                            : num == "100"
-                                                ? "مائة مرة"
-                                                : "مرة واحدة",
-                    style: GoogleFonts.notoNastaliqUrdu(
-                      color: MyColors.whiteColor,
-                      fontSize: 21,
-                    ),
+                child: Text(
+                  textAlign: TextAlign.center,
+                  num == ""
+                      ? "مرة واحدة"
+                      : num == "2"
+                          ? "مرتان"
+                          : num == "3"
+                              ? "ثلاث مرات"
+                              : num == "4"
+                                  ? "أربع مرات"
+                                  : num == "7"
+                                      ? "سبع مرات"
+                                      : num == "10"
+                                          ? "عشر مرات"
+                                          : num == "100"
+                                              ? "مائة  مرة"
+                                              : "مرة واحدة",
+                  style: GoogleFonts.notoNastaliqUrdu(
+                    color: MyColors.whiteColor,
+                    fontSize: 19.sp,
                   ),
                 ),
               ),
