@@ -1,6 +1,8 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:flutter/material.dart';
+import 'package:quran/quran.dart' as quran;
 
 class SuraWidget extends StatelessWidget {
   const SuraWidget({super.key, required this.suraPages});
@@ -18,18 +20,30 @@ class SuraWidget extends StatelessWidget {
     return pages;
   }
 
+  Future<void> playQuran() async {
+    final play = AudioPlayer();
+    await play.play(UrlSource(quran.getAudioURLByVerseNumber(10)));
+  }
+
   @override
   Widget build(BuildContext context) {
     print(suraPages);
+    print(quran.getAudioURLByVerseNumber(10));
+
     return Scaffold(
       backgroundColor: MyColors.whiteColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(1.0),
-          child: PageView(
-            scrollDirection: Axis.horizontal,
-            reverse: true,
-            children: retPage(context),
+          child: InkWell(
+            onTap: () {
+              playQuran();
+            },
+            child: PageView(
+              scrollDirection: Axis.horizontal,
+              reverse: true,
+              children: retPage(context),
+            ),
           ),
         ),
       ),
