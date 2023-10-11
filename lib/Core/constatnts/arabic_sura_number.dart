@@ -1,3 +1,4 @@
+import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/to_arabic_no_converter.dart';
 import 'package:flutter/material.dart';
 
@@ -9,9 +10,9 @@ class ArabicSuraNumber extends StatelessWidget {
     return Text(
       "\uFD3E${(i + 1).toString().toArabicNumbers}\uFD3F",
       style: const TextStyle(
-          color: Color.fromARGB(255, 0, 0, 0),
+          color: MyColors.darkBrown,
           fontFamily: 'me_quran',
-          fontSize: 20,
+          fontSize: 21,
           shadows: [
             Shadow(
               offset: Offset(.5, .5),
