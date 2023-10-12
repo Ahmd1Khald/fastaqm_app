@@ -26,6 +26,7 @@ class SurahBuilder extends StatefulWidget {
 class _SurahBuilderState extends State<SurahBuilder> {
   bool view = true;
   bool showSlider = false;
+  int playedAya = -1;
   double sliderValue = CacheHelper.getDate(key: "sliderValue") ?? 16;
   //double quranFontSize = CacheHelper.getDate(key: "quranFontSize") ?? 18;
 
@@ -58,7 +59,9 @@ class _SurahBuilderState extends State<SurahBuilder> {
                 style: TextStyle(
                   fontSize: sliderValue,
                   fontFamily: arabicFont,
-                  color: const Color.fromARGB(196, 0, 0, 0),
+                  color: playedAya == index + 1
+                      ? MyColors.babyBrown
+                      : const Color.fromARGB(196, 0, 0, 0),
                 ),
               ),
               const Column(
@@ -76,6 +79,11 @@ class _SurahBuilderState extends State<SurahBuilder> {
     Future<void> playQuran({required int aya, required int sura}) async {
       final play = AudioPlayer();
       await play.play(UrlSource(quraan.getAudioURLByVerse(sura, aya)));
+      setState(() {
+        playedAya = aya;
+      });
+      play.onPlayerComplete;
+      print(play.volume);
     }
 
     String fullSura = '';
