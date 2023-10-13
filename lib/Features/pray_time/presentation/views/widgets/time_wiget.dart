@@ -23,7 +23,7 @@ class TimeWidget extends StatelessWidget {
           backgroundColor: MyColors.darkBrown,
         ),
         CircleAvatar(
-          radius: 42.5.sp,
+          radius: 42.8.sp,
           backgroundColor: MyColors.creamColor,
           child: Column(
             mainAxisSize: MainAxisSize.min,

@@ -121,7 +121,8 @@ class _TimerCountWidgetState
               backgroundColor: MyColors.darkBrown,
             ),
             CircleAvatar(
-              radius: 55.sp,
+              radius: 53.sp,
+              backgroundColor: MyColors.lightBrown,
               child: Text(
                 getPrayArabicName(widget.cubit.nextPray!.name),
                 textAlign: TextAlign.right,
