@@ -48,6 +48,8 @@ class _SplashScreenState extends State<SplashScreen>
       final Position position = await Geolocator.getCurrentPosition();
       print(position);
       CacheHelper.saveData(key: AppStrings.locationKey, value: true);
+      CacheHelper.saveData(key: AppStrings.latKey, value: position.latitude);
+      CacheHelper.saveData(key: AppStrings.longKey, value: position.longitude);
       return position;
     } catch (e) {
       CacheHelper.saveData(key: AppStrings.locationKey, value: false);

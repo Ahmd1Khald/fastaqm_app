@@ -7,6 +7,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 int bookmarkedAyah = 1;
 int bookmarkedSura = 1;
 bool fabIsClicked = true;
+late String fajrTime;
+late String shroukTime;
+late String duhrTime;
+late String asrTime;
+late String maghrbTime;
+late String ishaTime;
 
 final ItemScrollController itemScrollController = ItemScrollController();
 final ItemPositionsListener itemPositionsListener =
@@ -18,23 +24,6 @@ double mushafFontSize = 40;
 
 Uri quranAppurl = Uri.parse(
     'https://play.google.com/store/apps/details?id=at.ahmed1khaled.fastakmapp');
-
-Future saveSettings() async {
-  final prefs = await SharedPreferences.getInstance();
-  await prefs.setInt('arabicFontSize', arabicFontSize.toInt());
-  await prefs.setInt('mushafFontSize', mushafFontSize.toInt());
-}
-
-Future getSettings() async {
-  try {
-    final prefs = await SharedPreferences.getInstance();
-    arabicFontSize = await prefs.getInt('arabicFontSize')!.toDouble();
-    mushafFontSize = await prefs.getInt('mushafFontSize')!.toDouble();
-  } catch (_) {
-    arabicFontSize = 28;
-    mushafFontSize = 40;
-  }
-}
 
 saveBookMark(surah, ayah) async {
   final prefs = await SharedPreferences.getInstance();

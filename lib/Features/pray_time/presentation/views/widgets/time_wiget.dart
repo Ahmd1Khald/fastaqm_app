@@ -35,7 +35,7 @@ class TimeWidget extends StatelessWidget {
             prayTime,
             style: GoogleFonts.notoNastaliqUrdu(
               textStyle: const TextStyle(
-                fontSize: 24,
+                fontSize: 22,
                 fontWeight: FontWeight.w400,
                 color: MyColors.darkBrown,
               ),

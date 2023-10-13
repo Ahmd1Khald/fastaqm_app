@@ -8,6 +8,7 @@ import 'package:fastaqm_app/Features/pray_time/presentation/views/widgets/time_w
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../Core/constatnts/constant.dart';
 import '../../../../Core/services/ServiceLocator.dart';
 import '../../../../Core/widgets/customErrorContainer.dart';
 import '../../../../Core/widgets/custom_floating_button.dart';
@@ -24,7 +25,7 @@ class PrayTimeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime date = DateTime.now();
-    print(date);
+    //print(date);
     final double timeNow = DateTime.now().hour.toDouble();
     return BlocProvider(
       create: (context) => PrayTimeCubit(
@@ -36,7 +37,7 @@ class PrayTimeScreen extends StatelessWidget {
       child: BlocConsumer<PrayTimeCubit, PrayTimeState>(
         listener: (context, state) {
           if (state is PrayTimeSuccessFetchData) {
-            print(state.data.data['timings']['Fajr']);
+            //print(state.data.data['timings']['Fajr']);
           }
           if (state is PrayTimeLoadingFetchData) {
             const Center(child: CircularProgressIndicator());
@@ -65,32 +66,38 @@ class PrayTimeScreen extends StatelessWidget {
                           TimeWidget(
                             prayName: 'الفجر',
                             timeNow: timeNow,
-                            prayTime: state.data.data['timings']['Fajr'],
+                            prayTime:
+                                fajrTime, //state.data.data['timings']['Fajr'],
                           ),
                           TimeWidget(
                             prayName: 'الشروق',
                             timeNow: timeNow,
-                            prayTime: state.data.data['timings']['Sunrise'],
+                            prayTime:
+                                shroukTime, //state.data.data['timings']['Sunrise'],
                           ),
                           TimeWidget(
                             prayName: 'الظهر',
                             timeNow: timeNow,
-                            prayTime: state.data.data['timings']['Dhuhr'],
+                            prayTime:
+                                duhrTime, //state.data.data['timings']['Dhuhr'],
                           ),
                           TimeWidget(
                             prayName: 'العصر',
                             timeNow: timeNow,
-                            prayTime: state.data.data['timings']['Asr'],
+                            prayTime:
+                                asrTime, //state.data.data['timings']['Asr'],
                           ),
                           TimeWidget(
                             prayName: 'المغرب',
                             timeNow: timeNow,
-                            prayTime: state.data.data['timings']['Maghrib'],
+                            prayTime:
+                                maghrbTime, //state.data.data['timings']['Maghrib'],
                           ),
                           TimeWidget(
                             prayName: 'العشاء',
                             timeNow: timeNow,
-                            prayTime: state.data.data['timings']['Isha'],
+                            prayTime:
+                                ishaTime, //state.data.data['timings']['Isha'],
                           ),
                           Image.asset(
                             AssetsManager.prayIcon,
