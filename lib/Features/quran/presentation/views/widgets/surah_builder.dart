@@ -37,6 +37,12 @@ class _SurahBuilderState extends State<SurahBuilder> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    play.pause();
+  }
+
   jumbToAyah() {
     if (fabIsClicked) {
       itemScrollController.scrollTo(
@@ -83,7 +89,7 @@ class _SurahBuilderState extends State<SurahBuilder> {
         playedAya = aya;
       });
       //play.onPlayerComplete;
-      print(play.volume);
+      print(play.getCurrentPosition());
     }
 
     String fullSura = '';
@@ -205,6 +211,7 @@ class _SurahBuilderState extends State<SurahBuilder> {
 
   @override
   Widget build(BuildContext context) {
+    print(quraan.getAudioURLBySurah(1));
     int LengthOfSura = noOfVerses[widget.sura];
 
     return MaterialApp(
@@ -262,7 +269,6 @@ class _SurahBuilderState extends State<SurahBuilder> {
           actions: [
             IconButton(
                 onPressed: () {
-                  play.pause();
                   Navigator.pop(context);
                 },
                 icon: const Icon(

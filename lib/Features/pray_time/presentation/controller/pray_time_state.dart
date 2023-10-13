@@ -9,8 +9,7 @@ class SetUpPrayTimeState extends PrayTimeState {}
 class PrayTimeLoadingFetchData extends PrayTimeState {}
 
 class PrayTimeSuccessFetchData extends PrayTimeState {
-  final PrayerDataModel data;
-  PrayTimeSuccessFetchData(this.data);
+  PrayTimeSuccessFetchData();
 }
 
 class PrayTimeErrorFetchData extends PrayTimeState {

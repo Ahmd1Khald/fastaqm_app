@@ -1,5 +1,4 @@
 import 'package:fastaqm_app/Core/constatnts/colors.dart';
-import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:quran/quran.dart' as quran;
 
@@ -9,13 +8,13 @@ class SuraWidget extends StatelessWidget {
 
   List<Widget> retPage(context) {
     final List<Widget> pages = [];
-    for (int i = suraPages[0]; i <= 604; i++) {
-      pages.add(Image.asset(
-        "assets/quran_images/$i.png",
-        height: AppVariables.appSize(context).height,
-        fit: BoxFit.fill,
-      ));
-    }
+    // for (int i = suraPages[0]; i <= 604; i++) {
+    //   pages.add(Image.asset(
+    //     "assets/quran_images/$i.png",
+    //     height: AppVariables.appSize(context).height,
+    //     fit: BoxFit.fill,
+    //   ));
+    // }
     return pages;
   }
 

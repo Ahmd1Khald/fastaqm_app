@@ -1,7 +1,5 @@
-import 'package:fastaqm_app/Core/constatnts/app_strings.dart';
 import 'package:fastaqm_app/Core/constatnts/assets_manager.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
-import 'package:fastaqm_app/Core/helpers/cachehelper.dart';
 import 'package:fastaqm_app/Features/pray_time/presentation/views/widgets/backgraound_widget.dart';
 import 'package:fastaqm_app/Features/pray_time/presentation/views/widgets/date_widget.dart';
 import 'package:fastaqm_app/Features/pray_time/presentation/views/widgets/time_wiget.dart';
@@ -9,12 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../Core/constatnts/constant.dart';
-import '../../../../Core/services/ServiceLocator.dart';
 import '../../../../Core/widgets/customErrorContainer.dart';
 import '../../../../Core/widgets/custom_floating_button.dart';
 import '../../../../Core/widgets/custom_loading.dart';
-import '../../data/repository/pray_time_repository.dart';
-import '../../domain/usecase/pray_time_usecase.dart';
 import '../controller/pray_time_cubit.dart';
 
 class PrayTimeScreen extends StatelessWidget {
@@ -28,12 +23,7 @@ class PrayTimeScreen extends StatelessWidget {
     //print(date);
     final double timeNow = DateTime.now().hour.toDouble();
     return BlocProvider(
-      create: (context) => PrayTimeCubit(
-        PrayTimeUseCase(getIt.get<PrayRepository>()),
-      )..fetchPrayData(
-          country: CacheHelper.getDate(key: AppStrings.countryNameKey),
-          date: date.toString(),
-        ),
+      create: (context) => PrayTimeCubit()..fetchPrayData(),
       child: BlocConsumer<PrayTimeCubit, PrayTimeState>(
         listener: (context, state) {
           if (state is PrayTimeSuccessFetchData) {
@@ -55,14 +45,7 @@ class PrayTimeScreen extends StatelessWidget {
                     SingleChildScrollView(
                       child: Column(
                         children: [
-                          DateWidget(
-                            dayName: state.data.data['date']['hijri']['weekday']
-                                ['ar'],
-                            dayNum: state.data.data['date']['hijri']['day'],
-                            monthName: state.data.data['date']['hijri']['month']
-                                ['ar'],
-                            dateNum: state.data.data['date']['hijri']['year'],
-                          ),
+                          const DateWidget(),
                           TimeWidget(
                             prayName: 'الفجر',
                             timeNow: timeNow,
@@ -122,7 +105,7 @@ class PrayTimeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const CustomErrorContainer(
-                          title: "تحقق من اتصالك بالإنترنت وأعد المحاولة لاحقا",
+                          title: "أعد المحاولة لاحقا",
                         ),
                         Image.asset(
                           AssetsManager.prayIcon,

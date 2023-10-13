@@ -4,45 +4,54 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../Core/constatnts/app_strings.dart';
 import '../../../../Core/constatnts/constant.dart';
 import '../../../../Core/helpers/cachehelper.dart';
-import '../../data/model/PrayerData.dart';
-import '../../domain/usecase/pray_time_usecase.dart';
 
 part 'pray_time_state.dart';
 
 class PrayTimeCubit extends Cubit<PrayTimeState> {
-  PrayTimeCubit(this.prayTimeUseCase) : super(PrayTimeInitial());
+  PrayTimeCubit() : super(PrayTimeInitial());
   static PrayTimeCubit get(context) => BlocProvider.of(context);
 
-  PrayerDataModel? prayTimeData;
-  final PrayTimeUseCase prayTimeUseCase;
+  //PrayerDataModel? prayTimeData;
+  //final PrayTimeUseCase prayTimeUseCase;
 
-  Future<void> fetchPrayData({
-    required String country,
-    required String date,
-  }) async {
-    emit(PrayTimeLoadingFetchData());
-    testPrayTime();
-    var result = await prayTimeUseCase
-        .execute(
-      country: country,
-      date: date,
-    )
-        .catchError((error) {
+  // Future<void> fetchPrayData({
+  //   required String country,
+  //   required String date,
+  // }) async {
+  //   emit(PrayTimeLoadingFetchData());
+  //   testPrayTime();
+  //   var result = await prayTimeUseCase
+  //       .execute(
+  //     country: country,
+  //     date: date,
+  //   )
+  //       .catchError((error) {
+  //     emit(PrayTimeErrorFetchData());
+  //     print("emited success");
+  //     print(error.toString());
+  //   });
+  //   result.fold((failure) {
+  //     emit(PrayTimeErrorFetchData());
+  //   }, (data) {
+  //     prayTimeData = data;
+  //     print("----------------------");
+  //     //print(prayTimeData?.data['timings']);
+  //     emit(PrayTimeSuccessFetchData(data));
+  //   });
+  // }
+
+  Future<void> fetchPrayData() async {
+    try {
+      emit(PrayTimeLoadingFetchData());
+      testPrayTime().then((value) {
+        emit(PrayTimeSuccessFetchData());
+      });
+    } catch (error) {
       emit(PrayTimeErrorFetchData());
-      print("emited success");
-      print(error.toString());
-    });
-    result.fold((failure) {
-      emit(PrayTimeErrorFetchData());
-    }, (data) {
-      prayTimeData = data;
-      print("----------------------");
-      //print(prayTimeData?.data['timings']);
-      emit(PrayTimeSuccessFetchData(data));
-    });
+    }
   }
 
-  void testPrayTime() {
+  Future<void> testPrayTime() async {
     print('My Prayer Times');
     final myCoordinates = Coordinates(
       CacheHelper.getDate(key: AppStrings.latKey),
