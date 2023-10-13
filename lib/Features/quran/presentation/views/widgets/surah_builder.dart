@@ -25,9 +25,10 @@ class SurahBuilder extends StatefulWidget {
 
 class _SurahBuilderState extends State<SurahBuilder> {
   bool view = true;
+  final play = AudioPlayer();
   bool showSlider = false;
   int playedAya = -1;
-  double sliderValue = CacheHelper.getDate(key: "sliderValue") ?? 16;
+  double sliderValue = CacheHelper.getDate(key: "sliderValue") ?? 20;
   //double quranFontSize = CacheHelper.getDate(key: "quranFontSize") ?? 18;
 
   @override
@@ -77,12 +78,11 @@ class _SurahBuilderState extends State<SurahBuilder> {
 
   SafeArea singleSuraBuilder(lengthOfSura) {
     Future<void> playQuran({required int aya, required int sura}) async {
-      final play = AudioPlayer();
       await play.play(UrlSource(quraan.getAudioURLByVerse(sura, aya)));
       setState(() {
         playedAya = aya;
       });
-      play.onPlayerComplete;
+      //play.onPlayerComplete;
       print(play.volume);
     }
 
@@ -262,6 +262,7 @@ class _SurahBuilderState extends State<SurahBuilder> {
           actions: [
             IconButton(
                 onPressed: () {
+                  play.pause();
                   Navigator.pop(context);
                 },
                 icon: const Icon(
