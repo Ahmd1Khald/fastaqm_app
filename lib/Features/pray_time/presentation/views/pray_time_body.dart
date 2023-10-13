@@ -51,41 +51,51 @@ class PrayTimeScreen extends StatelessWidget {
                           TimerCountWidget(
                             cubit: cubit,
                           ),
-                          TimeWidget(
-                            prayName: 'الفجر',
-                            timeNow: timeNow,
-                            prayTime:
-                                fajrTime, //state.data.data['timings']['Fajr'],
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0,
+                              vertical: 20,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                TimeWidget(
+                                  prayName: "الفجر",
+                                  prayTime: fajrTime,
+                                ),
+                                TimeWidget(
+                                  prayName: "الشروق",
+                                  prayTime: shroukTime,
+                                ),
+                                TimeWidget(
+                                  prayName: "الظهر",
+                                  prayTime: duhrTime,
+                                ),
+                              ],
+                            ),
                           ),
-                          TimeWidget(
-                            prayName: 'الشروق',
-                            timeNow: timeNow,
-                            prayTime:
-                                shroukTime, //state.data.data['timings']['Sunrise'],
-                          ),
-                          TimeWidget(
-                            prayName: 'الظهر',
-                            timeNow: timeNow,
-                            prayTime:
-                                duhrTime, //state.data.data['timings']['Dhuhr'],
-                          ),
-                          TimeWidget(
-                            prayName: 'العصر',
-                            timeNow: timeNow,
-                            prayTime:
-                                asrTime, //state.data.data['timings']['Asr'],
-                          ),
-                          TimeWidget(
-                            prayName: 'المغرب',
-                            timeNow: timeNow,
-                            prayTime:
-                                maghrbTime, //state.data.data['timings']['Maghrib'],
-                          ),
-                          TimeWidget(
-                            prayName: 'العشاء',
-                            timeNow: timeNow,
-                            prayTime:
-                                ishaTime, //state.data.data['timings']['Isha'],
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 0.0,
+                              horizontal: 20,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                TimeWidget(
+                                  prayName: "العصر",
+                                  prayTime: asrTime,
+                                ),
+                                TimeWidget(
+                                  prayName: "المغرب",
+                                  prayTime: maghrbTime,
+                                ),
+                                TimeWidget(
+                                  prayName: "العشاء",
+                                  prayTime: ishaTime,
+                                ),
+                              ],
+                            ),
                           ),
                           Image.asset(
                             AssetsManager.prayIcon,

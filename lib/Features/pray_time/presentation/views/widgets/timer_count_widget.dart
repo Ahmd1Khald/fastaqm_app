@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../Core/constatnts/assets_manager.dart';
 import '../../../../../Core/constatnts/colors.dart';
 import '../../../../../Core/constatnts/variables.dart';
+import '../constance/functions.dart';
 
 class TimerCountWidget extends StatefulWidget {
   const TimerCountWidget({
@@ -24,29 +25,6 @@ class _TimerCountWidgetState
     extends State<TimerCountWidget> /* with AutomaticKeepAliveClientMixin*/ {
   // @override
   // bool get wantKeepAlive => true;
-  String getPrayArabicName(String pray) {
-    String prayName = "";
-    if (pray == "fajr") {
-      prayName = "الفجر";
-    }
-    if (pray == "sunrise") {
-      prayName = "الشروق";
-    }
-    if (pray == "dhuhr") {
-      prayName = "الظهر";
-    }
-    if (pray == "asr") {
-      prayName = "العصر";
-    }
-    if (pray == "maghrib") {
-      prayName = "المغرب";
-    }
-    if (pray == "isha") {
-      prayName = "العشاء";
-    }
-
-    return prayName;
-  }
 
   int _hours = 0;
   int _minutes = 0;
@@ -95,8 +73,6 @@ class _TimerCountWidgetState
     print(
         "Time Difference: $_hours hours, $_minutes minutes, $_seconds seconds");
   }
-
-  bool lock = false;
 
   @override
   void initState() {
