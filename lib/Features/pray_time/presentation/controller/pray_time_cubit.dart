@@ -51,6 +51,8 @@ class PrayTimeCubit extends Cubit<PrayTimeState> {
     }
   }
 
+  Prayer? nextPray;
+  DateTime? timeForNextPray;
   Future<void> testPrayTime() async {
     print('My Prayer Times');
     final myCoordinates = Coordinates(
@@ -60,6 +62,14 @@ class PrayTimeCubit extends Cubit<PrayTimeState> {
     final params = CalculationMethod.egyptian.getParameters();
     params.madhab = Madhab.shafi;
     final prayerTimes = PrayerTimes.today(myCoordinates, params);
+    nextPray = prayerTimes.nextPrayer() == Prayer.none
+        ? Prayer.fajr
+        : prayerTimes.nextPrayer();
+    timeForNextPray = prayerTimes.timeForPrayer(nextPray!);
+    print("nextPray");
+    print(nextPray);
+    print("timeForNextPray");
+    print(timeForNextPray);
 
     print("${prayerTimes.fajr.hour}:${prayerTimes.fajr.minute}");
     fajrTime = "${prayerTimes.fajr.hour}:${prayerTimes.fajr.minute}";

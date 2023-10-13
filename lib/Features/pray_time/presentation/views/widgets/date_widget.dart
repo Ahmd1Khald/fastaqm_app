@@ -81,7 +81,7 @@ class DateWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var _today = HijriCalendar.now();
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 60.0),
+      padding: const EdgeInsets.only(top: 60.0, bottom: 25),
       child: Column(
         children: [
           Text(

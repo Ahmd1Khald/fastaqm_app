@@ -9,13 +9,12 @@ import 'Core/constatnts/app_strings.dart';
 import 'Core/helpers/cachehelper.dart';
 import 'Core/helpers/dio_helper.dart';
 import 'Core/services/BlocObserver.dart';
-import 'Core/services/ServiceLocator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   DioHelper.init();
-  setUpServiceLocator();
+  //setUpServiceLocator();
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
