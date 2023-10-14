@@ -66,16 +66,16 @@ class PrayTimeScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 TimeWidget(
-                                  prayName: "الفجر",
-                                  prayTime: fajrTime,
+                                  prayName: "الظهر",
+                                  prayTime: duhrTime,
                                 ),
                                 TimeWidget(
                                   prayName: "الشروق",
                                   prayTime: shroukTime,
                                 ),
                                 TimeWidget(
-                                  prayName: "الظهر",
-                                  prayTime: duhrTime,
+                                  prayName: "الفجر",
+                                  prayTime: fajrTime,
                                 ),
                               ],
                             ),
@@ -89,16 +89,16 @@ class PrayTimeScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 TimeWidget(
-                                  prayName: "العصر",
-                                  prayTime: asrTime,
+                                  prayName: "العشاء",
+                                  prayTime: ishaTime,
                                 ),
                                 TimeWidget(
                                   prayName: "المغرب",
                                   prayTime: maghrbTime,
                                 ),
                                 TimeWidget(
-                                  prayName: "العشاء",
-                                  prayTime: ishaTime,
+                                  prayName: "العصر",
+                                  prayTime: asrTime,
                                 ),
                               ],
                             ),
