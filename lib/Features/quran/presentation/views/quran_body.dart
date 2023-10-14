@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quran/quran.dart' as quraan;
 
-import '../../../../Core/constatnts/arabic_sura_number.dart';
 import '../../../../Core/constatnts/assets_manager.dart';
 import '../../../../Core/constatnts/constant.dart';
 import '../../../../Core/widgets/custom_loading.dart';
@@ -119,7 +118,7 @@ class _IndexCreatorState extends State<IndexCreator> {
           ),
           for (int i = 0; i < 114; i++)
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 children: [
                   Row(
@@ -153,8 +152,10 @@ class _IndexCreatorState extends State<IndexCreator> {
                       // SizedBox(
                       //   width: AppVariables.appSize(context).width * 0.04,
                       // ),
+
                       SizedBox(
-                        width: AppVariables.appSize(context).width * 0.9,
+                        width: AppVariables.appSize(context).width * 0.7,
+                        height: AppVariables.appSize(context).width * 0.17,
                         child: Container(
                           decoration: BoxDecoration(
                             color: MyColors.lightBrown,
@@ -162,44 +163,31 @@ class _IndexCreatorState extends State<IndexCreator> {
                           ),
                           child: TextButton(
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                ArabicSuraNumber(i: i),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [],
+                                //ArabicSuraNumber(i: i),
+                                if (quraan.getPlaceOfRevelation(i + 1) ==
+                                    "Madinah") ...[
+                                  Image.asset(
+                                    AssetsManager.masjedIcon,
+                                    width: 30.sp,
                                   ),
-                                ),
-                                const Expanded(child: SizedBox()),
+                                ] else ...[
+                                  Image.asset(
+                                    AssetsManager.makaaIcon,
+                                    width: 30.sp,
+                                  ),
+                                ],
+                                const Spacer(),
                                 Text(
                                   arabicName[i]['name'],
                                   style: GoogleFonts.notoNastaliqUrdu(
-                                    fontSize: 22,
+                                    fontSize: 20.sp,
                                     fontWeight: FontWeight.w600,
                                     color: MyColors.darkBrown,
                                   ),
                                   textDirection: TextDirection.rtl,
                                 ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                if (quraan.getPlaceOfRevelation(i + 1) ==
-                                    "Madinah") ...[
-                                  Image.asset(
-                                    AssetsManager.masjedIcon,
-                                    width: 26,
-                                  ),
-                                ] else ...[
-                                  Image.asset(
-                                    AssetsManager.makaaIcon,
-                                    width: 26,
-                                  ),
-                                ],
                               ],
                             ),
                             onPressed: () {
@@ -215,6 +203,21 @@ class _IndexCreatorState extends State<IndexCreator> {
                                         )),
                               );
                             },
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      CircleAvatar(
+                        backgroundColor: MyColors.darkBrown,
+                        radius: 25.sp,
+                        child: Text(
+                          "${i + 1}",
+                          style: GoogleFonts.noticiaText(
+                            color: MyColors.whiteColor,
+                            fontSize: 22.sp,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
