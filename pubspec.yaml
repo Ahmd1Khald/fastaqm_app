@@ -51,6 +51,8 @@ dependencies:
   adhan: ^2.0.0+1
   #date_hijry
   hijri: ^3.0.0
+  #animation
+  animations: ^2.0.8
 
 
 
