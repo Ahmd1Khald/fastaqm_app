@@ -3,10 +3,12 @@ import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:fastaqm_app/Core/helpers/cachehelper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quran/quran.dart' as quraan;
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+import '../../../../../Core/constatnts/assets_manager.dart';
 import '../../../../../Core/constatnts/constant.dart';
 
 class SurahBuilder extends StatefulWidget {
@@ -113,9 +115,11 @@ class _SurahBuilderState extends State<SurahBuilder> {
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     children: [
-                      (index != 0) || (widget.sura == 0) || (widget.sura == 8)
+                      (index != 0)
                           ? const Text('')
-                          : const RetunBasmala(),
+                          : RetunBasmala(
+                              suraName: widget.suraName,
+                            ),
                       Container(
                         color: index % 2 != 0
                             ? const Color.fromARGB(255, 253, 251, 240)
@@ -182,9 +186,9 @@ class _SurahBuilderState extends State<SurahBuilder> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            widget.sura + 1 != 1 && widget.sura + 1 != 9
-                                ? const RetunBasmala()
-                                : const Text(''),
+                            RetunBasmala(
+                              suraName: widget.suraName,
+                            ),
                             Padding(
                               padding: const EdgeInsets.all(15.0),
                               child: Text(
@@ -216,6 +220,11 @@ class _SurahBuilderState extends State<SurahBuilder> {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: MyColors.appBackGroundColor,
+        colorScheme: ColorScheme.fromSeed(seedColor: MyColors.lightBrown),
+        primaryColor: MyColors.lightBrown,
+      ),
       //theme: AppTheme.lightTheme(),
       home: Scaffold(
         bottomNavigationBar: showSlider
@@ -274,7 +283,7 @@ class _SurahBuilderState extends State<SurahBuilder> {
                 icon: const Icon(
                   Icons.arrow_forward,
                   size: 32,
-                  color: MyColors.whiteColor,
+                  color: MyColors.darkBrown,
                 )),
           ],
           leading: IconButton(
@@ -285,19 +294,11 @@ class _SurahBuilderState extends State<SurahBuilder> {
               },
               icon: const Icon(
                 Icons.settings,
+                size: 32,
+                color: MyColors.darkBrown,
               )),
-          centerTitle: true,
-          title: Text(
-            // widget.
-            "سورة ${widget.suraName}",
-            textAlign: TextAlign.center,
-            style: GoogleFonts.noticiaText(
-              fontSize: 32,
-              fontWeight: FontWeight.w600,
-              color: MyColors.whiteColor,
-            ),
-          ),
-          backgroundColor: MyColors.darkBrown,
+          backgroundColor: MyColors.appBackGroundColor,
+          elevation: 0,
         ),
         body: singleSuraBuilder(LengthOfSura),
       ),
@@ -306,19 +307,29 @@ class _SurahBuilderState extends State<SurahBuilder> {
 }
 
 class RetunBasmala extends StatelessWidget {
-  const RetunBasmala({Key? key}) : super(key: key);
+  const RetunBasmala({Key? key, required this.suraName}) : super(key: key);
 
+  final String suraName;
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Center(
-        child: Text(
-          quraan.basmala,
-          style: TextStyle(
-              fontFamily: 'me_quran',
-              fontSize: CacheHelper.getDate(key: 'sliderValue') ?? 30),
-          textDirection: TextDirection.rtl,
-        ),
+    return Column(children: [
+      Stack(
+        alignment: AlignmentDirectional.center,
+        children: [
+          Image.asset(
+            AssetsManager.soraNameIcon,
+          ),
+          Text(
+            // widget.
+            "سورة $suraName",
+            textAlign: TextAlign.center,
+            style: GoogleFonts.noticiaText(
+              fontSize: 22.sp,
+              fontWeight: FontWeight.w400,
+              color: MyColors.darkBrown,
+            ),
+          )
+        ],
       ),
     ]);
   }
