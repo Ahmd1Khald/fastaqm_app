@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../Core/constatnts/colors.dart';
+import '../../../../Core/constatnts/constant.dart';
 import '../../../../Core/constatnts/variables.dart';
+import '../../../quran/presentation/views/widgets/surah_builder.dart';
 
 class SavesScreen extends StatelessWidget {
   const SavesScreen({Key? key}) : super(key: key);
@@ -25,6 +27,24 @@ class SavesScreen extends StatelessWidget {
           text: "الأدعية  المفضلة",
           fnc: () {
             AppFunctions.pushTo(context: context, screen: const DuaaSaves());
+          },
+        ),
+        CustomBuildItem(
+          text: "الآية المحفوظة",
+          fnc: () async {
+            fabIsClicked = true;
+            if (await readBookmark() == true) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SurahBuilder(
+                            arabic: quran[0],
+                            sura: bookmarkedSura - 1,
+                            suraName: arabicName[bookmarkedSura - 1]['name'],
+                            ayah: bookmarkedAyah,
+                          )));
+            }
+            //AppFunctions.pushTo(context: context, screen: const DuaaSaves());
           },
         ),
       ],
