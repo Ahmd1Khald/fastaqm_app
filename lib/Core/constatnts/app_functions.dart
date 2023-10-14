@@ -41,6 +41,8 @@ class AppFunctions {
   }
 
   static void shareDuaa(String textToShare, {String subject = ''}) {
-    Share.share(textToShare, subject: subject);
+    Share.share(
+        "$textToShare\n https://play.google.com/store/apps/details?id=at.ahmed1khaled.fastakmapp",
+        subject: subject);
   }
 }

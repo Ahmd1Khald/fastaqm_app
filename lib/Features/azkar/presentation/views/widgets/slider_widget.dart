@@ -44,11 +44,10 @@ class SliderWidget extends StatelessWidget {
                                 ? cubit.azkarAlsalaa.length.toDouble() - 1
                                 : 0,
                 divisions: allCount - 1,
-                allowedInteraction: SliderInteraction.slideOnly,
                 activeColor: MyColors.darkBrown,
                 inactiveColor: MyColors.lightBrown,
                 onChanged: (value) {
-                  cubit.updateSliderValue(value);
+                  //cubit.updateSliderValue(value);
                 },
               ),
             ),
