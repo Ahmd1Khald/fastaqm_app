@@ -40,44 +40,41 @@ class PrayTimeCubit extends Cubit<PrayTimeState> {
   //   });
   // }
 
+  Prayer? nextPray;
+  DateTime? timeForNextPray;
   Future<void> fetchPrayData() async {
+    // CacheHelper.removeData(key: AppStrings.latKey);
+    // CacheHelper.removeData(key: AppStrings.longKey);
+    print('My Prayer Times');
     try {
       emit(PrayTimeLoadingFetchData());
-      testPrayTime().then((value) {
-        emit(PrayTimeSuccessFetchData());
-      });
+      final myCoordinates = Coordinates(
+        CacheHelper.getDate(key: AppStrings.latKey),
+        CacheHelper.getDate(key: AppStrings.longKey),
+      ); // Replace with your own location lat, lng.
+      final params = CalculationMethod.egyptian.getParameters();
+      params.madhab = Madhab.shafi;
+      final prayerTimes = PrayerTimes.today(myCoordinates, params);
+      nextPray = prayerTimes.nextPrayer() == Prayer.none
+          ? Prayer.fajr
+          : prayerTimes.nextPrayer();
+      timeForNextPray = prayerTimes.timeForPrayer(nextPray!);
+      print("nextPray");
+      print(nextPray);
+      print("timeForNextPray");
+      print(timeForNextPray);
+
+      print("${prayerTimes.fajr.hour}:${prayerTimes.fajr.minute}");
+      fajrTime = "${prayerTimes.fajr.hour}:${prayerTimes.fajr.minute}";
+      shroukTime = "${prayerTimes.sunrise.hour}:${prayerTimes.sunrise.minute}";
+      duhrTime = "${prayerTimes.dhuhr.hour}:${prayerTimes.dhuhr.minute}";
+      asrTime = "${prayerTimes.asr.hour}:${prayerTimes.asr.minute}";
+      maghrbTime = "${prayerTimes.maghrib.hour}:${prayerTimes.maghrib.minute}";
+      ishaTime = "${prayerTimes.isha.hour}:${prayerTimes.isha.minute}";
+      emit(PrayTimeSuccessFetchData());
     } catch (error) {
       emit(PrayTimeErrorFetchData());
     }
-  }
-
-  Prayer? nextPray;
-  DateTime? timeForNextPray;
-  Future<void> testPrayTime() async {
-    print('My Prayer Times');
-    final myCoordinates = Coordinates(
-      CacheHelper.getDate(key: AppStrings.latKey),
-      CacheHelper.getDate(key: AppStrings.longKey),
-    ); // Replace with your own location lat, lng.
-    final params = CalculationMethod.egyptian.getParameters();
-    params.madhab = Madhab.shafi;
-    final prayerTimes = PrayerTimes.today(myCoordinates, params);
-    nextPray = prayerTimes.nextPrayer() == Prayer.none
-        ? Prayer.fajr
-        : prayerTimes.nextPrayer();
-    timeForNextPray = prayerTimes.timeForPrayer(nextPray!);
-    print("nextPray");
-    print(nextPray);
-    print("timeForNextPray");
-    print(timeForNextPray);
-
-    print("${prayerTimes.fajr.hour}:${prayerTimes.fajr.minute}");
-    fajrTime = "${prayerTimes.fajr.hour}:${prayerTimes.fajr.minute}";
-    shroukTime = "${prayerTimes.sunrise.hour}:${prayerTimes.sunrise.minute}";
-    duhrTime = "${prayerTimes.dhuhr.hour}:${prayerTimes.dhuhr.minute}";
-    asrTime = "${prayerTimes.asr.hour}:${prayerTimes.asr.minute}";
-    maghrbTime = "${prayerTimes.maghrib.hour}:${prayerTimes.maghrib.minute}";
-    ishaTime = "${prayerTimes.isha.hour}:${prayerTimes.isha.minute}";
 
     //print(prayerTimes.fajr);
     // print(DateFormat.jm().format(prayerTimes.sunrise));

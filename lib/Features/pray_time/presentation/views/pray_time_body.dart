@@ -5,9 +5,15 @@ import 'package:fastaqm_app/Features/pray_time/presentation/views/widgets/date_w
 import 'package:fastaqm_app/Features/pray_time/presentation/views/widgets/time_wiget.dart';
 import 'package:fastaqm_app/Features/pray_time/presentation/views/widgets/timer_count_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../Core/constatnts/app_strings.dart';
+import '../../../../Core/constatnts/colors.dart';
 import '../../../../Core/constatnts/constant.dart';
+import '../../../../Core/helpers/cachehelper.dart';
 import '../../../../Core/widgets/customErrorContainer.dart';
 import '../../../../Core/widgets/custom_floating_button.dart';
 import '../../../../Core/widgets/custom_loading.dart';
@@ -110,7 +116,46 @@ class PrayTimeScreen extends StatelessWidget {
               ),
             );
           } else if (state is PrayTimeErrorFetchData) {
+            Future<Position> getUserLocation() async {
+              try {
+                LocationPermission permission =
+                    await Geolocator.checkPermission();
+                if (permission == LocationPermission.denied) {
+                  permission = await Geolocator.requestPermission();
+                  if (permission == LocationPermission.denied) {
+                    throw PlatformException(
+                      code: 'PERMISSION_DENIED',
+                      message: 'Location permission denied',
+                    );
+                  }
+                }
+                if (permission == LocationPermission.deniedForever) {
+                  permission = await Geolocator.requestPermission();
+                  print(permission.toString());
+                  throw PlatformException(
+                    code: 'PERMISSION_DENIED_FOREVER',
+                    message: 'Location permission denied forever',
+                  );
+                }
+                final Position position = await Geolocator.getCurrentPosition();
+                print(position);
+                CacheHelper.saveData(
+                    key: AppStrings.latKey, value: position.latitude);
+                CacheHelper.saveData(
+                    key: AppStrings.longKey, value: position.longitude);
+                //location = position;
+                return position;
+              } catch (e) {
+                print(e.toString());
+                throw PlatformException(
+                  code: 'ERROR_GETTING_LOCATION',
+                  message: 'Error getting user location: $e',
+                );
+              }
+            }
+
             return Scaffold(
+              floatingActionButton: customFloatingActionButton(context),
               body: SafeArea(
                 child: Stack(
                   alignment: AlignmentDirectional.center,
@@ -120,7 +165,33 @@ class PrayTimeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const CustomErrorContainer(
-                          title: "أعد المحاولة لاحقا",
+                          title: "يجب تفعيل الموقع أولا",
+                        ),
+                        const SizedBox(
+                          height: 45,
+                        ),
+                        MaterialButton(
+                          color: MyColors.darkBrown,
+                          onPressed: () async {
+                            const CustomLoadingPage();
+                            await getUserLocation().then((value) {
+                              cubit.fetchPrayData();
+                            });
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          splashColor: MyColors.lightBrown,
+                          elevation: 5,
+                          height: AppVariables.appSize(context).width * 0.15,
+                          child: Text(
+                            "تفعيل الموقع",
+                            style: GoogleFonts.noticiaText(
+                              color: Theme.of(context).scaffoldBackgroundColor,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ),
                         Image.asset(
                           AssetsManager.prayIcon,
@@ -135,6 +206,7 @@ class PrayTimeScreen extends StatelessWidget {
             );
           } else if (state is PrayTimeLoadingFetchData) {
             return Scaffold(
+              floatingActionButton: customFloatingActionButton(context),
               body: SafeArea(
                 child: Stack(
                   alignment: AlignmentDirectional.topCenter,
