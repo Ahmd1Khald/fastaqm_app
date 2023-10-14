@@ -125,6 +125,8 @@ class _SurahBuilderState extends State<SurahBuilder> {
                             ? const Color.fromARGB(255, 253, 251, 240)
                             : const Color.fromARGB(255, 253, 247, 230),
                         child: PopupMenuButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16)),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: verseBuilder(index, previousVerses),
@@ -137,7 +139,7 @@ class _SurahBuilderState extends State<SurahBuilder> {
                                     child: const Row(
                                       children: [
                                         Icon(
-                                          Icons.bookmark_add,
+                                          Icons.bookmark,
                                           color: MyColors.darkBrown,
                                           //Color.fromARGB(255, 56, 115, 59),
                                         ),

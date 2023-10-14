@@ -182,7 +182,7 @@ class _IndexCreatorState extends State<IndexCreator> {
                                 Text(
                                   arabicName[i]['name'],
                                   style: GoogleFonts.notoNastaliqUrdu(
-                                    fontSize: 20.sp,
+                                    fontSize: 19.3.sp,
                                     fontWeight: FontWeight.w600,
                                     color: MyColors.darkBrown,
                                   ),
