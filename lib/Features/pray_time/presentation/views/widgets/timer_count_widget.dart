@@ -57,18 +57,25 @@ class _TimerCountWidgetState
     // Convert the time strings to DateTime objects
     DateTime dateTime1 = DateTime.parse(time1);
     DateTime dateTime2 = DateTime.parse(time2);
+    print("dateTime1 $dateTime1");
+    print("dateTime2 $dateTime2");
 
     // Calculate the difference between the two times
-    Duration difference = dateTime1.difference(dateTime2);
+    Duration difference = dateTime2.difference(dateTime1);
+
+    print("difference $difference");
 
     // Extract hours, minutes, and seconds from the duration
-    _hours = difference.inHours;
-    _minutes = (difference.inMinutes - _hours * 60);
-    _seconds = (difference.inSeconds - _hours * 3600 - _minutes * 60);
+    _hours =
+        (difference.inHours < 0 ? difference.inHours - 1 : difference.inHours) %
+            24;
+    print("_hours $_hours");
+    _minutes = difference.inMinutes % 60;
+    _seconds = difference.inSeconds % 60;
 
-    if (_hours < 0) _hours *= -1;
-    if (_minutes < 0) _minutes *= -1;
-    if (_seconds < 0) _seconds *= -1;
+    // if (_hours < 0) _hours *= -1;
+    // if (_minutes < 0) _minutes *= -1;
+    // if (_seconds < 0) _seconds *= -1;
 
     print(
         "Time Difference: $_hours hours, $_minutes minutes, $_seconds seconds");
