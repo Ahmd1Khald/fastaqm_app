@@ -1,5 +1,6 @@
 import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
+import 'package:fastaqm_app/Core/widgets/custom_app_bar.dart';
 import 'package:fastaqm_app/Features/quran/presentation/views/widgets/surah_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,6 +40,7 @@ class QuranScreen extends StatelessWidget {
           color: MyColors.darkBrown,
         ),
       ),
+      appBar: customAppBar(context),
       body: FutureBuilder(
         future: readJson(),
         builder: (
@@ -89,158 +91,140 @@ class _IndexCreatorState extends State<IndexCreator> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Align(
-              alignment: AlignmentDirectional.topEnd,
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.arrow_forward,
-                    size: 32,
-                    color: MyColors.darkBrown,
-                  )),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Center(
+            child: Container(
+              width: AppVariables.appSize(context).width * 0.8,
+              height: AppVariables.appSize(context).width * 0.15,
+              decoration: BoxDecoration(
+                color: MyColors.darkBrown,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Text(
+                'القرآن الكريم',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.notoNastaliqUrdu(
+                  color: MyColors.whiteColor,
+                  fontSize: 22.sp,
+                ),
+              ),
             ),
-            Column(
+          ),
+          SizedBox(
+            height: 25.h,
+          ),
+          ListView.separated(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, i) => Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Center(
+                // SizedBox(
+                //   width: AppVariables.appSize(context).width * 0.14,
+                //   child: Container(
+                //     decoration: BoxDecoration(
+                //         shape: BoxShape.circle,
+                //         border: Border.all(
+                //           color: MyColors.darkBrown,
+                //           width: 5,
+                //         )),
+                //     child: Center(
+                //       child: IconButton(
+                //           onPressed: () {
+                //             playQuran(sura: i + 1);
+                //             setState(() {
+                //               isPlay = !isPlay;
+                //             });
+                //           },
+                //           icon: Icon(
+                //             isPlay ? Icons.pause : Icons.play_arrow,
+                //             color: MyColors.darkBrown,
+                //             size: 26.sp,
+                //           )),
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(
+                //   width: AppVariables.appSize(context).width * 0.04,
+                // ),
+                SizedBox(
+                  width: AppVariables.appSize(context).width * 0.7,
+                  height: AppVariables.appSize(context).width * 0.17,
                   child: Container(
-                    width: AppVariables.appSize(context).width * 0.8,
-                    height: AppVariables.appSize(context).width * 0.15,
                     decoration: BoxDecoration(
-                      color: MyColors.darkBrown,
+                      color: MyColors.lightBrown,
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    child: Text(
-                      'القرآن الكريم',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.notoNastaliqUrdu(
-                        color: MyColors.whiteColor,
-                        fontSize: 22.sp,
+                    child: TextButton(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          //ArabicSuraNumber(i: i),
+                          if (quraan.getPlaceOfRevelation(i + 1) ==
+                              "Madinah") ...[
+                            Image.asset(
+                              AssetsManager.masjedIcon,
+                              width: 30.sp,
+                            ),
+                          ] else ...[
+                            Image.asset(
+                              AssetsManager.makaaIcon,
+                              width: 30.sp,
+                            ),
+                          ],
+                          const Spacer(),
+                          Text(
+                            arabicName[i]['name'],
+                            style: GoogleFonts.notoNastaliqUrdu(
+                              fontSize: 19.3.sp,
+                              fontWeight: FontWeight.w600,
+                              color: MyColors.darkBrown,
+                            ),
+                            textDirection: TextDirection.rtl,
+                          ),
+                        ],
                       ),
+                      onPressed: () {
+                        fabIsClicked = false;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SurahBuilder(
+                                    arabic: quran[0],
+                                    sura: i,
+                                    suraName: arabicName[i]['name'],
+                                    ayah: 0,
+                                  )),
+                        );
+                      },
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 25.h,
+                  width: 10.w,
                 ),
-                ListView.separated(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (context, i) => Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // SizedBox(
-                      //   width: AppVariables.appSize(context).width * 0.14,
-                      //   child: Container(
-                      //     decoration: BoxDecoration(
-                      //         shape: BoxShape.circle,
-                      //         border: Border.all(
-                      //           color: MyColors.darkBrown,
-                      //           width: 5,
-                      //         )),
-                      //     child: Center(
-                      //       child: IconButton(
-                      //           onPressed: () {
-                      //             playQuran(sura: i + 1);
-                      //             setState(() {
-                      //               isPlay = !isPlay;
-                      //             });
-                      //           },
-                      //           icon: Icon(
-                      //             isPlay ? Icons.pause : Icons.play_arrow,
-                      //             color: MyColors.darkBrown,
-                      //             size: 26.sp,
-                      //           )),
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   width: AppVariables.appSize(context).width * 0.04,
-                      // ),
-                      SizedBox(
-                        width: AppVariables.appSize(context).width * 0.7,
-                        height: AppVariables.appSize(context).width * 0.17,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: MyColors.lightBrown,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: TextButton(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                //ArabicSuraNumber(i: i),
-                                if (quraan.getPlaceOfRevelation(i + 1) ==
-                                    "Madinah") ...[
-                                  Image.asset(
-                                    AssetsManager.masjedIcon,
-                                    width: 30.sp,
-                                  ),
-                                ] else ...[
-                                  Image.asset(
-                                    AssetsManager.makaaIcon,
-                                    width: 30.sp,
-                                  ),
-                                ],
-                                const Spacer(),
-                                Text(
-                                  arabicName[i]['name'],
-                                  style: GoogleFonts.notoNastaliqUrdu(
-                                    fontSize: 19.3.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: MyColors.darkBrown,
-                                  ),
-                                  textDirection: TextDirection.rtl,
-                                ),
-                              ],
-                            ),
-                            onPressed: () {
-                              fabIsClicked = false;
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SurahBuilder(
-                                          arabic: quran[0],
-                                          sura: i,
-                                          suraName: arabicName[i]['name'],
-                                          ayah: 0,
-                                        )),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: MyColors.darkBrown,
-                        radius: 25.sp,
-                        child: Text(
-                          "${i + 1}",
-                          style: GoogleFonts.noticiaText(
-                            color: MyColors.whiteColor,
-                            fontSize: 22.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ],
+                CircleAvatar(
+                  backgroundColor: MyColors.darkBrown,
+                  radius: 25.sp,
+                  child: Text(
+                    "${i + 1}",
+                    style: GoogleFonts.noticiaText(
+                      color: MyColors.whiteColor,
+                      fontSize: 22.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                  separatorBuilder: (context, index) => SizedBox(
-                    height: 10.h,
-                  ),
-                  itemCount: 114,
                 ),
               ],
             ),
-          ],
-        ),
+            separatorBuilder: (context, index) => SizedBox(
+              height: 10.h,
+            ),
+            itemCount: 114,
+          )
+        ],
       ),
     );
   }
