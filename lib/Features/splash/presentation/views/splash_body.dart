@@ -124,7 +124,7 @@ class _SplashScreenState extends State<SplashScreen>
   void initSlidingAnimation() {
     animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(milliseconds: 1500),
     );
 
     slidingAnimation =
@@ -135,7 +135,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void navigateToHome() {
-    Future.delayed(const Duration(seconds: 1)).then((value) {
+    Future.delayed(const Duration(seconds: 2)).then((value) {
       AppFunctions.pushAndRemove(
         context: context,
         screen: const LayoutScreen(),

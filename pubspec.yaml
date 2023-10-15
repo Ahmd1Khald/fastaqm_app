@@ -53,6 +53,8 @@ dependencies:
   hijri: ^3.0.0
   #animation
   animations: ^2.0.8
+  animated_button: ^0.2.0
+  scroll_snap_list: ^0.9.1
 
 
 
