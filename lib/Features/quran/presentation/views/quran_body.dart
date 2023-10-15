@@ -1,6 +1,5 @@
 import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
-import 'package:fastaqm_app/Core/widgets/custom_app_bar.dart';
 import 'package:fastaqm_app/Features/quran/presentation/views/widgets/surah_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,7 +39,6 @@ class QuranScreen extends StatelessWidget {
           color: MyColors.darkBrown,
         ),
       ),
-      appBar: customAppBar(context),
       body: FutureBuilder(
         future: readJson(),
         builder: (
@@ -91,37 +89,49 @@ class _IndexCreatorState extends State<IndexCreator> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: MyColors.appBackGroundColor,
-      child: ListView(
-        children: [
-          Center(
-            child: Container(
-              width: AppVariables.appSize(context).width * 0.8,
-              height: AppVariables.appSize(context).width * 0.15,
-              decoration: BoxDecoration(
-                color: MyColors.darkBrown,
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Text(
-                'القرآن الكريم',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.notoNastaliqUrdu(
-                  color: MyColors.whiteColor,
-                  fontSize: 22.sp,
-                ),
-              ),
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Align(
+              alignment: AlignmentDirectional.topEnd,
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_forward,
+                    size: 32,
+                    color: MyColors.darkBrown,
+                  )),
             ),
-          ),
-          SizedBox(
-            height: 25.h,
-          ),
-          for (int i = 0; i < 114; i++)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                children: [
-                  Row(
+            Column(
+              children: [
+                Center(
+                  child: Container(
+                    width: AppVariables.appSize(context).width * 0.8,
+                    height: AppVariables.appSize(context).width * 0.15,
+                    decoration: BoxDecoration(
+                      color: MyColors.darkBrown,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Text(
+                      'القرآن الكريم',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.notoNastaliqUrdu(
+                        color: MyColors.whiteColor,
+                        fontSize: 22.sp,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 25.h,
+                ),
+                ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (context, i) => Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       // SizedBox(
@@ -152,7 +162,6 @@ class _IndexCreatorState extends State<IndexCreator> {
                       // SizedBox(
                       //   width: AppVariables.appSize(context).width * 0.04,
                       // ),
-
                       SizedBox(
                         width: AppVariables.appSize(context).width * 0.7,
                         height: AppVariables.appSize(context).width * 0.17,
@@ -223,13 +232,15 @@ class _IndexCreatorState extends State<IndexCreator> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 15.h,
+                  separatorBuilder: (context, index) => SizedBox(
+                    height: 10.h,
                   ),
-                ],
-              ),
+                  itemCount: 114,
+                ),
+              ],
             ),
-        ],
+          ],
+        ),
       ),
     );
   }

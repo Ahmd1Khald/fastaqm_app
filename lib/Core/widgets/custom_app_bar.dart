@@ -5,6 +5,7 @@ import '../constatnts/colors.dart';
 AppBar customAppBar(BuildContext context) {
   return AppBar(
     automaticallyImplyLeading: false,
+    backgroundColor: MyColors.creamColor,
     actions: [
       IconButton(
           onPressed: () {

@@ -113,7 +113,7 @@ class AhadithScreen extends StatelessWidget {
                     ),
                   ] else ...[
                     SizedBox(
-                      width: AppVariables.appSize(context).width * 0.65,
+                      width: AppVariables.appSize(context).width * 0.55,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

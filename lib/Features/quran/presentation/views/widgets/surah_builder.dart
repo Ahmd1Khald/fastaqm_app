@@ -108,109 +108,129 @@ class _SurahBuilderState extends State<SurahBuilder> {
       }
 
     return SafeArea(
-      child: Container(
-        color: const Color.fromARGB(255, 253, 251, 240),
-        child: view
-            ? ScrollablePositionedList.builder(
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                      (index != 0)
-                          ? const Text('')
-                          : RetunBasmala(
-                              suraName: widget.suraName,
-                            ),
-                      Container(
-                        color: index % 2 != 0
-                            ? const Color.fromARGB(255, 253, 251, 240)
-                            : const Color.fromARGB(255, 253, 247, 230),
-                        child: PopupMenuButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: verseBuilder(index, previousVerses),
-                            ),
-                            itemBuilder: (context) => [
-                                  PopupMenuItem(
-                                    onTap: () {
-                                      saveBookMark(widget.sura + 1, index);
-                                    },
-                                    child: const Row(
-                                      children: [
-                                        Icon(
-                                          Icons.bookmark,
-                                          color: MyColors.darkBrown,
-                                          //Color.fromARGB(255, 56, 115, 59),
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text('حفظ'),
-                                      ],
-                                    ),
-                                  ),
-                                  PopupMenuItem(
-                                    onTap: () {
-                                      playQuran(
-                                          aya: index + 1,
-                                          sura: widget.sura + 1);
-                                    },
-                                    child: const Row(
-                                      //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Icon(
-                                          Icons.play_arrow,
-                                          color: MyColors.darkBrown,
-                                          //Color.fromARGB(255, 56, 115, 59),
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text('سماع للآية'),
-                                      ],
-                                    ),
-                                  ),
-                                ]),
-                      ),
-                    ],
-                  );
-                },
-                itemScrollController: itemScrollController,
-                itemPositionsListener: itemPositionsListener,
-                itemCount: lengthOfSura,
-              )
-            : ListView(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+      child: Column(
+        children: [
+          RetunBasmala(
+            suraName: widget.suraName,
+          ),
+          Expanded(
+            child: Container(
+              color: const Color.fromARGB(255, 253, 251, 240),
+              child: view
+                  ? ScrollablePositionedList.builder(
+                      itemBuilder: (BuildContext context, int index) {
+                        return Column(
                           children: [
-                            RetunBasmala(
-                              suraName: widget.suraName,
+                            // (index != 0)
+                            //     ? const Text('')
+                            //     : RetunBasmala(
+                            //         suraName: widget.suraName,
+                            //       ),
+                            Container(
+                              color: index % 2 != 0
+                                  ? const Color.fromARGB(255, 253, 251, 240)
+                                  : const Color.fromARGB(255, 253, 247, 230),
+                              child: PopupMenuButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: verseBuilder(index, previousVerses),
+                                  ),
+                                  itemBuilder: (context) => [
+                                        PopupMenuItem(
+                                          onTap: () {
+                                            saveBookMark(
+                                                widget.sura + 1, index);
+                                          },
+                                          child: const Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                'حفظ',
+                                                textAlign: TextAlign.right,
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Icon(
+                                                Icons.bookmark,
+                                                color: MyColors.darkBrown,
+                                                //Color.fromARGB(255, 56, 115, 59),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        PopupMenuItem(
+                                          onTap: () {
+                                            playQuran(
+                                                aya: index + 1,
+                                                sura: widget.sura + 1);
+                                          },
+                                          child: const Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                'سماع للآية',
+                                                textAlign: TextAlign.right,
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Icon(
+                                                Icons.play_arrow,
+                                                color: MyColors.darkBrown,
+                                                //Color.fromARGB(255, 56, 115, 59),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ]),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Text(
-                                fullSura, //mushaf mode
-                                textDirection: TextDirection.rtl,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 10, //sliderValue,
-                                  fontFamily: arabicFont,
-                                  color: const Color.fromARGB(196, 44, 44, 44),
-                                ),
+                          ],
+                        );
+                      },
+                      itemScrollController: itemScrollController,
+                      itemPositionsListener: itemPositionsListener,
+                      itemCount: lengthOfSura,
+                    )
+                  : ListView(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  RetunBasmala(
+                                    suraName: widget.suraName,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Text(
+                                      fullSura, //mushaf mode
+                                      textDirection: TextDirection.rtl,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 10, //sliderValue,
+                                        fontFamily: arabicFont,
+                                        color: const Color.fromARGB(
+                                            196, 44, 44, 44),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                      ],
+                    ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -223,7 +243,7 @@ class _SurahBuilderState extends State<SurahBuilder> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: MyColors.appBackGroundColor,
+        scaffoldBackgroundColor: MyColors.creamColor,
         colorScheme: ColorScheme.fromSeed(seedColor: MyColors.lightBrown),
         primaryColor: MyColors.lightBrown,
       ),

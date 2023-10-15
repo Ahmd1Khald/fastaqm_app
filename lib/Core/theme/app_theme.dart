@@ -6,8 +6,9 @@ import '../constatnts/colors.dart';
 class AppTheme {
   static lightTheme() {
     return ThemeData.light().copyWith(
-      scaffoldBackgroundColor: MyColors.appBackGroundColor,
+      scaffoldBackgroundColor: MyColors.creamColor,
       colorScheme: ColorScheme.fromSeed(seedColor: MyColors.lightBrown),
+      primaryColor: MyColors.lightBrown,
       // elevatedButtonTheme: ElevatedButtonThemeData(
       //   style: ButtonStyle(
       //     backgroundColor:
@@ -38,7 +39,7 @@ class AppTheme {
       useMaterial3: true,
       appBarTheme: AppBarTheme(
         elevation: 0,
-        backgroundColor: MyColors.appBackGroundColor,
+        backgroundColor: MyColors.creamColor,
         iconTheme: const IconThemeData(color: MyColors.darkBrown, size: 32),
         titleTextStyle: GoogleFonts.cairo(
           color: MyColors.primaryColor,
