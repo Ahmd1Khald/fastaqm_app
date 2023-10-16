@@ -117,7 +117,7 @@ class AhadithSaves extends StatelessWidget {
                       ),
                     ] else ...[
                       SizedBox(
-                        width: AppVariables.appSize(context).width * 0.65,
+                        width: AppVariables.appSize(context).width * 0.51,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

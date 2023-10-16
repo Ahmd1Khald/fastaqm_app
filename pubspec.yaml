@@ -37,8 +37,6 @@ dependencies:
   geocoding: ^2.1.0
   #share
   share: ^2.0.4
-  #uuid
-  uuid: ^3.0.7
   #rename
   rename: ^3.0.0
   # responsive
@@ -52,7 +50,6 @@ dependencies:
   #date_hijry
   hijri: ^3.0.0
   #animation
-  animations: ^2.0.8
   animated_button: ^0.2.0
   scroll_snap_list: ^0.9.1
 
