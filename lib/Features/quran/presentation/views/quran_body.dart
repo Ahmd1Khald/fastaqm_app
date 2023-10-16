@@ -7,9 +7,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quran/quran.dart' as quraan;
 
+import '../../../../Core/constatnts/app_functions.dart';
 import '../../../../Core/constatnts/assets_manager.dart';
 import '../../../../Core/constatnts/constant.dart';
 import '../../../../Core/widgets/custom_loading.dart';
+import '../../../saves/presentation/views/widgets/aya_saves/aya_empty_saves.dart';
 
 class QuranScreen extends StatelessWidget {
   const QuranScreen({Key? key}) : super(key: key);
@@ -33,6 +35,9 @@ class QuranScreen extends StatelessWidget {
                           suraName: arabicName[bookmarkedSura - 1]['name'],
                           ayah: bookmarkedAyah,
                         )));
+          } else {
+            AppFunctions.pushTo(
+                context: context, screen: const AyaEmptyWidget());
           }
         },
         child: const Icon(
