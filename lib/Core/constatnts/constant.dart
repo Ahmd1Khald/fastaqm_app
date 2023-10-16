@@ -282,6 +282,7 @@ List malayalam = [];
 List quran = [];
 
 Future readJson() async {
+  print("read quraan");
   final String response =
       await rootBundle.loadString("assets/hafs_smart_v8.json");
   final data = json.decode(response);
