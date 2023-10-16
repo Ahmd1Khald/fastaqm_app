@@ -223,7 +223,10 @@ class _IndexCreatorState extends State<IndexCreator> {
               height: 10.h,
             ),
             itemCount: 114,
-          )
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
         ],
       ),
     );

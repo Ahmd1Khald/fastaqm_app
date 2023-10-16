@@ -9,6 +9,12 @@ class AppTheme {
       scaffoldBackgroundColor: MyColors.creamColor,
       colorScheme: ColorScheme.fromSeed(seedColor: MyColors.lightBrown),
       primaryColor: MyColors.lightBrown,
+      sliderTheme: const SliderThemeData(
+        disabledActiveTrackColor: MyColors.darkBrown,
+        disabledInactiveTrackColor: MyColors.lightBrown,
+        disabledThumbColor: MyColors.darkBrown,
+      ),
+
       // elevatedButtonTheme: ElevatedButtonThemeData(
       //   style: ButtonStyle(
       //     backgroundColor:

@@ -47,8 +47,9 @@ class _BakiatScreenState extends State<BakiatScreen>
   Widget getItem(String source, VoidCallback fnc) {
     final size1 = 68.0.sp;
     final size2 = 45.0.sp;
-    return GestureDetector(
+    return InkWell(
       onTap: fnc,
+      splashColor: MyColors.darkBrown,
       child: Container(
         width: size1,
         height: size2,
@@ -144,19 +145,19 @@ class _BakiatScreenState extends State<BakiatScreen>
         SizedBox(
           width: AppVariables.appSize(context).width * 0.42,
           child: Container(
-            width: 180.w,
-            height: 60.h,
+            width: AppVariables.appSize(context).width * 0.4,
+            height: 70.h,
             decoration: BoxDecoration(
                 color: selectedItem == index //&& index != data.length - 1
                     ? MyColors.lightBrown
-                    : Colors.white,
+                    : MyColors.appBackGroundColor,
                 borderRadius: BorderRadius.circular(16)),
             child: Center(
               child: Text(
                 dataBakiat[index],
                 textAlign: TextAlign.right,
                 style: GoogleFonts.notoNastaliqUrdu(
-                  fontSize: 24.sp,
+                  fontSize: 26.sp,
                   color: MyColors.darkBrown,
                 ),
               ),
@@ -172,82 +173,87 @@ class _BakiatScreenState extends State<BakiatScreen>
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: customAppBar(context),
-      floatingActionButton: Container(
-        width: 150.w,
-        height: 190.h,
-        margin: const EdgeInsets.only(right: 15),
-        child: AnimatedBuilder(
-          animation: controller,
-          builder: (context, child) {
-            return Stack(
-              children: <Widget>[
-                Align(
-                  alignment: secondAnim.value,
-                  child: Container(
-                    padding:
-                        EdgeInsets.only(left: 37, top: verticalPadding.value),
-                    child: getItem(
-                      "هذا العدد",
-                      () {
-                        controller.reverse();
-                        if (selectedItem == 0) {
-                          CacheHelper.removeData(key: AppStrings.bakiat1Key);
-                        }
-                        if (selectedItem == 1) {
-                          CacheHelper.removeData(key: AppStrings.bakiat2Key);
-                        }
-                        if (selectedItem == 2) {
-                          CacheHelper.removeData(key: AppStrings.bakiat3Key);
-                        }
-                        if (selectedItem == 3) {
-                          CacheHelper.removeData(key: AppStrings.bakiat4Key);
-                        }
-                        if (selectedItem == 4) {
-                          CacheHelper.removeData(key: AppStrings.bakiat5Key);
-                        }
-                        dataIndex![selectedItem] = 0;
-                        setState(() {});
-                      },
-                    ),
-                  ),
-                ),
-                Align(
-                    alignment: fourthAnim.value,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(
+          left: 10.0,
+        ),
+        child: Container(
+          width: 150.w,
+          height: 190.h,
+          margin: const EdgeInsets.only(right: 15),
+          child: AnimatedBuilder(
+            animation: controller,
+            builder: (context, child) {
+              return Stack(
+                children: <Widget>[
+                  Align(
+                    alignment: secondAnim.value,
                     child: Container(
-                      padding: EdgeInsets.only(
-                          left: 38, bottom: verticalPadding.value),
+                      padding:
+                          EdgeInsets.only(left: 37, top: verticalPadding.value),
                       child: getItem(
-                        "الكل",
+                        "هذا العدد",
                         () {
                           controller.reverse();
-                          CacheHelper.removeData(key: AppStrings.bakiat1Key);
-                          CacheHelper.removeData(key: AppStrings.bakiat2Key);
-                          CacheHelper.removeData(key: AppStrings.bakiat3Key);
-                          CacheHelper.removeData(key: AppStrings.bakiat4Key);
-                          CacheHelper.removeData(key: AppStrings.bakiat5Key);
-                          dataIndex = [0, 0, 0, 0, 0];
+                          if (selectedItem == 0) {
+                            CacheHelper.removeData(key: AppStrings.bakiat1Key);
+                          }
+                          if (selectedItem == 1) {
+                            CacheHelper.removeData(key: AppStrings.bakiat2Key);
+                          }
+                          if (selectedItem == 2) {
+                            CacheHelper.removeData(key: AppStrings.bakiat3Key);
+                          }
+                          if (selectedItem == 3) {
+                            CacheHelper.removeData(key: AppStrings.bakiat4Key);
+                          }
+                          if (selectedItem == 4) {
+                            CacheHelper.removeData(key: AppStrings.bakiat5Key);
+                          }
+                          dataIndex![selectedItem] = 0;
                           setState(() {});
                         },
                       ),
-                    )),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onTap: () {
-                      controller.isCompleted
-                          ? controller.reverse()
-                          : controller.forward();
-                    },
-                    child: buildPrimaryItem(
-                      controller.isCompleted || controller.isAnimating
-                          ? Icons.close
-                          : Icons.delete,
                     ),
                   ),
-                ),
-              ],
-            );
-          },
+                  Align(
+                      alignment: fourthAnim.value,
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            left: 38, bottom: verticalPadding.value),
+                        child: getItem(
+                          "الكل",
+                          () {
+                            controller.reverse();
+                            CacheHelper.removeData(key: AppStrings.bakiat1Key);
+                            CacheHelper.removeData(key: AppStrings.bakiat2Key);
+                            CacheHelper.removeData(key: AppStrings.bakiat3Key);
+                            CacheHelper.removeData(key: AppStrings.bakiat4Key);
+                            CacheHelper.removeData(key: AppStrings.bakiat5Key);
+                            dataIndex = [0, 0, 0, 0, 0];
+                            setState(() {});
+                          },
+                        ),
+                      )),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: GestureDetector(
+                      onTap: () {
+                        controller.isCompleted
+                            ? controller.reverse()
+                            : controller.forward();
+                      },
+                      child: buildPrimaryItem(
+                        controller.isCompleted || controller.isAnimating
+                            ? Icons.close
+                            : Icons.delete,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -255,8 +261,11 @@ class _BakiatScreenState extends State<BakiatScreen>
           children: [
             const CustomBackground(),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40.0),
-              child: SizedBox(
+              padding: EdgeInsets.only(
+                top: AppVariables.appSize(context).width * 0.15,
+                bottom: AppVariables.appSize(context).width * 0.08,
+              ),
+              child: Container(
                 height: AppVariables.appSize(context).width * 0.3,
                 width: AppVariables.appSize(context).width,
                 child: ScrollSnapList(
@@ -277,71 +286,73 @@ class _BakiatScreenState extends State<BakiatScreen>
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  AnimatedButton(
-                    onPressed: () {
-                      dataIndex![selectedItem]++;
-                      if (selectedItem == 0) {
-                        CacheHelper.saveData(
-                            key: AppStrings.bakiat1Key,
-                            value: dataIndex![selectedItem]);
-                      }
-                      if (selectedItem == 1) {
-                        CacheHelper.saveData(
-                            key: AppStrings.bakiat2Key,
-                            value: dataIndex![selectedItem]);
-                      }
-                      if (selectedItem == 2) {
-                        CacheHelper.saveData(
-                            key: AppStrings.bakiat3Key,
-                            value: dataIndex![selectedItem]);
-                      }
-                      if (selectedItem == 3) {
-                        CacheHelper.saveData(
-                            key: AppStrings.bakiat4Key,
-                            value: dataIndex![selectedItem]);
-                      }
-                      if (selectedItem == 4) {
-                        CacheHelper.saveData(
-                            key: AppStrings.bakiat5Key,
-                            value: dataIndex![selectedItem]);
-                      }
-                      setState(() {});
-                    },
-                    enabled: true,
+            Container(
+              width: AppVariables.appSize(context).width * 0.2,
+              height: AppVariables.appSize(context).width * 0.13,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
                     color: MyColors.darkBrown,
-                    shadowDegree: ShadowDegree.dark,
-                    shape: BoxShape.circle,
-                    height: AppVariables.appSize(context).width * 0.4,
-                    width: AppVariables.appSize(context).width * 0.4,
-                    child: const Text(''),
+                  )),
+              child: Center(
+                  child: Text(
+                "${dataIndex![selectedItem]}".length > 5
+                    ? "10k +"
+                    : "${dataIndex![selectedItem]}",
+                style: GoogleFonts.noticiaText(
+                  fontSize: 22.sp,
+                  color: MyColors.darkBrown,
+                ),
+              )),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: AppVariables.appSize(context).width * 0.08,
+                  top: AppVariables.appSize(context).width * 0.08),
+              child: AnimatedButton(
+                onPressed: () {
+                  dataIndex![selectedItem]++;
+                  if (selectedItem == 0) {
+                    CacheHelper.saveData(
+                        key: AppStrings.bakiat1Key,
+                        value: dataIndex![selectedItem]);
+                  }
+                  if (selectedItem == 1) {
+                    CacheHelper.saveData(
+                        key: AppStrings.bakiat2Key,
+                        value: dataIndex![selectedItem]);
+                  }
+                  if (selectedItem == 2) {
+                    CacheHelper.saveData(
+                        key: AppStrings.bakiat3Key,
+                        value: dataIndex![selectedItem]);
+                  }
+                  if (selectedItem == 3) {
+                    CacheHelper.saveData(
+                        key: AppStrings.bakiat4Key,
+                        value: dataIndex![selectedItem]);
+                  }
+                  if (selectedItem == 4) {
+                    CacheHelper.saveData(
+                        key: AppStrings.bakiat5Key,
+                        value: dataIndex![selectedItem]);
+                  }
+                  setState(() {});
+                },
+                enabled: true,
+                color: MyColors.darkBrown,
+                shadowDegree: ShadowDegree.light,
+                shape: BoxShape.circle,
+                height: AppVariables.appSize(context).width * 0.35,
+                width: AppVariables.appSize(context).width * 0.35,
+                child: Text(
+                  '+',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 30.sp,
                   ),
-                  SizedBox(
-                    width: AppVariables.appSize(context).width * 0.15,
-                  ),
-                  Container(
-                    width: AppVariables.appSize(context).width * 0.15,
-                    height: AppVariables.appSize(context).width * 0.13,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                      color: MyColors.darkBrown,
-                    )),
-                    child: Center(
-                        child: Text(
-                      "${dataIndex![selectedItem]}".length > 4
-                          ? "1k +"
-                          : "${dataIndex![selectedItem]}",
-                      style: GoogleFonts.noticiaText(
-                        fontSize: 22.sp,
-                        color: MyColors.darkBrown,
-                      ),
-                    )),
-                  ),
-                ],
+                ),
               ),
             ),
           ],
