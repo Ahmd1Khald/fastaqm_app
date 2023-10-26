@@ -113,7 +113,7 @@ class _IndexCreatorState extends State<IndexCreator> {
                   textAlign: TextAlign.center,
                   style: GoogleFonts.noticiaText(
                     color: MyColors.whiteColor,
-                    fontSize: 25.sp,
+                    fontSize: 28.sp,
                   ),
                 ),
               ),
@@ -184,8 +184,8 @@ class _IndexCreatorState extends State<IndexCreator> {
                           const Spacer(),
                           Text(
                             arabicName[i]['name'],
-                            style: GoogleFonts.notoNastaliqUrdu(
-                              fontSize: 19.3.sp,
+                            style: GoogleFonts.noticiaText(
+                              fontSize: 24.sp,
                               fontWeight: FontWeight.w600,
                               color: MyColors.darkBrown,
                             ),

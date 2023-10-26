@@ -3,6 +3,7 @@ import 'package:fastaqm_app/Features/saves/presentation/views/widgets/ahadith_sa
 import 'package:fastaqm_app/Features/saves/presentation/views/widgets/aya_saves/aya_empty_saves.dart';
 import 'package:fastaqm_app/Features/saves/presentation/views/widgets/duaa_saved/duaa_saves.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../Core/constatnts/colors.dart';
@@ -106,10 +107,10 @@ class CustomBuildItem extends StatelessWidget {
                 child: Text(
                   text,
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.notoNastaliqUrdu(
+                  style: GoogleFonts.noticiaText(
                     color: Theme.of(context).scaffoldBackgroundColor,
                     fontWeight: FontWeight.w400,
-                    fontSize: 24,
+                    fontSize: 24.sp,
                   ),
                 ),
               ),
