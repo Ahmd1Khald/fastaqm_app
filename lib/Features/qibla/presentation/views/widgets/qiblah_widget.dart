@@ -23,7 +23,7 @@ class _QiblahWidgetState extends State<QiblahWidget>
   @override
   void initState() {
     _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 400));
+        vsync: this, duration: const Duration(milliseconds: 450));
     animation = Tween(begin: 0.0, end: 0.0).animate(_animationController!);
     super.initState();
   }
@@ -53,8 +53,15 @@ class _QiblahWidgetState extends State<QiblahWidget>
                   children: [
                     Text(
                       "${qiblahDirection.direction.toInt()}°",
-                      style: const TextStyle(
-                          color: MyColors.darkBrown, fontSize: 22),
+                      style: TextStyle(
+                          color: qiblahDirection.direction.toInt() == 122 ||
+                                  qiblahDirection.direction.toInt() == 121 ||
+                                  qiblahDirection.direction.toInt() == 123 ||
+                                  qiblahDirection.direction.toInt() == 124 ||
+                                  qiblahDirection.direction.toInt() == 125
+                              ? Colors.green
+                              : MyColors.darkBrown,
+                          fontSize: 22),
                     ),
                     const SizedBox(
                       height: 10,
