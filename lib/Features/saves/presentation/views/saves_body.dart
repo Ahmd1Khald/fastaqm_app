@@ -94,20 +94,23 @@ class CustomBuildItem extends StatelessWidget {
           SizedBox(
             width: AppVariables.appSize(context).width * 0.06,
           ),
-          Container(
-            width: AppVariables.appSize(context).width * 0.555,
-            height: AppVariables.appSize(context).width * 0.172,
-            decoration: BoxDecoration(
-                color: MyColors.darkBrown,
-                borderRadius: BorderRadius.circular(30)),
-            child: Center(
-              child: Text(
-                text,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.notoNastaliqUrdu(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 24,
+          InkWell(
+            onTap: fnc,
+            child: Container(
+              width: AppVariables.appSize(context).width * 0.555,
+              height: AppVariables.appSize(context).width * 0.172,
+              decoration: BoxDecoration(
+                  color: MyColors.darkBrown,
+                  borderRadius: BorderRadius.circular(30)),
+              child: Center(
+                child: Text(
+                  text,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.notoNastaliqUrdu(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 24,
+                  ),
                 ),
               ),
             ),

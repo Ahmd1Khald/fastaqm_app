@@ -14,7 +14,7 @@ class CustomAyaWidget extends StatelessWidget {
       alignment: AlignmentDirectional.center,
       children: [
         SizedBox(
-          width: AppVariables.appSize(context).width * 0.999,
+          width: double.infinity,
           child: Image.asset(
             AssetsManager.bakiatImage,
             height: AppVariables.appSize(context).height * 0.11,
@@ -22,7 +22,7 @@ class CustomAyaWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: AppVariables.appSize(context).width * 0.99,
+          width: AppVariables.appSize(context).width * 0.8,
           child: Text(
             textAlign: TextAlign.center,
             "وَقَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ",
