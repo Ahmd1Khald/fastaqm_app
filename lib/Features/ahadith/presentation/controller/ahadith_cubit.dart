@@ -107,4 +107,22 @@ class AhadithCubit extends Cubit<AhadithState> {
       return false;
     }
   }
+
+  bool showSlider = false;
+  double sliderValue =
+      CacheHelper.getDate(key: AppStrings.containerFontKey) ?? 24;
+  void showSliderFunc(bool t) {
+    if (t) {
+      showSlider = !showSlider;
+    } else {
+      showSlider = false;
+    }
+    emit(AhadithShowSliderValue());
+  }
+
+  void changeFontValue(double value) {
+    sliderValue = value;
+    CacheHelper.saveData(key: AppStrings.containerFontKey, value: sliderValue);
+    emit(AhadithChangeFontValue());
+  }
 }

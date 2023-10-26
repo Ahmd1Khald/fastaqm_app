@@ -16,3 +16,7 @@ class AhadithChangeBack extends AhadithState {}
 class AhadithChangeSelectedIcon extends AhadithState {}
 
 class AhadithSaveToList extends AhadithState {}
+
+class AhadithShowSliderValue extends AhadithState {}
+
+class AhadithChangeFontValue extends AhadithState {}

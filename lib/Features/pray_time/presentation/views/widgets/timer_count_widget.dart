@@ -69,7 +69,6 @@ class _TimerCountWidgetState
     _hours =
         (difference.inHours < 0 ? difference.inHours - 1 : difference.inHours) %
             24;
-    _hours -= 1;
     print("_hours $_hours");
     _minutes = difference.inMinutes % 60;
     _seconds = difference.inSeconds % 60;

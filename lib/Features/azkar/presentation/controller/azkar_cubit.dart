@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../Core/constatnts/app_strings.dart';
 import '../../../../Core/constatnts/colors.dart';
 import '../../../../Core/constatnts/variables.dart';
+import '../../../../Core/helpers/cachehelper.dart';
 import '../views/widgets/azkar_masaa.dart';
 import '../views/widgets/azkar_sabah.dart';
 import '../views/widgets/azkar_salaa.dart';
@@ -177,5 +179,23 @@ class AzkarCubit extends Cubit<AzkarState> {
     counterValue = 0;
     counterIndicator = 0;
     emit(AzkarResetCounter());
+  }
+
+  bool showSlider = false;
+  double sliderValue =
+      CacheHelper.getDate(key: AppStrings.containerFontKey) ?? 24;
+  void showSliderFunc(bool t) {
+    if (t) {
+      showSlider = !showSlider;
+    } else {
+      showSlider = false;
+    }
+    emit(AzkarShowSliderValue());
+  }
+
+  void changeFontValue(double value) {
+    sliderValue = value;
+    CacheHelper.saveData(key: AppStrings.containerFontKey, value: sliderValue);
+    emit(AzkarChangeFontValue());
   }
 }

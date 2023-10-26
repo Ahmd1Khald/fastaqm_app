@@ -253,7 +253,7 @@ class _SurahBuilderState extends State<SurahBuilder> {
             ? Container(
                 height: AppVariables.appSize(context).width * 0.15,
                 width: AppVariables.appSize(context).width,
-                color: Colors.white.withOpacity(0.4),
+                color: MyColors.lightBrown.withOpacity(0.2),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

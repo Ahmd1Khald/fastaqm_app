@@ -20,3 +20,7 @@ class AzkarResetCounter extends AzkarState {}
 class AzkarDecreaseIndex extends AzkarState {}
 
 class AzkarUpdateSliderValue extends AzkarState {}
+
+class AzkarShowSliderValue extends AzkarState {}
+
+class AzkarChangeFontValue extends AzkarState {}

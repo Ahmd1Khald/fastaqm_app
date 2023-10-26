@@ -41,12 +41,22 @@ class AzkarScreen extends StatelessWidget {
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               appBar: AppBar(
                 automaticallyImplyLeading: false,
+                forceMaterialTransparency: true,
+                leading: IconButton(
+                    onPressed: () {
+                      cubit.showSliderFunc(true);
+                    },
+                    icon: const Icon(
+                      Icons.settings,
+                      size: 32,
+                      color: MyColors.darkBrown,
+                    )),
                 actions: [
                   Text(
                     cubit.zekrNameSelected,
                     style: GoogleFonts.noticiaText(
                       color: MyColors.darkBrown,
-                      fontSize: 22,
+                      fontSize: 22.sp,
                     ),
                   ),
                   IconButton(
@@ -60,6 +70,44 @@ class AzkarScreen extends StatelessWidget {
                       ))
                 ],
               ),
+              bottomNavigationBar: cubit.showSlider
+                  ? Container(
+                      height: AppVariables.appSize(context).width * 0.15,
+                      width: AppVariables.appSize(context).width,
+                      color: MyColors.lightBrown.withOpacity(0.2),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 4,
+                            child: Slider(
+                              value: cubit.sliderValue,
+                              onChanged: (value) {
+                                cubit.changeFontValue(value);
+                              },
+                              min: 15,
+                              max: 34,
+                              activeColor: MyColors.darkBrown,
+                              inactiveColor: MyColors.lightBrown,
+                              divisions: 8,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: CloseButton(
+                              onPressed: () {
+                                cubit.showSliderFunc(false);
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Container(
+                      color: Colors.white,
+                      height: 1,
+                      width: AppVariables.appSize(context).width,
+                    ),
               body: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -118,6 +166,7 @@ class AzkarScreen extends StatelessWidget {
                                       ? cubit.azkarAlsalaa[cubit.salaaIndex]
                                           ['zekr']
                                       : '',
+                      fontSize: cubit.sliderValue,
                     ),
                     SizedBox(
                       height: 15.h,

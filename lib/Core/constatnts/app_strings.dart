@@ -10,5 +10,6 @@ class AppStrings {
   static const String bakiat3Key = "bakiat3";
   static const String bakiat4Key = "bakiat4";
   static const String bakiat5Key = "bakiat5";
+  static const String containerFontKey = "azkarsliderValue";
   static const String slidingSplashTest = "فَاسْتَقِمْ كَمَا أُمِرْتَْ";
 }

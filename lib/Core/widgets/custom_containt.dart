@@ -6,10 +6,12 @@ import '../../../../../Core/constatnts/colors.dart';
 import '../../../../../Core/constatnts/variables.dart';
 
 class CustomContantContainer extends StatelessWidget {
-  const CustomContantContainer({Key? key, required this.text})
+  const CustomContantContainer(
+      {Key? key, required this.text, required this.fontSize})
       : super(key: key);
 
   final String text;
+  final double fontSize;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +32,7 @@ class CustomContantContainer extends StatelessWidget {
             textDirection: TextDirection.rtl,
             textAlign: TextAlign.center,
             style: GoogleFonts.noticiaText(
-              fontSize: 24.sp,
+              fontSize: fontSize.sp,
               fontWeight: FontWeight.w400,
               color: Colors.black,
             ),

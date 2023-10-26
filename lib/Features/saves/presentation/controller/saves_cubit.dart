@@ -185,4 +185,22 @@ class SavesCubit extends Cubit<SavesState> {
       return false;
     }
   }
+
+  bool showSlider = false;
+  double sliderValue =
+      CacheHelper.getDate(key: AppStrings.containerFontKey) ?? 24;
+  void showSliderFunc(bool t) {
+    if (t) {
+      showSlider = !showSlider;
+    } else {
+      showSlider = false;
+    }
+    emit(SavesShowSliderValue());
+  }
+
+  void changeFontValue(double value) {
+    sliderValue = value;
+    CacheHelper.saveData(key: AppStrings.containerFontKey, value: sliderValue);
+    emit(SavesChangeFontValue());
+  }
 }

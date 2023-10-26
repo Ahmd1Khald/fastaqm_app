@@ -1,11 +1,12 @@
-import 'package:fastaqm_app/Core/widgets/custom_app_bar.dart';
 import 'package:fastaqm_app/Core/widgets/custom_containt.dart';
 import 'package:fastaqm_app/Features/duaa/presentation/controller/duaa_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../Core/constatnts/app_strings.dart';
 import '../../../../../Core/constatnts/colors.dart';
 import '../../../../../Core/constatnts/variables.dart';
+import '../../../../../Core/helpers/cachehelper.dart';
 import '../../../../../Core/widgets/custom_back_button.dart';
 import '../../../../../Core/widgets/custom_next_button.dart';
 import 'Love_button.dart';
@@ -23,6 +24,11 @@ class DuaaWidget extends StatefulWidget {
 }
 
 class _DuaaWidgetState extends State<DuaaWidget> {
+  bool showSlider = false;
+  int playedAya = -1;
+  double sliderValue =
+      CacheHelper.getDate(key: AppStrings.containerFontKey) ?? 24;
+
   @override
   void initState() {
     AppVariables.duaaSelected = 0;
@@ -46,7 +52,79 @@ class _DuaaWidgetState extends State<DuaaWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(context),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        forceMaterialTransparency: true,
+        backgroundColor: MyColors.creamColor,
+        leading: IconButton(
+            onPressed: () {
+              setState(() {
+                showSlider = !showSlider;
+              });
+            },
+            icon: Icon(
+              Icons.settings,
+              size: 32.sp,
+              color: MyColors.darkBrown,
+            )),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_forward,
+                size: 32,
+                color: MyColors.darkBrown,
+              ))
+        ],
+      ),
+      bottomNavigationBar: showSlider
+          ? Container(
+              height: AppVariables.appSize(context).width * 0.15,
+              width: AppVariables.appSize(context).width,
+              color: MyColors.lightBrown.withOpacity(0.2),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: Slider(
+                      value: sliderValue,
+                      onChanged: (value) {
+                        setState(() {
+                          sliderValue = value;
+                          // quranFontSize = value;
+                          print(sliderValue);
+                        });
+                        CacheHelper.saveData(
+                            key: 'sliderValue', value: sliderValue);
+                      },
+                      min: 15,
+                      max: 34,
+                      activeColor: MyColors.darkBrown,
+                      inactiveColor: MyColors.lightBrown,
+                      divisions: 8,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: CloseButton(
+                      onPressed: () {
+                        setState(() {
+                          showSlider = false;
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            )
+          : Container(
+              color: Colors.white,
+              height: 1,
+              width: AppVariables.appSize(context).width,
+            ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,6 +137,7 @@ class _DuaaWidgetState extends State<DuaaWidget> {
             ),
             CustomContantContainer(
               text: widget.list[AppVariables.duaaSelected]["zekr"],
+              fontSize: sliderValue,
             ),
             SizedBox(
               height: 20.h,

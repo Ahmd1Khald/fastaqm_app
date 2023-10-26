@@ -16,3 +16,7 @@ class SavesChangeBack extends SavesState {}
 class SavesRemoveFromList extends SavesState {}
 
 class SavesChangeSelectedIcon extends SavesState {}
+
+class SavesShowSliderValue extends SavesState {}
+
+class SavesChangeFontValue extends SavesState {}
