@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../Core/constatnts/colors.dart';
 import '../../../../../../Core/widgets/custom_app_bar.dart';
+import '../../../../../../Core/widgets/reusable_setting_icon.dart';
 import '../../../../../duaa/presentation/views/widgets/custom_duaa_title.dart';
 import '../../../controller/saves_cubit.dart';
 import 'ahadith_saved_icons.dart';
@@ -37,14 +38,11 @@ class AhadithSaves extends StatelessWidget {
                 forceMaterialTransparency: true,
                 backgroundColor: MyColors.creamColor,
                 leading: IconButton(
-                    onPressed: () {
-                      cubit.showSliderFunc(true);
-                    },
-                    icon: const Icon(
-                      Icons.settings,
-                      size: 32,
-                      color: MyColors.darkBrown,
-                    )),
+                  onPressed: () {
+                    cubit.showSliderFunc(true);
+                  },
+                  icon: reusableSettingIcon(),
+                ),
                 actions: [
                   IconButton(
                       onPressed: () {

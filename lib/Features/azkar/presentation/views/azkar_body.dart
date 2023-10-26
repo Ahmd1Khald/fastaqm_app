@@ -13,6 +13,7 @@ import '../../../../Core/widgets/custom_back_button.dart';
 import '../../../../Core/widgets/custom_containt.dart';
 import '../../../../Core/widgets/custom_loading.dart';
 import '../../../../Core/widgets/custom_next_button.dart';
+import '../../../../Core/widgets/reusable_setting_icon.dart';
 import '../controller/azkar_cubit.dart';
 
 class AzkarScreen extends StatelessWidget {
@@ -43,14 +44,11 @@ class AzkarScreen extends StatelessWidget {
                 automaticallyImplyLeading: false,
                 forceMaterialTransparency: true,
                 leading: IconButton(
-                    onPressed: () {
-                      cubit.showSliderFunc(true);
-                    },
-                    icon: const Icon(
-                      Icons.settings,
-                      size: 32,
-                      color: MyColors.darkBrown,
-                    )),
+                  onPressed: () {
+                    cubit.showSliderFunc(true);
+                  },
+                  icon: reusableSettingIcon(),
+                ),
                 actions: [
                   Text(
                     cubit.zekrNameSelected,

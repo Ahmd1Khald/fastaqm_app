@@ -19,12 +19,14 @@ class CustomDuaaTitle extends StatelessWidget {
           color: MyColors.darkBrown,
           borderRadius: BorderRadius.circular(30),
         ),
-        child: Text(
-          text,
-          textAlign: TextAlign.center,
-          style: GoogleFonts.notoNastaliqUrdu(
-            color: MyColors.whiteColor,
-            fontSize: 22.sp,
+        child: Center(
+          child: Text(
+            text,
+            textAlign: TextAlign.right,
+            style: GoogleFonts.noticiaText(
+              color: MyColors.whiteColor,
+              fontSize: 24.5.sp,
+            ),
           ),
         ),
       ),

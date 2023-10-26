@@ -40,9 +40,9 @@ class DuaaSaves extends StatelessWidget {
                     onPressed: () {
                       cubit.showSliderFunc(true);
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.settings,
-                      size: 32,
+                      size: 32.sp,
                       color: MyColors.darkBrown,
                     )),
                 actions: [
@@ -50,9 +50,9 @@ class DuaaSaves extends StatelessWidget {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.arrow_forward,
-                        size: 32,
+                        size: 32.sp,
                         color: MyColors.darkBrown,
                       ))
                 ],

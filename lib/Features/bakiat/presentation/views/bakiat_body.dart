@@ -63,7 +63,7 @@ class _BakiatScreenState extends State<BakiatScreen>
             child: Text(
           source,
           style: TextStyle(
-            fontSize: 15.sp,
+            fontSize: 14.sp,
             fontWeight: FontWeight.w500,
           ),
         )),
@@ -192,7 +192,7 @@ class _BakiatScreenState extends State<BakiatScreen>
                       padding:
                           EdgeInsets.only(left: 37, top: verticalPadding.value),
                       child: getItem(
-                        "هذا العدد",
+                        "الحالي",
                         () {
                           controller.reverse();
                           if (selectedItem == 0) {

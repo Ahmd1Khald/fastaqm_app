@@ -10,6 +10,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../../../Core/constatnts/assets_manager.dart';
 import '../../../../../Core/constatnts/constant.dart';
+import '../../../../../Core/widgets/reusable_setting_icon.dart';
 
 class SurahBuilder extends StatefulWidget {
   final sura;
@@ -309,16 +310,13 @@ class _SurahBuilderState extends State<SurahBuilder> {
                 )),
           ],
           leading: IconButton(
-              onPressed: () {
-                setState(() {
-                  showSlider = !showSlider;
-                });
-              },
-              icon: const Icon(
-                Icons.settings,
-                size: 32,
-                color: MyColors.darkBrown,
-              )),
+            onPressed: () {
+              setState(() {
+                showSlider = !showSlider;
+              });
+            },
+            icon: reusableSettingIcon(),
+          ),
           backgroundColor: MyColors.appBackGroundColor,
           elevation: 0,
         ),

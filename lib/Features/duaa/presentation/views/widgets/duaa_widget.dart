@@ -9,6 +9,7 @@ import '../../../../../Core/constatnts/variables.dart';
 import '../../../../../Core/helpers/cachehelper.dart';
 import '../../../../../Core/widgets/custom_back_button.dart';
 import '../../../../../Core/widgets/custom_next_button.dart';
+import '../../../../../Core/widgets/reusable_setting_icon.dart';
 import 'Love_button.dart';
 import 'custom_duaa_title.dart';
 
@@ -57,16 +58,13 @@ class _DuaaWidgetState extends State<DuaaWidget> {
         forceMaterialTransparency: true,
         backgroundColor: MyColors.creamColor,
         leading: IconButton(
-            onPressed: () {
-              setState(() {
-                showSlider = !showSlider;
-              });
-            },
-            icon: Icon(
-              Icons.settings,
-              size: 32.sp,
-              color: MyColors.darkBrown,
-            )),
+          onPressed: () {
+            setState(() {
+              showSlider = !showSlider;
+            });
+          },
+          icon: reusableSettingIcon(),
+        ),
         actions: [
           IconButton(
               onPressed: () {

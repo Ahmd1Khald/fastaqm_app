@@ -107,12 +107,14 @@ class _IndexCreatorState extends State<IndexCreator> {
                 color: MyColors.darkBrown,
                 borderRadius: BorderRadius.circular(30),
               ),
-              child: Text(
-                'القرآن الكريم',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.notoNastaliqUrdu(
-                  color: MyColors.whiteColor,
-                  fontSize: 22.sp,
+              child: Center(
+                child: Text(
+                  'القرآن الكريم',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.noticiaText(
+                    color: MyColors.whiteColor,
+                    fontSize: 25.sp,
+                  ),
                 ),
               ),
             ),
