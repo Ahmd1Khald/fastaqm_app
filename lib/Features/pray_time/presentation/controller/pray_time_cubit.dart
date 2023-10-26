@@ -65,6 +65,8 @@ class PrayTimeCubit extends Cubit<PrayTimeState> {
       print(timeForNextPray);
 
       print("${prayerTimes.fajr.hour}:${prayerTimes.fajr.minute}");
+      print("${prayerTimes.fajr.hour}:${prayerTimes.fajr.minute}");
+      print("${prayerTimes.fajr.hour}:${prayerTimes.fajr.minute}");
       fajrTime = "${prayerTimes.fajr.hour}:${prayerTimes.fajr.minute}";
       shroukTime = "${prayerTimes.sunrise.hour}:${prayerTimes.sunrise.minute}";
       duhrTime = "${prayerTimes.dhuhr.hour}:${prayerTimes.dhuhr.minute}";

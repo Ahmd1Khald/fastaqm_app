@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../../../Core/constatnts/app_strings.dart';
 import '../../../../Core/helpers/cachehelper.dart';
+import '../../../../Core/widgets/no_internet_snakbar.dart';
 
 class QiblaScreen extends StatefulWidget {
   const QiblaScreen({Key? key}) : super(key: key);
@@ -20,34 +22,30 @@ class QiblaScreen extends StatefulWidget {
 
 class _QiblaScreenState extends State<QiblaScreen> {
   //var location;
-  Future<Position> getUserLocation() async {
+  Future<void> getUserLocation() async {
     try {
-      LocationPermission permission = await Geolocator.checkPermission();
-      CacheHelper.saveData(key: AppStrings.locationKey, value: false);
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.denied) {
-          throw PlatformException(
-            code: 'PERMISSION_DENIED',
-            message: 'Location permission denied',
-          );
-        }
+      // Check if the device is currently offline
+      final bool isOffline = !await InternetConnectionChecker().hasConnection;
+
+      if (isOffline) {
+        // Handle offline scenario: No network connectivity
+        print("----offline-----");
+        CacheHelper.saveData(key: AppStrings.locationKey, value: false);
+        noInternetSnakbar(context);
+      } else {
+        // Device is online, attempt to get the location
+        final Position position = await Geolocator.getCurrentPosition();
+        print(position);
+        CacheHelper.saveData(key: AppStrings.locationKey, value: true);
+        CacheHelper.saveData(key: AppStrings.latKey, value: position.latitude);
+        CacheHelper.saveData(
+            key: AppStrings.longKey, value: position.longitude);
+        // Continue with additional logic or data processing here.
       }
-      if (permission == LocationPermission.deniedForever) {
-        permission = await Geolocator.requestPermission();
-        print(permission.toString());
-        throw PlatformException(
-          code: 'PERMISSION_DENIED_FOREVER',
-          message: 'Location permission denied forever',
-        );
-      }
-      final Position position = await Geolocator.getCurrentPosition();
-      print(position);
-      //location = position;
-      return position;
     } catch (e) {
+      // Handle exceptions, including those related to network or location errors
       CacheHelper.saveData(key: AppStrings.locationKey, value: false);
-      print(e.toString());
+      print("----error-----");
       throw PlatformException(
         code: 'ERROR_GETTING_LOCATION',
         message: 'Error getting user location: $e',
@@ -75,10 +73,8 @@ class _QiblaScreenState extends State<QiblaScreen> {
           color: MyColors.darkBrown,
           onPressed: () async {
             const CustomLoadingPage();
-            await getUserLocation().then((value) {
-              CacheHelper.saveData(key: AppStrings.locationKey, value: true);
-              setState(() {});
-            });
+            await getUserLocation();
+            setState(() {});
           },
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),

@@ -1,6 +1,5 @@
 class AppStrings {
   static const String appName = "فَاسْتَقِمْ";
-  static const String countryNameKey = "countryName";
   static const String latKey = "latKey";
   static const String longKey = "longKey";
   static const String locationKey = "locationKey";

@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../../../Core/constatnts/app_strings.dart';
 import '../../../../Core/constatnts/colors.dart';
@@ -17,6 +18,7 @@ import '../../../../Core/helpers/cachehelper.dart';
 import '../../../../Core/widgets/customErrorContainer.dart';
 import '../../../../Core/widgets/custom_floating_button.dart';
 import '../../../../Core/widgets/custom_loading.dart';
+import '../../../../Core/widgets/no_internet_snakbar.dart';
 import '../controller/pray_time_cubit.dart';
 
 class PrayTimeScreen extends StatelessWidget {
@@ -116,37 +118,35 @@ class PrayTimeScreen extends StatelessWidget {
               ),
             );
           } else if (state is PrayTimeErrorFetchData) {
-            Future<Position> getUserLocation() async {
+            Future<void> getUserLocation() async {
               try {
-                LocationPermission permission =
-                    await Geolocator.checkPermission();
-                if (permission == LocationPermission.denied) {
-                  permission = await Geolocator.requestPermission();
-                  if (permission == LocationPermission.denied) {
-                    throw PlatformException(
-                      code: 'PERMISSION_DENIED',
-                      message: 'Location permission denied',
-                    );
-                  }
+                // Check if the device is currently offline
+                final bool isOffline =
+                    !await InternetConnectionChecker().hasConnection;
+
+                if (isOffline) {
+                  // Handle offline scenario: No network connectivity
+                  print("----offline-----");
+                  CacheHelper.saveData(
+                      key: AppStrings.locationKey, value: false);
+                  noInternetSnakbar(context);
+                } else {
+                  // Device is online, attempt to get the location
+                  final Position position =
+                      await Geolocator.getCurrentPosition();
+                  print(position);
+                  CacheHelper.saveData(
+                      key: AppStrings.locationKey, value: true);
+                  CacheHelper.saveData(
+                      key: AppStrings.latKey, value: position.latitude);
+                  CacheHelper.saveData(
+                      key: AppStrings.longKey, value: position.longitude);
+                  // Continue with additional logic or data processing here.
                 }
-                if (permission == LocationPermission.deniedForever) {
-                  permission = await Geolocator.requestPermission();
-                  print(permission.toString());
-                  throw PlatformException(
-                    code: 'PERMISSION_DENIED_FOREVER',
-                    message: 'Location permission denied forever',
-                  );
-                }
-                final Position position = await Geolocator.getCurrentPosition();
-                print(position);
-                CacheHelper.saveData(
-                    key: AppStrings.latKey, value: position.latitude);
-                CacheHelper.saveData(
-                    key: AppStrings.longKey, value: position.longitude);
-                //location = position;
-                return position;
               } catch (e) {
-                print(e.toString());
+                // Handle exceptions, including those related to network or location errors
+                CacheHelper.saveData(key: AppStrings.locationKey, value: false);
+                print("----error-----");
                 throw PlatformException(
                   code: 'ERROR_GETTING_LOCATION',
                   message: 'Error getting user location: $e',
@@ -173,7 +173,7 @@ class PrayTimeScreen extends StatelessWidget {
                         MaterialButton(
                           color: MyColors.darkBrown,
                           onPressed: () async {
-                            const CustomLoadingPage();
+                            //const CustomLoadingPage();
                             await getUserLocation().then((value) {
                               cubit.fetchPrayData();
                             });

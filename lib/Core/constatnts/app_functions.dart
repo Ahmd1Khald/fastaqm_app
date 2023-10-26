@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:share/share.dart';
 
 class AppFunctions {
@@ -43,5 +44,11 @@ class AppFunctions {
     Share.share(
         "$textToShare\n https://play.google.com/store/apps/details?id=at.ahmed1khaled.fastakmapp",
         subject: subject);
+  }
+
+  static Future<void> oneSignal() async {
+    OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+    OneSignal.initialize("10c43c71-1dcf-4be9-b368-8220add934e1");
+    OneSignal.Notifications.requestPermission(true);
   }
 }

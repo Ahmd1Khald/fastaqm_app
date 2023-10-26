@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "852041153282",
+    "project_id": "fastakm",
+    "storage_bucket": "fastakm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852041153282:android:d3743740672e8bc6d3e01b",
+        "android_client_info": {
+          "package_name": "at.ahmed1khaled.fastakmapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeR_4Ul01RqxshTS3eNKhKk6Y682lsP8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

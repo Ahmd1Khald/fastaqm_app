@@ -15,6 +15,7 @@ class TimeWidget extends StatelessWidget {
   final String prayTime;
   @override
   Widget build(BuildContext context) {
+    //print();
     return Stack(
       alignment: AlignmentDirectional.center,
       children: [
