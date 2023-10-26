@@ -166,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
           textDirection: TextDirection.rtl,
           textAlign: TextAlign.center,
           style: GoogleFonts.noticiaText(
-            fontSize: 15.5.sp,
+            fontSize: 13.sp,
           ),
         ),
       ],
