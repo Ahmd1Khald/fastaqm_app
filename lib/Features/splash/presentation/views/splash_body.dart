@@ -27,8 +27,8 @@ class _SplashScreenState extends State<SplashScreen>
   Future<void> getUserLocation() async {
     try {
       print("----0-----");
-      CacheHelper.removeData(key: AppStrings.latKey);
-      CacheHelper.removeData(key: AppStrings.longKey);
+      // CacheHelper.removeData(key: AppStrings.latKey);
+      // CacheHelper.removeData(key: AppStrings.longKey);
 
       LocationPermission permission = await Geolocator.checkPermission();
 

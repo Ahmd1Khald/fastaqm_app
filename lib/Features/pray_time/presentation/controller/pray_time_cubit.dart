@@ -64,15 +64,17 @@ class PrayTimeCubit extends Cubit<PrayTimeState> {
       print("timeForNextPray");
       print(timeForNextPray);
 
-      print("${prayerTimes.fajr.hour}:${prayerTimes.fajr.minute}");
-      print("${prayerTimes.fajr.hour}:${prayerTimes.fajr.minute}");
-      print("${prayerTimes.fajr.hour}:${prayerTimes.fajr.minute}");
-      fajrTime = "${prayerTimes.fajr.hour}:${prayerTimes.fajr.minute}";
-      shroukTime = "${prayerTimes.sunrise.hour}:${prayerTimes.sunrise.minute}";
-      duhrTime = "${prayerTimes.dhuhr.hour}:${prayerTimes.dhuhr.minute}";
-      asrTime = "${prayerTimes.asr.hour}:${prayerTimes.asr.minute}";
-      maghrbTime = "${prayerTimes.maghrib.hour}:${prayerTimes.maghrib.minute}";
-      ishaTime = "${prayerTimes.isha.hour}:${prayerTimes.isha.minute}";
+      print("${prayerTimes.fajr.hour - 1}:${prayerTimes.fajr.minute}");
+      print("${prayerTimes.fajr.hour - 1}:${prayerTimes.fajr.minute}");
+      print("${prayerTimes.fajr.hour - 1}:${prayerTimes.fajr.minute}");
+      fajrTime = "${prayerTimes.fajr.hour - 1}:${prayerTimes.fajr.minute}";
+      shroukTime =
+          "${prayerTimes.sunrise.hour - 1}:${prayerTimes.sunrise.minute}";
+      duhrTime = "${prayerTimes.dhuhr.hour - 1}:${prayerTimes.dhuhr.minute}";
+      asrTime = "${prayerTimes.asr.hour - 1}:${prayerTimes.asr.minute}";
+      maghrbTime =
+          "${prayerTimes.maghrib.hour - 1}:${prayerTimes.maghrib.minute}";
+      ishaTime = "${prayerTimes.isha.hour - 1}:${prayerTimes.isha.minute}";
       emit(PrayTimeSuccessFetchData());
     } catch (error) {
       emit(PrayTimeErrorFetchData());
