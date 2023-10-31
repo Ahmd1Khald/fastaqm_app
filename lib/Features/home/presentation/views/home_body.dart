@@ -52,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 image: AssetsManager.masjedIcon,
                 text: "مواقيت الصلاة",
                 func: () {
+                  AppFunctions.sendNotification();
                   AppFunctions.pushTo(
                     context: context,
                     screen: const PrayTimeScreen(),

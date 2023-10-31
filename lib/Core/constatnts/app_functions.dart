@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
+import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:share/share.dart';
@@ -50,5 +54,42 @@ class AppFunctions {
     OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
     OneSignal.initialize("10c43c71-1dcf-4be9-b368-8220add934e1");
     OneSignal.Notifications.requestPermission(true);
+  }
+
+  static Future<void> sendNotification() async {
+    print("Push Notification -------->");
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+          'key=AAAAxmGcOwI:APA91bGlwvJHOCYCGF8TNpHFosarYpHfTYLqhq5PjdM3C1sbWhC3NPyA38Hdy6q3OMRSAXEzVCWEJ7WqNCbcj2iBZvJrk7J3zath4OsQF5Eyy1-Vux10ptyQksFTFUxrUEhF4Eu5Qp0C'
+    };
+    var data = json.encode({
+      "to": AppVariables.deviceToken,
+      "notification": {
+        "title": "Check this Mobile (title)",
+        "body": "Rich Notification testing (body)",
+        "mutable_content": true,
+        "sound": "Tri-tone"
+      },
+      "data": {
+        "url": "<url of media image>",
+        "dl": "<deeplink action on tap of notification>"
+      }
+    });
+    var dio = Dio();
+    var response = await dio.request(
+      'https://fcm.googleapis.com/fcm/send',
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+      data: data,
+    );
+
+    if (response.statusCode == 200) {
+      print(json.encode(response.data));
+    } else {
+      print(response.statusMessage);
+    }
   }
 }

@@ -101,6 +101,7 @@ class _SplashScreenState extends State<SplashScreen>
     getUserLocation();
     print("lat => ${CacheHelper.getDate(key: AppStrings.latKey)}");
     print("long => ${CacheHelper.getDate(key: AppStrings.longKey)}");
+
     super.initState();
   }
 

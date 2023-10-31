@@ -55,9 +55,12 @@ dependencies:
   #notification
   onesignal_flutter: ^5.0.3
   #firebase
-  firebase_core: ^2.20.0
+  firebase_core: ^2.21.0
+  firebase_messaging: ^14.7.3
   #check internet
   internet_connection_checker: ^1.0.0+1
+  #dio
+  dio: ^5.3.3
 
 
 

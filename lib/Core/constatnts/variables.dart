@@ -13,4 +13,8 @@ class AppVariables {
   //saved
   static int hadishSaveIndex = 0;
   static int duaaSaveIndex = 0;
+
+  //device token
+
+  static String? deviceToken;
 }
