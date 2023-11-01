@@ -72,28 +72,12 @@ class _SplashScreenState extends State<SplashScreen>
       CacheHelper.saveData(key: AppStrings.locationKey, value: false);
       print("----error-----");
       navigateToHome();
-      throw PlatformException(
-        code: 'ERROR_GETTING_LOCATION',
-        message: 'Error getting user location: $e',
-      );
+      // throw PlatformException(
+      //   code: 'ERROR_GETTING_LOCATION',
+      //   message: 'Error getting user location: $e',
+      // );
     }
   }
-
-  // Future<String?> getCountryName(double latitude, double longitude) async {
-  //   try {
-  //     List<Placemark> placemarks =
-  //         await placemarkFromCoordinates(latitude, longitude);
-  //
-  //     if (placemarks.isNotEmpty) {
-  //       return placemarks[0].country;
-  //     } else {
-  //       return null; // No placemark found
-  //     }
-  //   } catch (e) {
-  //     print("Error getting country name: $e");
-  //     return null; // Error occurred
-  //   }
-  // }
 
   @override
   void initState() {

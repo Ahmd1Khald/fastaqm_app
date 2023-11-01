@@ -3,6 +3,7 @@ import 'package:fastaqm_app/Core/constatnts/assets_manager.dart';
 import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:fastaqm_app/Features/pray_time/presentation/views/pray_time_body.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,6 +28,22 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     Future.wait({readJson()});
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      if (message.notification != null) {
+        print("------------------------");
+        print(message.notification!.title);
+        print("-------------------------");
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("${message.notification!.body}",
+                textAlign: TextAlign.right),
+            backgroundColor: MyColors.darkBrown,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
+    });
     super.initState();
   }
 
@@ -52,7 +69,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 image: AssetsManager.masjedIcon,
                 text: "مواقيت الصلاة",
                 func: () {
-                  AppFunctions.sendNotification();
                   AppFunctions.pushTo(
                     context: context,
                     screen: const PrayTimeScreen(),

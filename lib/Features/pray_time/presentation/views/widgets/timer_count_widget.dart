@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:adhan/adhan.dart';
 import 'package:fastaqm_app/Features/pray_time/presentation/controller/pray_time_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../../Core/constatnts/app_functions.dart';
 import '../../../../../Core/constatnts/assets_manager.dart';
 import '../../../../../Core/constatnts/colors.dart';
 import '../../../../../Core/constatnts/variables.dart';
@@ -72,6 +74,9 @@ class _TimerCountWidgetState
     print("_hours $_hours");
     _minutes = difference.inMinutes % 60;
     _seconds = difference.inSeconds % 60;
+    // _hours = 0;
+    // _minutes = 0;
+    // _seconds = 5;
 
     // if (_hours < 0) _hours *= -1;
     // if (_minutes < 0) _minutes *= -1;
@@ -91,8 +96,35 @@ class _TimerCountWidgetState
   void startTimer() {
     const oneSecond = Duration(seconds: 1);
     _timer = Timer.periodic(oneSecond, (timer) {
+      print("widget.cubit.nextPray ==>");
+      print(widget.cubit.nextPray);
       setState(() {
         if (_hours == 0 && _minutes == 0 && _seconds == 0) {
+          if (widget.cubit.nextPray == Prayer.fajr) {
+            print("++++++++++++++++++++++++++++");
+            AppFunctions.sendNotification(
+                title: '', body: 'حان الان موعد صلاة الفجر');
+          }
+          if (widget.cubit.nextPray == Prayer.sunrise) {
+            AppFunctions.sendNotification(
+                title: '', body: 'حان الان موعد صلاة الشروق');
+          }
+          if (widget.cubit.nextPray == Prayer.dhuhr) {
+            AppFunctions.sendNotification(
+                title: '', body: 'حان الان موعد صلاة الظهر');
+          }
+          if (widget.cubit.nextPray == Prayer.asr) {
+            AppFunctions.sendNotification(
+                title: '', body: 'حان الان موعد صلاة العصر');
+          }
+          if (widget.cubit.nextPray == Prayer.maghrib) {
+            AppFunctions.sendNotification(
+                title: '', body: 'حان الان موعد صلاة المغرب');
+          }
+          if (widget.cubit.nextPray == Prayer.isha) {
+            AppFunctions.sendNotification(
+                title: '', body: 'حان الان موعد صلاة العشاء');
+          }
           _timer.cancel();
           // Timer has finished, you can perform an action here.
         } else if (_minutes == 0 && _seconds == 0) {

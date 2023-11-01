@@ -56,7 +56,10 @@ class AppFunctions {
     OneSignal.Notifications.requestPermission(true);
   }
 
-  static Future<void> sendNotification() async {
+  static Future<void> sendNotification({
+    required String title,
+    required String body,
+  }) async {
     print("Push Notification -------->");
     var headers = {
       'Content-Type': 'application/json',
@@ -66,8 +69,8 @@ class AppFunctions {
     var data = json.encode({
       "to": AppVariables.deviceToken,
       "notification": {
-        "title": "Check this Mobile (title)",
-        "body": "Rich Notification testing (body)",
+        "title": title,
+        "body": body,
         "mutable_content": true,
         "sound": "Tri-tone"
       },

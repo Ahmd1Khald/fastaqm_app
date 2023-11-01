@@ -28,11 +28,10 @@ class PrayTimeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime date = DateTime.now();
     //print(date);
     final double timeNow = DateTime.now().hour.toDouble();
     return BlocProvider(
-      create: (context) => PrayTimeCubit()..fetchPrayData(),
+      create: (context) => PrayTimeCubit()..fetchPrayData(context),
       child: BlocConsumer<PrayTimeCubit, PrayTimeState>(
         listener: (context, state) {
           if (state is PrayTimeSuccessFetchData) {
@@ -175,7 +174,7 @@ class PrayTimeScreen extends StatelessWidget {
                           onPressed: () async {
                             //const CustomLoadingPage();
                             await getUserLocation().then((value) {
-                              cubit.fetchPrayData();
+                              cubit.fetchPrayData(context);
                             });
                           },
                           shape: RoundedRectangleBorder(

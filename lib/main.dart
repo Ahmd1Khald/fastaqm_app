@@ -22,18 +22,29 @@ Future<void> main() async {
   await CacheHelper.init();
   await AppFunctions.oneSignal();
   Bloc.observer = MyBlocObserver();
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-
-  _firebaseMessaging.getToken().then((token) {
-    AppVariables.deviceToken = token;
-    print('Device Token: $token');
-  });
 
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
+    _firebaseMessaging.getToken().then((token) {
+      AppVariables.deviceToken = token;
+      print('Device Token: $token');
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
