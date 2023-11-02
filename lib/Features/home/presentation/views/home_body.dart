@@ -2,8 +2,7 @@ import 'package:fastaqm_app/Core/constatnts/app_functions.dart';
 import 'package:fastaqm_app/Core/constatnts/assets_manager.dart';
 import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
-import 'package:fastaqm_app/Features/pray_time/presentation/views/pray_time_body.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:fastaqm_app/Core/services/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,6 +12,7 @@ import '../../../ahadith/presentation/views/ahadith_body.dart';
 import '../../../azkar/presentation/views/azkar_body.dart';
 import '../../../bakiat/presentation/views/bakiat_body.dart';
 import '../../../duaa/presentation/views/duaa_body.dart';
+import '../../../pray_time/presentation/views/pray_time_body.dart';
 import '../../../quran/presentation/views/quran_body.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,35 +25,36 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  NotificationService notificationService = NotificationService();
   @override
   void initState() {
     Future.wait({readJson()});
-
-    //notify when app open
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      if (message.notification != null) {
-        print("------------------------");
-        print(message.notification!.title);
-        print("-------------------------");
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("${message.notification!.body}",
-                textAlign: TextAlign.right),
-            backgroundColor: MyColors.darkBrown,
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
-      }
-    });
-
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      if (message.data['type'] == 'pray') {
-        AppFunctions.pushTo(context: context, screen: const PrayTimeScreen());
-      } else if (message.data['type'] == 'azkar') {
-        AppFunctions.pushTo(context: context, screen: const AzkarScreen());
-      }
-    });
+    notificationService.initializeNotifications();
+    //notify when app open and online
+    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    //   if (message.notification != null) {
+    //     print("------------------------");
+    //     print(message.notification!.title);
+    //     print("-------------------------");
+    //
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //       SnackBar(
+    //         content: Text("${message.notification!.body}",
+    //             textAlign: TextAlign.right),
+    //         backgroundColor: MyColors.darkBrown,
+    //         behavior: SnackBarBehavior.floating,
+    //       ),
+    //     );
+    //   }
+    // });
+    //
+    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    //   if (message.data['type'] == 'pray') {
+    //     AppFunctions.pushTo(context: context, screen: const PrayTimeScreen());
+    //   } else if (message.data['type'] == 'azkar') {
+    //     AppFunctions.pushTo(context: context, screen: const AzkarScreen());
+    //   }
+    // });
     super.initState();
   }
 
@@ -79,6 +80,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 image: AssetsManager.masjedIcon,
                 text: "مواقيت الصلاة",
                 func: () {
+                  notificationService.scheduleNotification(
+                      title: "الصلاة عماد الدين", body: "حان موعد صلاة المغرب");
                   AppFunctions.pushTo(
                     context: context,
                     screen: const PrayTimeScreen(),

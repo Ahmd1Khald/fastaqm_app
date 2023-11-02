@@ -96,8 +96,8 @@ class _TimerCountWidgetState
   void startTimer() {
     const oneSecond = Duration(seconds: 1);
     _timer = Timer.periodic(oneSecond, (timer) {
-      print("widget.cubit.nextPray ==>");
-      print(widget.cubit.nextPray);
+      //print("widget.cubit.nextPray ==>");
+      //print(widget.cubit.nextPray);
       setState(() {
         if (_hours == 0 && _minutes == 0 && _seconds == 0) {
           if (widget.cubit.nextPray == Prayer.fajr) {
