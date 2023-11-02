@@ -104,24 +104,19 @@ class _TimerCountWidgetState
             print("++++++++++++++++++++++++++++");
             AppFunctions.sendNotification(
                 title: '', body: 'حان الان موعد صلاة الفجر', type: "pray");
-          }
-          if (widget.cubit.nextPray == Prayer.sunrise) {
+          } else if (widget.cubit.nextPray == Prayer.sunrise) {
             AppFunctions.sendNotification(
                 title: '', body: 'حان الان موعد صلاة الشروق', type: "pray");
-          }
-          if (widget.cubit.nextPray == Prayer.dhuhr) {
+          } else if (widget.cubit.nextPray == Prayer.dhuhr) {
             AppFunctions.sendNotification(
                 title: '', body: 'حان الان موعد صلاة الظهر', type: "pray");
-          }
-          if (widget.cubit.nextPray == Prayer.asr) {
+          } else if (widget.cubit.nextPray == Prayer.asr) {
             AppFunctions.sendNotification(
                 title: '', body: 'حان الان موعد صلاة العصر', type: "pray");
-          }
-          if (widget.cubit.nextPray == Prayer.maghrib) {
+          } else if (widget.cubit.nextPray == Prayer.maghrib) {
             AppFunctions.sendNotification(
                 title: '', body: 'حان الان موعد صلاة المغرب', type: "pray");
-          }
-          if (widget.cubit.nextPray == Prayer.isha) {
+          } else if (widget.cubit.nextPray == Prayer.isha) {
             AppFunctions.sendNotification(
                 title: '', body: 'حان الان موعد صلاة العشاء', type: "pray");
           }
