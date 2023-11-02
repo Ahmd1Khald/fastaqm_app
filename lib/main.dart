@@ -14,11 +14,18 @@ import 'Core/services/BlocObserver.dart';
 import 'Features/splash/presentation/views/splash_body.dart';
 import 'firebase_options.dart';
 
+Future<void> _firebaseMessagesBackground(RemoteMessage message) async {
+  print("background =====>");
+  print("${message.notification!.title}");
+  print("${message.notification!.body}");
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagesBackground);
   await CacheHelper.init();
   await AppFunctions.oneSignal();
   Bloc.observer = MyBlocObserver();

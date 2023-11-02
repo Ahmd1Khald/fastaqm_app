@@ -59,6 +59,7 @@ class AppFunctions {
   static Future<void> sendNotification({
     required String title,
     required String body,
+    required String type,
   }) async {
     print("Push Notification -------->");
     var headers = {
@@ -75,8 +76,7 @@ class AppFunctions {
         "sound": "Tri-tone"
       },
       "data": {
-        "url": "<url of media image>",
-        "dl": "<deeplink action on tap of notification>"
+        "type": type,
       }
     });
     var dio = Dio();

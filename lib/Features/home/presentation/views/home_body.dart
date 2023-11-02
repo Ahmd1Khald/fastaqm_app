@@ -28,6 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     Future.wait({readJson()});
+
+    //notify when app open
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       if (message.notification != null) {
         print("------------------------");
@@ -42,6 +44,14 @@ class _HomeScreenState extends State<HomeScreen> {
             behavior: SnackBarBehavior.floating,
           ),
         );
+      }
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      if (message.data['type'] == 'pray') {
+        AppFunctions.pushTo(context: context, screen: const PrayTimeScreen());
+      } else if (message.data['type'] == 'azkar') {
+        AppFunctions.pushTo(context: context, screen: const AzkarScreen());
       }
     });
     super.initState();
