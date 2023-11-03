@@ -12,7 +12,6 @@ import '../../../ahadith/presentation/views/ahadith_body.dart';
 import '../../../azkar/presentation/views/azkar_body.dart';
 import '../../../bakiat/presentation/views/bakiat_body.dart';
 import '../../../duaa/presentation/views/duaa_body.dart';
-import '../../../pray_time/presentation/views/pray_time_body.dart';
 import '../../../quran/presentation/views/quran_body.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,11 +24,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  NotificationService notificationService = NotificationService();
   @override
   void initState() {
     Future.wait({readJson()});
-    notificationService.initializeNotifications();
+
     //notify when app open and online
     // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     //   if (message.notification != null) {
@@ -80,12 +78,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 image: AssetsManager.masjedIcon,
                 text: "مواقيت الصلاة",
                 func: () {
-                  notificationService.scheduleNotification(
-                      title: "الصلاة عماد الدين", body: "حان موعد صلاة المغرب");
-                  AppFunctions.pushTo(
-                    context: context,
-                    screen: const PrayTimeScreen(),
+                  DateTime now = DateTime.now();
+                  DateTime scheduleTime = now.add(const Duration(seconds: 12));
+                  print("DateTime.now => $now");
+                  print("scheduleTime => $scheduleTime");
+                  NotificationService().showNotification(
+                    title: 'Scheduled Notification',
+                    body: '$scheduleTime',
+                    //scheduleData: DateTime.now().add(Duration(seconds: 10)),
                   );
+                  // AppFunctions.pushTo(
+                  //   context: context,
+                  //   screen: const PrayTimeScreen(),
+                  // );
                 },
               ),
               customItem(

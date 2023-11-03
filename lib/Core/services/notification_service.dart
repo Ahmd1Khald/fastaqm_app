@@ -1,110 +1,99 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/data/latest.dart' as tzdata;
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
-  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
+  final FlutterLocalNotificationsPlugin notificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  final AndroidInitializationSettings _androidInitializationSettings =
-      const AndroidInitializationSettings('app_logo');
+  Future<void> initNotification() async {
+    AndroidInitializationSettings initializationSettingsAndroid =
+        const AndroidInitializationSettings('app_logo');
 
-  void initializeNotifications() async {
-    InitializationSettings initializationSettings = InitializationSettings(
-      android: _androidInitializationSettings,
-    );
+    var initializationSettingsIOS = DarwinInitializationSettings(
+        requestAlertPermission: true,
+        requestBadgePermission: true,
+        requestSoundPermission: true,
+        onDidReceiveLocalNotification:
+            (int id, String? title, String? body, String? payload) async {});
 
-    await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    var initializationSettings = InitializationSettings(
+        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+    await notificationsPlugin.initialize(initializationSettings,
+        onDidReceiveNotificationResponse:
+            (NotificationResponse notificationResponse) async {});
   }
 
-  void sendNotification({
+  notificationDetails() {
+    return const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'channelId 2channelId 2',
+          'channelNamechannelName',
+          importance: Importance.max,
+          //priority: Priority.high,
+          playSound: true,
+          sound: RawResourceAndroidNotificationSound('azan'),
+        ),
+        iOS: DarwinNotificationDetails());
+  }
+
+  Future showNotification({
+    int id = 0,
     required String title,
     required String body,
+    String? payLoad,
   }) async {
-    AndroidNotificationDetails androidNotificationDetails =
-        const AndroidNotificationDetails(
-      "channelId 2",
-      "channelName",
-      importance: Importance.max,
-      priority: Priority.high,
-      playSound: false,
-      sound: RawResourceAndroidNotificationSound('azan'),
-    );
-
-    NotificationDetails notificationDetails = NotificationDetails(
-      android: androidNotificationDetails,
-    );
-
-    _flutterLocalNotificationsPlugin.show(
-      0,
+    await notificationsPlugin.show(
+      id,
       title,
       body,
-      notificationDetails,
+      await notificationDetails(),
     );
+    final a = await notificationsPlugin.getActiveNotifications();
+    final b = await notificationsPlugin
+        .getNotificationAppLaunchDetails()
+        .whenComplete(() => null);
+    final c = await notificationsPlugin
+        .pendingNotificationRequests()
+        .whenComplete(() => null);
+    print("getActiveNotifications => ${a}");
+    print("getNotificationAppLaunchDetails => ${b}");
+    print("pendingNotificationRequests => ${c}");
   }
 
-  Future<void> scheduleNotification({
+  void scheduleNotification({
+    int id = 0,
     required String title,
     required String body,
+    required DateTime scheduleData,
+    String? payLoad,
   }) async {
-    AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(
-      "channelId 2",
-      "channelName",
-      importance: Importance.max,
-      priority: Priority.high,
-      playSound: true,
-      sound: const RawResourceAndroidNotificationSound('azan'),
-    );
+    try {
+      print(
+          "scheduledNotificationDateTime => ${tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5))}");
+      notificationsPlugin.zonedSchedule(
+        id,
+        title,
+        body,
+        tz.TZDateTime.from(scheduleData, tz.local),
+        await notificationDetails(),
+        androidAllowWhileIdle: true,
+        androidScheduleMode: AndroidScheduleMode.alarmClock,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+      );
 
-    NotificationDetails platformChannelSpecifics =
-        NotificationDetails(android: androidPlatformChannelSpecifics);
-    tzdata.initializeTimeZones();
-    const String timeZoneName =
-        'Africa/Cairo'; // Replace with your desired time zone
-    tz.setLocalLocation(tz.getLocation(timeZoneName));
-
-    final now = tz.TZDateTime.now(tz.local);
-    final scheduledDate =
-        now.add(const Duration(seconds: 5)); // Schedule 5 minutes from now
-
-    await _flutterLocalNotificationsPlugin.zonedSchedule(
-      0, // Notification ID (use a unique ID for each notification)
-      title,
-      body,
-      scheduledDate,
-      platformChannelSpecifics,
-      androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-    );
+      final a = await notificationsPlugin.getActiveNotifications();
+      final b = await notificationsPlugin
+          .getNotificationAppLaunchDetails()
+          .whenComplete(() => null);
+      final c = await notificationsPlugin
+          .pendingNotificationRequests()
+          .whenComplete(() => null);
+      print("getActiveNotifications => ${a}");
+      print("getNotificationAppLaunchDetails => ${b}");
+      print("pendingNotificationRequests => ${c}");
+    } catch (e) {
+      print('Error scheduling notification: $e');
+    }
   }
-
-  // void scheduleNotification({
-  //   required String title,
-  //   required String body,
-  // }) async {
-  //   AndroidNotificationDetails androidNotificationDetails =
-  //       const AndroidNotificationDetails(
-  //     'channelId 5',
-  //     'channelName',
-  //     importance: Importance.max,
-  //     priority: Priority.high,
-  //     playSound: true, // Enable sound
-  //     sound:
-  //         RawResourceAndroidNotificationSound('azan'), // Specify custom sound
-  //   );
-  //
-  //   NotificationDetails notificationDetails = NotificationDetails(
-  //     android: androidNotificationDetails,
-  //   );
-  //
-  //   await _flutterLocalNotificationsPlugin.periodicallyShow(
-  //     0,
-  //     title,
-  //     body,
-  //     RepeatInterval.everyMinute,
-  //     notificationDetails,
-  //   );
-  // }
 }

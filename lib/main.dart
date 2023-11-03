@@ -11,6 +11,7 @@ import 'Core/constatnts/app_strings.dart';
 import 'Core/constatnts/variables.dart';
 import 'Core/helpers/cachehelper.dart';
 import 'Core/services/BlocObserver.dart';
+import 'Core/services/notification_service.dart';
 import 'Features/splash/presentation/views/splash_body.dart';
 import 'firebase_options.dart';
 
@@ -25,6 +26,9 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await AppFunctions.configureLocalTimeZone();
+  NotificationService().initNotification();
+
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagesBackground);
   await CacheHelper.init();
   await AppFunctions.oneSignal();

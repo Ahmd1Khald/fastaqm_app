@@ -3,8 +3,11 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:share/share.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class AppFunctions {
   static String convertEnglishNumberToArabic(String input) {
@@ -94,5 +97,13 @@ class AppFunctions {
     } else {
       print(response.statusMessage);
     }
+  }
+
+  static Future<void> configureLocalTimeZone() async {
+    tz.initializeTimeZones();
+    final String timeZoneName = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(timeZoneName));
+
+    print("tz.TimeZone => ${tz.getLocation(timeZoneName)}");
   }
 }
