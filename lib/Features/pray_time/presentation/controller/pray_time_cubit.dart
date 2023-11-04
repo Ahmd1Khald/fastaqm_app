@@ -1,10 +1,7 @@
 import 'package:adhan/adhan.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../Core/constatnts/app_strings.dart';
-import '../../../../Core/constatnts/colors.dart';
 import '../../../../Core/constatnts/constant.dart';
 import '../../../../Core/helpers/cachehelper.dart';
 
@@ -46,31 +43,31 @@ class PrayTimeCubit extends Cubit<PrayTimeState> {
   Prayer? nextPray;
   DateTime? timeForNextPray;
 
-  void onMessageListen(context) {
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      if (message.notification != null) {
-        print("------------------------");
-        print(message.notification!.title);
-        print("-------------------------");
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("${message.notification!.body}",
-                textAlign: TextAlign.right),
-            backgroundColor: MyColors.darkBrown,
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
-      }
-    });
-  }
+  // void onMessageListen(context) {
+  //   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  //     if (message.notification != null) {
+  //       print("------------------------");
+  //       print(message.notification!.title);
+  //       print("-------------------------");
+  //
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(
+  //           content: Text("${message.notification!.body}",
+  //               textAlign: TextAlign.right),
+  //           backgroundColor: MyColors.darkBrown,
+  //           behavior: SnackBarBehavior.floating,
+  //         ),
+  //       );
+  //     }
+  //   });
+  // }
 
   Future<void> fetchPrayData(context) async {
     // CacheHelper.removeData(key: AppStrings.latKey);
     // CacheHelper.removeData(key: AppStrings.longKey);
     print('My Prayer Times');
     try {
-      onMessageListen(context);
+      //onMessageListen(context);
       emit(PrayTimeLoadingFetchData());
       final myCoordinates = Coordinates(
         CacheHelper.getDate(key: AppStrings.latKey),

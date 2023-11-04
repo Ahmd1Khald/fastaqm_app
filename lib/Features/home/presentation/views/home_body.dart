@@ -12,6 +12,7 @@ import '../../../ahadith/presentation/views/ahadith_body.dart';
 import '../../../azkar/presentation/views/azkar_body.dart';
 import '../../../bakiat/presentation/views/bakiat_body.dart';
 import '../../../duaa/presentation/views/duaa_body.dart';
+import '../../../pray_time/presentation/views/pray_time_body.dart';
 import '../../../quran/presentation/views/quran_body.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,10 +25,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late NotifyHelper notifyHelper;
   @override
   void initState() {
     Future.wait({readJson()});
 
+    notifyHelper = NotifyHelper();
+    notifyHelper.initializeNotification();
     //notify when app open and online
     // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     //   if (message.notification != null) {
@@ -82,15 +86,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   DateTime scheduleTime = now.add(const Duration(seconds: 12));
                   print("DateTime.now => $now");
                   print("scheduleTime => $scheduleTime");
-                  NotificationService().showNotification(
+                  // Future.delayed(const Duration(seconds: 12)).then(
+                  //     (value) => NotificationService().scheduleNotification(
+                  //           title: 'Scheduled Notification',
+                  //           body: '$scheduleTime',
+                  //           hour: 0,
+                  //           minutes: 0,
+                  //           second: 5,
+                  //           //scheduleData: DateTime.now().add(Duration(seconds: 10)),
+                  //         ));
+                  notifyHelper.displayNotification(
                     title: 'Scheduled Notification',
                     body: '$scheduleTime',
-                    //scheduleData: DateTime.now().add(Duration(seconds: 10)),
                   );
-                  // AppFunctions.pushTo(
-                  //   context: context,
-                  //   screen: const PrayTimeScreen(),
-                  // );
+                  notifyHelper.scheduledNotification();
+                  AppFunctions.pushTo(
+                    context: context,
+                    screen: const PrayTimeScreen(),
+                  );
                 },
               ),
               customItem(

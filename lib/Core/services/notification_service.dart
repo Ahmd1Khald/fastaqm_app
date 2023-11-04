@@ -1,99 +1,163 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
-class NotificationService {
-  final FlutterLocalNotificationsPlugin notificationsPlugin =
+class NotifyHelper {
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  Future<void> initNotification() async {
-    AndroidInitializationSettings initializationSettingsAndroid =
-        const AndroidInitializationSettings('app_logo');
+  String selectedNotificationPayload = '';
 
-    var initializationSettingsIOS = DarwinInitializationSettings(
-        requestAlertPermission: true,
-        requestBadgePermission: true,
-        requestSoundPermission: true,
-        onDidReceiveLocalNotification:
-            (int id, String? title, String? body, String? payload) async {});
+  // final BehaviorSubject<String> selectNotificationSubject =
+  //     BehaviorSubject<String>();
+  initializeNotification() async {
+    tz.initializeTimeZones();
+    _configureSelectNotificationSubject();
+    await _configureLocalTimeZone();
+    // await requestIOSPermissions(flutterLocalNotificationsPlugin);
+    // final IOSInitializationSettings initializationSettingsIOS =
+    //     IOSInitializationSettings(
+    //   requestSoundPermission: false,
+    //   requestBadgePermission: false,
+    //   requestAlertPermission: false,
+    //   onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+    // );
 
-    var initializationSettings = InitializationSettings(
-        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-    await notificationsPlugin.initialize(initializationSettings,
-        onDidReceiveNotificationResponse:
-            (NotificationResponse notificationResponse) async {});
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('app_logo');
+
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
+      //iOS: initializationSettingsIOS,
+      android: initializationSettingsAndroid,
+    );
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      // onSelectNotification: (String? payload) async {
+      //   if (payload != null) {
+      //     debugPrint('notification payload: ' + payload);
+      //   }
+      //   selectNotificationSubject.add(payload!);
+      // },
+    );
   }
 
-  notificationDetails() {
-    return const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'channelId 2channelId 2',
-          'channelNamechannelName',
-          importance: Importance.max,
-          //priority: Priority.high,
-          playSound: true,
-          sound: RawResourceAndroidNotificationSound('azan'),
-        ),
-        iOS: DarwinNotificationDetails());
-  }
-
-  Future showNotification({
-    int id = 0,
-    required String title,
-    required String body,
-    String? payLoad,
-  }) async {
-    await notificationsPlugin.show(
-      id,
+  displayNotification({required String title, required String body}) async {
+    print('doing test');
+    var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
+        'channel 2', 'your channel name',
+        importance: Importance.max, priority: Priority.high);
+    // var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+      //iOS: iOSPlatformChannelSpecifics,
+    );
+    await flutterLocalNotificationsPlugin.show(
+      0,
       title,
       body,
-      await notificationDetails(),
+      platformChannelSpecifics,
+      payload: 'Default_Sound',
     );
-    final a = await notificationsPlugin.getActiveNotifications();
-    final b = await notificationsPlugin
-        .getNotificationAppLaunchDetails()
-        .whenComplete(() => null);
-    final c = await notificationsPlugin
-        .pendingNotificationRequests()
-        .whenComplete(() => null);
-    print("getActiveNotifications => ${a}");
-    print("getNotificationAppLaunchDetails => ${b}");
-    print("pendingNotificationRequests => ${c}");
   }
 
-  void scheduleNotification({
-    int id = 0,
-    required String title,
-    required String body,
-    required DateTime scheduleData,
-    String? payLoad,
-  }) async {
-    try {
-      print(
-          "scheduledNotificationDateTime => ${tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5))}");
-      notificationsPlugin.zonedSchedule(
-        id,
-        title,
-        body,
-        tz.TZDateTime.from(scheduleData, tz.local),
-        await notificationDetails(),
-        androidAllowWhileIdle: true,
-        androidScheduleMode: AndroidScheduleMode.alarmClock,
-        uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime,
-      );
+  scheduledNotification(
+      // int hour,
+      // int minutes,
+      ) async {
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      0,
+      "task.title",
+      "task.note",
+      tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+      // _nextInstanceOfTenAM(hour, minutes),
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'your channel id',
+          'your channel name',
+        ),
+      ),
+      androidAllowWhileIdle: true,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      matchDateTimeComponents: DateTimeComponents.time,
+      // payload: '${task.title}|${task.note}|${task.startTime}|',
+    );
+  }
 
-      final a = await notificationsPlugin.getActiveNotifications();
-      final b = await notificationsPlugin
-          .getNotificationAppLaunchDetails()
-          .whenComplete(() => null);
-      final c = await notificationsPlugin
-          .pendingNotificationRequests()
-          .whenComplete(() => null);
-      print("getActiveNotifications => ${a}");
-      print("getNotificationAppLaunchDetails => ${b}");
-      print("pendingNotificationRequests => ${c}");
-    } catch (e) {
-      print('Error scheduling notification: $e');
+  tz.TZDateTime _nextInstanceOfTenAM(int hour, int minutes) {
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+    tz.TZDateTime scheduledDate =
+        tz.TZDateTime(tz.local, now.year, now.month, now.day, hour, minutes);
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
+    return scheduledDate;
+  }
+
+  void requestIOSPermissions() {
+    flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin>()
+        ?.requestPermissions(
+          alert: true,
+          badge: true,
+          sound: true,
+        );
+  }
+
+  Future<void> _configureLocalTimeZone() async {
+    tz.initializeTimeZones();
+    final String timeZoneName = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(timeZoneName));
+  }
+
+/*   Future selectNotification(String? payload) async {
+    if (payload != null) {
+      //selectedNotificationPayload = "The best";
+      selectNotificationSubject.add(payload);
+      print('notification payload: $payload');
+    } else {
+      print("Notification Done");
+    }
+    Get.to(() => SecondScreen(selectedNotificationPayload));
+  } */
+
+//Older IOS
+  Future onDidReceiveLocalNotification(
+      int id, String? title, String? body, String? payload) async {
+    // display a dialog with the notification details, tap ok to go to another page
+    /* showDialog(
+      context: context,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+        title: const Text('Title'),
+        content: const Text('Body'),
+        actions: [
+          CupertinoDialogAction(
+            isDefaultAction: true,
+            child: const Text('Ok'),
+            onPressed: () async {
+              Navigator.of(context, rootNavigator: true).pop();
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Container(color: Colors.white),
+                ),
+              );
+            },
+          )
+        ],
+      ),
+    );
+ */
+    //Get.dialog(Text(body!));
+  }
+
+  void _configureSelectNotificationSubject() {
+    // selectNotificationSubject.stream.listen((String payload) async {
+    //   debugPrint('My payload is ' + payload);
+    //   // await Get.to(() => NotificationScreen(payload));
+    // });
   }
 }

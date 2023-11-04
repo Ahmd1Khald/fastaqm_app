@@ -2,34 +2,28 @@ import 'package:bloc/bloc.dart';
 import 'package:fastaqm_app/Core/constatnts/app_functions.dart';
 import 'package:fastaqm_app/Core/theme/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'Core/constatnts/app_strings.dart';
-import 'Core/constatnts/variables.dart';
 import 'Core/helpers/cachehelper.dart';
 import 'Core/services/BlocObserver.dart';
-import 'Core/services/notification_service.dart';
 import 'Features/splash/presentation/views/splash_body.dart';
 import 'firebase_options.dart';
 
-Future<void> _firebaseMessagesBackground(RemoteMessage message) async {
+/*Future<void> _firebaseMessagesBackground(RemoteMessage message) async {
   print("background =====>");
   print("${message.notification!.title}");
   print("${message.notification!.body}");
-}
+}*/
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await AppFunctions.configureLocalTimeZone();
-  NotificationService().initNotification();
-
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagesBackground);
+  //FirebaseMessaging.onBackgroundMessage(_firebaseMessagesBackground);
   await CacheHelper.init();
   await AppFunctions.oneSignal();
   Bloc.observer = MyBlocObserver();
@@ -47,12 +41,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+    //final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
-    _firebaseMessaging.getToken().then((token) {
+    /*_firebaseMessaging.getToken().then((token) {
       AppVariables.deviceToken = token;
       print('Device Token: $token');
-    });
+    });*/
 
     super.initState();
   }
