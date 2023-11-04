@@ -37,6 +37,8 @@ class _LayoutScreenState extends State<LayoutScreen> {
   void initState() {
     notifyHelper = NotifyHelper();
     notifyHelper.initializeNotification();
+    notifyHelper.displayNotification(
+        title: "الصلاة عماد الدين", body: "العشاء");
     super.initState();
   }
 

@@ -60,7 +60,7 @@ class NotifyHelper {
     await flutterLocalNotificationsPlugin.show(
       0,
       title,
-      body,
+      "حان الآن موعد آذان $body",
       platformChannelSpecifics,
       payload: 'Default_Sound',
     );
@@ -76,7 +76,7 @@ class NotifyHelper {
     await flutterLocalNotificationsPlugin.zonedSchedule(
       0,
       title,
-      "$bodyحان الآن موعد آذان ",
+      "حان الآن موعد آذان $body",
       //tz.TZDateTime.from(now, tz.local).add(const Duration(seconds: 5)),
       _nextInstanceOfTenAM(hour, minutes),
       const NotificationDetails(
