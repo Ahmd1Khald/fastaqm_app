@@ -2,7 +2,6 @@ import 'package:fastaqm_app/Core/constatnts/app_functions.dart';
 import 'package:fastaqm_app/Core/constatnts/assets_manager.dart';
 import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
-import 'package:fastaqm_app/Core/services/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,38 +24,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late NotifyHelper notifyHelper;
   @override
   void initState() {
     Future.wait({readJson()});
-
-    notifyHelper = NotifyHelper();
-    notifyHelper.initializeNotification();
-    //notify when app open and online
-    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    //   if (message.notification != null) {
-    //     print("------------------------");
-    //     print(message.notification!.title);
-    //     print("-------------------------");
-    //
-    //     ScaffoldMessenger.of(context).showSnackBar(
-    //       SnackBar(
-    //         content: Text("${message.notification!.body}",
-    //             textAlign: TextAlign.right),
-    //         backgroundColor: MyColors.darkBrown,
-    //         behavior: SnackBarBehavior.floating,
-    //       ),
-    //     );
-    //   }
-    // });
-    //
-    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-    //   if (message.data['type'] == 'pray') {
-    //     AppFunctions.pushTo(context: context, screen: const PrayTimeScreen());
-    //   } else if (message.data['type'] == 'azkar') {
-    //     AppFunctions.pushTo(context: context, screen: const AzkarScreen());
-    //   }
-    // });
     super.initState();
   }
 
@@ -68,12 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // if (CacheHelper.getDate(key: AppStrings.locationKey) == true)
-          //   const Expanded(child: QiblahScreen()),
-          // if (CacheHelper.getDate(key: AppStrings.locationKey) == false)
-          //   const CustomErrorContainer(
-          //     title: "قم بتفعيل الموقع\nلاظهار القبلة",
-          //   ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -82,24 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 image: AssetsManager.masjedIcon,
                 text: "مواقيت الصلاة",
                 func: () {
-                  DateTime now = DateTime.now();
-                  DateTime scheduleTime = now.add(const Duration(seconds: 12));
-                  print("DateTime.now => $now");
-                  print("scheduleTime => $scheduleTime");
-                  // Future.delayed(const Duration(seconds: 12)).then(
-                  //     (value) => NotificationService().scheduleNotification(
-                  //           title: 'Scheduled Notification',
-                  //           body: '$scheduleTime',
-                  //           hour: 0,
-                  //           minutes: 0,
-                  //           second: 5,
-                  //           //scheduleData: DateTime.now().add(Duration(seconds: 10)),
-                  //         ));
-                  notifyHelper.displayNotification(
-                    title: 'Scheduled Notification',
-                    body: '$scheduleTime',
-                  );
-                  notifyHelper.scheduledNotification();
                   AppFunctions.pushTo(
                     context: context,
                     screen: const PrayTimeScreen(),

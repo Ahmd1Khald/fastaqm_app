@@ -69,6 +69,7 @@ class PrayTimeCubit extends Cubit<PrayTimeState> {
     try {
       //onMessageListen(context);
       emit(PrayTimeLoadingFetchData());
+      //setup pray times
       final myCoordinates = Coordinates(
         CacheHelper.getDate(key: AppStrings.latKey),
         CacheHelper.getDate(key: AppStrings.longKey),

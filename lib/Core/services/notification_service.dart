@@ -66,16 +66,19 @@ class NotifyHelper {
     );
   }
 
-  scheduledNotification(
-      // int hour,
-      // int minutes,
-      ) async {
+  scheduledNotification({
+    required int hour,
+    required int minutes,
+    String title = "الصلاة عماد الدين",
+    required String body,
+  }) async {
+    print("${_nextInstanceOfTenAM(hour, minutes)}+++++++++++++++++++");
     await flutterLocalNotificationsPlugin.zonedSchedule(
       0,
-      "task.title",
-      "task.note",
-      tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
-      // _nextInstanceOfTenAM(hour, minutes),
+      title,
+      "$bodyحان الآن موعد آذان ",
+      //tz.TZDateTime.from(now, tz.local).add(const Duration(seconds: 5)),
+      _nextInstanceOfTenAM(hour, minutes),
       const NotificationDetails(
         android: AndroidNotificationDetails(
           'your channel 2',
@@ -91,6 +94,11 @@ class NotifyHelper {
       matchDateTimeComponents: DateTimeComponents.time,
       // payload: '${task.title}|${task.note}|${task.startTime}|',
     );
+  }
+
+  cancelNotifications() async {
+    await flutterLocalNotificationsPlugin.cancelAll();
+    print("cancelNotifications+++++++");
   }
 
   tz.TZDateTime _nextInstanceOfTenAM(int hour, int minutes) {
