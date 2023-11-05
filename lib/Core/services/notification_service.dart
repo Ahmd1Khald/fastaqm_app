@@ -72,32 +72,108 @@ class NotifyHelper {
     String title = "الصلاة عماد الدين",
     required String body,
   }) async {
-    print("${_nextInstanceOfTenAM(hour, minutes)}+++++++++++++++++++");
-    await flutterLocalNotificationsPlugin.zonedSchedule(
+    // Calculate the next instance of the specified time
+    final tz.TZDateTime scheduledDate = _nextInstanceOfTime(hour, minutes);
+
+    // Calculate the time difference between the scheduled time and the current time
+    final Duration timeUntilNotification =
+        scheduledDate.isBefore(tz.TZDateTime.now(tz.local))
+            ? scheduledDate
+                .add(const Duration(days: 1))
+                .difference(tz.TZDateTime.now(tz.local))
+            : scheduledDate.difference(tz.TZDateTime.now(tz.local));
+
+    print("$scheduledDate +++++++++++++++++++");
+    await flutterLocalNotificationsPlugin
+        .zonedSchedule(
+          1,
+          title,
+          "حان الآن موعد آذان $body",
+          //tz.TZDateTime.from(now, tz.local).add(const Duration(seconds: 5)),
+          scheduledDate,
+          const NotificationDetails(
+            android: AndroidNotificationDetails(
+              'your channel 2',
+              'your channel name',
+              importance: Importance.max,
+              priority: Priority.high,
+              sound: RawResourceAndroidNotificationSound('azan'),
+            ),
+          ),
+          androidAllowWhileIdle: true,
+          uiLocalNotificationDateInterpretation:
+              UILocalNotificationDateInterpretation.absoluteTime,
+          matchDateTimeComponents: DateTimeComponents.time,
+          // payload: '${task.title}|${task.note}|${task.startTime}|',
+        )
+        .then((value) => print("scheduledNotification+++++++++++"));
+  }
+
+  void azkarNotification({
+    required int hour,
+    required int minutes,
+    required String title,
+    required String body,
+  }) async {
+    // Calculate the next instance of the specified time
+    final tz.TZDateTime scheduledDate = _nextInstanceOfTime(hour, minutes);
+
+    // Calculate the time difference between the scheduled time and the current time
+    final Duration timeUntilNotification =
+        scheduledDate.isBefore(tz.TZDateTime.now(tz.local))
+            ? scheduledDate
+                .add(const Duration(days: 1))
+                .difference(tz.TZDateTime.now(tz.local))
+            : scheduledDate.difference(tz.TZDateTime.now(tz.local));
+
+    print("$scheduledDate +++++++++++++++++++");
+
+    await flutterLocalNotificationsPlugin
+        .zonedSchedule(
       0,
-      title,
-      "حان الآن موعد آذان $body",
-      //tz.TZDateTime.from(now, tz.local).add(const Duration(seconds: 5)),
-      _nextInstanceOfTenAM(hour, minutes),
+      "أذكار $title",
+      body,
+      scheduledDate,
       const NotificationDetails(
         android: AndroidNotificationDetails(
-          'your channel 2',
+          'your channel 4',
           'your channel name',
           importance: Importance.max,
-          priority: Priority.high,
-          sound: RawResourceAndroidNotificationSound('azan'),
+          priority: Priority.max,
+          enableVibration: true,
+          enableLights: true,
         ),
       ),
-      androidAllowWhileIdle: true,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
-      // payload: '${task.title}|${task.note}|${task.startTime}|',
+      payload: '${title}|$body', // You can include additional data if needed
+      androidAllowWhileIdle: true,
+    )
+        .then((value) {
+      print('azkarNotification scheduled for $scheduledDate');
+    });
+  }
+
+// Calculate the next instance of the specified time
+  tz.TZDateTime _nextInstanceOfTime(int hour, int minutes) {
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+    tz.TZDateTime scheduledDate = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day,
+      hour,
+      minutes,
     );
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+    return scheduledDate;
   }
 
   cancelNotifications() async {
-    await flutterLocalNotificationsPlugin.cancelAll();
+    await flutterLocalNotificationsPlugin.cancel(1);
     print("cancelNotifications+++++++");
   }
 

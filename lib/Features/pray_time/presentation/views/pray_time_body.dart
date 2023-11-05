@@ -16,9 +16,9 @@ import '../../../../Core/constatnts/colors.dart';
 import '../../../../Core/constatnts/constant.dart';
 import '../../../../Core/helpers/cachehelper.dart';
 import '../../../../Core/widgets/customErrorContainer.dart';
+import '../../../../Core/widgets/custom_SnackBar.dart';
 import '../../../../Core/widgets/custom_floating_button.dart';
 import '../../../../Core/widgets/custom_loading.dart';
-import '../../../../Core/widgets/no_internet_snakbar.dart';
 import '../controller/pray_time_cubit.dart';
 
 class PrayTimeScreen extends StatelessWidget {

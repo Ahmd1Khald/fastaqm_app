@@ -1,3 +1,4 @@
+import 'package:adhan/adhan.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:fastaqm_app/Core/constatnts/assets_manager.dart';
 import 'package:fastaqm_app/Features/qibla/presentation/views/qibla_body.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../../Core/constatnts/app_strings.dart';
 import '../../../../Core/constatnts/colors.dart';
 import '../../../../Core/constatnts/variables.dart';
 import '../../../../Core/helpers/cachehelper.dart';
@@ -35,8 +37,32 @@ class _LayoutScreenState extends State<LayoutScreen> {
   late NotifyHelper notifyHelper;
   @override
   void initState() {
+    NotifyHelper().initializeNotification();
     notifyHelper = NotifyHelper();
-    notifyHelper.initializeNotification();
+    if (CacheHelper.getDate(key: AppStrings.latKey) != null &&
+        CacheHelper.getDate(key: AppStrings.longKey) != null) {
+      print("azkarNotification++++++++++++++++++++++++++++++");
+      final myCoordinates = Coordinates(
+        CacheHelper.getDate(key: AppStrings.latKey),
+        CacheHelper.getDate(key: AppStrings.longKey),
+      ); // Replace with your own location lat, lng.
+      final params = CalculationMethod.egyptian.getParameters();
+      params.madhab = Madhab.shafi;
+      final prayerTimes = PrayerTimes.today(myCoordinates, params);
+      //pray times notify
+      notifyHelper.azkarNotification(
+        hour: prayerTimes.sunrise.hour,
+        minutes: prayerTimes.sunrise.minute,
+        body: "ابدأ يومك بأذكار الصباح",
+        title: 'الصباح',
+      );
+      notifyHelper.azkarNotification(
+        hour: prayerTimes.maghrib.hour,
+        minutes: prayerTimes.maghrib.minute + 15,
+        body: "اختم يومك بأذكار المساء",
+        title: 'المساء',
+      );
+    }
     super.initState();
   }
 

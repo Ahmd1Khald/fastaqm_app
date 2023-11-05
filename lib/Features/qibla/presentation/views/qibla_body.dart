@@ -11,7 +11,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../../../Core/constatnts/app_strings.dart';
 import '../../../../Core/helpers/cachehelper.dart';
-import '../../../../Core/widgets/no_internet_snakbar.dart';
+import '../../../../Core/widgets/custom_SnackBar.dart';
 
 class QiblaScreen extends StatefulWidget {
   const QiblaScreen({Key? key}) : super(key: key);

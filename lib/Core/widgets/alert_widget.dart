@@ -5,7 +5,7 @@ import '../constatnts/app_strings.dart';
 import '../constatnts/colors.dart';
 import '../helpers/cachehelper.dart';
 import '../services/notification_service.dart';
-import 'no_internet_snakbar.dart';
+import 'custom_SnackBar.dart';
 
 class SwitchWidget extends StatefulWidget {
   const SwitchWidget({Key? key, required this.notifyHelper}) : super(key: key);
