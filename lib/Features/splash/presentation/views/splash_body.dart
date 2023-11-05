@@ -1,15 +1,13 @@
-import 'package:fastaqm_app/Core/constatnts/app_strings.dart';
-import 'package:fastaqm_app/Core/helpers/cachehelper.dart';
-import 'package:fastaqm_app/Features/layout/presentation/views/layout_body.dart';
 import 'package:fastaqm_app/Features/splash/presentation/views/widgets/sliding_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../../../Core/constatnts/app_functions.dart';
+import '../../../../Core/constatnts/app_strings.dart';
 import '../../../../Core/constatnts/assets_manager.dart';
 import '../../../../Core/constatnts/variables.dart';
+import '../../../../Core/helpers/cachehelper.dart';
+import '../../../layout/presentation/views/layout_body.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -22,70 +20,11 @@ class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<Offset> slidingAnimation;
-  late Position? position;
-
-  Future<void> getUserLocation() async {
-    try {
-      print("----0-----");
-      // CacheHelper.removeData(key: AppStrings.latKey);
-      // CacheHelper.removeData(key: AppStrings.longKey);
-
-      LocationPermission permission = await Geolocator.checkPermission();
-
-      if (permission == LocationPermission.denied) {
-        print("----1-----");
-        permission = await Geolocator.requestPermission();
-        CacheHelper.saveData(key: AppStrings.locationKey, value: false);
-        navigateToHome();
-      } else if (permission == LocationPermission.deniedForever) {
-        print("----2-----");
-        CacheHelper.saveData(key: AppStrings.locationKey, value: false);
-        navigateToHome();
-        throw PlatformException(
-          code: 'PERMISSION_DENIED_FOREVER',
-          message: 'Location permission denied forever',
-        );
-      } else {
-        print("----3-----");
-        // Check if the device is currently offline
-        final bool isOffline = !await InternetConnectionChecker().hasConnection;
-        if (isOffline) {
-          // Handle offline scenario: No network connectivity
-          print("----offline-----");
-          CacheHelper.saveData(key: AppStrings.locationKey, value: false);
-          navigateToHome();
-        } else {
-          // Device is online, attempt to get the location
-          final Position position = await Geolocator.getCurrentPosition();
-          print(position);
-          CacheHelper.saveData(key: AppStrings.locationKey, value: true);
-          CacheHelper.saveData(
-              key: AppStrings.latKey, value: position.latitude);
-          CacheHelper.saveData(
-              key: AppStrings.longKey, value: position.longitude);
-          navigateToHome();
-          // Continue with additional logic or data processing here.
-        }
-      }
-    } catch (e) {
-      // Handle exceptions, including those related to network or location errors
-      CacheHelper.saveData(key: AppStrings.locationKey, value: false);
-      print("----error-----");
-      navigateToHome();
-      // throw PlatformException(
-      //   code: 'ERROR_GETTING_LOCATION',
-      //   message: 'Error getting user location: $e',
-      // );
-    }
-  }
 
   @override
   void initState() {
     initSlidingAnimation();
-    getUserLocation();
-    print("lat => ${CacheHelper.getDate(key: AppStrings.latKey)}");
-    print("long => ${CacheHelper.getDate(key: AppStrings.longKey)}");
-
+    getLocationAndNavigate(context);
     super.initState();
   }
 
@@ -107,9 +46,6 @@ class _SplashScreenState extends State<SplashScreen>
             AssetsManager.appLogo,
             height: AppVariables.appSize(context).width * 0.5,
           ),
-          // const SizedBox(
-          //   height: 4,
-          // ),
           SlidingText(slidingAnimation: slidingAnimation),
         ],
       ),
@@ -129,7 +65,49 @@ class _SplashScreenState extends State<SplashScreen>
     animationController.forward();
   }
 
-  void navigateToHome() {
+  void getLocationAndNavigate(context) async {
+    final bool hasLocationData =
+        CacheHelper.getDate(key: AppStrings.locationKey) ?? false;
+    if (!hasLocationData) {
+      // Location data is not cached, request location
+      final bool locationPermissionGranted = await requestLocationPermission();
+      if (locationPermissionGranted) {
+        await getLocation(context);
+      } else {
+        navigateToHome(context);
+      }
+    } else {
+      // Location data is already cached, navigate directly
+      navigateToHome(context);
+    }
+  }
+
+  Future<bool> requestLocationPermission() async {
+    try {
+      final LocationPermission permission =
+          await Geolocator.requestPermission();
+      return permission == LocationPermission.whileInUse ||
+          permission == LocationPermission.always;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<void> getLocation(context) async {
+    try {
+      final Position position = await Geolocator.getCurrentPosition();
+      // Cache location data
+      CacheHelper.saveData(key: AppStrings.locationKey, value: true);
+      CacheHelper.saveData(key: AppStrings.latKey, value: position.latitude);
+      CacheHelper.saveData(key: AppStrings.longKey, value: position.longitude);
+    } catch (e) {
+      // Handle location-related errors
+    } finally {
+      navigateToHome(context);
+    }
+  }
+
+  void navigateToHome(context) {
     Future.delayed(const Duration(seconds: 2)).then((value) {
       AppFunctions.pushAndRemove(
         context: context,

@@ -128,7 +128,7 @@ class PrayTimeScreen extends StatelessWidget {
                   print("----offline-----");
                   CacheHelper.saveData(
                       key: AppStrings.locationKey, value: false);
-                  noInternetSnakbar(context);
+                  customSnackBar(context: context, title: 'لا يوجد انترنيت');
                 } else {
                   // Device is online, attempt to get the location
                   final Position position =

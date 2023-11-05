@@ -37,8 +37,6 @@ class _LayoutScreenState extends State<LayoutScreen> {
   void initState() {
     notifyHelper = NotifyHelper();
     notifyHelper.initializeNotification();
-    notifyHelper.displayNotification(
-        title: "الصلاة عماد الدين", body: "العشاء");
     super.initState();
   }
 
@@ -66,8 +64,9 @@ class _LayoutScreenState extends State<LayoutScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
                       content: SizedBox(
-                        height: AppVariables.appSize(context).height * 0.3,
+                        height: AppVariables.appSize(context).height * 0.4,
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
                               AssetsManager.azanIcon,
@@ -75,7 +74,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
                             ),
                             SizedBox(
                               height:
-                                  AppVariables.appSize(context).height * 0.01,
+                                  AppVariables.appSize(context).height * 0.013,
                             ),
                             Text(
                               'هل تود تفعيل الآذان؟',
@@ -86,25 +85,27 @@ class _LayoutScreenState extends State<LayoutScreen> {
                             ),
                             SizedBox(
                               height:
-                                  AppVariables.appSize(context).height * 0.01,
+                                  AppVariables.appSize(context).height * 0.013,
                             ),
                             SwitchWidget(notifyHelper: notifyHelper),
                             const Spacer(),
-                            Align(
-                              alignment: AlignmentDirectional.bottomEnd,
-                              child: TextButton(
-                                onPressed: () {
-                                  setState(() {});
-                                  Navigator.pop(context);
-                                },
-                                child: Text(
-                                  "تم",
-                                  style: GoogleFonts.noticiaText(
-                                    color: MyColors.darkBrown,
-                                    fontSize: 18.sp,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                    setState(() {});
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text(
+                                    "تم",
+                                    style: GoogleFonts.noticiaText(
+                                      color: MyColors.darkBrown,
+                                      fontSize: 18.sp,
+                                    ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
                           ],
                         ),

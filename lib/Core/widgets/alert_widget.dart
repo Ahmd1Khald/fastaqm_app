@@ -5,6 +5,7 @@ import '../constatnts/app_strings.dart';
 import '../constatnts/colors.dart';
 import '../helpers/cachehelper.dart';
 import '../services/notification_service.dart';
+import 'no_internet_snakbar.dart';
 
 class SwitchWidget extends StatefulWidget {
   const SwitchWidget({Key? key, required this.notifyHelper}) : super(key: key);
@@ -16,6 +17,7 @@ class SwitchWidget extends StatefulWidget {
 
 class _SwitchWidgetState extends State<SwitchWidget> {
   bool isSwitched = CacheHelper.getDate(key: 'isSwitched') ?? false;
+
   @override
   Widget build(BuildContext context) {
     return Switch(
@@ -23,48 +25,54 @@ class _SwitchWidgetState extends State<SwitchWidget> {
         activeColor: MyColors.lightBrown,
         activeTrackColor: MyColors.darkBrown,
         onChanged: (value) {
-          print("value => $value");
-          isSwitched = value;
-          CacheHelper.saveData(key: "isSwitched", value: isSwitched);
-          setState(() {});
+          if (CacheHelper.getDate(key: AppStrings.latKey) != null &&
+              CacheHelper.getDate(key: AppStrings.longKey) != null) {
+            print("value => $value");
+            isSwitched = value;
+            CacheHelper.saveData(key: "isSwitched", value: isSwitched);
+            setState(() {});
 
-          if (CacheHelper.getDate(key: 'isSwitched')) {
-            //setup pray times
-            final myCoordinates = Coordinates(
-              CacheHelper.getDate(key: AppStrings.latKey),
-              CacheHelper.getDate(key: AppStrings.longKey),
-            ); // Replace with your own location lat, lng.
-            final params = CalculationMethod.egyptian.getParameters();
-            params.madhab = Madhab.shafi;
-            final prayerTimes = PrayerTimes.today(myCoordinates, params);
-            //pray times notify
-            widget.notifyHelper.scheduledNotification(
-              hour: prayerTimes.fajr.hour,
-              minutes: prayerTimes.fajr.minute,
-              body: "الفجر",
-            );
-            widget.notifyHelper.scheduledNotification(
-              hour: prayerTimes.dhuhr.hour,
-              minutes: prayerTimes.dhuhr.minute,
-              body: "الظهر",
-            );
-            widget.notifyHelper.scheduledNotification(
-              hour: prayerTimes.asr.hour,
-              minutes: prayerTimes.asr.minute,
-              body: "العصر",
-            );
-            widget.notifyHelper.scheduledNotification(
-              hour: prayerTimes.maghrib.hour,
-              minutes: prayerTimes.maghrib.minute,
-              body: "المغرب",
-            );
-            widget.notifyHelper.scheduledNotification(
-              hour: prayerTimes.isha.hour,
-              minutes: prayerTimes.isha.minute,
-              body: "العشاء",
-            );
+            if (CacheHelper.getDate(key: 'isSwitched')) {
+              //setup pray times
+              final myCoordinates = Coordinates(
+                CacheHelper.getDate(key: AppStrings.latKey),
+                CacheHelper.getDate(key: AppStrings.longKey),
+              ); // Replace with your own location lat, lng.
+              final params = CalculationMethod.egyptian.getParameters();
+              params.madhab = Madhab.shafi;
+              final prayerTimes = PrayerTimes.today(myCoordinates, params);
+              //pray times notify
+              widget.notifyHelper.scheduledNotification(
+                hour: prayerTimes.fajr.hour,
+                minutes: prayerTimes.fajr.minute,
+                body: "الفجر",
+              );
+              widget.notifyHelper.scheduledNotification(
+                hour: prayerTimes.dhuhr.hour,
+                minutes: prayerTimes.dhuhr.minute,
+                body: "الظهر",
+              );
+              widget.notifyHelper.scheduledNotification(
+                hour: prayerTimes.asr.hour,
+                minutes: prayerTimes.asr.minute,
+                body: "العصر",
+              );
+              widget.notifyHelper.scheduledNotification(
+                hour: prayerTimes.maghrib.hour,
+                minutes: prayerTimes.maghrib.minute,
+                body: "المغرب",
+              );
+              widget.notifyHelper.scheduledNotification(
+                hour: prayerTimes.isha.hour,
+                minutes: prayerTimes.isha.minute,
+                body: "العشاء",
+              );
+            } else {
+              widget.notifyHelper.cancelNotifications();
+            }
           } else {
-            widget.notifyHelper.cancelNotifications();
+            customSnackBar(
+                context: context, title: 'قم بالسماح بأخذ موقعك أولا');
           }
         });
   }

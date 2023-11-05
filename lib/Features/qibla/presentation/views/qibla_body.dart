@@ -31,7 +31,7 @@ class _QiblaScreenState extends State<QiblaScreen> {
         // Handle offline scenario: No network connectivity
         print("----offline-----");
         CacheHelper.saveData(key: AppStrings.locationKey, value: false);
-        noInternetSnakbar(context);
+        customSnackBar(context: context, title: 'لا يوجد انترنيت');
       } else {
         // Device is online, attempt to get the location
         final Position position = await Geolocator.getCurrentPosition();

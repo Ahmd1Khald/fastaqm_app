@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../constatnts/colors.dart';
 
-void noInternetSnakbar(context) {
+void customSnackBar({required context, required String title}) {
   ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(
-      content: Text('لا يوجد انترنيت', textAlign: TextAlign.right),
+    SnackBar(
+      content: Text(title, textAlign: TextAlign.right),
       backgroundColor: MyColors.darkBrown,
       behavior: SnackBarBehavior.floating,
     ),
