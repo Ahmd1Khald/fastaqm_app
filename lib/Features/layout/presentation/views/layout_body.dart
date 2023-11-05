@@ -37,11 +37,10 @@ class _LayoutScreenState extends State<LayoutScreen> {
   late NotifyHelper notifyHelper;
   @override
   void initState() {
-    NotifyHelper().initializeNotification();
     notifyHelper = NotifyHelper();
+    notifyHelper.initializeNotification();
     if (CacheHelper.getDate(key: AppStrings.latKey) != null &&
         CacheHelper.getDate(key: AppStrings.longKey) != null) {
-      print("azkarNotification++++++++++++++++++++++++++++++");
       final myCoordinates = Coordinates(
         CacheHelper.getDate(key: AppStrings.latKey),
         CacheHelper.getDate(key: AppStrings.longKey),

@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     initSlidingAnimation();
-    getLocationAndNavigate(context);
+
     super.initState();
   }
 
@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 
-  void initSlidingAnimation() {
+  Future initSlidingAnimation() async {
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1500),
@@ -62,7 +62,9 @@ class _SplashScreenState extends State<SplashScreen>
         Tween<Offset>(begin: const Offset(0, 10), end: Offset.zero)
             .animate(animationController);
 
-    animationController.forward();
+    animationController
+        .forward()
+        .then((value) => getLocationAndNavigate(context));
   }
 
   void getLocationAndNavigate(context) async {
