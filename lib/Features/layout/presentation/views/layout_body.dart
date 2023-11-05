@@ -54,12 +54,14 @@ class _LayoutScreenState extends State<LayoutScreen> {
         minutes: prayerTimes.sunrise.minute,
         body: "ابدأ يومك بأذكار الصباح",
         title: 'الصباح',
+        id: 0,
       );
       notifyHelper.azkarNotification(
         hour: prayerTimes.maghrib.hour,
         minutes: prayerTimes.maghrib.minute + 15,
         body: "اختم يومك بأذكار المساء",
         title: 'المساء',
+        id: 1,
       );
     }
     super.initState();

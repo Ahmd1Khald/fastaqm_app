@@ -46,26 +46,31 @@ class _SwitchWidgetState extends State<SwitchWidget> {
                 hour: prayerTimes.fajr.hour,
                 minutes: prayerTimes.fajr.minute,
                 body: "الفجر",
+                id: 2,
               );
               widget.notifyHelper.scheduledNotification(
                 hour: prayerTimes.dhuhr.hour,
                 minutes: prayerTimes.dhuhr.minute,
                 body: "الظهر",
+                id: 3,
               );
               widget.notifyHelper.scheduledNotification(
                 hour: prayerTimes.asr.hour,
                 minutes: prayerTimes.asr.minute,
                 body: "العصر",
+                id: 4,
               );
               widget.notifyHelper.scheduledNotification(
                 hour: prayerTimes.maghrib.hour,
                 minutes: prayerTimes.maghrib.minute,
                 body: "المغرب",
+                id: 5,
               );
               widget.notifyHelper.scheduledNotification(
                 hour: prayerTimes.isha.hour,
                 minutes: prayerTimes.isha.minute,
                 body: "العشاء",
+                id: 6,
               );
             } else {
               widget.notifyHelper.cancelNotifications();

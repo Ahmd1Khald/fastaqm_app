@@ -68,6 +68,7 @@ class NotifyHelper {
 
   scheduledNotification({
     required int hour,
+    required int id,
     required int minutes,
     String title = "الصلاة عماد الدين",
     required String body,
@@ -86,7 +87,7 @@ class NotifyHelper {
     print("$scheduledDate +++++++++++++++++++");
     await flutterLocalNotificationsPlugin
         .zonedSchedule(
-          1,
+          id,
           title,
           "حان الآن موعد آذان $body",
           //tz.TZDateTime.from(now, tz.local).add(const Duration(seconds: 5)),
@@ -112,6 +113,7 @@ class NotifyHelper {
   void azkarNotification({
     required int hour,
     required int minutes,
+    required int id,
     required String title,
     required String body,
   }) async {
@@ -130,7 +132,7 @@ class NotifyHelper {
 
     await flutterLocalNotificationsPlugin
         .zonedSchedule(
-      0,
+      id,
       "أذكار $title",
       body,
       scheduledDate,
@@ -173,7 +175,11 @@ class NotifyHelper {
   }
 
   cancelNotifications() async {
-    await flutterLocalNotificationsPlugin.cancel(1);
+    await flutterLocalNotificationsPlugin.cancel(2);
+    await flutterLocalNotificationsPlugin.cancel(3);
+    await flutterLocalNotificationsPlugin.cancel(4);
+    await flutterLocalNotificationsPlugin.cancel(5);
+    await flutterLocalNotificationsPlugin.cancel(6);
     print("cancelNotifications+++++++");
   }
 
