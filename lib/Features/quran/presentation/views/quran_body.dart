@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:fastaqm_app/Core/widgets/custom_app_bar.dart';
@@ -82,11 +83,11 @@ class IndexCreator extends StatefulWidget {
 }
 
 class _IndexCreatorState extends State<IndexCreator> {
-  // bool isPlay = false;
-  // final play = AudioPlayer();
+  bool isPlay = false;
+  final play = AudioPlayer();
   // Future<void> playQuran({required int sura}) async {
   //   print("sura $sura");
-  //   print(quraan.getAudioURLByVerse(sura, 1));
+  //   //print(quraan.getAudioURLByVerse(sura, 1));
   //   print(quraan.getAudioURLBySurah(sura));
   //   await play.play(UrlSource(quraan.getAudioURLBySurah(sura)));
   //   setState(() {});
@@ -195,6 +196,7 @@ class _IndexCreatorState extends State<IndexCreator> {
                       ),
                       onPressed: () {
                         fabIsClicked = false;
+                        //playQuran(sura: 114);
                         Navigator.push(
                           context,
                           MaterialPageRoute(

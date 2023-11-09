@@ -58,7 +58,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
       );
       notifyHelper.azkarNotification(
         hour: prayerTimes.maghrib.hour,
-        minutes: prayerTimes.maghrib.minute + 15,
+        minutes: prayerTimes.maghrib.minute + 10,
         body: "اختم يومك بأذكار المساء",
         title: 'المساء',
         id: 1,
@@ -73,84 +73,98 @@ class _LayoutScreenState extends State<LayoutScreen> {
     return Scaffold(
       bottomNavigationBar: buildCurvedNavigationBar(navBarIconSize),
       appBar: AppBar(
-        title: const AppName(),
-        leading: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        title: Row(
           children: [
-            Shimmer.fromColors(
-              period: const Duration(seconds: 2),
-              baseColor: MyColors.babyBrown,
-              highlightColor: MyColors.darkBrown,
-              child: IconButton(
-                onPressed: () async {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      backgroundColor:
-                          Theme.of(context).scaffoldBackgroundColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12)),
-                      content: SizedBox(
-                        height: AppVariables.appSize(context).height * 0.4,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              AssetsManager.azanIcon,
-                              width: 80.sp,
+            InkWell(
+              onTap: () async {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    content: SizedBox(
+                      height: AppVariables.appSize(context).height * 0.4,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            AssetsManager.azanIcon,
+                            width: 80.sp,
+                          ),
+                          SizedBox(
+                            height:
+                                AppVariables.appSize(context).height * 0.013,
+                          ),
+                          Text(
+                            'هل تود تفعيل الآذان؟',
+                            style: GoogleFonts.noticiaText(
+                              color: MyColors.darkBrown,
+                              fontSize: 20.sp,
                             ),
-                            SizedBox(
-                              height:
-                                  AppVariables.appSize(context).height * 0.013,
-                            ),
-                            Text(
-                              'هل تود تفعيل الآذان؟',
-                              style: GoogleFonts.noticiaText(
-                                color: MyColors.darkBrown,
-                                fontSize: 20.sp,
-                              ),
-                            ),
-                            SizedBox(
-                              height:
-                                  AppVariables.appSize(context).height * 0.013,
-                            ),
-                            SwitchWidget(notifyHelper: notifyHelper),
-                            const Spacer(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                TextButton(
-                                  onPressed: () {
-                                    setState(() {});
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text(
-                                    "تم",
-                                    style: GoogleFonts.noticiaText(
-                                      color: MyColors.darkBrown,
-                                      fontSize: 18.sp,
-                                    ),
+                          ),
+                          SizedBox(
+                            height:
+                                AppVariables.appSize(context).height * 0.013,
+                          ),
+                          SwitchWidget(notifyHelper: notifyHelper),
+                          const Spacer(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  setState(() {});
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  "تم",
+                                  style: GoogleFonts.noticiaText(
+                                    color: MyColors.darkBrown,
+                                    fontSize: 18.sp,
                                   ),
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                  );
-                },
-                icon: Icon(
-                  CacheHelper.getDate(key: 'isSwitched') == true
-                      ? Icons.notifications_active
-                      : CacheHelper.getDate(key: 'isSwitched') == false
-                          ? Icons.notifications
-                          : Icons.notifications,
-                  color: MyColors.darkBrown,
-                  size: 32.sp,
+                  ),
+                );
+              },
+              child: SizedBox(
+                width: AppVariables.appSize(context).width * 0.25,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Shimmer.fromColors(
+                      period: const Duration(seconds: 2),
+                      baseColor: MyColors.babyBrown,
+                      highlightColor: MyColors.darkBrown,
+                      child: Icon(
+                        CacheHelper.getDate(key: 'isSwitched') == true
+                            ? Icons.notifications_active
+                            : CacheHelper.getDate(key: 'isSwitched') == false
+                                ? Icons.notifications
+                                : Icons.notifications,
+                        color: MyColors.darkBrown,
+                        size: 30.sp,
+                      ),
+                    ),
+                    Text(
+                      "الآذان",
+                      style: GoogleFonts.noticiaText(
+                        color: MyColors.darkBrown,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
+            const Spacer(),
+            const AppName(),
           ],
         ),
       ),

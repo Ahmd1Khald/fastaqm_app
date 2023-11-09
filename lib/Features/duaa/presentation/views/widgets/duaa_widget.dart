@@ -57,13 +57,13 @@ class _DuaaWidgetState extends State<DuaaWidget> {
         automaticallyImplyLeading: false,
         forceMaterialTransparency: true,
         backgroundColor: MyColors.creamColor,
-        leading: IconButton(
-          onPressed: () {
+        title: reusableSettingWidget(
+          fnc: () {
             setState(() {
               showSlider = !showSlider;
             });
           },
-          icon: reusableSettingIcon(),
+          context: context,
         ),
         actions: [
           IconButton(

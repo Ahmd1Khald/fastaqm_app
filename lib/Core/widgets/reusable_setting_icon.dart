@@ -1,12 +1,32 @@
+import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../constatnts/colors.dart';
 
-Icon reusableSettingIcon() {
-  return Icon(
-    Icons.settings,
-    size: 40.sp,
-    color: MyColors.darkBrown,
+SizedBox reusableSettingWidget({required VoidCallback fnc, required context}) {
+  return SizedBox(
+    width: AppVariables.appSize(context).width * 0.4,
+    child: MaterialButton(
+      onPressed: fnc,
+      height: 25,
+      color: MyColors.lightBrown,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Icon(
+            Icons.settings,
+            color: MyColors.darkBrown,
+            size: 20,
+          ),
+          Text(
+            'تعديل حجم الخط',
+            style: GoogleFonts.noticiaText(
+              color: MyColors.darkBrown,
+            ),
+          ),
+        ],
+      ),
+    ),
   );
 }

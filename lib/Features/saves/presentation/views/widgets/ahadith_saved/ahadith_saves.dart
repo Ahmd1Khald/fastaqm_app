@@ -37,11 +37,11 @@ class AhadithSaves extends StatelessWidget {
                 automaticallyImplyLeading: false,
                 forceMaterialTransparency: true,
                 backgroundColor: MyColors.creamColor,
-                leading: IconButton(
-                  onPressed: () {
+                title: reusableSettingWidget(
+                  fnc: () {
                     cubit.showSliderFunc(true);
                   },
-                  icon: reusableSettingIcon(),
+                  context: context,
                 ),
                 actions: [
                   IconButton(

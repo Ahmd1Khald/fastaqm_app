@@ -70,7 +70,7 @@ class NotifyHelper {
     required int hour,
     required int id,
     required int minutes,
-    String title = "الصلاة عماد الدين",
+    String title = "فاستقم",
     required String body,
   }) async {
     // Calculate the next instance of the specified time
@@ -129,11 +129,12 @@ class NotifyHelper {
             : scheduledDate.difference(tz.TZDateTime.now(tz.local));
 
     print("$scheduledDate +++++++++++++++++++");
+    print("اذكاار +++++++++++++++++++");
 
     await flutterLocalNotificationsPlugin
         .zonedSchedule(
       id,
-      "أذكار $title",
+      "فاستقم",
       body,
       scheduledDate,
       const NotificationDetails(

@@ -309,13 +309,13 @@ class _SurahBuilderState extends State<SurahBuilder> {
                   color: MyColors.darkBrown,
                 )),
           ],
-          leading: IconButton(
-            onPressed: () {
+          title: reusableSettingWidget(
+            fnc: () {
               setState(() {
                 showSlider = !showSlider;
               });
             },
-            icon: reusableSettingIcon(),
+            context: context,
           ),
           backgroundColor: MyColors.appBackGroundColor,
           elevation: 0,

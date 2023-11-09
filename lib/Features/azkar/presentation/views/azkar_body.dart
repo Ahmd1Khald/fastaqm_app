@@ -43,11 +43,11 @@ class AzkarScreen extends StatelessWidget {
               appBar: AppBar(
                 automaticallyImplyLeading: false,
                 forceMaterialTransparency: true,
-                leading: IconButton(
-                  onPressed: () {
+                title: reusableSettingWidget(
+                  fnc: () {
                     cubit.showSliderFunc(true);
                   },
-                  icon: reusableSettingIcon(),
+                  context: context,
                 ),
                 actions: [
                   Text(
