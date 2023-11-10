@@ -43,8 +43,8 @@ class _SwitchWidgetState extends State<SwitchWidget> {
               final prayerTimes = PrayerTimes.today(myCoordinates, params);
               //pray times notify
               widget.notifyHelper.scheduledNotification(
-                hour: prayerTimes.fajr.hour,
-                minutes: prayerTimes.fajr.minute,
+                hour: prayerTimes.fajr.hour, //DateTime.now().hour,
+                minutes: prayerTimes.fajr.minute, //DateTime.now().minute + 1,
                 body: "الفجر",
                 id: 2,
               );

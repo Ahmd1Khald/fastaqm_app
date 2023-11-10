@@ -48,6 +48,7 @@ class AzkarScreen extends StatelessWidget {
                     cubit.showSliderFunc(true);
                   },
                   context: context,
+                  isQuran: false,
                 ),
                 actions: [
                   Text(

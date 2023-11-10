@@ -94,7 +94,7 @@ class NotifyHelper {
           scheduledDate,
           const NotificationDetails(
             android: AndroidNotificationDetails(
-              'your channel 2',
+              'your channel 5',
               'your channel name',
               importance: Importance.max,
               priority: Priority.high,

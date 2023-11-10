@@ -43,6 +43,7 @@ class AhadithScreen extends StatelessWidget {
                   cubit.showSliderFunc(true);
                 },
                 context: context,
+                isQuran: false,
               ),
               actions: [
                 IconButton(

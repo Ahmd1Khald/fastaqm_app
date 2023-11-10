@@ -64,6 +64,7 @@ class _DuaaWidgetState extends State<DuaaWidget> {
             });
           },
           context: context,
+          isQuran: false,
         ),
         actions: [
           IconButton(

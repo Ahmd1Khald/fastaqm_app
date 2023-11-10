@@ -316,6 +316,7 @@ class _SurahBuilderState extends State<SurahBuilder> {
               });
             },
             context: context,
+            isQuran: true,
           ),
           backgroundColor: MyColors.appBackGroundColor,
           elevation: 0,
