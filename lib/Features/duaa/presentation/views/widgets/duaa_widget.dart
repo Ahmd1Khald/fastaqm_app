@@ -159,7 +159,7 @@ class _DuaaWidgetState extends State<DuaaWidget> {
                         fnc: () {
                           //backDuaa();
                         },
-                        color: Colors.grey,
+                        color: MyColors.lightBrown,
                       ),
                       CustomNextButton(
                         fnc: () {
@@ -179,7 +179,7 @@ class _DuaaWidgetState extends State<DuaaWidget> {
                         fnc: () {
                           nextDuaa(len: widget.list.length - 1);
                         },
-                        color: Colors.grey,
+                        color: MyColors.lightBrown,
                       ),
                     ] else ...[
                       SizedBox(
@@ -216,13 +216,13 @@ class _DuaaWidgetState extends State<DuaaWidget> {
                       fnc: () {
                         //backDuaa();
                       },
-                      color: Colors.grey,
+                      color: MyColors.lightBrown,
                     ),
                     CustomNextButton(
                       fnc: () {
                         //nextDuaa(len: widget.list.length - 1);
                       },
-                      color: Colors.grey,
+                      color: MyColors.lightBrown,
                     ),
                   ],
                 ),
