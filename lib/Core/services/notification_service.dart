@@ -72,6 +72,7 @@ class NotifyHelper {
     required int minutes,
     String title = "فاستقم",
     required String body,
+    //required String channelId,
   }) async {
     // Calculate the next instance of the specified time
     final tz.TZDateTime scheduledDate = _nextInstanceOfTime(hour, minutes);
@@ -139,7 +140,7 @@ class NotifyHelper {
       scheduledDate,
       const NotificationDetails(
         android: AndroidNotificationDetails(
-          'your channel 4',
+          'your channel 6',
           'your channel name',
           importance: Importance.max,
           priority: Priority.max,

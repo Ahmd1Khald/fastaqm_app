@@ -49,20 +49,6 @@ class _LayoutScreenState extends State<LayoutScreen> {
       params.madhab = Madhab.shafi;
       final prayerTimes = PrayerTimes.today(myCoordinates, params);
       //pray times notify
-      notifyHelper.azkarNotification(
-        hour: prayerTimes.sunrise.hour,
-        minutes: prayerTimes.sunrise.minute,
-        body: "ابدأ يومك بأذكار الصباح",
-        title: 'الصباح',
-        id: 0,
-      );
-      notifyHelper.azkarNotification(
-        hour: prayerTimes.maghrib.hour,
-        minutes: prayerTimes.maghrib.minute + 10,
-        body: "اختم يومك بأذكار المساء",
-        title: 'المساء',
-        id: 1,
-      );
     }
     super.initState();
   }

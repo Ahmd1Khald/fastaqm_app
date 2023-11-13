@@ -72,6 +72,21 @@ class _SwitchWidgetState extends State<SwitchWidget> {
                 body: "العشاء",
                 id: 6,
               );
+
+              widget.notifyHelper.azkarNotification(
+                hour: prayerTimes.fajr.hour,
+                minutes: prayerTimes.fajr.minute + 20,
+                body: "ابدأ يومك بأذكار الصباح",
+                title: 'الصباح',
+                id: 0,
+              );
+              widget.notifyHelper.azkarNotification(
+                hour: prayerTimes.asr.hour,
+                minutes: prayerTimes.asr.minute + 20,
+                body: "اختم يومك بأذكار المساء",
+                title: 'المساء',
+                id: 1,
+              );
             } else {
               widget.notifyHelper.cancelNotifications();
             }

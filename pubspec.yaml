@@ -18,6 +18,8 @@ dependencies:
   shimmer: ^3.0.0
   flutter_spinkit: ^5.2.0
   flutter_qiblah: ^2.2.0
+  # permission
+  permission_handler: ^11.0.1
   #bloc
   bloc: ^8.1.2
   flutter_bloc: ^8.1.3
