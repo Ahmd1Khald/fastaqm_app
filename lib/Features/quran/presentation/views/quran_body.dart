@@ -126,107 +126,111 @@ class _IndexCreatorState extends State<IndexCreator> {
           ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, i) => Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // SizedBox(
-                //   width: AppVariables.appSize(context).width * 0.14,
-                //   child: Container(
-                //     decoration: BoxDecoration(
-                //         shape: BoxShape.circle,
-                //         border: Border.all(
-                //           color: MyColors.darkBrown,
-                //           width: 5,
-                //         )),
-                //     child: Center(
-                //       child: IconButton(
-                //           onPressed: () {
-                //             playQuran(sura: i + 1);
-                //             setState(() {
-                //               isPlay = !isPlay;
-                //             });
-                //           },
-                //           icon: Icon(
-                //             isPlay ? Icons.pause : Icons.play_arrow,
-                //             color: MyColors.darkBrown,
-                //             size: 26.sp,
-                //           )),
-                //     ),
-                //   ),
-                // ),
-                // SizedBox(
-                //   width: AppVariables.appSize(context).width * 0.04,
-                // ),
-                SizedBox(
-                  width: AppVariables.appSize(context).width * 0.7,
-                  height: AppVariables.appSize(context).width * 0.17,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: MyColors.lightBrown,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: TextButton(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          //ArabicSuraNumber(i: i),
-                          if (quraan.getPlaceOfRevelation(i + 1) ==
-                              "Madinah") ...[
-                            Image.asset(
-                              AssetsManager.masjedIcon,
-                              width: 30.sp,
-                            ),
-                          ] else ...[
-                            Image.asset(
-                              AssetsManager.makaaIcon,
-                              width: 30.sp,
+            itemBuilder: (context, i) => Padding(
+              padding: EdgeInsets.only(bottom: i == 113 ? 50.0 : 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // SizedBox(
+                  //   width: AppVariables.appSize(context).width * 0.14,
+                  //   child: Container(
+                  //     decoration: BoxDecoration(
+                  //         shape: BoxShape.circle,
+                  //         border: Border.all(
+                  //           color: MyColors.darkBrown,
+                  //           width: 5,
+                  //         )),
+                  //     child: Center(
+                  //       child: IconButton(
+                  //           onPressed: () {
+                  //             playQuran(sura: i + 1);
+                  //             setState(() {
+                  //               isPlay = !isPlay;
+                  //             });
+                  //           },
+                  //           icon: Icon(
+                  //             isPlay ? Icons.pause : Icons.play_arrow,
+                  //             color: MyColors.darkBrown,
+                  //             size: 26.sp,
+                  //           )),
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   width: AppVariables.appSize(context).width * 0.04,
+                  // ),
+                  SizedBox(
+                    width: AppVariables.appSize(context).width * 0.7,
+                    height: AppVariables.appSize(context).width * 0.17,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: MyColors.lightBrown,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: TextButton(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            //ArabicSuraNumber(i: i),
+                            if (quraan.getPlaceOfRevelation(i + 1) ==
+                                "Madinah") ...[
+                              Image.asset(
+                                AssetsManager.masjedIcon,
+                                width: 30.sp,
+                              ),
+                            ] else ...[
+                              Image.asset(
+                                AssetsManager.makaaIcon,
+                                width: 30.sp,
+                              ),
+                            ],
+                            const Spacer(),
+                            Text(
+                              arabicName[i]['name'],
+                              style: GoogleFonts.noticiaText(
+                                fontSize: 24.sp,
+                                fontWeight: FontWeight.w600,
+                                color: MyColors.darkBrown,
+                              ),
+                              textDirection: TextDirection.rtl,
                             ),
                           ],
-                          const Spacer(),
-                          Text(
-                            arabicName[i]['name'],
-                            style: GoogleFonts.noticiaText(
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.w600,
-                              color: MyColors.darkBrown,
-                            ),
-                            textDirection: TextDirection.rtl,
-                          ),
-                        ],
+                        ),
+                        onPressed: () {
+                          fabIsClicked = false;
+                          //playQuran(sura: 114);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SurahBuilder(
+                                      arabic: quran[0],
+                                      sura: i,
+                                      suraName: arabicName[i]['name'],
+                                      ayah: 0,
+                                    )),
+                          );
+                        },
                       ),
-                      onPressed: () {
-                        fabIsClicked = false;
-                        //playQuran(sura: 114);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SurahBuilder(
-                                    arabic: quran[0],
-                                    sura: i,
-                                    suraName: arabicName[i]['name'],
-                                    ayah: 0,
-                                  )),
-                        );
-                      },
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: 10.w,
-                ),
-                CircleAvatar(
-                  backgroundColor: MyColors.darkBrown,
-                  radius: 25.sp,
-                  child: Text(
-                    "${i + 1}",
-                    style: GoogleFonts.noticiaText(
-                      color: MyColors.whiteColor,
-                      fontSize: 22.sp,
-                      fontWeight: FontWeight.w500,
+                  SizedBox(
+                    width: 10.w,
+                  ),
+                  CircleAvatar(
+                    backgroundColor: MyColors.darkBrown,
+                    radius: 25.sp,
+                    child: Text(
+                      AppFunctions.convertEnglishNumberToArabic(
+                          (i + 1).toString()),
+                      style: GoogleFonts.noticiaText(
+                        color: MyColors.whiteColor,
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             separatorBuilder: (context, index) => SizedBox(
               height: 10.h,
