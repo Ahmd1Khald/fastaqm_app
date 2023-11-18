@@ -134,40 +134,48 @@ class _IndexCreatorState extends State<IndexCreator> {
     return menuItems;
   }
 
-  String getAudioUrl(String audioValue) {
+  String getAudioUrl({required String audioValue, required int sura}) {
+    String suraNum = sura.toString();
+    if (sura < 10) {
+      suraNum = "00$sura";
+    } else if (sura > 10 && sura < 100) {
+      suraNum = "0$sura";
+    } else {
+      suraNum = "$sura";
+    }
     switch (audioValue) {
       case "المنشاوي - مجود":
-        return "https://server10.mp3quran.net/minsh/Almusshaf-Al-Mojawwad/001.mp3";
+        return "https://server10.mp3quran.net/minsh/Almusshaf-Al-Mojawwad/$suraNum.mp3";
       case "المنشاوي - مرتل":
         return "https://server10.mp3quran.net/minsh/001.mp3";
       case "الحصري - مجود":
-        return "https://server13.mp3quran.net/husr/Almusshaf-Al-Mojawwad/001.mp3";
+        return "https://server13.mp3quran.net/husr/Almusshaf-Al-Mojawwad/$suraNum.mp3";
       case "الحصري - مرتل":
-        return "https://server13.mp3quran.net/husr/Rewayat-Qalon-A-n-Nafi/001.mp3";
+        return "https://server13.mp3quran.net/husr/Rewayat-Qalon-A-n-Nafi/$suraNum.mp3";
       case "عبدالباسط - مجود":
-        return "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/001.mp3";
+        return "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/$suraNum.mp3";
       case "عبدالباسط - مرتل":
-        return "https://server7.mp3quran.net/basit/001.mp3";
+        return "https://server7.mp3quran.net/basit/$suraNum.mp3";
       case "البنى - مجود":
-        return "https://server8.mp3quran.net/bna/Almusshaf-Al-Mojawwad/001.mp3";
+        return "https://server8.mp3quran.net/bna/Almusshaf-Al-Mojawwad/$suraNum.mp3";
       case "البنى - مرتل":
-        return "https://server8.mp3quran.net/bna/001.mp3";
+        return "https://server8.mp3quran.net/bna/$suraNum.mp3";
       case "مصطفى اسماعيل":
-        return "https://server8.mp3quran.net/mustafa/Almusshaf-Al-Mojawwad/001.mp3";
+        return "https://server8.mp3quran.net/mustafa/Almusshaf-Al-Mojawwad/$suraNum.mp3";
       case "محمد ايوب":
-        return "https://server16.mp3quran.net/ayyoub2/Rewayat-Hafs-A-n-Assem/001.mp3";
+        return "https://server16.mp3quran.net/ayyoub2/Rewayat-Hafs-A-n-Assem/$suraNum.mp3";
       case "ماهر المعيقلي":
-        return "https://server12.mp3quran.net/maher/Almusshaf-Al-Mojawwad/001.mp3";
+        return "https://server12.mp3quran.net/maher/Almusshaf-Al-Mojawwad/$suraNum.mp3";
       case "سعود الشريم":
-        return "https://server7.mp3quran.net/shur/001.mp3";
+        return "https://server7.mp3quran.net/shur/$suraNum.mp3";
       case "ناصر القطامي":
-        return "https://server6.mp3quran.net/qtm/001.mp3";
+        return "https://server6.mp3quran.net/qtm/$suraNum.mp3";
       case "سعد الغامدي":
-        return "https://server7.mp3quran.net/s_gmd/001.mp3";
+        return "https://server7.mp3quran.net/s_gmd/$suraNum.mp3";
       case "عبد الرحمن السديس":
-        return "https://server11.mp3quran.net/sds/001.mp3";
+        return "https://server11.mp3quran.net/sds/$suraNum.mp3";
       case "صلاح بو خاطر":
-        return "https://server8.mp3quran.net/bu_khtr/001.mp3";
+        return "https://server8.mp3quran.net/bu_khtr/$suraNum.mp3";
       default:
         return ""; // return an empty string or null for unknown reciters
     }
@@ -386,7 +394,10 @@ class _IndexCreatorState extends State<IndexCreator> {
                             } else {
                               isPlay = i + 1;
                               pause = false;
-                              playQuran(suraUrl: getAudioUrl(audioValue ?? ""));
+                              playQuran(
+                                  suraUrl: getAudioUrl(
+                                      audioValue: audioValue ?? "",
+                                      sura: i + 1));
                             }
                             setState(() {});
                           } else {
