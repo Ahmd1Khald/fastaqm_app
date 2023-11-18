@@ -15,23 +15,7 @@ import '../../../../Core/widgets/custom_loading.dart';
 import '../../../saves/presentation/views/widgets/aya_saves/aya_empty_saves.dart';
 
 class QuranScreen extends StatelessWidget {
-  QuranScreen({Key? key}) : super(key: key);
-
-  //https://server7.mp3quran.net/s_gmd/001.mp3
-  //https://server7.mp3quran.net/shur/001.mp3
-  //https://server8.mp3quran.net/bu_khtr/001.mp3
-  //https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/001.mp3
-  //https://server7.mp3quran.net/basit/001.mp3
-  //https://server11.mp3quran.net/sds/001.mp3
-  //https://server6.mp3quran.net/qtm/001.mp3
-  //https://server12.mp3quran.net/maher/Almusshaf-Al-Mojawwad/001.mp3
-  //https://server16.mp3quran.net/ayyoub2/Rewayat-Hafs-A-n-Assem/001.mp3
-  //https://server8.mp3quran.net/mustafa/Almusshaf-Al-Mojawwad/001.mp3
-  //https://server8.mp3quran.net/bna/001.mp3
-  //https://server8.mp3quran.net/bna/Almusshaf-Al-Mojawwad/001.mp3
-  //https://server13.mp3quran.net/husr/Almusshaf-Al-Mojawwad/001.mp3
-  //https://server13.mp3quran.net/husr/Rewayat-Qalon-A-n-Nafi/002.mp3
-  //https://server10.mp3quran.net/minsh/Almusshaf-Al-Mojawwad/002.mp3
+  const QuranScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +86,7 @@ class _IndexCreatorState extends State<IndexCreator> {
   bool pause = false;
   final play = AudioPlayer();
   Future<void> playQuran({required String suraUrl}) async {
+    pause = false;
     const CustomLoadingPage();
     try {
       if (audioValue == null) {
@@ -132,109 +117,197 @@ class _IndexCreatorState extends State<IndexCreator> {
     List<DropdownMenuItem<String>>? menuItems =
         List<DropdownMenuItem<String>>.generate(
       AppVariables.mashaikhAudio.length,
-      (index) => DropdownMenuItem(
-        value: AppVariables.mashaikhAudio[index],
-        child: Text(
-          AppVariables.mashaikhAudio[index],
-          style: const TextStyle(
-            color: MyColors.darkBrown,
-            fontWeight: FontWeight.w700,
-            fontSize: 17,
+      (index) {
+        return DropdownMenuItem(
+          value: AppVariables.mashaikhAudio[index],
+          child: Text(
+            AppVariables.mashaikhAudio[index],
+            style: const TextStyle(
+              color: MyColors.darkBrown,
+              fontWeight: FontWeight.w700,
+              fontSize: 17,
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
     return menuItems;
+  }
+
+  String getAudioUrl(String audioValue) {
+    switch (audioValue) {
+      case "المنشاوي - مجود":
+        return "https://server10.mp3quran.net/minsh/Almusshaf-Al-Mojawwad/001.mp3";
+      case "المنشاوي - مرتل":
+        return "https://server10.mp3quran.net/minsh/001.mp3";
+      case "الحصري - مجود":
+        return "https://server13.mp3quran.net/husr/Almusshaf-Al-Mojawwad/001.mp3";
+      case "الحصري - مرتل":
+        return "https://server13.mp3quran.net/husr/Rewayat-Qalon-A-n-Nafi/001.mp3";
+      case "عبدالباسط - مجود":
+        return "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/001.mp3";
+      case "عبدالباسط - مرتل":
+        return "https://server7.mp3quran.net/basit/001.mp3";
+      case "البنى - مجود":
+        return "https://server8.mp3quran.net/bna/Almusshaf-Al-Mojawwad/001.mp3";
+      case "البنى - مرتل":
+        return "https://server8.mp3quran.net/bna/001.mp3";
+      case "مصطفى اسماعيل":
+        return "https://server8.mp3quran.net/mustafa/Almusshaf-Al-Mojawwad/001.mp3";
+      case "محمد ايوب":
+        return "https://server16.mp3quran.net/ayyoub2/Rewayat-Hafs-A-n-Assem/001.mp3";
+      case "ماهر المعيقلي":
+        return "https://server12.mp3quran.net/maher/Almusshaf-Al-Mojawwad/001.mp3";
+      case "سعود الشريم":
+        return "https://server7.mp3quran.net/shur/001.mp3";
+      case "ناصر القطامي":
+        return "https://server6.mp3quran.net/qtm/001.mp3";
+      case "سعد الغامدي":
+        return "https://server7.mp3quran.net/s_gmd/001.mp3";
+      case "عبد الرحمن السديس":
+        return "https://server11.mp3quran.net/sds/001.mp3";
+      case "صلاح بو خاطر":
+        return "https://server8.mp3quran.net/bu_khtr/001.mp3";
+      default:
+        return ""; // return an empty string or null for unknown reciters
+    }
   }
 
   String? audioValue;
 
   @override
+  void dispose() {
+    play.release();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    //playQuran();
+    //salah bo khater
+    //https://server8.mp3quran.net/bu_khtr/001.mp3
+
+    //sudise
+    //https://server11.mp3quran.net/sds/001.mp3
+
+    //sad elghamdy
+    //https://server7.mp3quran.net/s_gmd/001.mp3
+
+    //naser katald
+    //https://server6.mp3quran.net/qtm/001.mp3
+
+    //shuram
+    //https://server7.mp3quran.net/shur/001.mp3
+
+    //maher
+    //https://server12.mp3quran.net/maher/Almusshaf-Al-Mojawwad/001.mp3
+
+    //ayoub
+    //https://server16.mp3quran.net/ayyoub2/Rewayat-Hafs-A-n-Assem/001.mp3
+
+    //mustafa ismail
+    //https://server8.mp3quran.net/mustafa/Almusshaf-Al-Mojawwad/001.mp3
+
+    //banna
+    //https://server8.mp3quran.net/bna/001.mp3
+    //https://server8.mp3quran.net/bna/Almusshaf-Al-Mojawwad/001.mp3
+
+    //abdl baset
+    //https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/001.mp3
+    //https://server7.mp3quran.net/basit/001.mp3
+
+    //husary
+    //https://server13.mp3quran.net/husr/Rewayat-Qalon-A-n-Nafi/001.mp3
+    //https://server13.mp3quran.net/husr/Almusshaf-Al-Mojawwad/001.mp3
+
+    //minshawy
+    //https://server10.mp3quran.net/minsh/001.mp3
+    //https://server10.mp3quran.net/minsh/Almusshaf-Al-Mojawwad/001.mp3
+
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                const SizedBox(
-                  width: 20,
-                ),
-                Container(
-                  height: AppVariables.appSize(context).width * 0.12,
-                  decoration: BoxDecoration(
-                    color: MyColors.lightBrown,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: DropdownButton<String>(
-                    hint: Text(
-                      audioValue ?? "اختار صوت القارئ",
-                      style: const TextStyle(
-                          color: MyColors.darkBrown,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                    dropdownColor: MyColors.creamColor,
-                    // style: TextStyle(
-                    //   fontSize: 14,
-                    // ),
-                    padding: const EdgeInsets.only(left: 4, right: 4),
-                    isExpanded: false,
-                    autofocus: true,
-                    iconEnabledColor: MyColors.darkBrown,
-                    iconDisabledColor: MyColors.darkBrown,
-                    value: audioValue,
-                    items: audioDropDownList,
-                    onChanged: (String? value) {
-                      setState(() {
-                        audioValue = value;
-                      });
-                    },
-                  ),
-                ),
-                const Spacer(),
-                IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(
-                      Icons.arrow_forward,
-                      size: 32,
-                      color: MyColors.darkBrown,
-                    ))
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Center(
-              child: Container(
-                width: AppVariables.appSize(context).width * 0.8,
-                height: AppVariables.appSize(context).width * 0.15,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              const SizedBox(
+                width: 20,
+              ),
+              Container(
+                height: AppVariables.appSize(context).width * 0.12,
                 decoration: BoxDecoration(
-                  color: MyColors.darkBrown,
-                  borderRadius: BorderRadius.circular(30),
+                  color: MyColors.lightBrown,
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                child: Center(
-                  child: Text(
-                    'القرآن الكريم',
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.noticiaText(
-                      color: MyColors.whiteColor,
-                      fontSize: 28.sp,
-                    ),
+                child: DropdownButton<String>(
+                  hint: Text(
+                    audioValue ?? "اختار صوت القارئ",
+                    style: const TextStyle(
+                        color: MyColors.darkBrown,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                  dropdownColor: MyColors.creamColor,
+                  // style: TextStyle(
+                  //   fontSize: 14,
+                  // ),
+                  // padding: const EdgeInsets.only(left: 4, right: 4),
+                  isExpanded: false,
+                  autofocus: true,
+                  alignment: AlignmentDirectional.center,
+                  iconEnabledColor: MyColors.darkBrown,
+                  iconDisabledColor: MyColors.darkBrown,
+                  value: audioValue,
+                  items: audioDropDownList,
+                  onChanged: (String? value) {
+                    setState(() {
+                      isPlay = 0;
+                      audioValue = value;
+                    });
+                  },
+                ),
+              ),
+              const Spacer(),
+              IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_forward,
+                    size: 32,
+                    color: MyColors.darkBrown,
+                  ))
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Center(
+            child: Container(
+              width: AppVariables.appSize(context).width * 0.8,
+              height: AppVariables.appSize(context).width * 0.15,
+              decoration: BoxDecoration(
+                color: MyColors.darkBrown,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Center(
+                child: Text(
+                  'القرآن الكريم',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.noticiaText(
+                    color: MyColors.whiteColor,
+                    fontSize: 28.sp,
                   ),
                 ),
               ),
             ),
-            SizedBox(
-              height: 25.h,
-            ),
-            ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+          ),
+          SizedBox(
+            height: 15.h,
+          ),
+          Expanded(
+            child: ListView.separated(
+              //shrinkWrap: true,
+              //physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, i) => Padding(
                 padding: EdgeInsets.only(bottom: i == 113 ? 50.0 : 0),
                 child: Row(
@@ -297,20 +370,6 @@ class _IndexCreatorState extends State<IndexCreator> {
                     SizedBox(
                       width: 10.w,
                     ),
-                    // CircleAvatar(
-                    // backgroundColor: MyColors.darkBrown,
-                    // radius: 25.sp,
-                    // child: Text(
-                    // AppFunctions.convertEnglishNumberToArabic(
-                    //   (i + 1).toString()),
-                    // style: GoogleFonts.noticiaText(
-                    // color: MyColors.whiteColor,
-                    // fontSize: 22.sp,
-                    // fontWeight: FontWeight.w500,
-                    // ),
-                    // ),
-                    // ),
-
                     CircleAvatar(
                       backgroundColor: MyColors.darkBrown,
                       radius: 25.sp,
@@ -327,7 +386,7 @@ class _IndexCreatorState extends State<IndexCreator> {
                             } else {
                               isPlay = i + 1;
                               pause = false;
-                              playQuran(suraUrl: "");
+                              playQuran(suraUrl: getAudioUrl(audioValue ?? ""));
                             }
                             setState(() {});
                           } else {
@@ -350,11 +409,11 @@ class _IndexCreatorState extends State<IndexCreator> {
               ),
               itemCount: 114,
             ),
-            SizedBox(
-              height: 10.h,
-            ),
-          ],
-        ),
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+        ],
       ),
     );
   }
