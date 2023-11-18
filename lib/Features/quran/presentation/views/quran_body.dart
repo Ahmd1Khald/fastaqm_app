@@ -17,6 +17,22 @@ import '../../../saves/presentation/views/widgets/aya_saves/aya_empty_saves.dart
 class QuranScreen extends StatelessWidget {
   const QuranScreen({Key? key}) : super(key: key);
 
+  //https://server7.mp3quran.net/s_gmd/001.mp3
+  //https://server7.mp3quran.net/shur/001.mp3
+  //https://server8.mp3quran.net/bu_khtr/001.mp3
+  //https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/001.mp3
+  //https://server7.mp3quran.net/basit/001.mp3
+  //https://server11.mp3quran.net/sds/001.mp3
+  //https://server6.mp3quran.net/qtm/001.mp3
+  //https://server12.mp3quran.net/maher/Almusshaf-Al-Mojawwad/001.mp3
+  //https://server16.mp3quran.net/ayyoub2/Rewayat-Hafs-A-n-Assem/001.mp3
+  //https://server8.mp3quran.net/mustafa/Almusshaf-Al-Mojawwad/001.mp3
+  //https://server8.mp3quran.net/bna/001.mp3
+  //https://server8.mp3quran.net/bna/Almusshaf-Al-Mojawwad/001.mp3
+  //https://server13.mp3quran.net/husr/Almusshaf-Al-Mojawwad/001.mp3
+  //https://server13.mp3quran.net/husr/Rewayat-Qalon-A-n-Nafi/002.mp3
+  //https://server10.mp3quran.net/minsh/Almusshaf-Al-Mojawwad/002.mp3
+
   @override
   Widget build(BuildContext context) {
     print("quraaaaaaaaaaaaaaaaaaaaaan");
