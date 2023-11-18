@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 func: () {
                   AppFunctions.pushTo(
                     context: context,
-                    screen: const QuranScreen(),
+                    screen: QuranScreen(),
                   );
                   // Navigator.push(
                   //   context,

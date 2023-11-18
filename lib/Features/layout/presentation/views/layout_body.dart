@@ -35,6 +35,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
   int _page = 2;
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   late NotifyHelper notifyHelper;
+
   @override
   void initState() {
     notifyHelper = NotifyHelper();
