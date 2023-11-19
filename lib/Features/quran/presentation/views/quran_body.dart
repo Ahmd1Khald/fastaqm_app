@@ -176,6 +176,14 @@ class _IndexCreatorState extends State<IndexCreator> {
         return "https://server11.mp3quran.net/sds/$suraNum.mp3";
       case "صلاح بو خاطر":
         return "https://server8.mp3quran.net/bu_khtr/$suraNum.mp3";
+      case "عبدالرشيد صوفي":
+        return "https://server16.mp3quran.net/soufi/Rewayat-Hafs-A-n-Assem/$suraNum.mp3";
+      case "علي بن عبدالرحمن الحذيفي":
+        return "https://server9.mp3quran.net/hthfi/Rewayat-Sho-bah-A-n-Asim/$suraNum.mp3";
+      case "علي جابر":
+        return "https://server11.mp3quran.net/a_jbr/$suraNum.mp3";
+      case "فارس عباد":
+        return "https://server8.mp3quran.net/frs_a/$suraNum.mp3";
       default:
         return ""; // return an empty string or null for unknown reciters
     }
@@ -230,6 +238,21 @@ class _IndexCreatorState extends State<IndexCreator> {
     //minshawy
     //https://server10.mp3quran.net/minsh/001.mp3
     //https://server10.mp3quran.net/minsh/Almusshaf-Al-Mojawwad/001.mp3
+
+    //mohamed refaat
+    //https:server14.mp3quran.net/refat/002.mp3
+
+    //عبدالرشيد صوفي
+    //https:server16.mp3quran.net/soufi/Rewayat-Hafs-A-n-Assem/001.mp3
+
+    //علي بن عبدالرحمن الحذيفي
+    //https:server9.mp3quran.net/hthfi/Rewayat-Sho-bah-A-n-Asim/001.mp3
+
+    //علي جابر
+    //https:server11.mp3quran.net/a_jbr/
+
+    //فارس عباد
+    //https:server8.mp3quran.net/frs_a/001.mp3
 
     return SafeArea(
       child: Column(
