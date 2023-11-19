@@ -14,9 +14,14 @@ import '../../../../Core/widgets/custom_SnackBar.dart';
 import '../../../../Core/widgets/custom_loading.dart';
 import '../../../saves/presentation/views/widgets/aya_saves/aya_empty_saves.dart';
 
-class QuranScreen extends StatelessWidget {
+class QuranScreen extends StatefulWidget {
   const QuranScreen({Key? key}) : super(key: key);
 
+  @override
+  State<QuranScreen> createState() => _QuranScreenState();
+}
+
+class _QuranScreenState extends State<QuranScreen> {
   @override
   Widget build(BuildContext context) {
     print("quraaaaaaaaaaaaaaaaaaaaaan");
@@ -85,6 +90,8 @@ class _IndexCreatorState extends State<IndexCreator> {
   int isPlay = 0;
   bool pause = false;
   final play = AudioPlayer();
+  Duration duration = Duration.zero;
+  Duration position = Duration.zero;
   Future<void> playQuran({required String suraUrl}) async {
     pause = false;
     const CustomLoadingPage();
@@ -113,7 +120,6 @@ class _IndexCreatorState extends State<IndexCreator> {
   }
 
   List<DropdownMenuItem<String>>? get audioDropDownList {
-    print(AppVariables.mashaikhAudio);
     List<DropdownMenuItem<String>>? menuItems =
         List<DropdownMenuItem<String>>.generate(
       AppVariables.mashaikhAudio.length,
@@ -156,13 +162,13 @@ class _IndexCreatorState extends State<IndexCreator> {
         return "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/$suraNum.mp3";
       case "عبدالباسط - مرتل":
         return "https://server7.mp3quran.net/basit/$suraNum.mp3";
-      case "البنى - مجود":
+      case "البنا - مجود":
         return "https://server8.mp3quran.net/bna/Almusshaf-Al-Mojawwad/$suraNum.mp3";
-      case "البنى - مرتل":
+      case "البنا - مرتل":
         return "https://server8.mp3quran.net/bna/$suraNum.mp3";
-      case "مصطفى اسماعيل":
+      case "مصطفى إسماعيل":
         return "https://server8.mp3quran.net/mustafa/Almusshaf-Al-Mojawwad/$suraNum.mp3";
-      case "محمد ايوب":
+      case "محمد أيوب":
         return "https://server16.mp3quran.net/ayyoub2/Rewayat-Hafs-A-n-Assem/$suraNum.mp3";
       case "ماهر المعيقلي":
         return "https://server12.mp3quran.net/maher/Almusshaf-Al-Mojawwad/$suraNum.mp3";
@@ -189,11 +195,39 @@ class _IndexCreatorState extends State<IndexCreator> {
     }
   }
 
+  String formatTime(Duration position) {
+    // Calculate minutes and seconds
+    int minutes = position.inMinutes;
+    int seconds = position.inSeconds % 60;
+
+    // Format the time as a string
+    String formattedTime =
+        '$minutes:${seconds < 10 ? '0$seconds' : '$seconds'}';
+
+    return formattedTime;
+  }
+
   String? audioValue;
 
   @override
+  void initState() {
+    play.onDurationChanged.listen((event) {
+      setState(() {
+        duration = event;
+      });
+    });
+
+    play.onPositionChanged.listen((event) {
+      setState(() {
+        position = event;
+      });
+    });
+    super.initState();
+  }
+
+  @override
   void dispose() {
-    play.release();
+    play.dispose();
     super.dispose();
   }
 
@@ -341,100 +375,128 @@ class _IndexCreatorState extends State<IndexCreator> {
               //physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, i) => Padding(
                 padding: EdgeInsets.only(bottom: i == 113 ? 50.0 : 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Column(
                   children: [
-                    SizedBox(
-                      width: AppVariables.appSize(context).width * 0.7,
-                      height: AppVariables.appSize(context).width * 0.17,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: MyColors.lightBrown,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: TextButton(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              //ArabicSuraNumber(i: i),
-                              if (quraan.getPlaceOfRevelation(i + 1) ==
-                                  "Madinah") ...[
-                                Image.asset(
-                                  AssetsManager.masjedIcon,
-                                  width: 30.sp,
-                                ),
-                              ] else ...[
-                                Image.asset(
-                                  AssetsManager.makaaIcon,
-                                  width: 30.sp,
-                                ),
-                              ],
-                              const Spacer(),
-                              Text(
-                                arabicName[i]['name'],
-                                style: GoogleFonts.noticiaText(
-                                  fontSize: 24.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: MyColors.darkBrown,
-                                ),
-                                textDirection: TextDirection.rtl,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: AppVariables.appSize(context).width * 0.7,
+                          height: AppVariables.appSize(context).width * 0.17,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: MyColors.lightBrown,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: TextButton(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  //ArabicSuraNumber(i: i),
+                                  if (quraan.getPlaceOfRevelation(i + 1) ==
+                                      "Madinah") ...[
+                                    Image.asset(
+                                      AssetsManager.masjedIcon,
+                                      width: 30.sp,
+                                    ),
+                                  ] else ...[
+                                    Image.asset(
+                                      AssetsManager.makaaIcon,
+                                      width: 30.sp,
+                                    ),
+                                  ],
+                                  const Spacer(),
+                                  Text(
+                                    arabicName[i]['name'],
+                                    style: GoogleFonts.noticiaText(
+                                      fontSize: 24.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: MyColors.darkBrown,
+                                    ),
+                                    textDirection: TextDirection.rtl,
+                                  ),
+                                ],
                               ),
-                            ],
+                              onPressed: () {
+                                fabIsClicked = false;
+                                //playQuran(sura: 114);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SurahBuilder(
+                                            arabic: quran[0],
+                                            sura: i,
+                                            suraName: arabicName[i]['name'],
+                                            ayah: 0,
+                                          )),
+                                );
+                              },
+                            ),
                           ),
-                          onPressed: () {
-                            fabIsClicked = false;
-                            //playQuran(sura: 114);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SurahBuilder(
-                                        arabic: quran[0],
-                                        sura: i,
-                                        suraName: arabicName[i]['name'],
-                                        ayah: 0,
-                                      )),
-                            );
-                          },
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    CircleAvatar(
-                      backgroundColor: MyColors.darkBrown,
-                      radius: 25.sp,
-                      child: InkWell(
-                        onTap: () {
-                          if (audioValue != null) {
-                            if (isPlay == i + 1) {
-                              pause = !pause;
-                              if (pause) {
-                                pauseQuran();
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        CircleAvatar(
+                          backgroundColor: MyColors.darkBrown,
+                          radius: 25.sp,
+                          child: InkWell(
+                            onTap: () {
+                              if (audioValue != null) {
+                                if (isPlay == i + 1) {
+                                  pause = !pause;
+                                  if (pause) {
+                                    pauseQuran();
+                                  } else {
+                                    resumeQuran();
+                                  }
+                                } else {
+                                  isPlay = i + 1;
+                                  pause = false;
+                                  playQuran(
+                                      suraUrl: getAudioUrl(
+                                          audioValue: audioValue ?? "",
+                                          sura: i + 1));
+                                }
+                                setState(() {});
                               } else {
-                                resumeQuran();
+                                playQuran(suraUrl: "");
                               }
-                            } else {
-                              isPlay = i + 1;
-                              pause = false;
-                              playQuran(
-                                  suraUrl: getAudioUrl(
-                                      audioValue: audioValue ?? "",
-                                      sura: i + 1));
-                            }
-                            setState(() {});
-                          } else {
-                            playQuran(suraUrl: "");
-                          }
-                        },
-                        child: Icon(
-                          isPlay == i + 1 && !pause
-                              ? Icons.pause
-                              : Icons.play_arrow,
-                          color: Colors.white,
+                            },
+                            child: Icon(
+                              isPlay == i + 1 && !pause
+                                  ? Icons.pause
+                                  : Icons.play_arrow,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (isPlay == i + 1 && !pause) ...[
+                      SizedBox(
+                        width: double.infinity,
+                        height: AppVariables.appSize(context).width * 0.15,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(formatTime(position)),
+                            Slider(
+                              min: 0,
+                              max: duration.inSeconds.toDouble(),
+                              value: position.inSeconds.toDouble(),
+                              activeColor: MyColors.darkBrown,
+                              onChanged: (double value) async {
+                                final position =
+                                    Duration(seconds: value.toInt());
+                                await play.seek(position);
+                              },
+                            ),
+                            Text(formatTime(duration)),
+                          ],
                         ),
                       ),
-                    ),
+                    ],
                   ],
                 ),
               ),
