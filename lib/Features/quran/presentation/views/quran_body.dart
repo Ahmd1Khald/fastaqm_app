@@ -196,13 +196,15 @@ class _IndexCreatorState extends State<IndexCreator> {
   }
 
   String formatTime(Duration position) {
-    // Calculate minutes and seconds
-    int minutes = position.inMinutes;
-    int seconds = position.inSeconds % 60;
+    // Calculate hours, minutes, and seconds
+    int hours = position.inHours;
+    int minutes = (position.inMinutes % 60);
+    int seconds = (position.inSeconds % 60);
 
     // Format the time as a string
-    String formattedTime =
-        '$minutes:${seconds < 10 ? '0$seconds' : '$seconds'}';
+    String formattedTime = hours > 0
+        ? '$hours:${minutes < 10 ? '0$minutes' : '$minutes'}:${seconds < 10 ? '0$seconds' : '$seconds'}'
+        : '$minutes:${seconds < 10 ? '0$seconds' : '$seconds'}';
 
     return formattedTime;
   }
@@ -450,6 +452,7 @@ class _IndexCreatorState extends State<IndexCreator> {
                                   } else {
                                     resumeQuran();
                                   }
+                                  setState(() {});
                                 } else {
                                   isPlay = i + 1;
                                   pause = false;
@@ -457,8 +460,8 @@ class _IndexCreatorState extends State<IndexCreator> {
                                       suraUrl: getAudioUrl(
                                           audioValue: audioValue ?? "",
                                           sura: i + 1));
+                                  setState(() {});
                                 }
-                                setState(() {});
                               } else {
                                 playQuran(suraUrl: "");
                               }
