@@ -89,6 +89,7 @@ class IndexCreator extends StatefulWidget {
 class _IndexCreatorState extends State<IndexCreator> {
   int isPlay = 0;
   bool pause = false;
+  bool replay = false;
   final play = AudioPlayer();
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
@@ -96,12 +97,24 @@ class _IndexCreatorState extends State<IndexCreator> {
     pause = false;
     const CustomLoadingPage();
     try {
+      replay = false;
       if (audioValue == null) {
         customSnackBar(context: context, title: 'اختر صوت القارئ أولا');
       } else {
         const CustomLoadingPage();
         await play.play(UrlSource(suraUrl)).then((value) {
           setState(() {});
+        });
+
+        play.onPlayerStateChanged.listen((PlayerState state) {
+          if (state == PlayerState.completed) {
+            // The audio has finished playing
+            print('Audio has finished playing');
+
+            setState(() {
+              replay = true;
+            });
+          }
         });
       }
     } catch (error) {
@@ -447,7 +460,13 @@ class _IndexCreatorState extends State<IndexCreator> {
                               if (audioValue != null) {
                                 if (isPlay == i + 1) {
                                   pause = !pause;
-                                  if (pause) {
+                                  if (replay) {
+                                    playQuran(
+                                        suraUrl: getAudioUrl(
+                                            audioValue: audioValue ?? "",
+                                            sura: i + 1));
+                                    //setState(() {});
+                                  } else if (pause) {
                                     pauseQuran();
                                   } else {
                                     resumeQuran();
@@ -456,6 +475,7 @@ class _IndexCreatorState extends State<IndexCreator> {
                                 } else {
                                   isPlay = i + 1;
                                   pause = false;
+                                  replay = false;
                                   playQuran(
                                       suraUrl: getAudioUrl(
                                           audioValue: audioValue ?? "",
@@ -467,16 +487,18 @@ class _IndexCreatorState extends State<IndexCreator> {
                               }
                             },
                             child: Icon(
-                              isPlay == i + 1 && !pause
-                                  ? Icons.pause
-                                  : Icons.play_arrow,
+                              isPlay == i + 1 && replay
+                                  ? Icons.replay
+                                  : !pause && isPlay == i + 1
+                                      ? Icons.pause
+                                      : Icons.play_arrow,
                               color: Colors.white,
                             ),
                           ),
                         ),
                       ],
                     ),
-                    if (isPlay == i + 1 && !pause) ...[
+                    if (isPlay == i + 1) ...[
                       SizedBox(
                         width: double.infinity,
                         height: AppVariables.appSize(context).width * 0.15,
