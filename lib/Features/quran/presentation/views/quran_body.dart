@@ -333,6 +333,8 @@ class _IndexCreatorState extends State<IndexCreator> {
                   // padding: const EdgeInsets.only(left: 4, right: 4),
                   isExpanded: false,
                   autofocus: true,
+                  elevation: 0,
+                  underline: Container(),
                   alignment: AlignmentDirectional.center,
                   iconEnabledColor: MyColors.darkBrown,
                   iconDisabledColor: MyColors.darkBrown,

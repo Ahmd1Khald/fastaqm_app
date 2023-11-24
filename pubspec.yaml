@@ -45,6 +45,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   #audioplayers
   audioplayers: ^5.2.0
+  assets_audio_player: ^3.1.1
   #scroll to
   scrollable_positioned_list: ^0.3.8
   #pray_time
@@ -89,6 +90,7 @@ flutter:
   assets:
     - assets/images/
     - assets/
+    - assets/audios/azan.mp3
 
 
   fonts:

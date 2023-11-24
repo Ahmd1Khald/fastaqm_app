@@ -295,13 +295,12 @@ class NotifyHelper {
     return scheduledDate;
   }
 
-  cancelNotifications() async {
-    await flutterLocalNotificationsPlugin.cancel(2);
-    await flutterLocalNotificationsPlugin.cancel(3);
-    await flutterLocalNotificationsPlugin.cancel(4);
-    await flutterLocalNotificationsPlugin.cancel(5);
-    await flutterLocalNotificationsPlugin.cancel(6);
-    print("cancelNotifications+++++++");
+  cancelNotifications({required int id}) async {
+    await flutterLocalNotificationsPlugin.cancel(id);
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('notification_$id');
+    print("cancelNotifications $id+++++++");
   }
 
   tz.TZDateTime _nextInstanceOfTenAM(int hour, int minutes) {
