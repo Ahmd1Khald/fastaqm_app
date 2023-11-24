@@ -1,4 +1,5 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,12 +14,11 @@ class AzanListening extends StatefulWidget {
 }
 
 class _AzanListeningState extends State<AzanListening> {
-  final assetsAudioPlayer = AssetsAudioPlayer();
   bool isPlayed = false;
   Future<void> _playAzan() async {
     try {
       // Load the audio file from assets
-      await assetsAudioPlayer
+      await AppVariables.assetsAudioPlayer
           .open(
             Audio("assets/audios/azan.mp3"),
           )
@@ -31,7 +31,7 @@ class _AzanListeningState extends State<AzanListening> {
   Future<void> _pauseAzan() async {
     try {
       // Load the audio file from assets
-      await assetsAudioPlayer.stop();
+      await AppVariables.assetsAudioPlayer.stop();
     } catch (e) {
       print('Error: $e');
     }

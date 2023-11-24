@@ -35,6 +35,15 @@ class _LayoutScreenState extends State<LayoutScreen> {
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   late NotifyHelper notifyHelper;
 
+  Future<void> _pauseAzan() async {
+    try {
+      // Load the audio file from assets
+      await AppVariables.assetsAudioPlayer.stop();
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
   @override
   void initState() {
     notifyHelper = NotifyHelper();
@@ -117,9 +126,9 @@ class _LayoutScreenState extends State<LayoutScreen> {
                             children: [
                               SwitchWidget(
                                   notifyHelper: notifyHelper,
-                                  cacheKey: 'cache3'),
+                                  cacheKey: 'cache5'),
                               Text(
-                                'العشاء',
+                                'العصر',
                                 style: GoogleFonts.noticiaText(
                                   color: MyColors.darkBrown,
                                   fontSize: 18.sp,
@@ -147,9 +156,9 @@ class _LayoutScreenState extends State<LayoutScreen> {
                             children: [
                               SwitchWidget(
                                   notifyHelper: notifyHelper,
-                                  cacheKey: 'cache5'),
+                                  cacheKey: 'cache3'),
                               Text(
-                                'الفجر',
+                                'العشاء',
                                 style: GoogleFonts.noticiaText(
                                   color: MyColors.darkBrown,
                                   fontSize: 18.sp,
@@ -161,6 +170,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
                           const Spacer(),
                           ElevatedButton(
                             onPressed: () {
+                              _pauseAzan();
                               setState(() {});
                               Navigator.pop(context);
                             },

@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 
 class AppVariables {
@@ -40,4 +41,6 @@ class AppVariables {
     "عبد الرحمن السديس",
     "صلاح بو خاطر",
   ];
+
+  static final assetsAudioPlayer = AssetsAudioPlayer();
 }

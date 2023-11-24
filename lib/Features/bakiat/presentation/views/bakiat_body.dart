@@ -20,12 +20,14 @@ class BakiatScreen extends StatefulWidget {
 class _BakiatScreenState extends State<BakiatScreen>
     with SingleTickerProviderStateMixin {
   bool isDelete = false;
-  int selectedItem = 2;
+  int selectedItem = 0;
   int index0 = CacheHelper.getDate(key: AppStrings.bakiat1Key) ?? 0;
   int index1 = CacheHelper.getDate(key: AppStrings.bakiat2Key) ?? 0;
   int index2 = CacheHelper.getDate(key: AppStrings.bakiat3Key) ?? 0;
   int index3 = CacheHelper.getDate(key: AppStrings.bakiat4Key) ?? 0;
   int index4 = CacheHelper.getDate(key: AppStrings.bakiat5Key) ?? 0;
+  int index5 = CacheHelper.getDate(key: AppStrings.bakiat6Key) ?? 0;
+  int index6 = CacheHelper.getDate(key: AppStrings.bakiat7Key) ?? 0;
 
   final List<IconData> options = [
     Icons.settings,
@@ -105,6 +107,8 @@ class _BakiatScreenState extends State<BakiatScreen>
       index2,
       index3,
       index4,
+      index5,
+      index6,
     ];
     controller = AnimationController(vsync: this, duration: duration);
 
@@ -135,7 +139,8 @@ class _BakiatScreenState extends State<BakiatScreen>
     "الحمد لله",
     "لا إله إلا الله",
     "الله أكبر",
-    //"",
+    "اللهم صل على محمد",
+    "سبحان الله وبحمده",
   ];
   Widget _buildItemList(BuildContext context, int index) {
     print("dataIndex $dataIndex");
@@ -143,7 +148,7 @@ class _BakiatScreenState extends State<BakiatScreen>
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          width: AppVariables.appSize(context).width * 0.42,
+          width: AppVariables.appSize(context).width * 0.5,
           child: Container(
             width: AppVariables.appSize(context).width * 0.4,
             height: 70.h,
@@ -155,9 +160,9 @@ class _BakiatScreenState extends State<BakiatScreen>
             child: Center(
               child: Text(
                 dataBakiat[index],
-                textAlign: TextAlign.right,
-                style: GoogleFonts.notoNastaliqUrdu(
-                  fontSize: 26.sp,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.noticiaText(
+                  fontSize: 22.sp,
                   color: MyColors.darkBrown,
                 ),
               ),
@@ -210,6 +215,12 @@ class _BakiatScreenState extends State<BakiatScreen>
                           if (selectedItem == 4) {
                             CacheHelper.removeData(key: AppStrings.bakiat5Key);
                           }
+                          if (selectedItem == 5) {
+                            CacheHelper.removeData(key: AppStrings.bakiat6Key);
+                          }
+                          if (selectedItem == 6) {
+                            CacheHelper.removeData(key: AppStrings.bakiat7Key);
+                          }
                           dataIndex![selectedItem] = 0;
                           setState(() {});
                         },
@@ -230,7 +241,9 @@ class _BakiatScreenState extends State<BakiatScreen>
                             CacheHelper.removeData(key: AppStrings.bakiat3Key);
                             CacheHelper.removeData(key: AppStrings.bakiat4Key);
                             CacheHelper.removeData(key: AppStrings.bakiat5Key);
-                            dataIndex = [0, 0, 0, 0, 0];
+                            CacheHelper.removeData(key: AppStrings.bakiat6Key);
+                            CacheHelper.removeData(key: AppStrings.bakiat7Key);
+                            dataIndex = [0, 0, 0, 0, 0, 0, 0];
                             setState(() {});
                           },
                         ),
@@ -270,7 +283,7 @@ class _BakiatScreenState extends State<BakiatScreen>
                 width: AppVariables.appSize(context).width,
                 child: ScrollSnapList(
                   itemBuilder: _buildItemList,
-                  itemSize: 150.sp,
+                  itemSize: 180.sp,
                   dynamicItemSize: true,
                   initialIndex: selectedItem.toDouble(),
                   scrollPhysics: const ClampingScrollPhysics(),
@@ -335,6 +348,16 @@ class _BakiatScreenState extends State<BakiatScreen>
                   if (selectedItem == 4) {
                     CacheHelper.saveData(
                         key: AppStrings.bakiat5Key,
+                        value: dataIndex![selectedItem]);
+                  }
+                  if (selectedItem == 5) {
+                    CacheHelper.saveData(
+                        key: AppStrings.bakiat6Key,
+                        value: dataIndex![selectedItem]);
+                  }
+                  if (selectedItem == 6) {
+                    CacheHelper.saveData(
+                        key: AppStrings.bakiat7Key,
                         value: dataIndex![selectedItem]);
                   }
                   setState(() {});
