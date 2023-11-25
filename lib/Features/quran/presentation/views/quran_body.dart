@@ -183,8 +183,10 @@ class _IndexCreatorState extends State<IndexCreator> {
         return "https://server8.mp3quran.net/mustafa/Almusshaf-Al-Mojawwad/$suraNum.mp3";
       case "محمد أيوب":
         return "https://server16.mp3quran.net/ayyoub2/Rewayat-Hafs-A-n-Assem/$suraNum.mp3";
-      case "ماهر المعيقلي":
+      case "ماهر المعيقلي - مجود":
         return "https://server12.mp3quran.net/maher/Almusshaf-Al-Mojawwad/$suraNum.mp3";
+      case "ماهر المعيقلي - مرتل":
+        return "https://server12.mp3quran.net/maher/$suraNum.mp3";
       case "سعود الشريم":
         return "https://server7.mp3quran.net/shur/$suraNum.mp3";
       case "ناصر القطامي":
@@ -203,6 +205,12 @@ class _IndexCreatorState extends State<IndexCreator> {
         return "https://server11.mp3quran.net/a_jbr/$suraNum.mp3";
       case "فارس عباد":
         return "https://server8.mp3quran.net/frs_a/$suraNum.mp3";
+      case "منصور السالمي":
+        return "https://server14.mp3quran.net/mansor/$suraNum.mp3";
+      case "حسن صالح":
+        return "https://server16.mp3quran.net/h_saleh/Rewayat-Hafs-A-n-Assem/$suraNum.mp3";
+      case "ياسر الدوسري":
+        return "https://server11.mp3quran.net/yasser/$suraNum.mp3";
       default:
         return ""; // return an empty string or null for unknown reciters
     }
@@ -248,6 +256,9 @@ class _IndexCreatorState extends State<IndexCreator> {
 
   @override
   Widget build(BuildContext context) {
+    //mansour alsalmy
+    //https://server14.mp3quran.net/mansor/001.mp3
+
     //salah bo khater
     //https://server8.mp3quran.net/bu_khtr/001.mp3
 

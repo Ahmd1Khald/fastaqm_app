@@ -20,6 +20,8 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //SharedPreferences prefs = await SharedPreferences.getInstance();
+  //prefs.remove('notification_used_friday_8');
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
