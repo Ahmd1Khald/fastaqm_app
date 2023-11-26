@@ -57,14 +57,14 @@ class _LayoutScreenState extends State<LayoutScreen> {
       final prayerTimes = PrayerTimes.today(myCoordinates, params);
       notifyHelper.azkarNotification(
         hour: prayerTimes.fajr.hour,
-        minutes: prayerTimes.fajr.minute + 50,
+        minutes: prayerTimes.fajr.minute + 40,
         body: "ابدأ يومك بأذكار الصباح",
         title: 'الصباح',
         id: 0,
       );
       notifyHelper.azkarNotification(
         hour: prayerTimes.asr.hour,
-        minutes: prayerTimes.asr.minute + 70,
+        minutes: prayerTimes.asr.minute + 60,
         body: "اختم يومك بأذكار المساء",
         title: 'المساء',
         id: 1,

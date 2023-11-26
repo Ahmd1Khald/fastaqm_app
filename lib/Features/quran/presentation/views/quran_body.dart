@@ -166,7 +166,7 @@ class _IndexCreatorState extends State<IndexCreator> {
       case "المنشاوي - مجود":
         return "https://server10.mp3quran.net/minsh/Almusshaf-Al-Mojawwad/$suraNum.mp3";
       case "المنشاوي - مرتل":
-        return "https://server10.mp3quran.net/minsh/001.mp3";
+        return "https://server10.mp3quran.net/minsh/$suraNum.mp3";
       case "الحصري - مجود":
         return "https://server13.mp3quran.net/husr/Almusshaf-Al-Mojawwad/$suraNum.mp3";
       case "الحصري - مرتل":
