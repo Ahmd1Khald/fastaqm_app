@@ -73,8 +73,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
       notifyHelper.fridayNotification(
         hour: prayerTimes.dhuhr.hour + 1,
         minutes: prayerTimes.dhuhr.minute,
-        body:
-            "{إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ ۚ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا}",
+        body: "إاللهم صل على محمد وعلى آل محمد",
         title: 'فاستقم',
         id: 8,
       );
