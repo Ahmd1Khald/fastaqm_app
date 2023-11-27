@@ -70,10 +70,10 @@ class _LayoutScreenState extends State<LayoutScreen> {
         id: 1,
       );
 
-      notifyHelper.fridayNotification(
-        hour: prayerTimes.dhuhr.hour + 1,
-        minutes: prayerTimes.dhuhr.minute,
-        body: "إاللهم صل على محمد وعلى آل محمد",
+      notifyHelper.azkarNotification(
+        hour: prayerTimes.dhuhr.hour,
+        minutes: prayerTimes.dhuhr.minute + 60,
+        body: "اللهم صل على محمد وعلى آل محمد",
         title: 'فاستقم',
         id: 8,
       );
