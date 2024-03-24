@@ -3,7 +3,6 @@ import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:fastaqm_app/Features/pray_time/presentation/views/widgets/backgraound_widget.dart';
 import 'package:fastaqm_app/Features/pray_time/presentation/views/widgets/date_widget.dart';
 import 'package:fastaqm_app/Features/pray_time/presentation/views/widgets/time_wiget.dart';
-import 'package:fastaqm_app/Features/pray_time/presentation/views/widgets/timer_count_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,9 +54,10 @@ class PrayTimeScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           const DateWidget(),
-                          TimerCountWidget(
-                            cubit: cubit,
-                          ),
+                          // TimerCountWidget(
+                          //   cubit: cubit,
+                          //   color: MyColors.lightBrown,
+                          // ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 20.0,

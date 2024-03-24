@@ -35,8 +35,8 @@ dependencies:
   #cache
   shared_preferences: ^2.2.2
   #location
-  geolocator: ^9.0.2
-  geocoding: ^2.1.1
+  geolocator: ^10.1.1
+  geocoding: ^3.0.0
   #share
   share: ^2.0.4
   #rename
@@ -44,7 +44,7 @@ dependencies:
   # responsive
   flutter_screenutil: ^5.9.0
   #audioplayers
-  audioplayers: ^5.2.0
+  audioplayers: ^6.0.0
   assets_audio_player: ^3.1.1
   #scroll to
   scrollable_positioned_list: ^0.3.8
@@ -57,7 +57,7 @@ dependencies:
   scroll_snap_list: ^0.9.1
   #notification
   onesignal_flutter: ^5.0.3
-  flutter_local_notifications: ^15.1.2
+  flutter_local_notifications: ^17.0.0
   flutter_timezone: ^1.0.8
   #firebase
   firebase_core: ^2.21.0
@@ -73,7 +73,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
   flutter_launcher_icons: ^0.13.1
 
 flutter_icons:

@@ -14,13 +14,15 @@ import '../constance/functions.dart';
 
 class TimerCountWidget extends StatefulWidget {
   const TimerCountWidget({
-    Key? key,
+    super.key,
     required this.cubit,
-  }) : super(key: key);
+    required this.color,
+  });
 
   @override
   State<TimerCountWidget> createState() => _TimerCountWidgetState();
   final PrayTimeCubit cubit;
+  final Color color;
 }
 
 class _TimerCountWidgetState
@@ -156,7 +158,7 @@ class _TimerCountWidgetState
             ),
             CircleAvatar(
               radius: 53.sp,
-              backgroundColor: MyColors.lightBrown,
+              backgroundColor: widget.color,
               child: Text(
                 getPrayArabicName(widget.cubit.nextPray!.name),
                 textAlign: TextAlign.right,
@@ -171,6 +173,7 @@ class _TimerCountWidgetState
           width: 25.w,
         ),
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'الصلاة القادمة',
