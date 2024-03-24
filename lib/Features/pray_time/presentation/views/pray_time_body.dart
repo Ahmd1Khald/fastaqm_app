@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../Core/constatnts/app_strings.dart';
 import '../../../../Core/constatnts/colors.dart';
@@ -130,17 +131,31 @@ class PrayTimeScreen extends StatelessWidget {
                       key: AppStrings.locationKey, value: false);
                   customSnackBar(context: context, title: 'لا يوجد انترنيت');
                 } else {
-                  // Device is online, attempt to get the location
-                  final Position position =
-                      await Geolocator.getCurrentPosition();
-                  print(position);
-                  CacheHelper.saveData(
-                      key: AppStrings.locationKey, value: true);
-                  CacheHelper.saveData(
-                      key: AppStrings.latKey, value: position.latitude);
-                  CacheHelper.saveData(
-                      key: AppStrings.longKey, value: position.longitude);
-                  // Continue with additional logic or data processing here.
+                  // Request location permission
+                  var status = await Permission.locationWhenInUse.request();
+
+                  if (status.isGranted) {
+                    // Location permission granted, get the location
+                    final Position position =
+                        await Geolocator.getCurrentPosition();
+                    print(position);
+                    CacheHelper.saveData(
+                        key: AppStrings.locationKey, value: true);
+                    CacheHelper.saveData(
+                        key: AppStrings.latKey, value: position.latitude);
+                    CacheHelper.saveData(
+                        key: AppStrings.longKey, value: position.longitude);
+                    // Continue with additional logic or data processing here.
+                  } else {
+                    // Location permission denied
+                    CacheHelper.saveData(
+                        key: AppStrings.locationKey, value: false);
+                    customSnackBar(
+                        context: context,
+                        title: 'قم بالسماح بأخذ موقعك من الأعدادات');
+                    print("----permission denied-----");
+                    // Handle the scenario where the user denies location permission
+                  }
                 }
               } catch (e) {
                 // Handle exceptions, including those related to network or location errors

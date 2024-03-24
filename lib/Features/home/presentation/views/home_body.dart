@@ -7,7 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../Core/constatnts/app_strings.dart';
 import '../../../../Core/constatnts/constant.dart';
+import '../../../../Core/helpers/cachehelper.dart';
 import '../../../ahadith/presentation/views/ahadith_body.dart';
 import '../../../azkar/presentation/views/azkar_body.dart';
 import '../../../bakiat/presentation/views/bakiat_body.dart';
@@ -19,8 +21,8 @@ import '../../../quran/presentation/views/quran_body.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -55,21 +57,26 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: AppVariables.appSize(context).width,
-                  height: AppVariables.appSize(context).height * 0.2,
-                  decoration: BoxDecoration(
-                    color: MyColors.lightBrown,
-                    borderRadius: BorderRadius.circular(20),
+                if (CacheHelper.getDate(key: AppStrings.locationKey) ==
+                        true /*&&
+        location != null*/
+                    ) ...[
+                  Container(
+                    width: AppVariables.appSize(context).width,
+                    height: AppVariables.appSize(context).height * 0.2,
+                    decoration: BoxDecoration(
+                      color: MyColors.lightBrown,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: TimerCountWidget(
+                      cubit: cubit,
+                      color: MyColors.appBackGroundColor,
+                    ),
                   ),
-                  child: TimerCountWidget(
-                    cubit: cubit,
-                    color: MyColors.appBackGroundColor,
+                  SizedBox(
+                    height: 30.h,
                   ),
-                ),
-                SizedBox(
-                  height: 30.h,
-                ),
+                ],
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

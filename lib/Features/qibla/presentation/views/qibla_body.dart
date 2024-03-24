@@ -50,7 +50,8 @@ class _QiblaScreenState extends State<QiblaScreen> {
         } else {
           // Location permission denied
           CacheHelper.saveData(key: AppStrings.locationKey, value: false);
-          customSnackBar(context: context, title: 'قم بالسماح بأخذ موقعك');
+          customSnackBar(
+              context: context, title: 'قم بالسماح بأخذ موقعك من الأعدادات');
           print("----permission denied-----");
           // Handle the scenario where the user denies location permission
         }
