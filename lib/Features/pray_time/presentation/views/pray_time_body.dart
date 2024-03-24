@@ -152,7 +152,7 @@ class PrayTimeScreen extends StatelessWidget {
                         key: AppStrings.locationKey, value: false);
                     customSnackBar(
                         context: context,
-                        title: 'قم بالسماح بأخذ موقعك من الأعدادات');
+                        title: 'قم بالسماح بأخذ موقعك من الإعدادات');
                     print("----permission denied-----");
                     // Handle the scenario where the user denies location permission
                   }
