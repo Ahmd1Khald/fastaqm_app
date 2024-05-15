@@ -3,6 +3,7 @@ import 'package:fastaqm_app/Core/constatnts/colors.dart';
 import 'package:fastaqm_app/Core/constatnts/variables.dart';
 import 'package:fastaqm_app/Features/quran/presentation/views/widgets/surah_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quran/quran.dart' as quraan;
@@ -88,6 +89,7 @@ class IndexCreator extends StatefulWidget {
 
 class _IndexCreatorState extends State<IndexCreator> {
   int isPlay = 0;
+  int isDownload = 0;
   bool pause = false;
   bool replay = false;
   final play = AudioPlayer();
@@ -231,6 +233,7 @@ class _IndexCreatorState extends State<IndexCreator> {
   }
 
   String? audioValue;
+  bool loadingDownload = false;
 
   @override
   void initState() {
@@ -409,7 +412,7 @@ class _IndexCreatorState extends State<IndexCreator> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: AppVariables.appSize(context).width * 0.7,
+                          width: AppVariables.appSize(context).width * 0.57,
                           height: AppVariables.appSize(context).width * 0.17,
                           child: Container(
                             decoration: BoxDecoration(
@@ -465,6 +468,7 @@ class _IndexCreatorState extends State<IndexCreator> {
                         SizedBox(
                           width: 10.w,
                         ),
+                        //play sura
                         CircleAvatar(
                           backgroundColor: MyColors.darkBrown,
                           radius: 25.sp,
@@ -507,6 +511,67 @@ class _IndexCreatorState extends State<IndexCreator> {
                                       : Icons.play_arrow,
                               color: Colors.white,
                             ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                        //download sura
+                        CircleAvatar(
+                          backgroundColor: MyColors.darkBrown,
+                          radius: 25.sp,
+                          child: InkWell(
+                            onTap: () {
+                              bool clicked = false;
+                              //You can download a single file
+                              if (audioValue != null) {
+                                print(getAudioUrl(
+                                    audioValue: audioValue ?? "", sura: i + 1));
+                                FileDownloader.downloadFile(
+                                    url: getAudioUrl(
+                                        audioValue: audioValue ?? "",
+                                        sura: i + 1),
+                                    name:
+                                        "فاستقم - ${arabicName[i]['name']}", //(optional)
+                                    onProgress:
+                                        (String? fileName, double? progress) {
+                                      isDownload = i + 1;
+                                      setState(() {
+                                        loadingDownload = true;
+                                      });
+                                      print(
+                                          'FILE fileName HAS PROGRESS $progress');
+                                    },
+                                    onDownloadCompleted: (String path) {
+                                      setState(() {
+                                        loadingDownload = false;
+                                      });
+                                      customSnackBar(
+                                          context: context,
+                                          title: 'تم التحميل بنجاح');
+                                    },
+                                    onDownloadError: (String error) {
+                                      setState(() {
+                                        loadingDownload = false;
+                                      });
+                                      customSnackBar(
+                                          context: context,
+                                          title: 'تأكد من اتصالك بالانترنيت');
+                                    });
+                              } else {
+                                customSnackBar(
+                                    context: context,
+                                    title: 'اختر صوت القارئ أولا');
+                              }
+                            },
+                            child: loadingDownload && isDownload == i + 1
+                                ? const CircularProgressIndicator(
+                                    color: MyColors.lightBrown,
+                                  )
+                                : const Icon(
+                                    Icons.download,
+                                    color: Colors.white,
+                                  ),
                           ),
                         ),
                       ],

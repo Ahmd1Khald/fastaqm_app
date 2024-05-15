@@ -7,8 +7,7 @@ import '../../../../../Core/constatnts/variables.dart';
 
 class CustomContantContainer extends StatelessWidget {
   const CustomContantContainer(
-      {Key? key, required this.text, required this.fontSize})
-      : super(key: key);
+      {super.key, required this.text, required this.fontSize});
 
   final String text;
   final double fontSize;

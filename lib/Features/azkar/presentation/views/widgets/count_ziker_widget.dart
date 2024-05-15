@@ -29,13 +29,14 @@ class CountZikerWidget extends StatelessWidget {
                     color: MyColors.lightBrown,
                     shape: BoxShape.circle,
                   ),
-                  child: Text(
-                    "${cubit.counterValue.toInt()}",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 33.sp,
-                      fontWeight: FontWeight.w700,
-                      color: MyColors.darkBrown,
+                  child: Center(
+                    child: Text(
+                      "${cubit.counterValue.toInt()}",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.noticiaText(
+                        color: MyColors.darkBrown,
+                        fontSize: 30.sp,
+                      ),
                     ),
                   ),
                 ),
@@ -88,9 +89,9 @@ class CountZikerWidget extends StatelessWidget {
                                           : num == "100"
                                               ? "مائة  مرة"
                                               : "مرة واحدة",
-                  style: GoogleFonts.notoNastaliqUrdu(
+                  style: GoogleFonts.noticiaText(
                     color: MyColors.whiteColor,
-                    fontSize: 19.sp,
+                    fontSize: 20.sp,
                   ),
                 ),
               ),

@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:in_app_update/in_app_update.dart';
 
 import 'Core/constatnts/app_strings.dart';
 import 'Core/helpers/cachehelper.dart';
@@ -41,6 +42,26 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  Future<void> checkForUpdate() async {
+    print("Checking for update");
+    InAppUpdate.checkForUpdate().then((info) {
+      setState(() {
+        if (info.updateAvailability == UpdateAvailability.updateAvailable) {
+          print("update Available");
+          update();
+        }
+      });
+    });
+  }
+
+  void update() async {
+    print("updating");
+    InAppUpdate.startFlexibleUpdate();
+    InAppUpdate.completeFlexibleUpdate().then((_) {}).catchError((error) {
+      print(error);
+    });
+  }
+
   @override
   void initState() {
     //final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
@@ -51,6 +72,7 @@ class _MyAppState extends State<MyApp> {
     });*/
 
     super.initState();
+    checkForUpdate();
   }
 
   @override
