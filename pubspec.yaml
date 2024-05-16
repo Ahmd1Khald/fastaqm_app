@@ -69,6 +69,7 @@ dependencies:
   #dio
   dio: ^5.3.3
   #check for update
+  upgrader: ^10.3.0
   in_app_update: ^4.2.2
 
 

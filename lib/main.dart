@@ -5,7 +5,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:in_app_update/in_app_update.dart';
 
 import 'Core/constatnts/app_strings.dart';
 import 'Core/helpers/cachehelper.dart';
@@ -21,6 +20,8 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Only call clearSavedSettings() during testing to reset internal values.
+  //await Upgrader.clearSavedSettings(); // REMOVE this for release builds
   //SharedPreferences prefs = await SharedPreferences.getInstance();
   //prefs.remove('notification_used_friday_8');
   await Firebase.initializeApp(
@@ -42,25 +43,25 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Future<void> checkForUpdate() async {
-    print("Checking for update");
-    InAppUpdate.checkForUpdate().then((info) {
-      setState(() {
-        if (info.updateAvailability == UpdateAvailability.updateAvailable) {
-          print("update Available");
-          update();
-        }
-      });
-    });
-  }
-
-  void update() async {
-    print("updating");
-    InAppUpdate.startFlexibleUpdate();
-    InAppUpdate.completeFlexibleUpdate().then((_) {}).catchError((error) {
-      print(error);
-    });
-  }
+  // Future<void> checkForUpdate() async {
+  //   print("Checking for update");
+  //   InAppUpdate.checkForUpdate().then((info) {
+  //     setState(() {
+  //       if (info.updateAvailability == UpdateAvailability.updateAvailable) {
+  //         print("update Available");
+  //         update();
+  //       }
+  //     });
+  //   });
+  // }
+  //
+  // void update() async {
+  //   print("updating");
+  //   InAppUpdate.startFlexibleUpdate();
+  //   InAppUpdate.completeFlexibleUpdate().then((_) {}).catchError((error) {
+  //     print(error);
+  //   });
+  // }
 
   @override
   void initState() {
@@ -72,7 +73,7 @@ class _MyAppState extends State<MyApp> {
     });*/
 
     super.initState();
-    checkForUpdate();
+    //checkForUpdate();
   }
 
   @override
