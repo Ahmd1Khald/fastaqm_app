@@ -56,27 +56,27 @@ class _LayoutScreenState extends State<LayoutScreen> {
       final params = CalculationMethod.egyptian.getParameters();
       params.madhab = Madhab.shafi;
       final prayerTimes = PrayerTimes.today(myCoordinates, params);
-      notifyHelper.azkarNotification(
-        hour: prayerTimes.fajr.hour,
-        minutes: prayerTimes.fajr.minute + 20,
-        body: "ابدأ يومك بأذكار الصباح",
-        title: 'الصباح',
-        id: 0,
-      );
-      notifyHelper.azkarNotification(
-        hour: prayerTimes.asr.hour,
-        minutes: prayerTimes.asr.minute + 40,
-        body: "اختم يومك بأذكار المساء",
-        title: 'المساء',
-        id: 1,
-      );
+      // notifyHelper.azkarNotification(
+      //   hour: prayerTimes.fajr.hour,
+      //   minutes: prayerTimes.fajr.minute + 20,
+      //   body: "ابدأ يومك بأذكار الصباح",
+      //   title: 'الصباح',
+      //   id: 0,
+      // );
+      // notifyHelper.azkarNotification(
+      //   hour: prayerTimes.asr.hour,
+      //   minutes: prayerTimes.asr.minute + 40,
+      //   body: "اختم يومك بأذكار المساء",
+      //   title: 'المساء',
+      //   id: 1,
+      // );
 
       notifyHelper.azkarNotification(
         hour: prayerTimes.dhuhr.hour,
         minutes: prayerTimes.dhuhr.minute + 40,
         body: "اللهم صل على محمد وعلى آل محمد",
         title: 'فاستقم',
-        id: 8,
+        id: 10,
       );
     }
     super.initState();

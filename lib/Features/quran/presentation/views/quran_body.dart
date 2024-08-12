@@ -141,12 +141,16 @@ class _IndexCreatorState extends State<IndexCreator> {
       (index) {
         return DropdownMenuItem(
           value: AppVariables.mashaikhAudio[index],
+          alignment: AlignmentDirectional.centerEnd,
+          enabled: true,
           child: Text(
+            textDirection: TextDirection.rtl,
+            textAlign: TextAlign.right,
             AppVariables.mashaikhAudio[index],
-            style: const TextStyle(
+            style: TextStyle(
               color: MyColors.darkBrown,
               fontWeight: FontWeight.w700,
-              fontSize: 17,
+              fontSize: 17.sp,
             ),
           ),
         );
@@ -183,8 +187,12 @@ class _IndexCreatorState extends State<IndexCreator> {
         return "https://server8.mp3quran.net/bna/$suraNum.mp3";
       case "مصطفى إسماعيل":
         return "https://server8.mp3quran.net/mustafa/Almusshaf-Al-Mojawwad/$suraNum.mp3";
+      case "محمد جبريل":
+        return "https://server8.mp3quran.net/jbrl/$suraNum.mp3";
       case "محمد أيوب":
         return "https://server16.mp3quran.net/ayyoub2/Rewayat-Hafs-A-n-Assem/$suraNum.mp3";
+      case "مشاري راشد العفاسي":
+        return "https://server8.mp3quran.net/afs/$suraNum.mp3";
       case "ماهر المعيقلي - مجود":
         return "https://server12.mp3quran.net/maher/Almusshaf-Al-Mojawwad/$suraNum.mp3";
       case "ماهر المعيقلي - مرتل":
@@ -316,6 +324,9 @@ class _IndexCreatorState extends State<IndexCreator> {
 
     //فارس عباد
     //https:server8.mp3quran.net/frs_a/001.mp3
+    //
+    // العفاسي
+    //https://server8.mp3quran.net/afs/001.mp3
 
     return SafeArea(
       child: Column(
@@ -333,6 +344,8 @@ class _IndexCreatorState extends State<IndexCreator> {
                 ),
                 child: DropdownButton<String>(
                   hint: Text(
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.right,
                     audioValue ?? "اختار صوت القارئ",
                     style: const TextStyle(
                         color: MyColors.darkBrown,
@@ -346,6 +359,13 @@ class _IndexCreatorState extends State<IndexCreator> {
                   // ),
                   // padding: const EdgeInsets.only(left: 4, right: 4),
                   isExpanded: false,
+                  icon: SizedBox(
+                    width: 60.w,
+                    child: Icon(
+                      Icons.radio_outlined,
+                      size: 27.sp,
+                    ),
+                  ),
                   autofocus: true,
                   elevation: 0,
                   underline: Container(),
@@ -412,7 +432,7 @@ class _IndexCreatorState extends State<IndexCreator> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: AppVariables.appSize(context).width * 0.57,
+                          width: AppVariables.appSize(context).width * 0.55,
                           height: AppVariables.appSize(context).width * 0.17,
                           child: Container(
                             decoration: BoxDecoration(
@@ -514,7 +534,7 @@ class _IndexCreatorState extends State<IndexCreator> {
                           ),
                         ),
                         SizedBox(
-                          width: 5.w,
+                          width: 7.w,
                         ),
                         //download sura
                         CircleAvatar(
