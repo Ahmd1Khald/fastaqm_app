@@ -469,6 +469,8 @@ class _IndexCreatorState extends State<IndexCreator> {
                                     children: [
                                       InkWell(
                                         onTap: () {
+                                          print("audioValue++++++++++++++++++");
+                                          print(audioValue);
                                           if (audioValue != null) {
                                             FileDownloader.downloadFile(
                                               url: getAudioUrl(
@@ -512,7 +514,9 @@ class _IndexCreatorState extends State<IndexCreator> {
                                         child: loadingDownload &&
                                                 isDownload == i + 1
                                             ? const CircularProgressIndicator(
-                                                color: MyColors.lightBrown)
+                                                color: MyColors.darkBrown,
+                                                strokeWidth: 10,
+                                              )
                                             : const Icon(Icons.download,
                                                 color: MyColors.darkBrown),
                                       ),

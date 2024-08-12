@@ -19,8 +19,7 @@ class SurahBuilder extends StatefulWidget {
   int ayah;
 
   SurahBuilder(
-      {Key? key, this.sura, this.arabic, this.suraName, required this.ayah})
-      : super(key: key);
+      {super.key, this.sura, this.arabic, this.suraName, required this.ayah});
 
   @override
   _SurahBuilderState createState() => _SurahBuilderState();
