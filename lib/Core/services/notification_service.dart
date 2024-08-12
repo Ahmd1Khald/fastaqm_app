@@ -249,8 +249,8 @@ class NotifyHelper {
         scheduledDate,
         const NotificationDetails(
           android: AndroidNotificationDetails(
-            'your channel 6',
-            'your channel name',
+            'your channel 10',
+            'your channel name 10',
             importance: Importance.max,
             priority: Priority.max,
             enableVibration: true,
@@ -260,7 +260,7 @@ class NotifyHelper {
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.time,
-        payload: '${title}|$body', // You can include additional data if needed
+        payload: '$title|$body', // You can include additional data if needed
         androidAllowWhileIdle: true,
       );
 

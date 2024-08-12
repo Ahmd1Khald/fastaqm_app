@@ -337,7 +337,7 @@ class _IndexCreatorState extends State<IndexCreator> {
           Row(
             children: [
               const SizedBox(
-                width: 20,
+                width: 10,
               ),
               Container(
                 height: AppVariables.appSize(context).width * 0.12,
@@ -350,9 +350,9 @@ class _IndexCreatorState extends State<IndexCreator> {
                     textDirection: TextDirection.rtl,
                     textAlign: TextAlign.right,
                     audioValue ?? "اختار صوت القارئ",
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: MyColors.darkBrown,
-                        fontSize: 17,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.w700),
                   ),
                   borderRadius: BorderRadius.circular(10),
@@ -453,7 +453,7 @@ class _IndexCreatorState extends State<IndexCreator> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 10),
+                          horizontal: 5.0, vertical: 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
