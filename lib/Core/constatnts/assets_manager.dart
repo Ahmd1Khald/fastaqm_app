@@ -5,7 +5,6 @@ class AssetsManager {
   static const timerIcon = '$baseImagesPath/timer_icon.png';
   static const soraNameIcon = '$baseImagesPath/sura_name_icon.png';
   static const azanIcon = '$baseImagesPath/azan.png';
-  //static const appLogo2 = '$baseImagesPath/app_logo2.png';
   static const saveIcon = '$baseImagesPath/save_icon.png';
   static const homeIcon = '$baseImagesPath/home.png';
   static const hadithLogo = '$baseImagesPath/ahadith_icon.png';

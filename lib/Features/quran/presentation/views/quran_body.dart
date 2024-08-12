@@ -453,7 +453,7 @@ class _IndexCreatorState extends State<IndexCreator> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 5.0, vertical: 10),
+                          horizontal: 10.0, vertical: 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -463,145 +463,153 @@ class _IndexCreatorState extends State<IndexCreator> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      InkWell(
-                                        onTap: () {
-                                          print("audioValue++++++++++++++++++");
-                                          print(audioValue);
-                                          if (audioValue != null) {
-                                            FileDownloader.downloadFile(
-                                              url: getAudioUrl(
-                                                audioValue: audioValue!,
-                                                sura: i + 1,
-                                              ),
-                                              name:
-                                                  "فاستقم - ${arabicName[i]['name']}",
-                                              onProgress: (String? fileName,
-                                                  double? progress) {
-                                                setState(() {
-                                                  loadingDownload = true;
-                                                  isDownload = i + 1;
-                                                });
-                                              },
-                                              onDownloadCompleted:
-                                                  (String path) {
-                                                setState(() {
-                                                  loadingDownload = false;
-                                                });
-                                                customSnackBar(
-                                                    context: context,
-                                                    title: 'تم التحميل بنجاح');
-                                              },
-                                              onDownloadError: (String error) {
-                                                setState(() {
-                                                  loadingDownload = false;
-                                                });
-                                                customSnackBar(
-                                                    context: context,
-                                                    title:
-                                                        'تأكد من اتصالك بالانترنيت');
-                                              },
-                                            );
-                                          } else {
-                                            customSnackBar(
-                                                context: context,
-                                                title: 'اختر صوت القارئ أولا');
-                                          }
-                                        },
-                                        child: loadingDownload &&
-                                                isDownload == i + 1
-                                            ? const CircularProgressIndicator(
-                                                color: MyColors.darkBrown,
-                                                strokeWidth: 10,
-                                              )
-                                            : const Icon(Icons.download,
-                                                color: MyColors.darkBrown),
-                                      ),
-                                      SizedBox(
-                                          width: AppVariables.appSize(context)
-                                                  .width *
-                                              0.15),
-                                      Text(
-                                        arabicName[i]['name'],
-                                        style: GoogleFonts.noticiaText(
-                                          fontSize: 26.sp,
-                                          fontWeight: FontWeight.w600,
-                                          color: MyColors.darkBrown,
+                                  SizedBox(
+                                    width: AppVariables.appSize(context).width *
+                                        0.47,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            print(
+                                                "audioValue++++++++++++++++++");
+                                            print(audioValue);
+                                            if (audioValue != null) {
+                                              FileDownloader.downloadFile(
+                                                url: getAudioUrl(
+                                                  audioValue: audioValue!,
+                                                  sura: i + 1,
+                                                ),
+                                                name:
+                                                    "فاستقم - $audioValue سورة ${arabicName[i]['name']}",
+                                                onProgress: (String? fileName,
+                                                    double? progress) {
+                                                  setState(() {
+                                                    loadingDownload = true;
+                                                    isDownload = i + 1;
+                                                  });
+                                                },
+                                                onDownloadCompleted:
+                                                    (String path) {
+                                                  setState(() {
+                                                    loadingDownload = false;
+                                                  });
+                                                  customSnackBar(
+                                                      context: context,
+                                                      title:
+                                                          'تم التحميل بنجاح');
+                                                },
+                                                onDownloadError:
+                                                    (String error) {
+                                                  setState(() {
+                                                    loadingDownload = false;
+                                                  });
+                                                  customSnackBar(
+                                                      context: context,
+                                                      title:
+                                                          'تأكد من اتصالك بالانترنيت');
+                                                },
+                                              );
+                                            } else {
+                                              customSnackBar(
+                                                  context: context,
+                                                  title:
+                                                      'اختر صوت القارئ أولا');
+                                            }
+                                          },
+                                          child: loadingDownload &&
+                                                  isDownload == i + 1
+                                              ? const CircularProgressIndicator(
+                                                  color: MyColors.darkBrown,
+                                                  strokeWidth: 10,
+                                                )
+                                              : const Icon(Icons.download,
+                                                  color: MyColors.darkBrown),
                                         ),
-                                        textDirection: TextDirection.rtl,
-                                        textAlign: TextAlign.right,
-                                      ),
-                                    ],
+                                        const Spacer(),
+                                        Text(
+                                          arabicName[i]['name'],
+                                          style: GoogleFonts.noticiaText(
+                                            fontSize: 26.sp,
+                                            fontWeight: FontWeight.w600,
+                                            color: MyColors.darkBrown,
+                                          ),
+                                          textDirection: TextDirection.rtl,
+                                          textAlign: TextAlign.right,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   SizedBox(height: 10.h),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundColor: MyColors.darkBrown,
-                                        radius: 20.sp,
-                                        child: InkWell(
-                                          onTap: () {
-                                            if (audioValue != null) {
-                                              if (isPlay == i + 1) {
-                                                pause = !pause;
-                                                if (replay) {
+                                  SizedBox(
+                                    width: AppVariables.appSize(context).width *
+                                        0.47,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        CircleAvatar(
+                                          backgroundColor: MyColors.darkBrown,
+                                          radius: 20.sp,
+                                          child: InkWell(
+                                            onTap: () {
+                                              if (audioValue != null) {
+                                                if (isPlay == i + 1) {
+                                                  pause = !pause;
+                                                  if (replay) {
+                                                    playQuran(
+                                                        suraUrl: getAudioUrl(
+                                                            sura: i + 1,
+                                                            audioValue:
+                                                                audioValue!));
+                                                  } else if (pause) {
+                                                    pauseQuran();
+                                                  } else {
+                                                    resumeQuran();
+                                                  }
+                                                } else {
+                                                  setState(() {
+                                                    isPlay = i + 1;
+                                                    pause = false;
+                                                    replay = false;
+                                                  });
                                                   playQuran(
                                                       suraUrl: getAudioUrl(
                                                           sura: i + 1,
                                                           audioValue:
                                                               audioValue!));
-                                                } else if (pause) {
-                                                  pauseQuran();
-                                                } else {
-                                                  resumeQuran();
                                                 }
                                               } else {
-                                                setState(() {
-                                                  isPlay = i + 1;
-                                                  pause = false;
-                                                  replay = false;
-                                                });
-                                                playQuran(
-                                                    suraUrl: getAudioUrl(
-                                                        sura: i + 1,
-                                                        audioValue:
-                                                            audioValue!));
+                                                playQuran(suraUrl: "");
                                               }
-                                            } else {
-                                              playQuran(suraUrl: "");
-                                            }
-                                          },
-                                          child: Icon(
-                                            isPlay == i + 1 && replay
-                                                ? Icons.replay
-                                                : !pause && isPlay == i + 1
-                                                    ? Icons.pause
-                                                    : Icons.play_arrow,
-                                            color: Colors.white,
+                                            },
+                                            child: Icon(
+                                              isPlay == i + 1 && replay
+                                                  ? Icons.replay
+                                                  : !pause && isPlay == i + 1
+                                                      ? Icons.pause
+                                                      : Icons.play_arrow,
+                                              color: Colors.white,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                          width: AppVariables.appSize(context)
-                                                  .width *
-                                              0.15),
-                                      Image.asset(
-                                        quraan.getPlaceOfRevelation(i + 1) ==
-                                                "Madinah"
-                                            ? AssetsManager.masjedIcon
-                                            : AssetsManager.makaaIcon,
-                                        height: 35.sp,
-                                      ),
-                                    ],
+                                        const Spacer(),
+                                        SizedBox(
+                                            width: AppVariables.appSize(context)
+                                                    .width *
+                                                0.15),
+                                        Image.asset(
+                                          quraan.getPlaceOfRevelation(i + 1) ==
+                                                  "Madinah"
+                                              ? AssetsManager.masjedIcon
+                                              : AssetsManager.makaaIcon,
+                                          height: 35.sp,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
-                              SizedBox(width: 15.w),
+                              const Spacer(),
                               Container(
                                 width:
                                     AppVariables.appSize(context).width * 0.28,
