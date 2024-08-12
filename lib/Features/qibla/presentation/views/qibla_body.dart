@@ -22,73 +22,79 @@ class QiblaScreen extends StatefulWidget {
 }
 
 class _QiblaScreenState extends State<QiblaScreen> {
-  //var location;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserLocation();
+  }
+
   Future<void> getUserLocation() async {
+    setState(() {
+      isLoading = true;
+    });
+
     try {
-      // Check if the device is currently offline
       final bool isOffline = !await InternetConnectionChecker().hasConnection;
 
       if (isOffline) {
-        // Handle offline scenario: No network connectivity
-        print("----offline-----");
         CacheHelper.saveData(key: AppStrings.locationKey, value: false);
         customSnackBar(context: context, title: 'لا يوجد انترنيت');
       } else {
-        // Request location permission
         var status = await Permission.locationWhenInUse.request();
 
         if (status.isGranted) {
-          // Location permission granted, get the location
-          final Position position = await Geolocator.getCurrentPosition();
-          print(position);
+          // Attempt to retrieve the last known location
+          Position? position = await Geolocator.getLastKnownPosition();
+
+          // If no last known location, get the current location
+          position ??= await Geolocator.getCurrentPosition();
+
           CacheHelper.saveData(key: AppStrings.locationKey, value: true);
           CacheHelper.saveData(
               key: AppStrings.latKey, value: position.latitude);
           CacheHelper.saveData(
               key: AppStrings.longKey, value: position.longitude);
-          // Continue with additional logic or data processing here.
         } else {
-          // Location permission denied
           CacheHelper.saveData(key: AppStrings.locationKey, value: false);
           customSnackBar(
               context: context, title: 'قم بالسماح بأخذ موقعك من الإعدادات');
-          print("----permission denied-----");
-          // Handle the scenario where the user denies location permission
         }
       }
     } catch (e) {
-      // Handle exceptions, including those related to network or location errors
       CacheHelper.saveData(key: AppStrings.locationKey, value: false);
-      print("----error-----");
       throw PlatformException(
         code: 'ERROR_GETTING_LOCATION',
         message: 'Error getting user location: $e',
       );
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (CacheHelper.getDate(key: AppStrings.locationKey) ==
-            true /*&&
-        location != null*/
-        ) {
+    if (isLoading) {
+      return const CustomLoadingPage();
+    }
+
+    if (CacheHelper.getDate(key: AppStrings.locationKey) == true) {
       return const QiblahWidget();
     }
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const CustomErrorContainer(title: 'قم بتفعيل القبلة'),
-        const SizedBox(
-          height: 45,
-        ),
+        const SizedBox(height: 45),
         MaterialButton(
           color: MyColors.darkBrown,
           onPressed: () async {
-            const CustomLoadingPage();
             await getUserLocation();
-            setState(() {});
           },
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),

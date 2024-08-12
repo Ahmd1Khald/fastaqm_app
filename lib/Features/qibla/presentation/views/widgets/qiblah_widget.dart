@@ -16,9 +16,9 @@ class QiblahWidget extends StatefulWidget {
 
 class _QiblahWidgetState extends State<QiblahWidget>
     with SingleTickerProviderStateMixin {
-  late Animation<double> animation;
+  late Animation<double> _animation;
   late AnimationController _animationController;
-  double begin = 0.0;
+  double _begin = 0.0;
 
   @override
   void initState() {
@@ -27,7 +27,13 @@ class _QiblahWidgetState extends State<QiblahWidget>
       vsync: this,
       duration: const Duration(milliseconds: 450),
     );
-    animation = Tween(begin: 0.0, end: 0.0).animate(_animationController);
+    _animation = Tween(begin: 0.0, end: 0.0).animate(_animationController);
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -42,43 +48,39 @@ class _QiblahWidgetState extends State<QiblahWidget>
             }
 
             final qiblahDirection = snapshot.data;
+            if (qiblahDirection != null) {
+              final double newEnd = qiblahDirection.qiblah * (pi / 180) * -1;
 
-            animation = Tween(
-              begin: begin,
-              end: (qiblahDirection!.qiblah * (pi / 180) * -1),
-            ).animate(_animationController);
+              _animation = Tween(
+                begin: _begin,
+                end: newEnd,
+              ).animate(_animationController);
 
-            begin = (qiblahDirection.qiblah * (pi / 180) * -1);
-            _animationController.forward(from: 0);
+              _begin = newEnd;
+              _animationController.forward(from: 0);
+            }
+
+            final int directionDegree = qiblahDirection?.direction.toInt() ?? 0;
+            final bool isWithinRange = [].contains(directionDegree);
 
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "${qiblahDirection.direction.toInt()}°",
+                    "$directionDegree°",
                     style: TextStyle(
-                      color: [
-                        122,
-                        121,
-                        123,
-                        124,
-                        125,
-                      ].contains(qiblahDirection.direction.toInt())
-                          ? Colors.green
-                          : MyColors.darkBrown,
+                      color: isWithinRange ? Colors.green : MyColors.darkBrown,
                       fontSize: 22,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10),
                   SizedBox(
                     height: AppVariables.appSize(context).height * 0.33,
                     child: AnimatedBuilder(
-                      animation: animation,
+                      animation: _animation,
                       builder: (context, child) => Transform.rotate(
-                        angle: animation.value,
+                        angle: _animation.value,
                         child: Image.asset(
                           AssetsManager.qiblaImage,
                         ),
