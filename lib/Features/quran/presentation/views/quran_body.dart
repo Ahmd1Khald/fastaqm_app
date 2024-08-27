@@ -426,244 +426,201 @@ class _IndexCreatorState extends State<IndexCreator> {
           Expanded(
             child: ListView.separated(
               itemBuilder: (context, i) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: TextButton(
-                  onPressed: () {
-                    fabIsClicked = false;
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SurahBuilder(
-                          arabic: quran[0],
-                          sura: i,
-                          suraName: arabicName[i]['name'],
-                          ayah: 0,
+                padding: EdgeInsets.only(bottom: i == 113 ? 50.0 : 0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: AppVariables.appSize(context).width * 0.55,
+                          height: AppVariables.appSize(context).width * 0.17,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: MyColors.lightBrown,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: TextButton(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  if (quraan.getPlaceOfRevelation(i + 1) ==
+                                      "Madinah") ...[
+                                    Image.asset(
+                                      AssetsManager.masjedIcon,
+                                      width: 30.sp,
+                                    ),
+                                  ] else ...[
+                                    Image.asset(
+                                      AssetsManager.makaaIcon,
+                                      width: 30.sp,
+                                    ),
+                                  ],
+                                  const Spacer(),
+                                  Text(
+                                    arabicName[i]['name'],
+                                    style: GoogleFonts.noticiaText(
+                                      fontSize: 24.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: MyColors.darkBrown,
+                                    ),
+                                    textDirection: TextDirection.rtl,
+                                  ),
+                                ],
+                              ),
+                              onPressed: () {
+                                fabIsClicked = false;
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SurahBuilder(
+                                            arabic: quran[0],
+                                            sura: i,
+                                            suraName: arabicName[i]['name'],
+                                            ayah: 0,
+                                          )),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        CircleAvatar(
+                          backgroundColor: MyColors.darkBrown,
+                          radius: 25.sp,
+                          child: InkWell(
+                            onTap: () {
+                              if (audioValue != null) {
+                                if (isPlay == i + 1) {
+                                  pause = !pause;
+                                  if (replay) {
+                                    playQuran(
+                                        suraUrl: getAudioUrl(
+                                            audioValue: audioValue ?? "",
+                                            sura: i + 1));
+                                  } else if (pause) {
+                                    pauseQuran();
+                                  } else {
+                                    resumeQuran();
+                                  }
+                                  setState(() {});
+                                } else {
+                                  isPlay = i + 1;
+                                  pause = false;
+                                  replay = false;
+                                  playQuran(
+                                      suraUrl: getAudioUrl(
+                                          audioValue: audioValue ?? "",
+                                          sura: i + 1));
+                                  setState(() {});
+                                }
+                              } else {
+                                playQuran(suraUrl: "");
+                              }
+                            },
+                            child: Icon(
+                              isPlay == i + 1 && replay
+                                  ? Icons.replay
+                                  : !pause && isPlay == i + 1
+                                      ? Icons.pause
+                                      : Icons.play_arrow,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 7.w,
+                        ),
+//download sura
+                        CircleAvatar(
+                          backgroundColor: MyColors.darkBrown,
+                          radius: 25.sp,
+                          child: InkWell(
+                            onTap: () {
+                              bool clicked = false;
+//You can download a single file
+                              if (audioValue != null) {
+                                print(getAudioUrl(
+                                    audioValue: audioValue ?? "", sura: i + 1));
+                                FileDownloader.downloadFile(
+                                    url: getAudioUrl(
+                                        audioValue: audioValue ?? "",
+                                        sura: i + 1),
+                                    name:
+                                        "فاستقم - ${arabicName[i]['name']}", //(optional)
+                                    onProgress:
+                                        (String? fileName, double? progress) {
+                                      isDownload = i + 1;
+                                      setState(() {
+                                        loadingDownload = true;
+                                      });
+                                      print(
+                                          'FILE fileName HAS PROGRESS $progress');
+                                    },
+                                    onDownloadCompleted: (String path) {
+                                      setState(() {
+                                        loadingDownload = false;
+                                      });
+                                      customSnackBar(
+                                          context: context,
+                                          title: 'تم التحميل بنجاح');
+                                    },
+                                    onDownloadError: (String error) {
+                                      setState(() {
+                                        loadingDownload = false;
+                                      });
+                                      customSnackBar(
+                                          context: context,
+                                          title: 'تأكد من اتصالك بالانترنيت');
+                                    });
+                              } else {
+                                customSnackBar(
+                                    context: context,
+                                    title: 'اختر صوت القارئ أولا');
+                              }
+                            },
+                            child: loadingDownload && isDownload == i + 1
+                                ? const CircularProgressIndicator(
+                                    color: MyColors.lightBrown,
+                                  )
+                                : const Icon(
+                                    Icons.download,
+                                    color: Colors.white,
+                                  ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (isPlay == i + 1) ...[
+                      SizedBox(
+                        width: double.infinity,
+                        height: AppVariables.appSize(context).width * 0.15,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(formatTime(position)),
+                            Slider(
+                              min: 0,
+                              max: duration.inSeconds.toDouble(),
+                              value: position.inSeconds.toDouble(),
+                              activeColor: MyColors.darkBrown,
+                              onChanged: (double value) async {
+                                final position =
+                                    Duration(seconds: value.toInt());
+                                await play.seek(position);
+                              },
+                            ),
+                            Text(formatTime(duration)),
+                          ],
                         ),
                       ),
-                    );
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: isPlay == i + 1
-                        ? AppVariables.appSize(context).width * 0.4
-                        : AppVariables.appSize(context).width * 0.35,
-                    decoration: BoxDecoration(
-                      color: MyColors.lightBrown,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  SizedBox(
-                                    width: AppVariables.appSize(context).width *
-                                        0.47,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            print(
-                                                "audioValue++++++++++++++++++");
-                                            print(audioValue);
-                                            if (audioValue != null) {
-                                              FileDownloader.downloadFile(
-                                                url: getAudioUrl(
-                                                  audioValue: audioValue!,
-                                                  sura: i + 1,
-                                                ),
-                                                name:
-                                                    "فاستقم - $audioValue سورة ${arabicName[i]['name']}",
-                                                onProgress: (String? fileName,
-                                                    double? progress) {
-                                                  setState(() {
-                                                    loadingDownload = true;
-                                                    isDownload = i + 1;
-                                                  });
-                                                },
-                                                onDownloadCompleted:
-                                                    (String path) {
-                                                  setState(() {
-                                                    loadingDownload = false;
-                                                  });
-                                                  customSnackBar(
-                                                      context: context,
-                                                      title:
-                                                          'تم التحميل بنجاح');
-                                                },
-                                                onDownloadError:
-                                                    (String error) {
-                                                  setState(() {
-                                                    loadingDownload = false;
-                                                  });
-                                                  customSnackBar(
-                                                      context: context,
-                                                      title:
-                                                          'تأكد من اتصالك بالانترنيت');
-                                                },
-                                              );
-                                            } else {
-                                              customSnackBar(
-                                                  context: context,
-                                                  title:
-                                                      'اختر صوت القارئ أولا');
-                                            }
-                                          },
-                                          child: loadingDownload &&
-                                                  isDownload == i + 1
-                                              ? const CircularProgressIndicator(
-                                                  color: MyColors.darkBrown,
-                                                  strokeWidth: 10,
-                                                )
-                                              : const Icon(Icons.download,
-                                                  color: MyColors.darkBrown),
-                                        ),
-                                        const Spacer(),
-                                        Text(
-                                          arabicName[i]['name'],
-                                          style: GoogleFonts.noticiaText(
-                                            fontSize: 26.sp,
-                                            fontWeight: FontWeight.w600,
-                                            color: MyColors.darkBrown,
-                                          ),
-                                          textDirection: TextDirection.rtl,
-                                          textAlign: TextAlign.right,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(height: 10.h),
-                                  SizedBox(
-                                    width: AppVariables.appSize(context).width *
-                                        0.47,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        CircleAvatar(
-                                          backgroundColor: MyColors.darkBrown,
-                                          radius: 20.sp,
-                                          child: InkWell(
-                                            onTap: () {
-                                              if (audioValue != null) {
-                                                if (isPlay == i + 1) {
-                                                  pause = !pause;
-                                                  if (replay) {
-                                                    playQuran(
-                                                        suraUrl: getAudioUrl(
-                                                            sura: i + 1,
-                                                            audioValue:
-                                                                audioValue!));
-                                                  } else if (pause) {
-                                                    pauseQuran();
-                                                  } else {
-                                                    resumeQuran();
-                                                  }
-                                                } else {
-                                                  setState(() {
-                                                    isPlay = i + 1;
-                                                    pause = false;
-                                                    replay = false;
-                                                  });
-                                                  playQuran(
-                                                      suraUrl: getAudioUrl(
-                                                          sura: i + 1,
-                                                          audioValue:
-                                                              audioValue!));
-                                                }
-                                              } else {
-                                                playQuran(suraUrl: "");
-                                              }
-                                            },
-                                            child: Icon(
-                                              isPlay == i + 1 && replay
-                                                  ? Icons.replay
-                                                  : !pause && isPlay == i + 1
-                                                      ? Icons.pause
-                                                      : Icons.play_arrow,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                        const Spacer(),
-                                        SizedBox(
-                                            width: AppVariables.appSize(context)
-                                                    .width *
-                                                0.15),
-                                        Image.asset(
-                                          quraan.getPlaceOfRevelation(i + 1) ==
-                                                  "Madinah"
-                                              ? AssetsManager.masjedIcon
-                                              : AssetsManager.makaaIcon,
-                                          height: 35.sp,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
-                              Container(
-                                width:
-                                    AppVariables.appSize(context).width * 0.28,
-                                height:
-                                    AppVariables.appSize(context).width * 0.27,
-                                decoration: BoxDecoration(
-                                  image: const DecorationImage(
-                                    image: AssetImage(AssetsManager.quranImage),
-                                    opacity: 0.8,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(color: MyColors.darkBrown),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 5.h,
-                          ),
-                          //slider player
-                          if (isPlay == i + 1)
-                            SizedBox(
-                              width: AppVariables.appSize(context).width * 0.8,
-                              height:
-                                  AppVariables.appSize(context).width * 0.05,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(formatTime(position)),
-                                  Expanded(
-                                    child: Slider(
-                                      min: 0,
-                                      max: duration.inSeconds.toDouble(),
-                                      value: position.inSeconds.toDouble(),
-                                      activeColor: MyColors.darkBrown,
-                                      onChanged: (double value) async {
-                                        final position =
-                                            Duration(seconds: value.toInt());
-                                        await play.seek(position);
-                                      },
-                                    ),
-                                  ),
-                                  Text(formatTime(duration)),
-                                ],
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                  ),
+                    ],
+                  ],
                 ),
               ),
-              separatorBuilder: (context, index) => SizedBox(height: 0.h),
+              separatorBuilder: (context, index) => SizedBox(height: 12.h),
               itemCount: 114,
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../Core/constatnts/colors.dart';
@@ -28,7 +29,7 @@ class CustomDuaaContant extends StatelessWidget {
             textDirection: TextDirection.rtl,
             textAlign: TextAlign.center,
             style: GoogleFonts.noticiaText(
-              fontSize: 25,
+              fontSize: 24.sp,
               fontWeight: FontWeight.w400,
               color: Colors.black,
             ),

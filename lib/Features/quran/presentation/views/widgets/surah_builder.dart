@@ -30,7 +30,7 @@ class _SurahBuilderState extends State<SurahBuilder> {
   final play = AudioPlayer();
   bool showSlider = false;
   int playedAya = -1;
-  double sliderValue = CacheHelper.getDate(key: "sliderValue") ?? 20;
+  double sliderValue = CacheHelper.getDate(key: "sliderValue") ?? 24;
   //double quranFontSize = CacheHelper.getDate(key: "quranFontSize") ?? 18;
 
   @override
